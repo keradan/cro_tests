@@ -1,5 +1,10 @@
-console.log('keradan here 5s delayed popup');
+(function () {
+ 
+ 	function dsdsd (some) {
+ 		alert('some: ', some);
+ 	}
+	dsdsd('keradan here again');
+	
+	// setTimeout(keradan_run_delayed_test());
 
-//setTimeout(keradan_run_delayed_test())
-
-console.log('vse ok 6');
+})();
