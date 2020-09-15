@@ -1,7 +1,7 @@
 (function () {
  
  	function dsdsd (some) {
- 		alert('some: ', some);
+ 		console.log('some: ', some);
  	}
 	dsdsd('keradan here again');
 	
