@@ -1,10 +1,8 @@
 (function () {
  
- 	function dsdsd (some) {
- 		console.log('some: ', some);
+ 	let run_test = function () {
+ 		console.log('test is runing with delay of 1000');
  	}
-	dsdsd('keradan here again');
 	
-	// setTimeout(keradan_run_delayed_test());
-
+	setTimeout(run_test, 1000);
 })();
