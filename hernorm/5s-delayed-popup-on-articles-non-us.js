@@ -229,7 +229,7 @@
 	});
 	// popup_wrapper.querySelector('button.close').addEventListener('click', close_popup);
 	// popup_wrapper.querySelector('button.cancel-button').addEventListener('click', close_popup);
-	popup_wrapper.querySelector('button.request-button').addEventListener('click', function(){
+	popup_wrapper.querySelector('a.request-button').addEventListener('click', function(){
 		keradan_ga_event('click on Watch this video to find out');
 	});
 
