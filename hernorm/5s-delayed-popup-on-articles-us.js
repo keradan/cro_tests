@@ -12,7 +12,7 @@
 			'eventAction': eventAction
 		};
 		keradan_log('keradan ga event: ', ga_data);
-		if(false) dataLayer.push(ga_data);
+		if(true) dataLayer.push(ga_data);
 	}
 
 	keradan_ga_event('loaded');
@@ -240,5 +240,5 @@
 		keradan_ga_event('click on I want to learn more about this tool');
 	});
 
-	setTimeout(show_popup, 1000);
+	setTimeout(show_popup, 5000);
 })();
