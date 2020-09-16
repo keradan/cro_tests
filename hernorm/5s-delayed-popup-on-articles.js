@@ -81,7 +81,7 @@
 	document.querySelector('head').append(styles_el);
 
 	let markup_el = document.createElement('div');
-	markup_el.classList.add('keradan-delayed-popup', 'krdndpw');
+	markup_el.classList.add('keradan-delayed-popup-wrapper', 'krdndpw');
 	markup_el.innerHTML = markup;
 	document.querySelector('body').append(markup_el);
 	
