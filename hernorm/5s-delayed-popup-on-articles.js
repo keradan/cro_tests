@@ -84,13 +84,16 @@
 	markup_el.classList.add('keradan-delayed-popup', 'krdndpw');
 	markup_el.innerHTML = markup;
 	document.querySelector('body').append(markup_el);
+	
+	var popup_wrapper = document.querySelector('.krdndpw');
+
 	popup_wrapper.addEventListener('click', function(event){
 		if (event.target == popup_wrapper) close_popup();
 	});
-	// popup_wrapper.querySelector('button.close').addEventListener('click', close_popup);
-	// popup_wrapper.querySelector('button.cancel-button').addEventListener('click', close_popup);
+	popup_wrapper.querySelector('button.close').addEventListener('click', close_popup);
+	popup_wrapper.querySelector('button.cancel-button').addEventListener('click', close_popup);
 
-	var popup_wrapper = document.querySelector('.krdndpw');
+	
 
 	setTimeout(show_popup, 1000);
 })();
