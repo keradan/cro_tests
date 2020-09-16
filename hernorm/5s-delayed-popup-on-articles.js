@@ -11,7 +11,7 @@
  	}
 
  	let markup_content = {
- 		headline: 'How to find out if He is cheating on you?',
+ 		headline: 'How to find out if<br>He is cheating on you?',
  		sub_headline: 'This <span>online tool</span> can legally and anonymously check:',
  		list_items: '',
  		list_items_text: [
@@ -55,6 +55,7 @@
  			display: none!important;
  		}
  		.krdndpw .popup {
+ 			position: relative;
  			display: flex;
  			flex-flow: column;
  			align-items: center;
@@ -62,20 +63,84 @@
  			background: white;
  			width: calc(100vw - 30px);
  			box-sizing: border-box;
+ 			border-radius: 5px;
+ 			margin: 0;
+ 			padding: 15px;
  		}
  		.krdndpw .popup button.close {
+ 			position: absolute;
+		    top: 10px;
+		    right: 10px;
+		    border: none;
+		    background: transparent;
+		    opacity: 0.3;
+		    width: 26px;
+		    height: 26px;
+		    padding: 5px;
+		    margin: 0;
+		    display: flex;
  		}
  		.krdndpw .popup .headline {
+ 			font-family: PT Serif;
+		    font-size: 24px;
+		    line-height: 32px;
+		    letter-spacing: -0.5px;
+		    color: #000000;
+		    text-align: center;
+		    margin: 0;
+    		padding: 0;
+    		margin-top: 15px;
  		}
  		.krdndpw .popup .sub-headline {
+ 			font-family: PT Serif;
+		    font-size: 20px;
+		    line-height: 26px;
+		    letter-spacing: -0.5px;
+		    color: #404040;
+		    text-align: center;
+		    margin: 15px;
+    		padding: 0;
  		}
  		.krdndpw .popup ul {
+ 			margin: 0;
+ 			padding: 0;
  		}
  		.krdndpw .popup ul li {
  		}
+ 		.krdndpw .popup ul li span.mark {
+ 			display: block;
+ 			width: 40px;
+ 		}
+ 		.krdndpw .popup ul li span.text {
+ 			font-family: PT Serif;
+		    font-size: 20px;
+		    line-height: 26px;
+		    letter-spacing: -0.5px;
+ 		}
+ 		.krdndpw .popup button.cancel-button, .krdndpw .popup a.request-button {
+ 			display: flex;
+		    justify-content: center;
+		    align-items: center;
+		    border: 2px solid #E768B5;
+		    box-sizing: border-box;
+		    border-radius: 10px;
+		    font-family: PT Serif;
+		    font-size: 16px;
+		    letter-spacing: -0.5px;
+		    height: 50px;
+		    width: 100%;
+ 		}
  		.krdndpw .popup button.cancel-button {
+ 			color: #E768B5;
+		    background: transparent;
+		    margin-top: 20px;
+		    margin-bottom: 10px;
  		}
  		.krdndpw .popup a.request-button {
+ 			text-decoration: none;
+ 			color: white;
+		    background: #E768B5;
+		    margin-bottom: 15px;
  		}
  	`;
 
