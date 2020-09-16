@@ -75,10 +75,10 @@
  			margin: 0;
  			padding: 15px;
  			transform: translateY(0);
- 			transition: transform 0.3s cubic-bezier(0.29, 0.38, 0.59, 1.93);
+ 			transition: transform 0.3s cubic-bezier(0.3, 0.4, 1, 1.5);
  		}
  		.keradan-delayed-popup-wrapper:not(.show) .popup {
- 			transform: translateY(-10%);
+ 			transform: translateY(-5%);
  		}
  		.krdndpw .popup button.close {
  			position: absolute;
