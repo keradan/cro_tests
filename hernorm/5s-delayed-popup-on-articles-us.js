@@ -8,7 +8,7 @@
 		let dataLayer = window.dataLayer || [];
 		let ga_data = {
 			'event': 'event-to-ga',
-			'eventCategory': 'Popup with CTA - non-US',
+			'eventCategory': 'Popup with CTA - US',
 			'eventAction': eventAction
 		};
 		keradan_log('keradan ga event: ', ga_data);
@@ -16,27 +16,31 @@
 	}
 
 	keradan_ga_event('loaded');
-	keradan_ga_event('view popup');
-	keradan_ga_event('close popup - X');
-	keradan_ga_event('close popup - background');
-	keradan_ga_event('click on I prefer to do not know about this');
-	keradan_ga_event('click on I want to learn more about this tool');
-	keradan_ga_event('click on Watch this video to find out');
 	
-	try {
-		hotjarhotjarhotjarhotjarhotjarhotjar
-	}
-	catch (e) {
+	(function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:1955547,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+    window.hj = window.hj || function(){(hj.q = hj.q || []).push(arguments)};
+    try {
+        hj('trigger', 'popup_cta_us');
+    }
+    catch (e) {
 		keradan_log('Hotjar error: ', e);
 	}
- 
+
  	let show_popup = function () {
- 		console.log('show_popup');
+ 		keradan_ga_event('view popup');
  		popup_wrapper.classList.toggle('displayed', true);
  		setTimeout(() => popup_wrapper.classList.toggle('show', true), 10);
  	}
 
- 	let close_popup = function () {
+ 	let close_popup = function (ga_event) {
+ 		keradan_ga_event(ga_event);
  		console.log('close_popup');
  		popup_wrapper.classList.toggle('show', false);
  		setTimeout(() => popup_wrapper.classList.toggle('displayed', false), 300);
@@ -220,10 +224,16 @@
 	var popup_wrapper = document.querySelector('.krdndpw');
 
 	popup_wrapper.addEventListener('click', function(event){
-		if (event.target == popup_wrapper) close_popup();
+		if (!event.target) return;
+		if (event.target == popup_wrapper) close_popup('close popup - background');
+		if (event.target == popup_wrapper.querySelector('button.close')) close_popup('close popup - X');
+		if (event.target == popup_wrapper.querySelector('button.cancel-button')) close_popup('click on I prefer to do not know about this');
 	});
-	popup_wrapper.querySelector('button.close').addEventListener('click', close_popup);
-	popup_wrapper.querySelector('button.cancel-button').addEventListener('click', close_popup);
+	// popup_wrapper.querySelector('button.close').addEventListener('click', close_popup);
+	// popup_wrapper.querySelector('button.cancel-button').addEventListener('click', close_popup);
+	popup_wrapper.querySelector('button.request-button').addEventListener('click', function(){
+		keradan_ga_event('click on I want to learn more about this tool');
+	});
 
 	setTimeout(show_popup, 1000);
 })();
