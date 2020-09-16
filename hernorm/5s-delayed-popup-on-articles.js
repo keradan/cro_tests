@@ -1,9 +1,39 @@
 (function () {
+	let keradan_enable_log = true;
+	function keradan_log() {
+		if(keradan_enable_log) console.log.apply(this, arguments);
+	}
+
+	let keradan_ga_event = function(eventAction) {
+		let dataLayer = window.dataLayer || [];
+		let ga_data = {
+			'event': 'event-to-ga',
+			'eventCategory': 'Popup with CTA - non-US',
+			'eventAction': eventAction
+		};
+		keradan_log('keradan ga event: ', ga_data);
+		if(false) dataLayer.push(ga_data);
+	}
+
+	keradan_ga_event('loaded');
+	keradan_ga_event('view popup');
+	keradan_ga_event('close popup - X');
+	keradan_ga_event('close popup - background');
+	keradan_ga_event('click on I prefer to do not know about this');
+	keradan_ga_event('click on I want to learn more about this tool');
+	keradan_ga_event('click on Watch this video to find out');
+	
+	try {
+		hotjarhotjarhotjarhotjarhotjarhotjar
+	}
+	catch (e) {
+		keradan_log('Hotjar error: ', e);
+	}
  
  	let show_popup = function () {
  		console.log('show_popup');
  		popup_wrapper.classList.toggle('displayed', true);
- 		setTimeout(() => popup_wrapper.classList.toggle('show', true), 1);
+ 		setTimeout(() => popup_wrapper.classList.toggle('show', true), 10);
  	}
 
  	let close_popup = function () {
@@ -27,7 +57,7 @@
  		list_item_mark: '<svg width="20" height="16" viewBox="0 0 20 16" fill="none"><path d="M19.7071 0.949099C19.3166 0.558552 18.6835 0.558552 18.2929 0.949099L6.31228 12.9298L1.70713 8.32469C1.31662 7.93414 0.683496 7.93418 0.29291 8.32469C-0.0976367 8.71519 -0.0976367 9.34832 0.29291 9.73887L5.60518 15.0511C5.99557 15.4416 6.62916 15.4413 7.01939 15.0511L19.7071 2.36332C20.0977 1.97281 20.0976 1.33965 19.7071 0.949099Z" fill="#E768B5"/></svg>',
  		cancel_button_text: 'I prefer to don’t know about this',
  		request_button_text: 'I want to learn more about this tool',
- 		request_button_link: '#',
+ 		request_button_link: 'https://hernorm.com/become-his-obsession/',
  	};
 
  	markup_content.list_items_text.forEach(function(text_item){
