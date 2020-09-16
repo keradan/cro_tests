@@ -11,11 +11,11 @@
  	}
 
  	let markup_content = {
- 		headline: 'How to find out if  He is cheating on you?',
- 		sub_headline: 'This <span>online tool</span> can legally and  anonymously check:',
+ 		headline: 'How to find out if He is cheating on you?',
+ 		sub_headline: 'This <span>online tool</span> can legally and anonymously check:',
  		list_items: '',
  		list_items_text: [
- 			'Who He’s been contacting  frequently?',
+ 			'Who He’s been contacting frequently?',
  			'What contact details he is using',
  			'Did he download dating apps',
  			'Is he married or divorced',
