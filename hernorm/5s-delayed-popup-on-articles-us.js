@@ -142,7 +142,7 @@
 		    line-height: 26px;
 		    letter-spacing: -0.5px;
 		    color: #404040;
-		    text-align: center;
+		    text-align: left;
 		    margin: 15px;
     		padding: 0;
  		}
