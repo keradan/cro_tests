@@ -11,11 +11,11 @@
  	}
 
  	let markup_content = {
- 		headline: 'How to find out if He is cheating on you?',
- 		sub_headline: 'This <span>online tool</span> can legally and anonymously check:',
+ 		headline: 'How to find out if  He is cheating on you?',
+ 		sub_headline: 'This <span>online tool</span> can legally and  anonymously check:',
  		list_items: '',
  		list_items_text: [
- 			'Who He’s been contacting frequently?',
+ 			'Who He’s been contacting  frequently?',
  			'What contact details he is using',
  			'Did he download dating apps',
  			'Is he married or divorced',
@@ -49,19 +49,33 @@
  			align-items: center;
  			justify-content: center;
  			background: rgba(0,0,0,0.4);
- 			z-index: 9;
+ 			z-index: 9999999999;
  		}
  		.keradan-delayed-popup:not(.krdndpw.show) {
  			display: none!important;
  		}
  		.krdndpw .popup {
  			display: flex;
- 			flex-flow: row;
+ 			flex-flow: column;
  			align-items: center;
  			justify-content: center;
  			background: white;
  			width: calc(100vw - 30px);
  			box-sizing: border-box;
+ 		}
+ 		.krdndpw .popup button.close {
+ 		}
+ 		.krdndpw .popup .headline {
+ 		}
+ 		.krdndpw .popup .sub-headline {
+ 		}
+ 		.krdndpw .popup ul {
+ 		}
+ 		.krdndpw .popup ul li {
+ 		}
+ 		.krdndpw .popup button.cancel-button {
+ 		}
+ 		.krdndpw .popup a.request-button {
  		}
  	`;
 
@@ -69,7 +83,7 @@
  		<div class="popup">
  			<button class="close"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8.88368 8.00076L15.8167 1.06771C16.0608 0.823614 16.0608 0.427865 15.8167 0.183803C15.5726 -0.0602597 15.1769 -0.060291 14.9328 0.183803L7.99975 7.11686L1.06673 0.183803C0.822637 -0.060291 0.426888 -0.060291 0.182826 0.183803C-0.0612362 0.427896 -0.0612675 0.823646 0.182826 1.06771L7.11584 8.00073L0.182826 14.9338C-0.0612675 15.1779 -0.0612675 15.5736 0.182826 15.8177C0.304857 15.9397 0.464825 16.0007 0.624794 16.0007C0.784762 16.0007 0.944699 15.9397 1.06676 15.8177L7.99975 8.88467L14.9328 15.8177C15.0548 15.9397 15.2148 16.0007 15.3747 16.0007C15.5347 16.0007 15.6946 15.9397 15.8167 15.8177C16.0608 15.5736 16.0608 15.1778 15.8167 14.9338L8.88368 8.00076Z" fill="black"/></svg></button>
  			<p class="headline">${markup_content.headline}</p>
- 			<p class="headline">${markup_content.sub_headline}</p>
+ 			<p class="sub-headline">${markup_content.sub_headline}</p>
  			<ul>${markup_content.list_items}</ul>
  			<button class="cancel-button">${markup_content.cancel_button_text}</button>
  			<a href="${markup_content.request_button_link}" class="request-button">${markup_content.request_button_text}</a>
