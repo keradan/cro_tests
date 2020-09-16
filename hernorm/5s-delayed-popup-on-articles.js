@@ -87,8 +87,8 @@
 	popup_wrapper.addEventListener('click', function(event){
 		if (event.target == popup_wrapper) close_popup();
 	});
-	popup_wrapper.querySelector('button.close').addEventListener('click', close_popup);
-	popup_wrapper.querySelector('button.cancel-button').addEventListener('click', close_popup);
+	// popup_wrapper.querySelector('button.close').addEventListener('click', close_popup);
+	// popup_wrapper.querySelector('button.cancel-button').addEventListener('click', close_popup);
 
 	var popup_wrapper = document.querySelector('.krdndpw');
 
