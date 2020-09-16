@@ -51,7 +51,7 @@
  			background: rgba(0,0,0,0.4);
  			z-index: 9999999999;
  		}
- 		.keradan-delayed-popup:not(.krdndpw.show) {
+ 		.keradan-delayed-popup-wrapper:not(.show) {
  			display: none!important;
  		}
  		.krdndpw .popup {
