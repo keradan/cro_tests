@@ -104,7 +104,7 @@
  			margin: 0;
  			padding: 15px;
  			transform: translateY(0);
- 			transition: transform 0.3s cubic-bezier(0.3, 0.4, 1, 1.5);
+ 			transition: transform 0.3s cubic-bezier(0.3, 0.4, 0.2, 1.5);
  		}
  		.keradan-delayed-popup-wrapper:not(.show) .popup {
  			transform: translateY(-5%);
