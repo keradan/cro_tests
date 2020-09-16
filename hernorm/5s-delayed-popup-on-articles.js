@@ -101,21 +101,32 @@
 		    margin: 15px;
     		padding: 0;
  		}
+ 		.krdndpw .popup .sub-headline span {
+ 			font-weight: 600;
+ 			font-style: italic;
+ 		}
  		.krdndpw .popup ul {
  			margin: 0;
  			padding: 0;
  		}
  		.krdndpw .popup ul li {
+ 			display: flex;
+ 			flex-wrap: nowrap;
+ 			margin: 10px 0;
  		}
  		.krdndpw .popup ul li span.mark {
- 			display: block;
- 			width: 40px;
+ 			display: flex;
+		    width: 33px;
+		    justify-content: flex-start;
+		    align-items: flex-start;
+		    padding-top: 4px;
  		}
  		.krdndpw .popup ul li span.text {
  			font-family: PT Serif;
 		    font-size: 20px;
 		    line-height: 26px;
 		    letter-spacing: -0.5px;
+		    max-width: calc(100% - 33px);
  		}
  		.krdndpw .popup button.cancel-button, .krdndpw .popup a.request-button {
  			display: flex;
@@ -141,6 +152,7 @@
  			color: white;
 		    background: #E768B5;
 		    margin-bottom: 15px;
+		    box-shadow: 0 5px 10px rgba(133, 35, 94, 0.25);
  		}
  	`;
 
