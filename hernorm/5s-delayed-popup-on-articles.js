@@ -2,12 +2,12 @@
  
  	let show_popup = function () {
  		console.log('show_popup');
- 		popup_wrapper.classList.togle('show', true);
+ 		popup_wrapper.classList.toggle('show', true);
  	}
 
  	let close_popup = function () {
  		console.log('close_popup');
- 		popup_wrapper.classList.togle('show', false);
+ 		popup_wrapper.classList.toggle('show', false);
  	}
 
  	let markup_content = {
