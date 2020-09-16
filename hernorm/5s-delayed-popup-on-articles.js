@@ -2,12 +2,14 @@
  
  	let show_popup = function () {
  		console.log('show_popup');
- 		popup_wrapper.classList.toggle('show', true);
+ 		popup_wrapper.classList.toggle('displayed', true);
+ 		setTimeout(() => popup_wrapper.classList.toggle('show', true), 1);
  	}
 
  	let close_popup = function () {
  		console.log('close_popup');
  		popup_wrapper.classList.toggle('show', false);
+ 		setTimeout(() => popup_wrapper.classList.toggle('displayed', false), 300);
  	}
 
  	let markup_content = {
@@ -38,6 +40,7 @@
  	});
 
  	/* .krdndpw - minified wrapper class for scope */
+ 	
  	let styles = `
  		.keradan-delayed-popup-wrapper {
  			position: fixed;
@@ -50,9 +53,14 @@
  			justify-content: center;
  			background: rgba(0,0,0,0.4);
  			z-index: 9999999999;
+ 			opacity: 1;
+ 			transition: opacity 0.3s ease;
+ 		}
+ 		.keradan-delayed-popup-wrapper:not(.displayed) {
+ 			display: none!important;
  		}
  		.keradan-delayed-popup-wrapper:not(.show) {
- 			display: none!important;
+ 			opacity: 0;
  		}
  		.krdndpw .popup {
  			position: relative;
@@ -66,6 +74,11 @@
  			border-radius: 5px;
  			margin: 0;
  			padding: 15px;
+ 			transform: translateY(0);
+ 			transition: transform 0.3s cubic-bezier(0.29, 0.38, 0.59, 1.93);
+ 		}
+ 		.keradan-delayed-popup-wrapper:not(.show) .popup {
+ 			transform: translateY(-10%);
  		}
  		.krdndpw .popup button.close {
  			position: absolute;
