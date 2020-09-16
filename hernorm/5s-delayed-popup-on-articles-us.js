@@ -39,8 +39,7 @@
  		setTimeout(() => popup_wrapper.classList.toggle('show', true), 10);
  	}
 
- 	let close_popup = function (ga_event) {
- 		keradan_ga_event(ga_event);
+ 	let close_popup = function () {
  		console.log('close_popup');
  		popup_wrapper.classList.toggle('show', false);
  		setTimeout(() => popup_wrapper.classList.toggle('displayed', false), 300);
