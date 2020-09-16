@@ -225,13 +225,18 @@
 	var popup_wrapper = document.querySelector('.krdndpw');
 
 	popup_wrapper.addEventListener('click', function(event){
-		if (!event.target) return;
-		if (event.target == popup_wrapper) close_popup('close popup - background');
-		if (event.target == popup_wrapper.querySelector('button.close')) close_popup('close popup - X');
-		if (event.target == popup_wrapper.querySelector('button.cancel-button')) close_popup('click on I prefer to do not know about this');
+		if (event.target != popup_wrapper) return false;
+		keradan_ga_event('close popup - background');
+		close_popup();
 	});
-	// popup_wrapper.querySelector('button.close').addEventListener('click', close_popup);
-	// popup_wrapper.querySelector('button.cancel-button').addEventListener('click', close_popup);
+	popup_wrapper.querySelector('button.close').addEventListener('click', function(){
+		keradan_ga_event('close popup - X');
+		close_popup();
+	});
+	popup_wrapper.querySelector('button.cancel-button').addEventListener('click', function(){
+		keradan_ga_event('click on I prefer to do not know about this');
+		close_popup();
+	});
 	popup_wrapper.querySelector('a.request-button').addEventListener('click', function(){
 		keradan_ga_event('click on I want to learn more about this tool');
 	});
