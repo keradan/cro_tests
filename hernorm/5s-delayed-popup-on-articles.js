@@ -39,8 +39,6 @@
  		`;
  	});
 
- 	/* .krdndpw - minified wrapper class for scope */
- 	
  	let styles = `
  		.keradan-delayed-popup-wrapper {
  			position: fixed;
@@ -185,7 +183,7 @@
 	document.querySelector('head').append(styles_el);
 
 	let markup_el = document.createElement('div');
-	markup_el.classList.add('keradan-delayed-popup-wrapper', 'krdndpw');
+	markup_el.classList.add('keradan-delayed-popup-wrapper', 'krdndpw'); // .krdndpw - minified wrapper class for scope
 	markup_el.innerHTML = markup;
 	document.querySelector('body').append(markup_el);
 	
@@ -196,8 +194,6 @@
 	});
 	popup_wrapper.querySelector('button.close').addEventListener('click', close_popup);
 	popup_wrapper.querySelector('button.cancel-button').addEventListener('click', close_popup);
-
-	
 
 	setTimeout(show_popup, 1000);
 })();
