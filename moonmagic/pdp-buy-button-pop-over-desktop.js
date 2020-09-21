@@ -47,7 +47,7 @@
 		    background: white;
 		    box-shadow: 0 0 15px rgba(0,0,0,0.1);
 		    padding: 5px;
-		    transition: all 0.2s ease;
+		    transition: opacity 0.2s ease, padding 0.2s ease;
 		    opacity: 1;
 
  		}
