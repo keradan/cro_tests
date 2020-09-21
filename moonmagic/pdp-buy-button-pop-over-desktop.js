@@ -48,7 +48,7 @@
 		    box-shadow: 0 0 15px rgba(0,0,0,0.1);
 		    padding: 5px;
  		}
- 		.keradan-pdp-buy-button-popover {
+ 		.keradan-pdp-buy-button-popover:not(.show){
  			height: 1px;
 		    padding: 0;
 		    border-width: 0;
