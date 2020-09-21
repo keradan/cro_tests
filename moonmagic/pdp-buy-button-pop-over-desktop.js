@@ -106,7 +106,7 @@
  			width: 10px;
 		    height: 10px;
 		    transform: translateY(3px);
-		    margin-right: 5px;
+		    margin-right: 4px;
  		}
  		.krdnpbbp ul li span.text {
  			font-family: Montserrat;
@@ -114,8 +114,7 @@
 		    font-size: 12px;
 		    line-height: 16px;
 		    text-transform: none;
-		    width: calc(100% - 10px);
-		    max-width: calc(100% - 15px);
+		    max-width: calc(100% - 14px);
 		    text-align: left;
  		}
  	`;
