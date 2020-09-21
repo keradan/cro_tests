@@ -38,7 +38,6 @@
 
  	let styles = `
  		.keradan-pdp-buy-button-popover {
- 			display: none;
  			position: absolute;
 		    top: 70px;
     		left: 0;
@@ -47,12 +46,15 @@
 		    background: white;
 		    box-shadow: 0 0 15px rgba(0,0,0,0.1);
 		    padding: 5px;
+		    transition: all 0.2s ease;
+		    opacity: 1;
+
  		}
  		.keradan-pdp-buy-button-popover:not(.show){
- 			height: 1px;
-		    padding: 0;
+ 			height: 0;
+		    padding: 0 5px;
 		    border-width: 0;
-		    transition: all 0.2s ease;
+		    opacity: 0;
  		}
  		.krdnpbbp.show {
  			display: flex!important;
@@ -71,12 +73,7 @@
 		    border-bottom: 2px solid transparent;
 		    border-left: 2px solid pink;
 		    border-top: 2px solid pink;
-		    border-width: 0;
- 		}
- 		.krdnpbbp.show .arrow {
- 			width: 12px;
-		    height: 12px;
-		    border-width: 2px;
+		    transition: all 0.2s ease;
  		}
  		.krdnpbbp .arrow.up {
  			top: 0;
@@ -86,12 +83,17 @@
  			bottom: 0;
  			transform: translateX(-50%) translateY(50%) rotate(-135deg);
  		}
+ 		.krdnpbbp:not(.show) .arrow {
+ 			width: 0;
+		    height: 0;
+		    border-width: 0;
+ 		}
  		.krdnpbbp ul {
  			overflow: hidden;
-
+ 			transition: all 0.2s ease;
 		}
-		.krdnpbbp.show ul {
-
+		.krdnpbbp:not(.show) ul {
+			height: 0;
 		}
  		.krdnpbbp ul li {
  			display: flex;
