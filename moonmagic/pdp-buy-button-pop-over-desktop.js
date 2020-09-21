@@ -38,8 +38,9 @@
 
  	let styles = `
  		.keradan-pdp-buy-button-popover {
+ 			display: flex;
  			position: absolute;
-		    top: 70px;
+		    top: 0;
     		left: 0;
 		    width: 100%;
 		    border: 1px solid pink;
@@ -56,11 +57,11 @@
 		    border-width: 0;
 		    opacity: 0;
  		}
- 		.krdnpbbp.show {
- 			display: flex!important;
+ 		.krdnpbbp.show-below {
+ 			top: 70px;
  		}
- 		.krdnpbbp.show-above, .krdnpbbp.show-below {
- 			display: flex;
+ 		.krdnpbbp.show-above {
+ 			bottom: 70px;
  		}
  		.krdnpbbp .arrow {
 		    position: absolute;
@@ -75,11 +76,11 @@
 		    border-top: 1px solid pink;
 		    transition: all 0.2s ease;
  		}
- 		.krdnpbbp .arrow.up {
+ 		.krdnpbbp.show-below .arrow {
  			top: 0;
 		    transform: translateX(-50%) translateY(-50%) rotate(45deg);
 		}
- 		.krdnpbbp .arrow.down {
+ 		.krdnpbbp.show-above .arrow {
  			bottom: 0;
  			transform: translateX(-50%) translateY(50%) rotate(-135deg);
  		}
@@ -132,7 +133,7 @@
  				<span class="text">Hassle-free return if size doesn’t fit</span>
  			</li>
  		</ul>
- 		<span class="arrow up"></span>
+ 		<span class="arrow"></span>
  	`;
 
  	let styles_el = document.createElement('style');
@@ -147,20 +148,32 @@
 
 	document.querySelector('#js-pp-add-to-cart').addEventListener('mouseenter', function(){
 		// console.log('button entered');
+		markup_el.classList.toggle('show-above', false);
+		markup_el.classList.toggle('show-below', false);
 		markup_el.classList.toggle('show', true);
+		
 		let btn = document.querySelector('#js-pp-add-to-cart');
-		let djhfd = btn.getBoundingClientRect().height + btn.getBoundingClientRect().y;
-		if (djhfd < (window.innerHeight - 100)) {
+		let btn_distance_to_top = btn.getBoundingClientRect().height + btn.getBoundingClientRect().y;
+		if (btn_distance_to_top < (window.innerHeight - 100)) {
+			console.log('снизу');
+			markup_el.classList.toggle('show-below', true);
+		} else {
 			console.log('сверху');
-		} else console.log('снизу');
+			markup_el.classList.toggle('show-above', true);
+		}
+		
 	});
 	markup_el.addEventListener('mouseenter', function(){
 		// console.log('popover entered');
 		markup_el.classList.toggle('show', false);
+		markup_el.classList.toggle('show-above', false);
+		markup_el.classList.toggle('show-below', false);
 	});
 	document.querySelector('#js-pp-add-to-cart').addEventListener('mouseleave', function(){
 		// console.log('button leave');
 		markup_el.classList.toggle('show', false);
+		markup_el.classList.toggle('show-above', false);
+		markup_el.classList.toggle('show-below', false);
 	});
 
 	
