@@ -48,8 +48,14 @@
 		    box-shadow: 0 0 15px rgba(0,0,0,0.1);
 		    padding: 5px;
  		}
+ 		.keradan-pdp-buy-button-popover {
+ 			height: 1px;
+		    padding: 0;
+		    border-width: 0;
+		    transition: all 0.2s ease;
+ 		}
  		.krdnpbbp.show {
- 			display: flex;
+ 			display: flex!important;
  		}
  		.krdnpbbp.show-above, .krdnpbbp.show-below {
  			display: flex;
@@ -65,6 +71,12 @@
 		    border-bottom: 2px solid transparent;
 		    border-left: 2px solid pink;
 		    border-top: 2px solid pink;
+		    border-width: 0;
+ 		}
+ 		.krdnpbbp.show .arrow {
+ 			width: 12px;
+		    height: 12px;
+		    border-width: 2px;
  		}
  		.krdnpbbp .arrow.up {
  			top: 0;
@@ -74,20 +86,27 @@
  			bottom: 0;
  			transform: translateX(-50%) translateY(50%) rotate(-135deg);
  		}
- 		.keradan-pdp-buy-button-popover ul li {
+ 		.krdnpbbp ul {
+ 			overflow: hidden;
+
+		}
+		.krdnpbbp.show ul {
+
+		}
+ 		.krdnpbbp ul li {
  			display: flex;
  			margin-bottom: 8px;
  		}
- 		.keradan-pdp-buy-button-popover ul li:last-child {
+ 		.krdnpbbp ul li:last-child {
  			margin-bottom: 0;
  		}
- 		.keradan-pdp-buy-button-popover ul li svg {
+ 		.krdnpbbp ul li svg {
  			width: 10px;
 		    height: 10px;
 		    transform: translateY(3px);
 		    margin-right: 5px;
  		}
- 		.keradan-pdp-buy-button-popover ul li span.text {
+ 		.krdnpbbp ul li span.text {
  			font-family: Montserrat;
 		    font-weight: 500;
 		    font-size: 12px;
