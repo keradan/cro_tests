@@ -44,6 +44,9 @@
 		    left: 50%;
 		    transform: translateX(-50%);
 		    width: 100%;
+		    borer: 2px solid pink;
+		    background: white;
+		    box-shadow: 0 0 15px rgba(0,0,0,0.1);
  		}
  		.krdnpbbp.show {
  			display: flex;
@@ -51,14 +54,19 @@
  		.krdnpbbp.show-above, .krdnpbbp.show-below {
  			display: flex;
  		}
- 		.krdnpbbp .arrow-down, .krdnpbbp .arrow-up {
- 			position: absolute;
- 			left: 50%;
-		    transform: translateX(-50%), translateY(-50%), rotate(45deg);
-		    background: red;
+ 		.krdnpbbp .arrow {
+		    position: absolute;
+		    left: 50%;
+		    top: 0;
+		    transform: translateX(-50%) translateY(-50%) rotate(45deg);
+		    box-sizing: border-box;
 		    width: 12px;
 		    height: 12px;
-		    box-sizing: border-box;
+		    background: white;
+		    border-right: 2px solid transparent;
+		    border-bottom: 2px solid transparent;
+		    border-left: 2px solid pink;
+		    border-top: 2px solid pink;
  		}
  	`;
 
@@ -74,8 +82,7 @@
  				<span>Hassle-free return if size doesn’t fit</span>
  			</li>
  		</ul>
- 		<span class="arrow-down"></span>
- 		<span class="arrow-up"></span>
+ 		<span class="arrow"></span>
  	`;
 
  	let styles_el = document.createElement('style');
