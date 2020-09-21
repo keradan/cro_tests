@@ -37,7 +37,7 @@
 	*/
 
  	let styles = `
- 		.keradan-delayed-popup-wrapper {
+ 		.keradan-pdp-buy-button-popover {
  			display: none;
  			position: absolute;
 		    top: 0;
@@ -51,20 +51,40 @@
  		.krdnpbbp.show-above, .krdnpbbp.show-below {
  			display: flex;
  		}
+ 		.krdnpbbp .arrow-down, .krdnpbbp .arrow-up {
+ 			position: absolute;
+ 			left: 50%;
+		    transform: translateX(-50%), translateY(-50%), rotate(45deg);
+		    background: red;
+		    width: 12px;
+		    height: 12px;
+		    box-sizing: border-box;
+ 		}
  	`;
 
+ 	let checkmark = '<svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M3.85584 7L1.06436 3.971C1.02051 3.91539 0.997598 3.84386 1.0002 3.7707C1.0028 3.69754 1.03072 3.62814 1.07839 3.57637C1.12606 3.5246 1.18995 3.49427 1.25731 3.49144C1.32467 3.48862 1.39053 3.5135 1.44173 3.56112L3.85049 6.17734L8.55827 1.0699C8.60947 1.02228 8.67533 0.997391 8.74269 1.00022C8.81005 1.00304 8.87394 1.03337 8.92161 1.08514C8.96927 1.13691 8.9972 1.20631 8.9998 1.27947C9.0024 1.35263 8.97949 1.42416 8.93564 1.47977L3.85584 7Z" fill="#FCBEC0" stroke="#FCBEC0"/></svg>';
  	let markup = `
- 		<span>
- 			выорвыорврыорвроы
- 		</span>
+ 		<ul>
+ 			<li>
+ 				${checkmark}
+ 				<span>Only genuine gemstones and high quality materials</span>
+ 			</li>
+ 			<li>
+ 				${checkmark}
+ 				<span>Hassle-free return if size doesn’t fit</span>
+ 			</li>
+ 		</ul>
+ 		<span class="arrow-down"></span>
+ 		<span class="arrow-up"></span>
  	`;
 
  	let styles_el = document.createElement('style');
+	// styles_el.classList.add('keradan-pdp-buy-button-popover-styles'); // .krdnpbbp - minified wrapper class for scope
 	styles_el.innerHTML = styles;
 	document.querySelector('head').append(styles_el);
 
 	let markup_el = document.createElement('div');
-	markup_el.classList.add('keradan-delayed-popup-wrapper', 'krdnpbbp'); // .krdnpbbp - minified wrapper class for scope
+	markup_el.classList.add('keradan-pdp-buy-button-popover', 'krdnpbbp'); // .krdnpbbp - minified wrapper class for scope
 	markup_el.innerHTML = markup;
 	document.querySelector('#js-pp-add-to-cart').append(markup_el);
 
