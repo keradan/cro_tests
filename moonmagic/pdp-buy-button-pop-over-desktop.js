@@ -40,9 +40,8 @@
  		.keradan-pdp-buy-button-popover {
  			display: none;
  			position: absolute;
-		    top: 0;
-		    left: 50%;
-		    transform: translateX(-50%);
+		    top: 70px;
+    		left: 0;
 		    width: 100%;
 		    borer: 2px solid pink;
 		    background: white;
