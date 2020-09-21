@@ -84,7 +84,7 @@
 	document.querySelector('head').append(styles_el);
 
 	let markup_el = document.createElement('div');
-	markup_el.classList.add('keradan-pdp-buy-button-popover', 'krdnpbbp'); // .krdnpbbp - minified wrapper class for scope
+	markup_el.classList.add('keradan-pdp-buy-button-popover', 'krdnpbbp', 'show'); // .krdnpbbp - minified wrapper class for scope
 	markup_el.innerHTML = markup;
 	document.querySelector('#js-pp-add-to-cart').append(markup_el);
 
