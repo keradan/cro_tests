@@ -73,12 +73,26 @@
  			bottom: 0;
  			transform: translateX(-50%) translateY(50%) rotate(-135deg);
  		}
+ 		.keradan-pdp-buy-button-popover ul li {
+ 			display: flex;
+ 			margin-bottom: 8px;
+ 		}
+ 		.keradan-pdp-buy-button-popover ul li:last-child {
+ 			margin-bottom: 0;
+ 		}
+ 		.keradan-pdp-buy-button-popover ul li svg {
+ 			width: 10px;
+		    height: 10px;
+		    transform: translateY(3px);
+		    margin-right: 5px;
+ 		}
  		.keradan-pdp-buy-button-popover ul li span.text {
  			font-family: Montserrat;
 		    font-weight: 500;
 		    font-size: 12px;
-		    line-height: 19px;
+		    line-height: 16px;
 		    text-transform: none;
+		    width: calc(100% - 10px);
  		}
  	`;
 
