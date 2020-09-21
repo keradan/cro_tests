@@ -56,8 +56,6 @@
  		.krdnpbbp .arrow {
 		    position: absolute;
 		    left: 50%;
-		    top: 0;
-		    transform: translateX(-50%) translateY(-50%) rotate(45deg);
 		    box-sizing: border-box;
 		    width: 12px;
 		    height: 12px;
@@ -67,6 +65,21 @@
 		    border-left: 2px solid pink;
 		    border-top: 2px solid pink;
  		}
+ 		.krdnpbbp .arrow.up {
+ 			top: 0;
+		    transform: translateX(-50%) translateY(-50%) rotate(45deg);
+		}
+ 		.krdnpbbp .arrow.down {
+ 			bottom: 0;
+ 			transform: translateX(-50%) translateY(50%) rotate(-135deg);
+ 		}
+ 		.keradan-pdp-buy-button-popover ul li span.text {
+ 			font-family: Montserrat;
+		    font-weight: 500;
+		    font-size: 12px;
+		    line-height: 19px;
+		    text-transform: none;
+ 		}
  	`;
 
  	let checkmark = '<svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M3.85584 7L1.06436 3.971C1.02051 3.91539 0.997598 3.84386 1.0002 3.7707C1.0028 3.69754 1.03072 3.62814 1.07839 3.57637C1.12606 3.5246 1.18995 3.49427 1.25731 3.49144C1.32467 3.48862 1.39053 3.5135 1.44173 3.56112L3.85049 6.17734L8.55827 1.0699C8.60947 1.02228 8.67533 0.997391 8.74269 1.00022C8.81005 1.00304 8.87394 1.03337 8.92161 1.08514C8.96927 1.13691 8.9972 1.20631 8.9998 1.27947C9.0024 1.35263 8.97949 1.42416 8.93564 1.47977L3.85584 7Z" fill="#FCBEC0" stroke="#FCBEC0"/></svg>';
@@ -74,14 +87,14 @@
  		<ul>
  			<li>
  				${checkmark}
- 				<span>Only genuine gemstones and high quality materials</span>
+ 				<span class="text">Only genuine gemstones and high quality materials</span>
  			</li>
  			<li>
  				${checkmark}
- 				<span>Hassle-free return if size doesn’t fit</span>
+ 				<span class="text">Hassle-free return if size doesn’t fit</span>
  			</li>
  		</ul>
- 		<span class="arrow"></span>
+ 		<span class="arrow up"></span>
  	`;
 
  	let styles_el = document.createElement('style');
