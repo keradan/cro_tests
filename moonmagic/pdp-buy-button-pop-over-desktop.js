@@ -124,6 +124,9 @@
 	markup_el.innerHTML = markup;
 	document.querySelector('#js-pp-add-to-cart').append(markup_el);
 
+	btn.addEventListener('mouseenter', function(){console.log('entered')});
+	btn.addEventListener('mouseleave', function(){console.log('leave')});
+
 	
 
 	
