@@ -120,12 +120,18 @@
 	document.querySelector('head').append(styles_el);
 
 	let markup_el = document.createElement('div');
-	markup_el.classList.add('keradan-pdp-buy-button-popover', 'krdnpbbp', 'show'); // .krdnpbbp - minified wrapper class for scope
+	markup_el.classList.add('keradan-pdp-buy-button-popover', 'krdnpbbp'); // .krdnpbbp - minified wrapper class for scope
 	markup_el.innerHTML = markup;
 	document.querySelector('#js-pp-add-to-cart').append(markup_el);
 
-	btn.addEventListener('mouseenter', function(){console.log('entered')});
-	btn.addEventListener('mouseleave', function(){console.log('leave')});
+	document.querySelector('#js-pp-add-to-cart').addEventListener('mouseenter', function(){
+		console.log('entered');
+		markup_el.classList.toggle('show', true);
+	});
+	document.querySelector('#js-pp-add-to-cart').addEventListener('mouseleave', function(){
+		console.log('leave');
+		markup_el.classList.toggle('show', false);
+	});
 
 	
 
