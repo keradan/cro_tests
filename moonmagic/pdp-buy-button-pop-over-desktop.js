@@ -97,7 +97,7 @@
 		}
  		.krdnpbbp ul li {
  			display: flex;
- 			margin-bottom: 8px;
+ 			margin-bottom: 5px;
  		}
  		.krdnpbbp ul li:last-child {
  			margin-bottom: 0;
@@ -146,15 +146,20 @@
 	document.querySelector('#js-pp-add-to-cart').append(markup_el);
 
 	document.querySelector('#js-pp-add-to-cart').addEventListener('mouseenter', function(){
-		console.log('button entered');
+		// console.log('button entered');
 		markup_el.classList.toggle('show', true);
+		let btn = document.querySelector('#js-pp-add-to-cart');
+		let djhfd = btn.getBoundingClientRect().height + btn.getBoundingClientRect().y;
+		if (djhfd < (window.innerHeight - 100)) {
+			console.log('сверху');
+		} else console.log('снизу');
 	});
 	markup_el.addEventListener('mouseenter', function(){
-		console.log('popover entered');
+		// console.log('popover entered');
 		markup_el.classList.toggle('show', false);
 	});
 	document.querySelector('#js-pp-add-to-cart').addEventListener('mouseleave', function(){
-		console.log('button leave');
+		// console.log('button leave');
 		markup_el.classList.toggle('show', false);
 	});
 
