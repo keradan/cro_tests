@@ -46,6 +46,7 @@
 		    border: 2px solid pink;
 		    background: white;
 		    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+		    padding: 5px;
  		}
  		.krdnpbbp.show {
  			display: flex;
@@ -93,6 +94,8 @@
 		    line-height: 16px;
 		    text-transform: none;
 		    width: calc(100% - 10px);
+		    max-width: calc(100% - 15px);
+		    text-align: left;
  		}
  	`;
 
