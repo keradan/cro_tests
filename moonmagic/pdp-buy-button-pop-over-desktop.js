@@ -146,11 +146,15 @@
 	document.querySelector('#js-pp-add-to-cart').append(markup_el);
 
 	document.querySelector('#js-pp-add-to-cart').addEventListener('mouseenter', function(){
-		console.log('entered');
+		console.log('button entered');
 		markup_el.classList.toggle('show', true);
 	});
+	markup_el.addEventListener('mouseenter', function(){
+		console.log('popover entered');
+		markup_el.classList.toggle('show', false);
+	});
 	document.querySelector('#js-pp-add-to-cart').addEventListener('mouseleave', function(){
-		console.log('leave');
+		console.log('button leave');
 		markup_el.classList.toggle('show', false);
 	});
 
