@@ -116,6 +116,7 @@
 		    text-transform: none;
 		    max-width: calc(100% - 14px);
 		    text-align: left;
+		    letter-spacing: 0;
  		}
  	`;
 
