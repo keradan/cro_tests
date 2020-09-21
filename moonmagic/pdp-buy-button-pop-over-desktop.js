@@ -43,7 +43,7 @@
 		    top: 70px;
     		left: 0;
 		    width: 100%;
-		    borer: 2px solid pink;
+		    border: 2px solid pink;
 		    background: white;
 		    box-shadow: 0 0 15px rgba(0,0,0,0.1);
  		}
