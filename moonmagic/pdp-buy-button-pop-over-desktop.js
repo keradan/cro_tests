@@ -42,7 +42,7 @@
 		    top: 70px;
     		left: 0;
 		    width: 100%;
-		    border: 2px solid pink;
+		    border: 1px solid pink;
 		    background: white;
 		    box-shadow: 0 0 15px rgba(0,0,0,0.1);
 		    padding: 5px;
@@ -69,10 +69,10 @@
 		    width: 12px;
 		    height: 12px;
 		    background: white;
-		    border-right: 2px solid transparent;
-		    border-bottom: 2px solid transparent;
-		    border-left: 2px solid pink;
-		    border-top: 2px solid pink;
+		    border-right: 1px solid transparent;
+		    border-bottom: 1px solid transparent;
+		    border-left: 1px solid pink;
+		    border-top: 1px solid pink;
 		    transition: all 0.2s ease;
  		}
  		.krdnpbbp .arrow.up {
