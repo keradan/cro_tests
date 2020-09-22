@@ -165,14 +165,14 @@
 	markup_el.addEventListener('mouseenter', function(){
 		// console.log('popover entered');
 		markup_el.classList.toggle('show', false);
-		markup_el.classList.toggle('show-above', false);
-		markup_el.classList.toggle('show-below', false);
+		// markup_el.classList.toggle('show-above', false);
+		// markup_el.classList.toggle('show-below', false);
 	});
 	document.querySelector('#js-pp-add-to-cart').addEventListener('mouseleave', function(){
 		// console.log('button leave');
 		markup_el.classList.toggle('show', false);
-		markup_el.classList.toggle('show-above', false);
-		markup_el.classList.toggle('show-below', false);
+		// markup_el.classList.toggle('show-above', false);
+		// markup_el.classList.toggle('show-below', false);
 	});
 
 	
