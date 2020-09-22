@@ -57,10 +57,10 @@
 		    opacity: 0;
  		}
  		.krdnpbbp.show-below {
- 			top: 70px;
+ 			top: 65px;
  		}
  		.krdnpbbp.show-above {
- 			bottom: 70px;
+ 			bottom: 65px;
  		}
  		.krdnpbbp .arrow {
 		    position: absolute;
@@ -73,7 +73,7 @@
 		    border-bottom: 1px solid transparent;
 		    border-left: 1px solid pink;
 		    border-top: 1px solid pink;
-		    transition: all 0.2s ease;
+		    transition: width 0.2s ease, height 0.2s ease, border-width 0.2s ease;
  		}
  		.krdnpbbp.show-below .arrow {
  			top: 0;
@@ -117,6 +117,7 @@
 		    max-width: calc(100% - 14px);
 		    text-align: left;
 		    letter-spacing: 0;
+		    color: #2F2F2F;
  		}
  	`;
 
