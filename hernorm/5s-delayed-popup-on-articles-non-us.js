@@ -1,5 +1,40 @@
 (function () {
 	let keradan_enable_log = true;
+	function keradan_affiliate_link_track_click(el) {
+		let base_tracker_url = location.protocol + '//track.trackall.io/ga_postback/';
+		el = jQuery(el);
+		var data = getPostbackData(el);
+
+		console.log('keradans try click tracking...');
+			
+		jQuery.ajax({
+			url: base_tracker_url + 'click.php',
+			data: data,
+			success: function(response)
+			{
+				console.log(response);
+				
+				var redirect_url = el.attr('href');
+				
+				if ((typeof offer_mode != 'undefined') && ((offer_mode == 'test') || (mode == 'local')))
+				{
+					redirect_url = base_tracker_url + 'offer.php?tid=' + el.attr('data-transaction-id');
+				}
+				
+				if ((typeof offer_mode != 'undefined') && ((offer_mode == 'test') || (mode == 'local')))
+				{
+					el.attr('href', redirect_url);
+				}
+			},
+			error: function(jqxhr, text_status, error_thrown)
+			{
+				console.log(text_status);
+				console.log(error_thrown);
+			}
+		});
+
+	}
+
 	function keradan_log() {
 		if(keradan_enable_log) console.log.apply(this, arguments);
 	}
