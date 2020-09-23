@@ -1,6 +1,6 @@
 (function () {
 	let keradan_enable_log = true;
-	function keradan_affiliate_link_track_click(el) {
+	window.keradan_affiliate_link_track_click = function(el) {
 		let base_tracker_url = location.protocol + '//track.trackall.io/ga_postback/';
 		el = jQuery(el);
 		var data = getPostbackData(el);
