@@ -5,6 +5,7 @@
 		el = jQuery(el);
 		var data = getPostbackData(el);
 
+		console.log('getPostbackData: ', getPostbackData(el));
 		console.log('keradans try click tracking...');
 			
 		jQuery.ajax({
