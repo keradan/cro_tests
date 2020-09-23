@@ -193,7 +193,7 @@
  			<p class="headline">${markup_content.headline}</p>
  			<p class="sub-headline">${markup_content.sub_headline}</p>
  			<ul>${markup_content.list_items}</ul>
- 			<a href="${markup_content.request_button_link}" class="request-button">${markup_content.request_button_text}</a>
+ 			<a data-tracking-group="digistore24" data-action="sale.hso" href="${markup_content.request_button_link}" class="request-button">${markup_content.request_button_text}</a>
  		</div>
  	`;
 
