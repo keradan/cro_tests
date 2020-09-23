@@ -1,40 +1,5 @@
 (function () {
 	let keradan_enable_log = true;
-	window.keradan_affiliate_link_track_click = function(el) {
-		let base_tracker_url = location.protocol + '//track.trackall.io/ga_postback/';
-		el = jQuery(el);
-		var data = getPostbackData(el);
-
-		console.log('getPostbackData: ', getPostbackData(el));
-		console.log('keradans try click tracking...');
-			
-		jQuery.ajax({
-			url: base_tracker_url + 'click.php',
-			data: data,
-			success: function(response)
-			{
-				console.log(response);
-				
-				var redirect_url = el.attr('href');
-				
-				if ((typeof offer_mode != 'undefined') && ((offer_mode == 'test') || (mode == 'local')))
-				{
-					redirect_url = base_tracker_url + 'offer.php?tid=' + el.attr('data-transaction-id');
-				}
-				
-				if ((typeof offer_mode != 'undefined') && ((offer_mode == 'test') || (mode == 'local')))
-				{
-					el.attr('href', redirect_url);
-				}
-			},
-			error: function(jqxhr, text_status, error_thrown)
-			{
-				console.log(text_status);
-				console.log(error_thrown);
-			}
-		});
-
-	}
 
 	function keradan_log() {
 		if(keradan_enable_log) console.log.apply(this, arguments);
@@ -53,7 +18,6 @@
 
 	keradan_ga_event('loaded');
 	
-
 	(function(h,o,t,j,a,r){
 		h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
 		h._hjSettings={hjid:1955547,hjsv:6};
@@ -257,5 +221,6 @@
 		keradan_ga_event('click on Watch this video to find out');
 	});
 
-	setTimeout(show_popup, 5000);
+	setTimeout(window.doInit, 1000);
+	setTimeout(show_popup, 15000);
 })();

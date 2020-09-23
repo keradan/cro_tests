@@ -240,5 +240,5 @@
 		keradan_ga_event('click on I want to learn more about this tool');
 	});
 
-	setTimeout(show_popup, 5000);
+	setTimeout(show_popup, 45000);
 })();
