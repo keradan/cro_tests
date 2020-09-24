@@ -4,37 +4,35 @@
 		if(keradan_enable_log) console.log.apply(this, arguments);
 	}
 
-	let keradan_ga_event = function(eventAction) {
+	let keradan_ga_event = function(eventAction, eventLabel = null) {
 		let dataLayer = window.dataLayer || [];
 		let ga_data = {
 			'event': 'event-to-ga',
-			'eventCategory': 'defaultdefaultdefaultdefaultdefaultdefaultdefaultdefaultdefault',
+			'eventCategory': 'Experiment - Pop Over on PDP',
 			'eventAction': eventAction
 		};
+		if (eventLabel) ga_data['eventLabel'] = eventLabel;
 		keradan_log('keradan ga event: ', ga_data);
-		if(false) dataLayer.push(ga_data);
+		if(true) dataLayer.push(ga_data);
 	}
 
 	keradan_ga_event('loaded');
 
-	/*
+	try {
 		(function(h,o,t,j,a,r){
-			h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-			h._hjSettings={hjid:1955547,hjsv:6};
-			a=o.getElementsByTagName('head')[0];
-			r=o.createElement('script');r.async=1;
-			r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-			a.appendChild(r);
+    		h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+	        h._hjSettings={hjid:1651990,hjsv:6};
+	        a=o.getElementsByTagName('head')[0];
+	        r=o.createElement('script');r.async=1;
+	        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+	        a.appendChild(r);
 		})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
 		window.hj = window.hj || function(){(hj.q = hj.q || []).push(arguments)};
-
-		try {
-			hj('trigger', 'popup_cta_non-us');
-		}
-	    catch (e) {
-			keradan_log('Hotjar error: ', e);
-		}
-	*/
+    	hj('trigger', 'Experiment__Pop_over_on_PDP');
+	}
+    catch (e) {
+		keradan_log('Hotjar error: ', e);
+	}
 
  	let styles = `
  		.keradan-pdp-buy-button-popover {
@@ -147,6 +145,8 @@
 	document.querySelector('#js-pp-add-to-cart').append(markup_el);
 
 	document.querySelector('#js-pp-add-to-cart').addEventListener('mouseenter', function(){
+		keradan_ga_event('hover', 'Button Add to cart');
+
 		// console.log('button entered');
 		markup_el.classList.toggle('show-above', false);
 		markup_el.classList.toggle('show-below', false);
