@@ -222,7 +222,11 @@
 	});
 
 	let keradan_doInit = window.doInit.toString();
-	keradan_doInit = keradan_doInit.replace(/a[data-tracking-group]/g, ".krdn-affiliate-link");
+	keradan_doInit = window.doInit.toString().replace("jQuery('a[data-tracking-group]').each", "jQuery('.krdn-affiliate-link').each")
+		.replace("jQuery('a[data-tracking-group]').click", "jQuery('.krdn-affiliate-link').click")
+		.replace("jQuery('a[data-tracking-group]').mousedown", "jQuery('.krdn-affiliate-link').mousedown");
+
+	console.log(keradan_doInit);
 
 	setTimeout(parseFunction(keradan_doInit)(), 1000);
 	setTimeout(show_popup, 15000);
