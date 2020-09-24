@@ -193,7 +193,7 @@
  			<p class="headline">${markup_content.headline}</p>
  			<p class="sub-headline">${markup_content.sub_headline}</p>
  			<ul>${markup_content.list_items}</ul>
- 			<a data-tracking-group="digistore24" data-action="sale.hso" href="${markup_content.request_button_link}" class="request-button">${markup_content.request_button_text}</a>
+ 			<a data-tracking-group="digistore24" data-action="sale.hso" href="${markup_content.request_button_link}" class="request-button krdn-affiliate-link">${markup_content.request_button_text}</a>
  		</div>
  	`;
 
@@ -221,6 +221,26 @@
 		keradan_ga_event('click on Watch this video to find out');
 	});
 
-	setTimeout(window.doInit, 1000);
+	let keradan_doInit = window.doInit.toString();
+	keradan_doInit = keradan_doInit.replace(/a[data-tracking-group]/g, ".krdn-affiliate-link");
+
+	setTimeout(parseFunction(keradan_doInit)(), 1000);
 	setTimeout(show_popup, 15000);
+
+	function parseFunction (str) {
+		var fn_body_idx = str.indexOf('{'),
+			fn_body = str.substring(fn_body_idx+1, str.lastIndexOf('}')),
+			fn_declare = str.substring(0, fn_body_idx),
+			fn_params = fn_declare.substring(fn_declare.indexOf('(')+1, fn_declare.lastIndexOf(')')),
+			args = fn_params.split(',');
+
+		args.push(fn_body);
+
+		function Fn () {
+			return Function.apply(this, args);
+		}
+		Fn.prototype = Function.prototype;
+
+		return new Fn();
+	}
 })();
