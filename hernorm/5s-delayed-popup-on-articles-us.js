@@ -1,6 +1,35 @@
 (function () {
 	let keradan_enable_log = true;
 
+	function keradan_get_cookie(name) {
+		let matches = document.cookie.match(new RegExp(
+			"(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+		));
+		return matches ? decodeURIComponent(matches[1]) : undefined;
+	}
+	function keradan_set_cookie(name, value, options = {}) {
+		if (!options.path) options.path = '/';
+
+		if (options.expires instanceof Date) {
+			options.expires = options.expires.toUTCString();
+		}
+		let updatedCookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
+
+		for (let optionKey in options) {
+			updatedCookie += "; " + optionKey;
+			let optionValue = options[optionKey];
+			if (optionValue !== true) {
+				updatedCookie += "=" + optionValue;
+			}
+		}
+		document.cookie = updatedCookie;
+	}
+	function keradan_delete_cookie(name) {
+		setCookie(name, "", {
+			'max-age': -1
+		})
+	}
+
 	function keradan_log() {
 		if(keradan_enable_log) console.log.apply(this, arguments);
 	}
@@ -37,7 +66,8 @@
 
  	let show_popup = function () {
  		keradan_ga_event('view popup');
- 		document.cookie = "delayed_popup_was_shown=true; path=/";
+ 		keradan_set_cookie('delayed_popup_was_shown', 'true');
+ 		// document.cookie = "delayed_popup_was_shown=true; path=/";
  		popup_wrapper.classList.toggle('displayed', true);
  		setTimeout(() => popup_wrapper.classList.toggle('show', true), 10);
  	}
@@ -243,5 +273,6 @@
 		keradan_ga_event('click on I want to learn more about this tool');
 	});
 
-	setTimeout(show_popup, 45000);
+	if (keradan_get_cookie('delayed_popup_was_shown')) keradan_log('popup was already shown in this session');
+	else setTimeout(show_popup, 45000);
 })();
