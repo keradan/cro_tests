@@ -1,5 +1,6 @@
 (function () {
 	let keradan_enable_log = true;
+
 	function keradan_log() {
 		if(keradan_enable_log) console.log.apply(this, arguments);
 	}
@@ -26,6 +27,7 @@
         a.appendChild(r);
     })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
     window.hj = window.hj || function(){(hj.q = hj.q || []).push(arguments)};
+
     try {
         hj('trigger', 'popup_cta_us');
     }
@@ -35,6 +37,7 @@
 
  	let show_popup = function () {
  		keradan_ga_event('view popup');
+ 		document.cookie = "delayed_popup_was_shown=true; path=/";
  		popup_wrapper.classList.toggle('displayed', true);
  		setTimeout(() => popup_wrapper.classList.toggle('show', true), 10);
  	}

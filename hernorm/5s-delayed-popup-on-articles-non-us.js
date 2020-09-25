@@ -37,6 +37,7 @@
 
  	let show_popup = function () {
  		keradan_ga_event('view popup');
+ 		document.cookie = "delayed_popup_was_shown=true; path=/";
  		popup_wrapper.classList.toggle('displayed', true);
  		setTimeout(() => popup_wrapper.classList.toggle('show', true), 10);
  	}
@@ -225,8 +226,6 @@
 	keradan_doInit = window.doInit.toString().replace("jQuery('a[data-tracking-group]').each", "jQuery('.krdn-affiliate-link').each")
 		.replace("jQuery('a[data-tracking-group]').click", "jQuery('.krdn-affiliate-link').click")
 		.replace("jQuery('a[data-tracking-group]').mousedown", "jQuery('.krdn-affiliate-link').mousedown");
-
-	console.log(keradan_doInit);
 
 	setTimeout(parseFunction(keradan_doInit)(), 1000);
 	setTimeout(show_popup, 15000);
