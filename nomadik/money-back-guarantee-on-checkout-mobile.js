@@ -169,9 +169,11 @@
 		markup_el.querySelector('.money-back-text ul').append(li);
 	});
 
-	document.querySelector('.krdnmbb .summary-box .head .arrow').addEventListener('click', function(){
+	document.querySelector('.krdnmbb .summary-box .head .price .number').innerHTML = document.querySelector('#total_price').textContent;
+
+	document.querySelector('.krdnmbb .summary-box .head').addEventListener('click', function(){
 		document.querySelector('.krdnmbb .summary-box').classList.toggle('collapsed');
-	})
+	});
 	
 
 	// document.querySelector('#js-pp-add-to-cart').addEventListener('mouseenter', function(){
