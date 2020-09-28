@@ -50,7 +50,6 @@
 	let r_col = cols[1];
 
 	let keradan_markup_update_timer = setInterval(function(){
-		// console.log('dsdsdd');
 		let billing_settings = document.querySelector('.billing-settings');
 		let btn_box = document.querySelector('._process');
 
