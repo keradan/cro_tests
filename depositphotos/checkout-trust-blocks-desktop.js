@@ -35,6 +35,9 @@
 	}
 
  	let styles = `
+	 	.content-container_september-offer {
+	    	background-color: transparent!important;
+	    }
  	`;
 
  	let markup = `
