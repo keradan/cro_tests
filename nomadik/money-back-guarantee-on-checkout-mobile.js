@@ -76,11 +76,29 @@
  		.krdnmbb .summary-box.collapsed .head .arrow {
  			transform: rotate3d(180, 0, 0, 180deg);
  		}
+ 		.krdnmbb .summary-box .body {
+ 			border-top: 1px solid #DCDCDC;
+ 			margin: 0;
+		    margin-top: 10px;
+		    padding: 0;
+		    padding-top: 10px;
+		    max-height: 100vh;
+		    overflow: hidden;
+		    opacity: 1;
+		    transition: all 0.3s ease;
+ 		}
+ 		.krdnmbb .summary-box.collapsed .body {
+		    margin-top: 0;
+		    padding-top: 0;
+		    max-height: 0;
+		    opacity: 0;
+ 		}
 
  		.krdnmbb .money-back-text ul {
  			list-style: none;
 		    margin: 0;
 		    margin-top: 10px;
+		    margin-bottom: -10px;
 		    padding: 0 11px;
 		    display: flex;
 		    flex-flow: column;
