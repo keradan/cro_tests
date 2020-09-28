@@ -186,7 +186,7 @@
 	}
 
 	document.querySelectorAll('.cart_listing table.item_table .delete_column').forEach(function(delete_column){
-		let row = delete_column.parent;
+		let row = delete_column.parentElement;
 		// let form_id = delete_column.querySelector('form').getAttribute('id');
 		keradan_add_row_to_summary({
 			form_id: delete_column.querySelector('form').getAttribute('id'),
