@@ -143,9 +143,7 @@
  				</div>
  				<div class="arrow">${exp_data.arrow}</div>
  			</div>
- 			<div class="body">
- 				jkdsjkjkdsjksdjk
- 			</div>
+ 			<div class="body"></div>
  		</div>
  		<div class="container money-back-text">
 	 		<div class="column">
@@ -182,7 +180,7 @@
 			<div class="product_data">${row_data.product_data}</div>
 			<div class="price">${row_data.price}</div>
 		`;
-		markup_el.querySelector('.money-back-text ul').append(row_el);
+		markup_el.querySelector('.krdnmbb .summary-box .body').append(row_el);
 	}
 
 	document.querySelectorAll('.cart_listing table.item_table .delete_column').forEach(function(delete_column){
