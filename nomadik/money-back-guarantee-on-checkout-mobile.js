@@ -93,14 +93,14 @@
 		    max-height: 0;
 		    opacity: 0;
  		}
- 		.krdnmbb .summary-box.collapsed .body .summary-row {
+ 		.krdnmbb .summary-box .body .summary-row {
  			display: flex;
 		    flex-flow: row;
 		    align-items: flex-start;
 		    justify-content: space-between;
 		    margin-bottom: 20px;
  		}
- 		.krdnmbb .summary-box.collapsed .body .summary-row button.delete {
+ 		.krdnmbb .summary-box .body .summary-row button.delete {
  			border: none;
 		    background: transparent;
 		    margin: 0;
@@ -108,17 +108,17 @@
 		    padding-left: 0;
 		    width: 30px;
  		}
- 		.krdnmbb .summary-box.collapsed .body .summary-row .product_data {
+ 		.krdnmbb .summary-box .body .summary-row .product_data {
  			width: calc(100% - 110px);
  		}
- 		.krdnmbb .summary-box.collapsed .body .summary-row .product_data .product-name {
+ 		.krdnmbb .summary-box .body .summary-row .product_data .product-name {
  			font-family: Roboto;
 		    font-weight: bold;
 		    font-size: 16px;
 		    line-height: 19px;
 		    color: #212032;
  		}
- 		.krdnmbb .summary-box.collapsed .body .summary-row .product_data .subscription-plan {
+ 		.krdnmbb .summary-box .body .summary-row .product_data .subscription-plan {
  			margin-top: 5px;
  			font-family: Roboto;
 		    font-weight: normal;
@@ -126,14 +126,14 @@
 		    line-height: 16px;
 		    color: #212032;
  		}
- 		.krdnmbb .summary-box.collapsed .body .summary-row .product_data .subscription-autorenew {
+ 		.krdnmbb .summary-box .body .summary-row .product_data .subscription-autorenew {
  			font-family: Roboto;
 		    font-weight: bold;
 		    font-size: 14px;
 		    line-height: 16px;
 		    color: #212032;
  		}
- 		.krdnmbb .summary-box.collapsed .body .summary-row .price {
+ 		.krdnmbb .summary-box .body .summary-row .price {
  			font-family: Roboto;
 		    font-weight: normal;
 		    font-size: 16px;
