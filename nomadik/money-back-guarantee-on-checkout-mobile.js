@@ -185,7 +185,7 @@
 		markup_el.querySelector('.money-back-text ul').append(li);
 	}
 
-	document.querySelector('.cart_listing table.item_table .delete_column').forEach(function(delete_column){
+	document.querySelectorAll('.cart_listing table.item_table .delete_column').forEach(function(delete_column){
 		let row = delete_column.parent;
 		// let form_id = delete_column.querySelector('form').getAttribute('id');
 		keradan_add_row_to_summary({
