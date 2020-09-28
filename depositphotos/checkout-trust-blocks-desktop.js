@@ -44,5 +44,20 @@
 	styles_el.innerHTML = styles;
 	document.querySelector('head').append(styles_el);
 
-	console.log('keradan here deposit');
+	let billing_settings = document.querySelector('.billing-settings');
+	let cols = document.querySelectorAll('.billing-page__cell');
+	let l_col = cols[0];
+	let r_col = cols[1];
+	let btn_box = document.querySelector('._process');
+	console.log({
+		billing_settings: billing_settings,
+		cols: cols,
+		l_col: l_col,
+		r_col: r_col,
+		btn_box: btn_box,
+	});
+
+	l_col.append(billing_settings);
+	billing_settings.before(btn_box);
+
 })();
