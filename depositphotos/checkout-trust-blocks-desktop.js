@@ -49,22 +49,21 @@
 	let l_col = cols[0];
 	let r_col = cols[1];
 
-	// console.log({
-	// 	billing_settings: billing_settings,
-	// 	cols: cols,
-	// 	l_col: l_col,
-	// 	r_col: r_col,
-	// 	btn_box: btn_box,
-	// });
-
-	
-
 	let keradan_markup_update_timer = setInterval(function(){
 		let billing_settings = document.querySelector('.billing-settings');
 		let btn_box = document.querySelector('._process');
 
 		if (billing_settings.parentElement != l_col) l_col.append(billing_settings);
 		if (btn_box.parentElement != l_col) billing_settings.before(btn_box);
-	}, 200);
+		console.log({
+			billing_settings: billing_settings,
+			// cols: cols,
+			l_col: l_col,
+			// r_col: r_col,
+			btn_box: btn_box,
+			"billing_settings_parent": billing_settings.parentElement,
+			"btn_box_parent": btn_box.parentElement,
+		});
+	}, 500);
 
 })();
