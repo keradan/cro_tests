@@ -48,7 +48,6 @@
 	document.querySelector('head').append(styles_el);
 
 	
-	
 
 	let keradan_markup_update_timer = setInterval(function(){
 		let cols = document.querySelectorAll('.billing-page__cell');
