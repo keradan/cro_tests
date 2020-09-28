@@ -71,7 +71,7 @@
 		    right: 0;
 		    width: 20px;
 		    transform: rotate3d(0, 0, 0, 0);
-		    transition: all 0.5s ease;
+		    transition: all 0.3s ease;
  		}
  		.krdnmbb .summary-box.collapsed .head .arrow {
  			transform: rotate3d(180, 0, 0, 180deg);
@@ -85,7 +85,7 @@
 		    max-height: 100vh;
 		    overflow: hidden;
 		    opacity: 1;
-		    transition: all 0.3s ease;
+		    transition: all 0.2s ease;
  		}
  		.krdnmbb .summary-box.collapsed .body {
 		    margin-top: 0;
@@ -168,6 +168,10 @@
 		li.innerHTML = `${exp_data.check_mark} <span class="text">${list_item_text}</span>`;
 		markup_el.querySelector('.money-back-text ul').append(li);
 	});
+
+	document.querySelector('.krdnmbb .summary-box .head .arrow').addEventListener('click', function(){
+		document.querySelector('.krdnmbb .summary-box').classList.toggle('collapsed');
+	})
 	
 
 	// document.querySelector('#js-pp-add-to-cart').addEventListener('mouseenter', function(){
