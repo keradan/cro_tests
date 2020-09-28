@@ -39,7 +39,13 @@
 	    	background-color: transparent!important;
 	    }
 	    .content-container_september-offer:before {
-	    	background: none!important;
+	    	width: 100%!important;
+	    	height: 50%!important;
+	    	background-size: cover!important;
+	    	background-image: url(https://images.unsplash.com/photo-1543007354-0bc99b7d096b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80)!important;
+	    }
+	    .content-container_september-offer .billing-page:before {
+	    	display: none!important;
 	    }
 	    .content-container_september-offer .billing-page:after {
 	    	background-color: transparent!important;
