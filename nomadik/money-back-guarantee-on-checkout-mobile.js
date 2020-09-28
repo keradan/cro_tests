@@ -182,7 +182,7 @@
 			<div class="product_data">${row_data.product_data}</div>
 			<div class="price">${row_data.price}</div>
 		`;
-		markup_el.querySelector('.money-back-text ul').append(li);
+		markup_el.querySelector('.money-back-text ul').append(row_el);
 	}
 
 	document.querySelectorAll('.cart_listing table.item_table .delete_column').forEach(function(delete_column){
