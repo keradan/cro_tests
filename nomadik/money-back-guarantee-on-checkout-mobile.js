@@ -39,8 +39,70 @@
 
  		}
  		.krdnmbb .summary-box {
-
+ 			background: #F6F6F6;
+ 			padding: 10px 25px;
  		}
+ 		.krdnmbb .summary-box .head {
+ 			position: relative;
+ 			display: flex;
+		    width: 100%;
+		    margin: 0 auto;
+		    justify-content: space-between;
+		    align-items: center;
+		    padding-right: 30px;
+ 		}
+ 		.krdnmbb .summary-box .head .title {
+ 			font-family: Open Sans;
+		    font-style: normal;
+		    font-weight: 800;
+		    font-size: 16px;
+		    color: #282562;
+		}
+ 		.krdnmbb .summary-box .head .price {
+ 			margin: 0;
+		    padding: 0;
+		    font-family: Roboto;
+		    font-weight: bold;
+		    font-size: 16px;
+		    color: #212032;
+ 		}
+ 		.krdnmbb .summary-box .head .arrow {
+ 			position: absolute;
+		    right: 0;
+		    width: 20px;
+		    transform: rotate3d(0, 0, 0, 0);
+		    transition: all 0.5s ease;
+ 		}
+ 		.krdnmbb .summary-box.collapsed .head .arrow {
+ 			transform: rotate3d(180, 0, 0, 180deg);
+ 		}
+
+ 		.krdnmbb .money-back-text ul {
+ 			list-style: none;
+		    margin: 0;
+		    margin-top: 10px;
+		    padding: 0 11px;
+		    display: flex;
+		    flex-flow: column;
+		    justify-content: center;
+		    align-items: flex-start;
+ 		}
+ 		.krdnmbb .money-back-text ul li {
+ 			display: flex;
+		    margin: 5px 0;
+		    padding: 0;
+ 		}
+ 		.krdnmbb .money-back-text ul li svg {
+ 			min-width: 15px;
+		    margin-top: 2px;
+		    margin-right: 5px;
+		}
+ 		.krdnmbb .money-back-text ul li .text {
+ 			font-family: Roboto;
+		    font-weight: 500;
+		    font-size: 14px;
+		    line-height: 16px;
+		}
  	`;
 
  	let exp_data = {
