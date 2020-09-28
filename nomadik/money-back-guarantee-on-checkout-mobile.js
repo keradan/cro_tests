@@ -109,7 +109,7 @@
 		    width: 30px;
  		}
  		.krdnmbb .summary-box .body .summary-row .product_data {
- 			width: calc(100% - 110px);
+ 			width: calc(100% - 100px);
  		}
  		.krdnmbb .summary-box .body .summary-row .product_data .product-name {
  			font-family: Roboto;
@@ -141,7 +141,7 @@
 		    margin: 0;
 		    padding: 0;
 		    margin-top: 2px;
-		    width: 80px;
+		    width: 70px;
 		    text-align: right;
  		}
 
@@ -225,9 +225,8 @@
 		console.log(row_data);
 		let row_el = document.createElement('div');
 		row_el.classList.add('summary-row');
-		// .submit()
 		row_el.innerHTML = `
-			<button class="delete" onclick="console.log(document.querySelector('form#${row_data.form_id}'));">${exp_data.delete_icon}</button>
+			<button class="delete" onclick="document.querySelector('form#${row_data.form_id}').submit();">${exp_data.delete_icon}</button>
 			<div class="product_data">${row_data.product_data}</div>
 			<div class="price">${row_data.price}</div>
 		`;
