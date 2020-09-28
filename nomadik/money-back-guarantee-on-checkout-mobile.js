@@ -124,6 +124,7 @@
  	`;
 
  	let exp_data = {
+ 		delete_icon: '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 20C4.477 20 0 15.523 0 10C0 4.477 4.477 0 10 0C15.523 0 20 4.477 20 10C20 15.523 15.523 20 10 20ZM10 18C12.1217 18 14.1566 17.1571 15.6569 15.6569C17.1571 14.1566 18 12.1217 18 10C18 7.87827 17.1571 5.84344 15.6569 4.34315C14.1566 2.84285 12.1217 2 10 2C7.87827 2 5.84344 2.84285 4.34315 4.34315C2.84285 5.84344 2 7.87827 2 10C2 12.1217 2.84285 14.1566 4.34315 15.6569C5.84344 17.1571 7.87827 18 10 18ZM10 8.586L12.828 5.757L14.243 7.172L11.414 10L14.243 12.828L12.828 14.243L10 11.414L7.172 14.243L5.757 12.828L8.586 10L5.757 7.172L7.172 5.757L10 8.586Z" fill="#ED143D"/></svg>',
  		summary_title: 'My Order Summary',
  		arrow: '<svg width="19" height="10" viewBox="0 0 19 10" fill="none"><path d="M1.1875 8.875L9.5 1.75L17.8125 8.875" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
  		check_mark: '<svg width="15" height="12" viewBox="0 0 15 12" fill="none"><path d="M5 8.586L1.707 5.293L0.292999 6.707L5 11.414L14.707 1.707L13.293 0.292999L5 8.586Z" fill="#32B259"/></svg>',
@@ -170,6 +171,29 @@
 	});
 
 	document.querySelector('.krdnmbb .summary-box .head .price .number').innerHTML = document.querySelector('#total_price').textContent;
+
+	function keradan_add_row_to_summary(row_data) {
+		console.log(row_data);
+		let row_el = document.createElement('div');
+		row_el.classList.add('summary-row');
+		// .submit()
+		row_el.innerHTML = `
+			<button class="delete" onclick="console.log(document.querySelector('form#${row_data.form_id}'));">${exp_data.delete_icon}</button>
+			<div class="product_data">${row_data.product_data}</div>
+			<div class="price">${row_data.price}</div>
+		`;
+		markup_el.querySelector('.money-back-text ul').append(li);
+	}
+
+	document.querySelector('.cart_listing table.item_table .delete_column').forEach(function(delete_column){
+		let row = delete_column.parent;
+		// let form_id = delete_column.querySelector('form').getAttribute('id');
+		keradan_add_row_to_summary({
+			form_id: delete_column.querySelector('form').getAttribute('id'),
+			product_data: row.querySelector('td.product_column').innerHTML,
+			price: row.querySelector('td.price_column').textContent,
+		});
+	});
 
 	document.querySelector('.krdnmbb .summary-box .head').addEventListener('click', function(){
 		document.querySelector('.krdnmbb .summary-box').classList.toggle('collapsed');
