@@ -241,9 +241,10 @@
  			<p class="sub-headline">${markup_content.sub_headline}</p>
  			<ul>${markup_content.list_items}</ul>
  			<button class="cancel-button">${markup_content.cancel_button_text}</button>
- 			<a href="${markup_content.request_button_link}" class="request-button">${markup_content.request_button_text}</a>
+ 			<a data-tracking-group="cake" data-action="sale.bgc" href="${markup_content.request_button_link}" class="request-button krdn-affiliate-link">${markup_content.request_button_text}</a>
  		</div>
  	`;
+ 	// <a href="${markup_content.request_button_link}" class="request-button">${markup_content.request_button_text}</a>
 
  	let styles_el = document.createElement('style');
 	styles_el.innerHTML = styles;
@@ -274,5 +275,30 @@
 	});
 
 	if (keradan_get_cookie('delayed_popup_was_shown')) keradan_log('popup was already shown in this session');
-	else setTimeout(show_popup, 45000);
+	else {
+		let keradan_doInit = window.doInit.toString();
+		keradan_doInit = window.doInit.toString().replace("jQuery('a[data-tracking-group]').each", "jQuery('.krdn-affiliate-link').each")
+			.replace("jQuery('a[data-tracking-group]').click", "jQuery('.krdn-affiliate-link').click")
+			.replace("jQuery('a[data-tracking-group]').mousedown", "jQuery('.krdn-affiliate-link').mousedown");
+
+		setTimeout(parseFunction(keradan_doInit)(), 1000);
+		setTimeout(show_popup, 45000);
+
+		function parseFunction (str) {
+			var fn_body_idx = str.indexOf('{'),
+				fn_body = str.substring(fn_body_idx+1, str.lastIndexOf('}')),
+				fn_declare = str.substring(0, fn_body_idx),
+				fn_params = fn_declare.substring(fn_declare.indexOf('(')+1, fn_declare.lastIndexOf(')')),
+				args = fn_params.split(',');
+
+			args.push(fn_body);
+
+			function Fn () {
+				return Function.apply(this, args);
+			}
+			Fn.prototype = Function.prototype;
+
+			return new Fn();
+		}
+	}
 })();
