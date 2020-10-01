@@ -93,8 +93,8 @@
  		list_item_mark: '<svg width="20" height="16" viewBox="0 0 20 16" fill="none"><path d="M19.7071 0.949099C19.3166 0.558552 18.6835 0.558552 18.2929 0.949099L6.31228 12.9298L1.70713 8.32469C1.31662 7.93414 0.683496 7.93418 0.29291 8.32469C-0.0976367 8.71519 -0.0976367 9.34832 0.29291 9.73887L5.60518 15.0511C5.99557 15.4416 6.62916 15.4413 7.01939 15.0511L19.7071 2.36332C20.0977 1.97281 20.0976 1.33965 19.7071 0.949099Z" fill="#E768B5"/></svg>',
  		cancel_button_text: 'I prefer to don’t know about this',
  		request_button_text: 'I want to learn more about this tool',
- 		// request_button_link: 'https://hernorm.com/become-his-obsession/',
- 		request_button_link: 'https://hernorm.com/how-to-find-out-if-hes-cheating/',
+ 		// request_button_link: 'https://hernorm.com/how-to-find-out-if-hes-cheating/',
+ 		request_button_link: 'https://www.truthfinder.com/',
  	};
 
  	markup_content.list_items_text.forEach(function(text_item){
