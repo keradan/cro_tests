@@ -88,7 +88,8 @@
  		],
  		list_item_mark: '<svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M7.50002 0C3.35786 0 0 3.35786 0 7.50002C0 11.6422 3.35786 15 7.50002 15C11.6422 15 15 11.6422 15 7.50002C15 3.35786 11.6421 0 7.50002 0ZM7.50002 13.125C4.39344 13.125 1.87502 10.6066 1.87502 7.50002C1.87502 4.39344 4.39344 1.87502 7.50002 1.87502C10.6066 1.87502 13.125 4.39344 13.125 7.50002C13.125 10.6066 10.6066 13.125 7.50002 13.125Z" fill="#E768B5"/></svg>',
  		request_button_text: 'Watch this video to find out',
- 		request_button_link: 'https://hernorm.com/become-his-obsession/',
+ 		// request_button_link: 'https://hernorm.com/become-his-obsession/',
+ 		request_button_link: 'https://hissecretobsession.com/freeintroduction.php',
  	};
 
  	markup_content.list_items_text.forEach(function(text_item){
