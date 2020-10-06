@@ -8,7 +8,7 @@
 		let dataLayer = window.dataLayer || [];
 		let ga_data = {
 			'event': 'event-to-ga',
-			'eventCategory': 'fjfjfjfdhjdjhdfjhdjhdfjhdjhfdhjdfhj',
+			'eventCategory': 'Exp - Checkout - Money back guarantee',
 			'eventAction': eventAction
 		};
 		if (eventLabel) ga_data['eventLabel'] = eventLabel;
