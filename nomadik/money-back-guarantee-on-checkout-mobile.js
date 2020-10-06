@@ -117,6 +117,16 @@
  			margin: 0;
  			padding: 0;
  			margin-bottom: 10px;
+ 			font-family: Roboto;
+ 			font-size: 14px;
+ 		}
+ 		.krdnmbb .shipping-schedule-box .body p a {
+ 			color: #3680A2;
+ 			font-style: italic;
+ 			text-decoration: none;
+ 		}
+ 		.krdnmbb .shipping-schedule-box .body p a:active {
+ 			text-decoration: underline;
  		}
  		.krdnmbb .summary-box.collapsed .body, .krdnmbb .shipping-schedule-box.collapsed .body {
 		    margin-top: 0;
