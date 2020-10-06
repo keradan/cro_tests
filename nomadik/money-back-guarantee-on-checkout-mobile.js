@@ -13,7 +13,7 @@
 		};
 		if (eventLabel) ga_data['eventLabel'] = eventLabel;
 		keradan_log('keradan ga event: ', ga_data);
-		if(false) dataLayer.push(ga_data);
+		if(true) dataLayer.push(ga_data);
 	}
 
 	keradan_ga_event('loaded');
