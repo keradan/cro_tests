@@ -300,57 +300,16 @@
 	});
 
 	document.querySelector('.krdnmbb .summary-box .head').addEventListener('click', function(){
-		document.querySelector('.krdnmbb .summary-box').classList.toggle('collapsed');
+		let box = document.querySelector('.krdnmbb .summary-box');
+		box.classList.toggle('collapsed');
+		if (box.classList.contains('collapsed')) keradan_ga_event('click on Close My Order Summary');
+		else keradan_ga_event('click on Open My Order Summary');
 	});
 
 	document.querySelector('.krdnmbb .shipping-schedule-box .head').addEventListener('click', function(){
-		document.querySelector('.krdnmbb .shipping-schedule-box').classList.toggle('collapsed');
+		let box = document.querySelector('.krdnmbb .shipping-schedule-box');
+		box.classList.toggle('collapsed');
+		if (box.classList.contains('collapsed')) keradan_ga_event('click on Close Shipping schedule');
+		else keradan_ga_event('click on Open Shipping schedule');
 	});
-	
-
-	// document.querySelector('#js-pp-add-to-cart').addEventListener('mouseenter', function(){
-	// 	keradan_ga_event('hover', 'Button Add to cart');
-
-	// 	// console.log('button entered');
-	// 	markup_el.classList.toggle('show-above', false);
-	// 	markup_el.classList.toggle('show-below', false);
-	// 	markup_el.classList.toggle('show', true);
-		
-	// 	let btn = document.querySelector('#js-pp-add-to-cart');
-	// 	let btn_distance_to_top = btn.getBoundingClientRect().height + btn.getBoundingClientRect().y;
-	// 	if (btn_distance_to_top < (window.innerHeight - 100)) {
-	// 		console.log('снизу');
-	// 		markup_el.classList.toggle('show-below', true);
-	// 	} else {
-	// 		console.log('сверху');
-	// 		markup_el.classList.toggle('show-above', true);
-	// 	}
-		
-	// });
-	// markup_el.addEventListener('mouseenter', function(){
-	// 	markup_el.classList.toggle('show', false);
-	// });
-	// document.querySelector('#js-pp-add-to-cart').addEventListener('mouseleave', function(){
-	// 	markup_el.classList.toggle('show', false);
-	// });
-
-	
-
-	
-	// var popup_wrapper = document.querySelector('.krdndpw');
-
-	// popup_wrapper.addEventListener('click', function(event){
-	// 	if (event.target != popup_wrapper) return false;
-	// 	keradan_ga_event('close popup - background');
-	// 	close_popup();
-	// });
-	// popup_wrapper.querySelector('button.close').addEventListener('click', function(){
-	// 	keradan_ga_event('close popup - X');
-	// 	close_popup();
-	// });
-	// popup_wrapper.querySelector('a.request-button').addEventListener('click', function(){
-	// 	keradan_ga_event('click on Watch this video to find out');
-	// });
-
-	// setTimeout(show_popup, 5000);
 })();
