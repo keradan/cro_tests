@@ -47,6 +47,7 @@
  		}
  		.krdnmbb .shipping-schedule-box {
  			background: white;
+ 			border-bottom: 1px solid #E0E0E0;
  		}
  		.krdnmbb .summary-box .head, .krdnmbb .shipping-schedule-box .head {
  			position: relative;
