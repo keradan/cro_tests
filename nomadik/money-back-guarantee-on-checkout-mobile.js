@@ -42,6 +42,12 @@
  			background: #F6F6F6;
  			padding: 10px 25px;
  		}
+ 		.krdnmbb .summary-box {
+ 			border-bottom: 1px solid #E0E0E0;
+ 		}
+ 		.krdnmbb .shipping-schedule-box {
+ 			background: white;
+ 		}
  		.krdnmbb .summary-box .head, .krdnmbb .shipping-schedule-box .head {
  			position: relative;
  			display: flex;
@@ -284,6 +290,10 @@
 
 	document.querySelector('.krdnmbb .summary-box .head').addEventListener('click', function(){
 		document.querySelector('.krdnmbb .summary-box').classList.toggle('collapsed');
+	});
+
+	document.querySelector('.krdnmbb .shipping-schedule-box .head').addEventListener('click', function(){
+		document.querySelector('.krdnmbb .shipping-schedule-box').classList.toggle('collapsed');
 	});
 	
 
