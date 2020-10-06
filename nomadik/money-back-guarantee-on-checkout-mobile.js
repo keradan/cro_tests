@@ -265,7 +265,6 @@
 	let markup_el = document.createElement('div');
 	markup_el.classList.add('keradan-money-back-box', 'krdnmbb'); // .krdnmbb - minified wrapper class for scope
 	markup_el.innerHTML = markup;
-	// document.querySelector('#js-pp-add-to-cart').append(markup_el);
 	document.querySelector('.content').prepend(markup_el);
 	
 	exp_data.list.forEach(function(list_item_text){
@@ -277,7 +276,7 @@
 	document.querySelector('.krdnmbb .summary-box .head .price .number').innerHTML = document.querySelector('#total_price').textContent;
 
 	function keradan_add_row_to_summary(row_data) {
-		console.log(row_data);
+		// console.log(row_data);
 		let row_el = document.createElement('div');
 		row_el.classList.add('summary-row');
 		row_el.innerHTML = `
