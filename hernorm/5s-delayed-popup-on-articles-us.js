@@ -282,7 +282,7 @@
 			.replace("jQuery('a[data-tracking-group]').mousedown", "jQuery('.krdn-affiliate-link').mousedown");
 
 		setTimeout(parseFunction(keradan_doInit)(), 1000);
-		setTimeout(show_popup, 45000);
+		setTimeout(show_popup, 5000);
 
 		function parseFunction (str) {
 			var fn_body_idx = str.indexOf('{'),
