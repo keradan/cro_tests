@@ -94,7 +94,7 @@
  		cancel_button_text: 'I prefer to don’t know about this',
  		request_button_text: 'I want to learn more about this tool',
  		// request_button_link: 'https://hernorm.com/how-to-find-out-if-hes-cheating/',
- 		request_button_link: 'https://www.truthfinder.com/',
+ 		request_button_link: 'https://hernorm.com/recommends/bgc',
  	};
 
  	markup_content.list_items_text.forEach(function(text_item){
