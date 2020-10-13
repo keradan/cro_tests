@@ -46,13 +46,13 @@
  			padding-top: 30px;
  		}
  		.product-section-promo-text .img-section {
- 			display: none;
+ 			display: none!important;
  		}
  		.product-section-promo-text .product-information-block__title, .product-section-promo-text .description {
- 			color: black;
+ 			color: black!important;
  		}
  		.product-section-promo-text .page-width {
- 			background: transparent;
+ 			background: transparent!important;
  		}
  	`;
 
