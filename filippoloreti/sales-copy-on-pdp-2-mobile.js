@@ -51,6 +51,9 @@
  		.product-section-promo-text .product-information-block__title, .product-section-promo-text .description {
  			color: black;
  		}
+ 		.product-section-promo-text .page-width {
+ 			background: transparent;
+ 		}
  	`;
 
 	let styles_el = document.createElement('style');
