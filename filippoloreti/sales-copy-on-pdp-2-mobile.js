@@ -34,16 +34,38 @@
 		keradan_log('Hotjar error: ', e);
 	}
 
- 	let styles = `
- 	`;
+	let markup_content = {
+ 		prices_compare_image_src: 'https://i.ibb.co/qgSMfwy/fl-prices-compare.png',
+ 		new_description_text: `We at Filippo Loreti wanted to make luxury watches accessible to anyone. While major brands in watch industry markup their products by 8x-16x of the actual cost, we do things differently. By bypassing traditional channels, building direct relationships with manufacturers and designing our products in-house, we're able to provide high-quality, beautiful luxury goods at down-to-earth prices.`,
+ 	};
 
- 	let markup = `
+
+ 	let styles = `
+ 		.product-section-promo-text .product-information-block-text {
+ 			background: transparent;
+ 			padding-top: 30px;
+ 		}
+ 		.product-section-promo-text .img-section {
+ 			display: none;
+ 		}
+ 		.product-section-promo-text .product-information-block__title, .product-section-promo-text .description {
+ 			color: black;
+ 		}
  	`;
 
 	let styles_el = document.createElement('style');
 	styles_el.innerHTML = styles;
-	document.querySelector('head').append(styles_el);	
+	document.querySelector('head').append(styles_el);
 
 	keradan_log('test - sales-copy-on-pdp-2-mobile');
+
+	let description_block = document.querySelector('.product-section-promo-text .product-information-block-text .description');
+	description_block.innerHTML = markup_content.new_description_text;
+	
+	let image_block = document.createElement('div');
+	image_block.classList.add('image-block');
+	image_block.innerHTML = `<img src="${markup_content.prices_compare_image_src}">`;
+	description_block.before(image_block);
+
 
 })();
