@@ -224,7 +224,7 @@
  		check_mark: '<svg width="15" height="12" viewBox="0 0 15 12" fill="none"><path d="M5 8.586L1.707 5.293L0.292999 6.707L5 11.414L14.707 1.707L13.293 0.292999L5 8.586Z" fill="#32B259"/></svg>',
  		list: [
  			'Cancel subscription anytime inside your customer account',
- 			'100% money-back guarantee',
+ 			// '100% money-back guarantee',
  		],
  		shipping_schedule_body: `
 			<p>Order before the 14th and your box will ship by the 24th.</p>
