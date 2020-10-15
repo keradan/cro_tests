@@ -8,28 +8,28 @@
 		let dataLayer = window.dataLayer || [];
 		let ga_data = {
 			'event': 'event-to-ga',
-			'eventCategory': 'dsjkddsjkdjskjkdsjsdkjdsjkdsjkdsjdsjkdsjkdsjkdsjkdskjdsjkdsjkdsjkdsjkdskjdsjkdsjkdskjdskjdskdjsdshlkdjshdlskjhdsljkkds',
+			'eventCategory': 'Exp - Sales copy on PDP-2',
 			'eventAction': eventAction
 		};
 		if (eventLabel) ga_data['eventLabel'] = eventLabel;
 		keradan_log('keradan ga event: ', ga_data);
-		if(false) dataLayer.push(ga_data);
+		if(true) dataLayer.push(ga_data);
 	}
 
 	keradan_ga_event('loaded');
 
 	try {
-		(function(h,o,t,j,a,r){
-    		h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-	        h._hjSettings={hjid:1651990,hjsv:6};
+    	(function(h,o,t,j,a,r){
+	        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+	        h._hjSettings={hjid:1885763,hjsv:6};
 	        a=o.getElementsByTagName('head')[0];
 	        r=o.createElement('script');r.async=1;
 	        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
 	        a.appendChild(r);
-		})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-		window.hj = window.hj || function(){(hj.q = hj.q || []).push(arguments)};
-    	hj('trigger', 'dkdsjkdsjkdsjdsjkdsjkdsjkdsjkdsjkdsjkdsjkdsjkdsjkdsjkdsjkdsjkdsjkdsjkdsjkdsjkdsjkdsjkdskjdsjkdsjkdskjdskjdsjkdskj');
-	}
+	    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+	        window.hj=window.hj||function(){(hj.q=hj.q||[]).push(arguments)};
+	        hj('trigger', 'Sales_copy_on_pdp_2');
+		}
     catch (e) {
 		keradan_log('Hotjar error: ', e);
 	}
@@ -38,7 +38,6 @@
  		prices_compare_image_src: 'https://i.ibb.co/qgSMfwy/fl-prices-compare.png',
  		new_description_text: `We at Filippo Loreti wanted to make luxury watches accessible to anyone. While major brands in watch industry markup their products by 8x-16x of the actual cost, we do things differently. By bypassing traditional channels, building direct relationships with manufacturers and designing our products in-house, we're able to provide high-quality, beautiful luxury goods at down-to-earth prices.`,
  	};
-
 
  	let styles = `
  		.product-section-promo-text .product-information-block-text {
@@ -69,6 +68,5 @@
 	image_block.classList.add('image-block');
 	image_block.innerHTML = `<img src="${markup_content.prices_compare_image_src}">`;
 	description_block.before(image_block);
-
 
 })();
