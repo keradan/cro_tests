@@ -64,6 +64,7 @@
 		document.body.append(iframe.el);
 
 		iframe.doc = iframe.el.contentWindow.document;
+		iframe.el.contentWindow.test_updated_slide_in_cart_mobile_already_running = true;
 
 		iframe.doc.open();
 		iframe.doc.write(parent_doc_text);
