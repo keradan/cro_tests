@@ -44,7 +44,7 @@
 
 	console.log('Test "Updated slide in cart - Mobile" is here');
 
-	function create_iframe() {
+	window.create_iframe = function() {
 		window.keradan_cart_iframe = document.createElement('iframe');
 		window.keradan_cart_iframe.classList.add('keradan-cart-iframe');
 		// window.keradan_cart_iframe.setAttribute('src', 'https://dressa.com.ua/cart');
@@ -59,7 +59,7 @@
 		});
 	}
 
-	function run_iframe() {
+	window.run_iframe = function() {
 		keradan_log('run_iframe');
 
 		document.body.append(window.keradan_cart_iframe);
