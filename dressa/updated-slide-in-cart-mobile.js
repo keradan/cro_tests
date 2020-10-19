@@ -1,4 +1,7 @@
 (function () {
+	
+	let test_data = window.keradan.get_test_data(document.currentScript);
+
 	let keradan_enable_log = true;
 	function keradan_log() {
 		if(keradan_enable_log) console.log.apply(this, arguments);
@@ -25,29 +28,28 @@
 		keradan_log('Hotjar error: ', e);
 	}
 
-	if (!window.keradan) window.keradan = {};
-	window.keradan.updated_slide_in_cart = {};
-	window.keradan.updated_slide_in_cart.iframe = {el: null, doc: null, status: null};
+	keradan_log(test_data);
 
 	let markup_content = {
  		ddsjhdsjh: 'djdshjdsjh',
  		sksjskjaa: `dsjsdjhsdhj`,
  	};
 
- 	let styles = `
+	document.querySelector("#styles-" + test_data.name).innerHTML = `
 	 	.keradan {
 	 		background: red;
 	 	}
  	`;
 
-	let styles_el = document.createElement('style');
-	styles_el.innerHTML = styles;
-	document.querySelector('head').append(styles_el);
+ 	window.keradan[test_data.name].iframe = {el: null, doc: null, status: null};
+	
 
 	console.log('Test "Updated slide in cart - Mobile" is here');
 
-	window.keradan.updated_slide_in_cart.create_iframe = function() {
+	window.keradan[test_data.name].create_iframe = function() {
 		let iframe = window.keradan.updated_slide_in_cart.iframe;
+		let old_iframe = document.querySelector('.keradan-cart-iframe');
+		if(old_iframe) old_iframe.remove();
 
 		iframe.el = document.createElement('iframe');
 		iframe.el.classList.add('keradan-cart-iframe');
@@ -67,7 +69,7 @@
 		return iframe;
 	}
 
-	window.keradan.updated_slide_in_cart.run_iframe = function() {
+	window.keradan[test_data.name].run_iframe = function() {
 		let iframe = window.keradan.updated_slide_in_cart.iframe;
 		
 		iframe.doc.querySelector('.link__shopping').click();
