@@ -81,6 +81,30 @@
 		let iframe = window.keradan[test_data.name].iframe;
 		
 		iframe.doc.querySelector('.link__shopping').click();
+		const basket_button_ready = new Promise(function(resolve, reject) {
+			keradan_log('waiting for basket_button');
+		  
+			setTimeout(function(){
+				clearInterval(basket_button_ready_timer);
+				reject(new Error("keradan not found basket_button by 15 seconds"));
+			}, 15000);
+			
+			const basket_button_ready_timer = setInterval(function(){
+			    let dressa_basket_button = iframe.doc.querySelector('.basket-btn app-dressa-button')
+
+			    if(!basket_button) return;
+			    
+			    clearInterval(basket_button_ready_timer);
+			    resolve('basket_button_ready. RUN CART IN IFRAME');
+			}, 200);
+		});
+
+		basket_button_ready
+		.then(function(msg) {
+			keradan_log(msg);
+			iframe.doc.querySelector('.basket-btn app-dressa-button').click();
+		})
+		.catch(error => console.error(error));
 		// iframe.doc.querySelector('.basket-btn app-dressa-button').click();
 		//iframe.doc.querySelectorAll('.counter__add')[1].click();
 	}
