@@ -25,7 +25,9 @@
 		keradan_log('Hotjar error: ', e);
 	}
 
-	window.keradan_cart_iframe_status = null;
+	if (!window.keradan) window.keradan = {};
+	window.keradan.updated_slide_in_cart = {};
+	window.keradan.updated_slide_in_cart.iframe = {el: null, doc: null, status: null};
 
 	let markup_content = {
  		ddsjhdsjh: 'djdshjdsjh',
@@ -44,35 +46,33 @@
 
 	console.log('Test "Updated slide in cart - Mobile" is here');
 
-	window.create_iframe = function() {
-		window.keradan_cart_iframe = document.createElement('iframe');
-		window.keradan_cart_iframe.classList.add('keradan-cart-iframe');
+	window.keradan.updated_slide_in_cart.create_iframe = function() {
+		let iframe = window.keradan.updated_slide_in_cart.iframe;
+
+		iframe.el = document.createElement('iframe');
+		iframe.el.classList.add('keradan-cart-iframe');
 		// window.keradan_cart_iframe.setAttribute('src', 'https://dressa.com.ua/cart');
-		window.keradan_cart_iframe.setAttribute('width', '350');
-		window.keradan_cart_iframe.setAttribute('height', '500');
-		window.keradan_cart_iframe.setAttribute('style', 'border: 2px solid red; margin-bottom: 100px;');
-		window.keradan_cart_iframe_status = 'created';
-		// window.keradan_cart_iframe_status = 'ready_to_use';
-		keradan_log('keradans cart iframe:', {
-			iframe: window.keradan_cart_iframe,
-			iframe_status: window.keradan_cart_iframe_status,
-		});
+		iframe.el.setAttribute('width', '350');
+		iframe.el.setAttribute('height', '500');
+		iframe.el.setAttribute('style', 'border: 2px solid red; margin-bottom: 100px;');
+		document.body.append(iframe.el);
+
+		iframe.doc = iframe.el.contentWindow.document;
+
+		iframe.doc.open();
+		iframe.doc.write(document.documentElement.innerHTML);
+		iframe.doc.close();
+
+		iframe.status = 'created';
+		return iframe;
 	}
 
-	window.run_iframe = function() {
-		keradan_log('run_iframe');
-
-		document.body.append(window.keradan_cart_iframe);
-
-		let keradan_cart_iframe_document = window.keradan_cart_iframe.contentWindow.document;
-
-		window.keradan_cart_iframe.contentWindow.document.open();
-		window.keradan_cart_iframe.contentWindow.document.write(document.documentElement.innerHTML);
-		window.keradan_cart_iframe.contentWindow.document.close();
-
-		// window.keradan_cart_iframe.contentWindow.document.querySelector('.link__shopping').click();
-		//window.keradan_cart_iframe.contentWindow.document.querySelector('.basket-btn app-dressa-button').click();
-		//window.keradan_cart_iframe.contentWindow.document.querySelectorAll('.counter__add')[1].click();
+	window.keradan.updated_slide_in_cart.run_iframe = function() {
+		let iframe = window.keradan.updated_slide_in_cart.iframe;
+		
+		iframe.doc.querySelector('.link__shopping').click();
+		iframe.doc.querySelector('.basket-btn app-dressa-button').click();
+		//iframe.doc.querySelectorAll('.counter__add')[1].click();
 	}
 
 
