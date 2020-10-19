@@ -47,13 +47,13 @@
 	console.log('Test "Updated slide in cart - Mobile" is here');
 
 	window.keradan[test_data.name].create_iframe = function() {
-		let iframe = window.keradan.updated_slide_in_cart.iframe;
+		let iframe = window.keradan[test_data.name].iframe;
 		let old_iframe = document.querySelector('.keradan-cart-iframe');
 		if(old_iframe) old_iframe.remove();
 
 		iframe.el = document.createElement('iframe');
 		iframe.el.classList.add('keradan-cart-iframe');
-		// window.keradan_cart_iframe.setAttribute('src', 'https://dressa.com.ua/cart');
+		// iframe.el.setAttribute('src', 'https://dressa.com.ua/cart');
 		iframe.el.setAttribute('width', '350');
 		iframe.el.setAttribute('height', '500');
 		iframe.el.setAttribute('style', 'border: 2px solid red; margin-bottom: 100px;');
@@ -70,7 +70,7 @@
 	}
 
 	window.keradan[test_data.name].run_iframe = function() {
-		let iframe = window.keradan.updated_slide_in_cart.iframe;
+		let iframe = window.keradan[test_data.name].iframe;
 		
 		iframe.doc.querySelector('.link__shopping').click();
 		iframe.doc.querySelector('.basket-btn app-dressa-button').click();
