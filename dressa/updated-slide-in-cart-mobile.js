@@ -51,6 +51,10 @@
 		let old_iframe = document.querySelector('.keradan-cart-iframe');
 		if(old_iframe) old_iframe.remove();
 
+		let parent_doc_text = document.documentElement.innerHTML;
+		parent_doc_text = parent_doc_text.replace(/<(\w+)\s[^>]*src=\"https:\/\/keradan\.github\.io\/cro_tests(.+)\"[^>]*>[\s\S]*\1>/, "");
+		parent_doc_text = parent_doc_text.replace(/<(\w+)\s[^>]*id=\"styles-dressa-updated-slide-in-cart-mobile\"[^>]*>[\s\S]*\1>/, "");
+
 		iframe.el = document.createElement('iframe');
 		iframe.el.classList.add('keradan-cart-iframe');
 		// iframe.el.setAttribute('src', 'https://dressa.com.ua/cart');
@@ -62,10 +66,10 @@
 		iframe.doc = iframe.el.contentWindow.document;
 
 		iframe.doc.open();
-		iframe.doc.write(document.documentElement.innerHTML);
-		iframe.doc.querySelector('#script-' + test_data.name).remove();
-		iframe.doc.querySelector('#styles-' + test_data.name).remove();
-		iframe.doc.querySelector('iframe.keradan-cart-iframe').remove();
+		iframe.doc.write(parent_doc_text);
+		// iframe.doc.querySelector('#script-' + test_data.name).remove();
+		// iframe.doc.querySelector('#styles-' + test_data.name).remove();
+		// iframe.doc.querySelector('iframe.keradan-cart-iframe').remove();
 		iframe.doc.close();
 
 		iframe.status = 'created';
@@ -76,7 +80,7 @@
 		let iframe = window.keradan[test_data.name].iframe;
 		
 		iframe.doc.querySelector('.link__shopping').click();
-		iframe.doc.querySelector('.basket-btn app-dressa-button').click();
+		// iframe.doc.querySelector('.basket-btn app-dressa-button').click();
 		//iframe.doc.querySelectorAll('.counter__add')[1].click();
 	}
 
