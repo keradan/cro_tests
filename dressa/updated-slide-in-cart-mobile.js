@@ -90,7 +90,7 @@
 			}, 15000);
 			
 			const basket_button_ready_timer = setInterval(function(){
-			    let dressa_basket_button = iframe.doc.querySelector('.basket-btn app-dressa-button')
+			    let basket_button = iframe.doc.querySelector('.basket-btn app-dressa-button')
 
 			    if(!basket_button) return;
 			    
