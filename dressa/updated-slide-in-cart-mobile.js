@@ -52,7 +52,7 @@
 		if(old_iframe) old_iframe.remove();
 
 		let parent_doc_text = document.documentElement.innerHTML;
-		// parent_doc_text = parent_doc_text.replace(/<(\w+)\s[^>]*src=\"https:\/\/keradan\.github\.io\/cro_tests(.+)\"[^>]*>[\s\S]*\1>/, "");
+		parent_doc_text = parent_doc_text.replace(/src=\"https:\/\/keradan\.github\.io\/cro_tests/, "src=\"");
 		// parent_doc_text = parent_doc_text.replace(/<(\w+)\s[^>]*id=\"styles-dressa-updated-slide-in-cart-mobile\"[^>]*>[\s\S]*\1>/, "");
 
 		iframe.el = document.createElement('iframe');
@@ -67,7 +67,7 @@
 
 		iframe.doc.open();
 		iframe.doc.write(parent_doc_text);
-		iframe.doc.querySelector('#script-' + test_data.name).remove();
+		// iframe.doc.querySelector('#script-' + test_data.name).remove();
 		// iframe.doc.querySelector('#styles-' + test_data.name).remove();
 		// iframe.doc.querySelector('iframe.keradan-cart-iframe').remove();
 		iframe.doc.close();
