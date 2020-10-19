@@ -67,7 +67,7 @@
 
 		iframe.doc.open();
 		iframe.doc.write(parent_doc_text);
-		// iframe.doc.querySelector('#script-' + test_data.name).remove();
+		iframe.doc.querySelector('#script-' + test_data.name).remove();
 		// iframe.doc.querySelector('#styles-' + test_data.name).remove();
 		// iframe.doc.querySelector('iframe.keradan-cart-iframe').remove();
 		iframe.doc.close();
