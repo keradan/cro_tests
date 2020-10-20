@@ -1,4 +1,6 @@
 (function () {
+
+	const start_time = new Date().getTime();
 	
 	let test_data = window.keradan.get_test_data(document.currentScript);
 
@@ -47,7 +49,7 @@
 
 	console.log('Test "Updated slide in cart - Mobile" is here');
 
-	const iframe_is_created = get_iframe_promise({
+	const iframe_is_created_promise_attributes = {
 		is_resolve: function(iframe){
 			if(iframe.status != 'created') return false;
 		    if(!iframe.doc) return false;
@@ -56,12 +58,12 @@
 		},
 		reject_msg: 'Iframe not created longer than 15 seconds.',
 		resolve_msg: 'Running cart in iframe: iframe_is_created.',
-	});
+	};
 	
-	const basket_button_ready = get_iframe_promise({
+	const basket_button_ready_promise_attributes = {
 		is_resolve: function(iframe){
 			if(!iframe.doc.querySelector('.basket-btn app-dressa-button')) {
-				iframe.doc.querySelector('.link__shopping').click();
+				// iframe.doc.querySelector('.link__shopping').click();
 				return false;
 			}
 		    return true;
@@ -70,7 +72,7 @@
 		resolve_msg: 'Running cart in iframe: basket_button_ready.',
 		promise_attempt_interval: 500,
 		// max_promise_time: 20000,
-	});
+	};
 
 	function get_iframe_promise (attributes) {
 		let test = window.keradan[test_data.name];
@@ -130,12 +132,12 @@
 	window.keradan[test_data.name].run_iframe = function() {
 		let iframe = window.keradan[test_data.name].iframe;
 
-		iframe_is_created
+		get_iframe_promise(iframe_is_created_promise_attributes)
 		.then(function(msg) {
 			keradan_log(msg);
-			// iframe.doc.querySelector('.link__shopping').click();
+			iframe.doc.querySelector('.link__shopping').click();
 
-			basket_button_ready
+			get_iframe_promise(basket_button_ready_promise_attributes)
 			.then(function(msg) {
 				keradan_log(msg);
 				iframe.doc.querySelector('.basket-btn app-dressa-button').click();
@@ -156,8 +158,13 @@
 	document.addEventListener('readystatechange', function(){
 		keradan_log('keradan readyState changed and now is: ', document.readyState);
 		if (document.readyState == 'complete') {
-			// window.keradan[test_data.name].create_iframe();
-			// window.keradan[test_data.name].run_iframe();
+			const end_time = new Date().getTime();
+			const result_time = Math.round((start_time - end_time) / 100) / 10;
+
+			keradan_log(`keradan create and run iframe, after ${result_time} seconds of waiting`);
+
+			window.keradan[test_data.name].create_iframe();
+			window.keradan[test_data.name].run_iframe();
 		}
 	});
 
