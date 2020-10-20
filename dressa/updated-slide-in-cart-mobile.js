@@ -91,8 +91,8 @@
 			if(timer_end) resolve_anyway('basket is empty');
 		    return true;
 		},
-		reject_msg: 'Not found section.basket-page in iframe by 15 seconds.',
-		resolve_msg: 'Running cart in iframe: section.basket-page founded - basket page has been loaded.',
+		reject_msg: 'Not found basket products in iframe by 15 seconds.',
+		resolve_msg: 'Running cart in iframe: basket products founded in iframe.',
 		max_promise_time: 3000,
 		promise_attempt_interval: 100,
 	};
