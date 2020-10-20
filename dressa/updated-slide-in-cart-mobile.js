@@ -68,6 +68,7 @@
 		reject_msg: 'Not found basket_button in iframe by 15 seconds.',
 		resolve_msg: 'Running cart in iframe: basket_button_ready.',
 		promise_attempt_interval: 500,
+		// max_promise_time: 20000,
 	});
 
 	function get_iframe_promise (attributes) {
@@ -87,6 +88,7 @@
 				if(attributes.is_resolve(test.iframe) !== true) return;
 			    clearInterval(test.timers[promise_timer_id]);
 			    resolve('iframe promise resolved. ' + attributes.resolve_msg ?? '');
+			    keradan_log('timer interval when resolved: ', test.timers[promise_timer_id]);
 			}, attributes.promise_attempt_interval);
 		});
 		return promise;
