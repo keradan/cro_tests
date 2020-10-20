@@ -77,37 +77,101 @@
 		return iframe;
 	}
 
+	function get_iframe_promise (attributes) {
+		if (!attributes.max_promise_time) attributes.max_promise_time = 15000;
+		if (!attributes.promise_attempt_interval) attributes.promise_attempt_interval = 200;
+		
+		const promise = new Promise(function(resolve, reject) {		  
+			setTimeout(function(){
+				clearInterval(promise_timer);
+				reject(new Error('iframe promise rejected. ' + attributes.reject_msg ?? ''));
+			}, attributes.max_promise_time);
+			
+			const promise_timer = setInterval(function(){
+				let iframe = window.keradan[test_data.name].iframe;
+
+				if(attributes.is_resolve() !== true) return;
+			    
+			    clearInterval(promise_timer);
+			    resolve('iframe promise resolved. ' + attributes.resolve_msg ?? '');
+			}, promise_attempt_interval);
+		});
+		return promise;
+	}
+
 	window.keradan[test_data.name].run_iframe = function() {
 		let iframe = window.keradan[test_data.name].iframe;
 		
-		iframe.doc.querySelector('.link__shopping').click();
+		// iframe.doc.querySelector('.link__shopping').click();
+		const iframe_is_created = get_iframe_promise({
+			is_resolve: function(){
+				if(iframe.status != 'created') return false;
+			    if(!iframe.doc.querySelector('.link__shopping')) return false;
+			    return true;
+			},
+			reject_msg: 'Iframe not created longer than 15 seconds.',
+			resolve_msg: 'Running cart in iframe: iframe_is_created.',
+		});
+		// const iframe_is_created = new Promise(function(resolve, reject) {
+		// 	keradan_log('waiting for iframe to be created');
+		  
+		// 	setTimeout(function(){
+		// 		clearInterval(iframe_is_created_timer);
+		// 		reject(new Error("keradan iframe not created longer than 15 seconds"));
+		// 	}, 15000);
+			
+		// 	const iframe_is_created_timer = setInterval(function(){
+		// 	    if(!iframe.status != 'created') return;
+
+		// 	    let link_shopping = iframe.doc.querySelector('.link__shopping');
+		// 	    if(!link_shopping) return;
+			    
+		// 	    clearInterval(iframe_is_created_timer);
+		// 	    resolve('running cart in iframe: iframe_is_created.');
+		// 	}, 200);
+		// });
+
 		const basket_button_ready = new Promise(function(resolve, reject) {
 			keradan_log('waiting for basket_button');
 		  
 			setTimeout(function(){
 				clearInterval(basket_button_ready_timer);
-				reject(new Error("keradan not found basket_button by 15 seconds"));
+				reject(new Error("keradan not found basket_button in iframe by 15 seconds"));
 			}, 15000);
 			
 			const basket_button_ready_timer = setInterval(function(){
-			    let basket_button = iframe.doc.querySelector('.basket-btn app-dressa-button')
+			    let basket_button = iframe.doc.querySelector('.basket-btn app-dressa-button');
 
 			    if(!basket_button) return;
 			    
 			    clearInterval(basket_button_ready_timer);
-			    resolve('basket_button_ready. RUN CART IN IFRAME');
+			    resolve('running cart in iframe: basket_button_ready.');
 			}, 200);
 		});
 
-		basket_button_ready
+		iframe_is_created
 		.then(function(msg) {
 			keradan_log(msg);
-			iframe.doc.querySelector('.basket-btn app-dressa-button').click();
+			iframe.doc.querySelector('.link__shopping').click();
+
+			basket_button_ready
+			.then(function(msg) {
+				keradan_log(msg);
+				iframe.doc.querySelector('.basket-btn app-dressa-button').click();
+			})
+			.catch(error => console.error(error));
 		})
 		.catch(error => console.error(error));
+
+		
 		// iframe.doc.querySelector('.basket-btn app-dressa-button').click();
-		//iframe.doc.querySelectorAll('.counter__add')[1].click();
 	}
+
+	window.keradan[test_data.name].change_something_in_cart = function() {
+		iframe.doc.querySelectorAll('.counter__add')[1].click();
+	}
+
+
 
 
 
