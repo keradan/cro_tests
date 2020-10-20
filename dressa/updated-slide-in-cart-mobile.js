@@ -62,7 +62,8 @@
 	
 	const basket_button_ready_promise_attributes = {
 		is_resolve: function(iframe){
-			if(!iframe.doc.querySelector('section.basket-page')) return false;
+			// if(!iframe.doc.querySelector('section.basket-page')) return false;
+			if(!iframe.doc.querySelector('.link__shopping')) return false;
 			if(!iframe.doc.querySelector('.basket-btn app-dressa-button')) {
 				iframe.doc.querySelector('.link__shopping').click();
 				return false;
