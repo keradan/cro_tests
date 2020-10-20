@@ -50,6 +50,7 @@
 		is_resolve: function(iframe){
 			if(iframe.status != 'created') return false;
 		    if(!iframe.doc.querySelector('.link__shopping')) return false;
+		    keradan_log('link__shopping in promise is_resolve: ', iframe.doc.querySelector('.link__shopping'));
 		    return true;
 		},
 		reject_msg: 'Iframe not created longer than 15 seconds.',
@@ -122,7 +123,10 @@
 		.then(function(msg) {
 			keradan_log(msg);
 			iframe.doc.querySelector('.link__shopping').click();
-			keradan_log('link__shopping', iframe.doc.querySelector('.link__shopping').click());
+			// let iframe = window.keradan[test_data.name].iframe;
+			keradan_log('window.iframe in promise then: ', window.keradan[test_data.name].iframe);
+			keradan_log('iframe in promise then: ', iframe);
+			keradan_log('link__shopping in promise then: ', iframe.doc.querySelector('.link__shopping'));
 			// window.keradan[test_data.name].iframe.doc.querySelector('.link__shopping').click();
 
 			basket_button_ready
