@@ -96,6 +96,7 @@
 
 	window.keradan[test_data.name].create_iframe = function() {
 		let iframe = window.keradan[test_data.name].iframe;
+		iframe.status = 'loading';
 		let old_iframe = document.querySelector('.keradan-cart-iframe');
 		if(old_iframe) old_iframe.remove();
 
@@ -152,6 +153,15 @@
 
 	window.keradan[test_data.name].create_iframe();
 	window.keradan[test_data.name].run_iframe();
+
+
+	document.addEventListener("DOMContentLoaded", function(){
+		keradan_log('keradan DOMContentLoaded event runed');
+	});
+
+	document.addEventListener('readystatechange', function(){
+		keradan_log('keradan readyState changed and now is: ', document.readyState);
+	});
 
 
 
