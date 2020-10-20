@@ -50,6 +50,7 @@
 	const iframe_is_created = get_iframe_promise({
 		is_resolve: function(iframe){
 			if(iframe.status != 'created') return false;
+		    if(!iframe.doc) return false;
 		    if(!iframe.doc.querySelector('.link__shopping')) return false;
 		    return true;
 		},
@@ -151,17 +152,13 @@
 		iframe.doc.querySelectorAll('.counter__add')[1].click();
 	}
 
-	window.keradan[test_data.name].create_iframe();
-	window.keradan[test_data.name].run_iframe();
-
-
-	document.addEventListener("DOMContentLoaded", function(){
-		keradan_log('keradan DOMContentLoaded event runed');
-	});
 
 	document.addEventListener('readystatechange', function(){
 		keradan_log('keradan readyState changed and now is: ', document.readyState);
-		if (document.readyState == 'complete') alert('keradan complete');
+		if (document.readyState == 'complete') {
+			// window.keradan[test_data.name].create_iframe();
+			// window.keradan[test_data.name].run_iframe();
+		}
 	});
 
 
