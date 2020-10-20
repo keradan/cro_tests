@@ -161,6 +161,7 @@
 
 	document.addEventListener('readystatechange', function(){
 		keradan_log('keradan readyState changed and now is: ', document.readyState);
+		if (document.readyState == 'complete') alert('keradan complete');
 	});
 
 
