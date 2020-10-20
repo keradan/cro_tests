@@ -42,6 +42,7 @@
  	`;
 
  	window.keradan[test_data.name].iframe = {el: null, doc: null, status: null};
+ 	window.keradan[test_data.name].timers = [];
 	
 
 	console.log('Test "Updated slide in cart - Mobile" is here');
@@ -72,7 +73,7 @@
 		
 		let promise = new Promise(function(resolve, reject) {		  
 			let promise_timer_id = test.timers.push(null) - 1;
-			
+
 			setTimeout(function(){
 				clearInterval(test.timers[promise_timer_id]);
 				reject(new Error('iframe promise rejected. ' + attributes.reject_msg ?? ''));
