@@ -136,6 +136,7 @@
 		.then(function(msg) {
 			keradan_log(msg);
 			iframe.doc.querySelector('.link__shopping').click();
+			keradan_log('link__shopping in promise then: ', iframe.doc.querySelector('.link__shopping'));
 
 			get_iframe_promise(basket_button_ready_promise_attributes)
 			.then(function(msg) {
@@ -159,7 +160,7 @@
 		keradan_log('keradan readyState changed and now is: ', document.readyState);
 		if (document.readyState == 'complete') {
 			const end_time = new Date().getTime();
-			const result_time = Math.round((start_time - end_time) / 100) / 10;
+			const result_time = Math.round((end_time - start_time) / 100) / 10;
 
 			keradan_log(`keradan create and run iframe, after ${result_time} seconds of waiting`);
 
