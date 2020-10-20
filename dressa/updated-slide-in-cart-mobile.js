@@ -125,6 +125,7 @@
 		iframe_is_created
 		.then(function(msg) {
 			keradan_log(msg);
+			let iframe = window.keradan[test_data.name].iframe;
 			keradan_log('link__shopping click: ', iframe.doc.querySelector('.link__shopping').click());
 			// let iframe = window.keradan[test_data.name].iframe;
 			// keradan_log('window.iframe in promise then: ', window.keradan[test_data.name].iframe);
@@ -135,6 +136,7 @@
 			basket_button_ready
 			.then(function(msg) {
 				keradan_log(msg);
+				let iframe = window.keradan[test_data.name].iframe;
 				iframe.doc.querySelector('.basket-btn app-dressa-button').click();
 			})
 			.catch(error => console.error(error));
