@@ -89,9 +89,7 @@
 			
 			const promise_timer = setInterval(function(){
 				let iframe = window.keradan[test_data.name].iframe;
-
 				if(attributes.is_resolve() !== true) return;
-			    
 			    clearInterval(promise_timer);
 			    resolve('iframe promise resolved. ' + attributes.resolve_msg ?? '');
 			}, attributes.promise_attempt_interval);
@@ -131,23 +129,31 @@
 		// 	}, 200);
 		// });
 
-		const basket_button_ready = new Promise(function(resolve, reject) {
-			keradan_log('waiting for basket_button');
-		  
-			setTimeout(function(){
-				clearInterval(basket_button_ready_timer);
-				reject(new Error("keradan not found basket_button in iframe by 15 seconds"));
-			}, 15000);
-			
-			const basket_button_ready_timer = setInterval(function(){
-			    let basket_button = iframe.doc.querySelector('.basket-btn app-dressa-button');
-
-			    if(!basket_button) return;
-			    
-			    clearInterval(basket_button_ready_timer);
-			    resolve('running cart in iframe: basket_button_ready.');
-			}, 200);
+		const basket_button_ready = get_iframe_promise({
+			is_resolve: function(){
+				if(!iframe.doc.querySelector('.basket-btn app-dressa-button')) return;
+			    return true;
+			},
+			reject_msg: 'Not found basket_button in iframe by 15 seconds.',
+			resolve_msg: 'Running cart in iframe: basket_button_ready.',
 		});
+		// const basket_button_ready = new Promise(function(resolve, reject) {
+		// 	keradan_log('waiting for basket_button');
+		  
+		// 	setTimeout(function(){
+		// 		clearInterval(basket_button_ready_timer);
+		// 		reject(new Error("keradan not found basket_button in iframe by 15 seconds"));
+		// 	}, 15000);
+			
+		// 	const basket_button_ready_timer = setInterval(function(){
+		// 	    let basket_button = iframe.doc.querySelector('.basket-btn app-dressa-button');
+
+		// 	    if(!basket_button) return;
+			    
+		// 	    clearInterval(basket_button_ready_timer);
+		// 	    resolve('running cart in iframe: basket_button_ready.');
+		// 	}, 200);
+		// });
 
 		iframe_is_created
 		.then(function(msg) {
