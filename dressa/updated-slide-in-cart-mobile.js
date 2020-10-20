@@ -47,7 +47,7 @@
 	console.log('Test "Updated slide in cart - Mobile" is here');
 
 	const iframe_is_created = get_iframe_promise({
-		is_resolve: function(){
+		is_resolve: function(iframe){
 			if(iframe.status != 'created') return false;
 		    if(!iframe.doc.querySelector('.link__shopping')) return false;
 		    return true;
@@ -57,7 +57,7 @@
 	});
 	
 	const basket_button_ready = get_iframe_promise({
-		is_resolve: function(){
+		is_resolve: function(iframe){
 			if(!iframe.doc.querySelector('.basket-btn app-dressa-button')) return;
 		    return true;
 		},
@@ -76,8 +76,7 @@
 			}, attributes.max_promise_time);
 			
 			const promise_timer = setInterval(function(){
-				let iframe = window.keradan[test_data.name].iframe;
-				if(attributes.is_resolve() !== true) return;
+				if(attributes.is_resolve(window.keradan[test_data.name].iframe) !== true) return;
 			    clearInterval(promise_timer);
 			    resolve('iframe promise resolved. ' + attributes.resolve_msg ?? '');
 			}, attributes.promise_attempt_interval);
