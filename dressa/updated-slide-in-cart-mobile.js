@@ -59,7 +59,7 @@
 	
 	const basket_button_ready = get_iframe_promise({
 		is_resolve: function(iframe){
-			if(!iframe.doc.querySelector('.basket-btn app-dressa-button')) return;
+			if(!iframe.doc.querySelector('.basket-btn app-dressa-button')) return false;
 		    return true;
 		},
 		reject_msg: 'Not found basket_button in iframe by 15 seconds.',
@@ -125,8 +125,7 @@
 		iframe_is_created
 		.then(function(msg) {
 			keradan_log(msg);
-			let iframe = window.keradan[test_data.name].iframe;
-			keradan_log('link__shopping click: ', iframe.doc.querySelector('.link__shopping').click());
+			iframe.doc.querySelector('.link__shopping').click();
 			// let iframe = window.keradan[test_data.name].iframe;
 			// keradan_log('window.iframe in promise then: ', window.keradan[test_data.name].iframe);
 			// keradan_log('iframe in promise then: ', iframe);
@@ -136,7 +135,6 @@
 			basket_button_ready
 			.then(function(msg) {
 				keradan_log(msg);
-				let iframe = window.keradan[test_data.name].iframe;
 				iframe.doc.querySelector('.basket-btn app-dressa-button').click();
 			})
 			.catch(error => console.error(error));
