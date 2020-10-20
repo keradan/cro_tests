@@ -62,7 +62,7 @@
 	
 	const basket_button_ready_promise_attributes = {
 		is_resolve: function(iframe){
-			if(!iframe.doc.querySelector('.link__shopping')) return false;
+			if(!iframe.doc.querySelector('section.basket-page')) return false;
 			if(!iframe.doc.querySelector('.basket-btn app-dressa-button')) {
 				iframe.doc.querySelector('.link__shopping').click();
 				return false;
@@ -73,6 +73,15 @@
 		resolve_msg: 'Running cart in iframe: basket_button_ready.',
 		promise_attempt_interval: 500,
 		// max_promise_time: 20000,
+	};
+	
+	const basket_loaded_promise_attributes = {
+		is_resolve: function(iframe){
+			if(!iframe.doc.querySelector('section.basket-page')) return false;
+		    return true;
+		},
+		reject_msg: 'Not found basket_button in iframe by 15 seconds.',
+		resolve_msg: 'Running cart in iframe: dskdskjsdjkdsjkdsjkdsjksdjk.',
 	};
 
 	function get_iframe_promise (attributes) {
@@ -136,7 +145,7 @@
 		get_iframe_promise(iframe_is_created_promise_attributes)
 		.then(function(msg) {
 			keradan_log(msg);
-			// iframe.doc.querySelector('.link__shopping').click();
+			iframe.doc.querySelector('.link__shopping').click();
 			// keradan_log('link__shopping in promise then: ', iframe.doc.querySelector('.link__shopping'));
 
 			get_iframe_promise(basket_button_ready_promise_attributes)
@@ -169,6 +178,9 @@
 			window.keradan[test_data.name].run_iframe();
 		}
 	});
+
+	// window.keradan["dressa-updated-slide-in-cart-mobile"]
+	// window.keradan["dressa-updated-slide-in-cart-mobile"].create_iframe(); window.keradan["dressa-updated-slide-in-cart-mobile"].run_iframe();
 
 
 
