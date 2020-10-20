@@ -122,6 +122,8 @@
 		.then(function(msg) {
 			keradan_log(msg);
 			iframe.doc.querySelector('.link__shopping').click();
+			keradan_log('link__shopping', iframe.doc.querySelector('.link__shopping').click());
+			// window.keradan[test_data.name].iframe.doc.querySelector('.link__shopping').click();
 
 			basket_button_ready
 			.then(function(msg) {
