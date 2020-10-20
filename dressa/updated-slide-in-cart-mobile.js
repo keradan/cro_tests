@@ -50,7 +50,6 @@
 		is_resolve: function(iframe){
 			if(iframe.status != 'created') return false;
 		    if(!iframe.doc.querySelector('.link__shopping')) return false;
-		    keradan_log('link__shopping in promise is_resolve: ', iframe.doc.querySelector('.link__shopping'));
 		    return true;
 		},
 		reject_msg: 'Iframe not created longer than 15 seconds.',
@@ -70,13 +69,14 @@
 		if (!attributes.max_promise_time) attributes.max_promise_time = 15000;
 		if (!attributes.promise_attempt_interval) attributes.promise_attempt_interval = 200;
 		
-		const promise = new Promise(function(resolve, reject) {		  
+		let promise = new Promise(function(resolve, reject) {		  
 			setTimeout(function(){
 				clearInterval(promise_timer);
 				reject(new Error('iframe promise rejected. ' + attributes.reject_msg ?? ''));
 			}, attributes.max_promise_time);
 			
-			const promise_timer = setInterval(function(){
+			let promise_timer_id = window.keradan[test_data.name].timers.push(null) - 1;
+			window.keradan[test_data.name].timers[promise_timer_id] = setInterval(function(){
 				if(attributes.is_resolve(window.keradan[test_data.name].iframe) !== true) return;
 			    clearInterval(promise_timer);
 			    resolve('iframe promise resolved. ' + attributes.resolve_msg ?? '');
@@ -122,12 +122,12 @@
 		iframe_is_created
 		.then(function(msg) {
 			keradan_log(msg);
-			iframe.doc.querySelector('.link__shopping').click();
+			keradan_log('link__shopping click: ', iframe.doc.querySelector('.link__shopping').click());
 			// let iframe = window.keradan[test_data.name].iframe;
-			keradan_log('window.iframe in promise then: ', window.keradan[test_data.name].iframe);
-			keradan_log('iframe in promise then: ', iframe);
-			keradan_log('link__shopping in promise then: ', iframe.doc.querySelector('.link__shopping'));
-			// window.keradan[test_data.name].iframe.doc.querySelector('.link__shopping').click();
+			// keradan_log('window.iframe in promise then: ', window.keradan[test_data.name].iframe);
+			// keradan_log('iframe in promise then: ', iframe);
+			// keradan_log('link__shopping in promise then: ', iframe.doc.querySelector('.link__shopping'));
+			// window.keradan["dressa-updated-slide-in-cart-mobile"].iframe.doc.querySelector('.link__shopping').click();
 
 			basket_button_ready
 			.then(function(msg) {
