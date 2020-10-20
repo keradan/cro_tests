@@ -59,11 +59,15 @@
 	
 	const basket_button_ready = get_iframe_promise({
 		is_resolve: function(iframe){
-			if(!iframe.doc.querySelector('.basket-btn app-dressa-button')) return false;
+			if(!iframe.doc.querySelector('.basket-btn app-dressa-button')) {
+				iframe.doc.querySelector('.link__shopping').click();
+				return false;
+			}
 		    return true;
 		},
 		reject_msg: 'Not found basket_button in iframe by 15 seconds.',
 		resolve_msg: 'Running cart in iframe: basket_button_ready.',
+		promise_attempt_interval: 500,
 	});
 
 	function get_iframe_promise (attributes) {
@@ -125,12 +129,7 @@
 		iframe_is_created
 		.then(function(msg) {
 			keradan_log(msg);
-			iframe.doc.querySelector('.link__shopping').click();
-			// let iframe = window.keradan[test_data.name].iframe;
-			// keradan_log('window.iframe in promise then: ', window.keradan[test_data.name].iframe);
-			// keradan_log('iframe in promise then: ', iframe);
-			// keradan_log('link__shopping in promise then: ', iframe.doc.querySelector('.link__shopping'));
-			// window.keradan["dressa-updated-slide-in-cart-mobile"].iframe.doc.querySelector('.link__shopping').click();
+			// iframe.doc.querySelector('.link__shopping').click();
 
 			basket_button_ready
 			.then(function(msg) {
