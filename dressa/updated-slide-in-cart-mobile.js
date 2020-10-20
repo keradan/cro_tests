@@ -1,7 +1,4 @@
-(function () {
-
-	const start_time = new Date().getTime();
-	
+(function () {	
 	let test_data = window.keradan.get_test_data(document.currentScript);
 
 	let keradan_enable_log = true;
@@ -45,6 +42,11 @@
 
  	window.keradan[test_data.name].iframe = {el: null, doc: null, status: null};
  	window.keradan[test_data.name].timers = [];
+ 	window.keradan[test_data.name].start_time = new Date().getTime();
+
+	function get_current_test_time(){
+		return Math.round((new Date().getTime() - window.keradan[test_data.name].start_time) / 100) / 10;
+	}
 	
 
 	console.log('Test "Updated slide in cart - Mobile" is here');
@@ -116,14 +118,14 @@
 			test.timers[promise_timer_id] = setInterval(function(){
 				let resolve_anyway = function(msg = null){
 					resolve('iframe promise force resolved. ' + msg ?? '');
-			    	keradan_log('timer interval when resolved: ', test.timers[promise_timer_id]);
+			    	keradan_log(`resolved after ${get_current_test_time()}s of test work`);
 				}
 				if (iteration == last_iteration - 1) timer_end = true;
 				let is_resolve = attributes.is_resolve(test.iframe, timer_end, resolve_anyway);
 				if(is_resolve !== true) return;
 			    clearInterval(test.timers[promise_timer_id]);
 			    resolve('iframe promise resolved. ' + attributes.resolve_msg ?? '');
-			    keradan_log('timer interval when resolved: ', test.timers[promise_timer_id]);
+			    keradan_log(`resolved after ${get_current_test_time()}s of test work`);
 			    iteration++;
 			}, attributes.promise_attempt_interval);
 		});
@@ -165,11 +167,11 @@
 	window.keradan[test_data.name].run_iframe = function() {
 		let iframe = window.keradan[test_data.name].iframe;
 
-		get_iframe_promise(iframe_is_created_promise_attributes)
+		get_iframe_promise(iframe_is_created_promise_attributes) // Ждем когда появится кнопка корзины чтобы нажать на нее и вывести попап с корзиной
 		.then(function(msg) {
 			keradan_log(msg);
 			iframe.doc.querySelector('.link__shopping').click();
-			return get_iframe_promise(basket_button_ready_promise_attributes);
+			return get_iframe_promise(basket_button_ready_promise_attributes); // Ждем когда в попапе появится кнопка оформить заказ, чтобы мы могли перейти на страницу корзины
 		})
 		.then(function(msg) {
 			keradan_log(msg);
@@ -182,33 +184,31 @@
 		})
 		.then(function(msg) {
 			keradan_log(msg);
-			// Hачинаем парсить товары
-			keradan_log('Hачинаем парсить товары, или что-то делаем с пустой корзиной');
+			// Hачинаем парсить товары, или что-то делаем с пустой корзиной
+			// Нужно взять и начинить обьект данными из корзину. Так же должен для этого обьекта быть еще индикатор статуса.
+			// Если статус ready то можно юзать, если другой то надо ждать в промисе
+			// После этого можно будет переходить к работе над ивентами по открытию корзины
+			
 		})
 		.catch(error => console.error(error));
-
-		
-		// iframe.doc.querySelector('.basket-btn app-dressa-button').click();
 	}
 
 	window.keradan[test_data.name].change_something_in_cart = function() {
 		iframe.doc.querySelectorAll('.counter__add')[1].click();
 	}
 
-
 	document.addEventListener('readystatechange', function(){
 		keradan_log('keradan readyState changed and now is: ', document.readyState);
 		if (document.readyState == 'complete') {
-			const end_time = new Date().getTime();
-			const result_time = Math.round((end_time - start_time) / 100) / 10;
 
-			keradan_log(`keradan create and run iframe, after ${result_time} seconds of waiting`);
+			keradan_log(`keradan create and run iframe, after ${get_current_test_time()} seconds of waiting`);
 
 			window.keradan[test_data.name].create_iframe();
 			window.keradan[test_data.name].run_iframe();
 		}
 	});
 
+	// ПОДСКАЗКА:
 	// window.keradan["dressa-updated-slide-in-cart-mobile"]
 	// window.keradan["dressa-updated-slide-in-cart-mobile"].create_iframe(); window.keradan["dressa-updated-slide-in-cart-mobile"].run_iframe();
 
