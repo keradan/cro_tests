@@ -86,7 +86,7 @@
 	};
 
 	const basket_products_loaded_promise_attributes = {
-		is_resolve: function(iframe){
+		is_resolve: function(iframe, timer_end, resolve_anyway){
 			if(!iframe.doc.querySelector('section.basket-page .buttons__checkout app-dressa-button')) return false;
 			if(timer_end) resolve_anyway('basket is empty');
 		    return true;
@@ -119,7 +119,7 @@
 			    	keradan_log('timer interval when resolved: ', test.timers[promise_timer_id]);
 				}
 				if (iteration == last_iteration - 1) timer_end = true;
-				let is_resolve = attributes.is_resolve(test.iframe);
+				let is_resolve = attributes.is_resolve(test.iframe, timer_end, resolve_anyway);
 				if(is_resolve !== true) return;
 			    clearInterval(test.timers[promise_timer_id]);
 			    resolve('iframe promise resolved. ' + attributes.resolve_msg ?? '');
