@@ -66,19 +66,20 @@
 	});
 
 	function get_iframe_promise (attributes) {
+		let test = window.keradan[test_data.name];
 		if (!attributes.max_promise_time) attributes.max_promise_time = 15000;
 		if (!attributes.promise_attempt_interval) attributes.promise_attempt_interval = 200;
 		
 		let promise = new Promise(function(resolve, reject) {		  
 			setTimeout(function(){
-				clearInterval(promise_timer);
+				clearInterval(test.timers[promise_timer_id]);
 				reject(new Error('iframe promise rejected. ' + attributes.reject_msg ?? ''));
 			}, attributes.max_promise_time);
 			
-			let promise_timer_id = window.keradan[test_data.name].timers.push(null) - 1;
-			window.keradan[test_data.name].timers[promise_timer_id] = setInterval(function(){
-				if(attributes.is_resolve(window.keradan[test_data.name].iframe) !== true) return;
-			    clearInterval(promise_timer);
+			let promise_timer_id = test.timers.push(null) - 1;
+			test.timers[promise_timer_id] = setInterval(function(){
+				if(attributes.is_resolve(test.iframe) !== true) return;
+			    clearInterval(test.timers[promise_timer_id]);
 			    resolve('iframe promise resolved. ' + attributes.resolve_msg ?? '');
 			}, attributes.promise_attempt_interval);
 		});
