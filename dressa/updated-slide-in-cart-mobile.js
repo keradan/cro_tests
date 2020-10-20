@@ -62,8 +62,9 @@
 	
 	const basket_button_ready_promise_attributes = {
 		is_resolve: function(iframe){
+			if(!iframe.doc.querySelector('.link__shopping')) return false;
 			if(!iframe.doc.querySelector('.basket-btn app-dressa-button')) {
-				// iframe.doc.querySelector('.link__shopping').click();
+				iframe.doc.querySelector('.link__shopping').click();
 				return false;
 			}
 		    return true;
@@ -135,8 +136,8 @@
 		get_iframe_promise(iframe_is_created_promise_attributes)
 		.then(function(msg) {
 			keradan_log(msg);
-			iframe.doc.querySelector('.link__shopping').click();
-			keradan_log('link__shopping in promise then: ', iframe.doc.querySelector('.link__shopping'));
+			// iframe.doc.querySelector('.link__shopping').click();
+			// keradan_log('link__shopping in promise then: ', iframe.doc.querySelector('.link__shopping'));
 
 			get_iframe_promise(basket_button_ready_promise_attributes)
 			.then(function(msg) {
