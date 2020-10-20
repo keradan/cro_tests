@@ -94,7 +94,7 @@
 			    
 			    clearInterval(promise_timer);
 			    resolve('iframe promise resolved. ' + attributes.resolve_msg ?? '');
-			}, promise_attempt_interval);
+			}, attributes.promise_attempt_interval);
 		});
 		return promise;
 	}
