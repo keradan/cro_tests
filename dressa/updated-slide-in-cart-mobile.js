@@ -81,8 +81,20 @@
 			if(!iframe.doc.querySelector('section.basket-page')) return false;
 		    return true;
 		},
-		reject_msg: 'Not found basket_button in iframe by 15 seconds.',
-		resolve_msg: 'Running cart in iframe: dskdskjsdjkdsjkdsjkdsjksdjk.',
+		reject_msg: 'Not found section.basket-page in iframe by 15 seconds.',
+		resolve_msg: 'Running cart in iframe: section.basket-page founded - basket page has been loaded.',
+	};
+
+	const basket_products_loaded_promise_attributes = {
+		is_resolve: function(iframe){
+			if(!iframe.doc.querySelector('section.basket-page .buttons__checkout app-dressa-button')) return false;
+			if(timer_end) resolve_anyway('basket is empty');
+		    return true;
+		},
+		reject_msg: 'Not found section.basket-page in iframe by 15 seconds.',
+		resolve_msg: 'Running cart in iframe: section.basket-page founded - basket page has been loaded.',
+		max_promise_time: 3000,
+		promise_attempt_interval: 100,
 	};
 
 	function get_iframe_promise (attributes) {
@@ -92,6 +104,9 @@
 		
 		let promise = new Promise(function(resolve, reject) {		  
 			let promise_timer_id = test.timers.push(null) - 1;
+			let last_iteration = attributes.max_promise_time / attributes.promise_attempt_interval;
+			let iteration = 0;
+			let timer_end = false;
 
 			setTimeout(function(){
 				clearInterval(test.timers[promise_timer_id]);
@@ -99,10 +114,17 @@
 			}, attributes.max_promise_time);
 
 			test.timers[promise_timer_id] = setInterval(function(){
-				if(attributes.is_resolve(test.iframe) !== true) return;
+				let resolve_anyway = function(msg = null){
+					resolve('iframe promise force resolved. ' + msg ?? '');
+			    	keradan_log('timer interval when resolved: ', test.timers[promise_timer_id]);
+				}
+				if (iteration == last_iteration - 1) timer_end = true;
+				let is_resolve = attributes.is_resolve(test.iframe);
+				if(is_resolve !== true) return;
 			    clearInterval(test.timers[promise_timer_id]);
 			    resolve('iframe promise resolved. ' + attributes.resolve_msg ?? '');
 			    keradan_log('timer interval when resolved: ', test.timers[promise_timer_id]);
+			    iteration++;
 			}, attributes.promise_attempt_interval);
 		});
 		return promise;
@@ -147,14 +169,21 @@
 		.then(function(msg) {
 			keradan_log(msg);
 			iframe.doc.querySelector('.link__shopping').click();
-			// keradan_log('link__shopping in promise then: ', iframe.doc.querySelector('.link__shopping'));
-
-			get_iframe_promise(basket_button_ready_promise_attributes)
-			.then(function(msg) {
-				keradan_log(msg);
-				iframe.doc.querySelector('.basket-btn app-dressa-button').click();
-			})
-			.catch(error => console.error(error));
+			return get_iframe_promise(basket_button_ready_promise_attributes);
+		})
+		.then(function(msg) {
+			keradan_log(msg);
+			iframe.doc.querySelector('.basket-btn app-dressa-button').click();
+			return get_iframe_promise(basket_loaded_promise_attributes); // Ждем пока загрузиться страница корзины
+		})
+		.then(function(msg) {
+			keradan_log(msg);
+			return get_iframe_promise(basket_products_loaded_promise_attributes); // Ждем когда появятся товары
+		})
+		.then(function(msg) {
+			keradan_log(msg);
+			// Hачинаем парсить товары
+			keradan_log('Hачинаем парсить товары, или что-то делаем с пустой корзиной');
 		})
 		.catch(error => console.error(error));
 
