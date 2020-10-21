@@ -217,6 +217,7 @@
 					},
 				};
 				cart_item.querySelectorAll('app-cart-item-size-filter ul.select__dropdown li').forEach(item => product_data.sizes.list.push(get_size_data(item)));
+				product_data.price_singular = parseInt(product_data.price) / parseInt(product_data.quantity);
 
 				cart_item.setAttribute('data-product-id', product_data.id);
 				cart_item.setAttribute('data-product-key', i);
