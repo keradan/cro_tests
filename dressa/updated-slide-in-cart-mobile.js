@@ -199,7 +199,7 @@
 				let get_size_data = function(elem) {
 					let size_data = elem.innerText.split('-');
 					return {
-						size: size_data[0].trim(),
+						size: size_data[0].trim().replace(/[\D]+/g, ''),
 						shipment: size_data[1].trim(),
 					};
 				}
