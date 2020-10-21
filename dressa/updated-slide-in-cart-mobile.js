@@ -113,6 +113,7 @@
 			let last_iteration = attributes.max_promise_time / attributes.promise_attempt_interval;
 			let iteration = 0;
 			let timer_end = false;
+			keradan_log('last_iteration', last_iteration);
 
 			setTimeout(function(){
 				clearInterval(test.timers[promise_timer_id]);
@@ -124,6 +125,7 @@
 					resolve('iframe promise force resolved. ' + msg ?? '');
 			    	keradan_log(`resolved after ${get_current_test_time()}s of test work`);
 				}
+				keradan_log('iteration', iteration);
 				if (iteration == last_iteration - 1) timer_end = true;
 				let is_resolve = attributes.is_resolve(test.iframe, timer_end, resolve_anyway);
 				if(is_resolve !== true) return;
