@@ -111,7 +111,7 @@
 		let promise = new Promise(function(resolve, reject) {		  
 			let promise_timer_id = test.timers.push(null) - 1;
 			let last_iteration = attributes.max_promise_time / attributes.promise_attempt_interval;
-			let iteration = 0;
+			let window.krdn_iteration = 0;
 			let timer_end = false;
 			keradan_log('last_iteration', last_iteration);
 
@@ -125,14 +125,14 @@
 					resolve('iframe promise force resolved. ' + msg ?? '');
 			    	keradan_log(`resolved after ${get_current_test_time()}s of test work`);
 				}
-				keradan_log('iteration', iteration);
-				if (iteration == last_iteration - 1) timer_end = true;
+				keradan_log('window.krdn_iteration', window.krdn_iteration);
+				if (window.krdn_iteration == last_iteration - 1) timer_end = true;
 				let is_resolve = attributes.is_resolve(test.iframe, timer_end, resolve_anyway);
 				if(is_resolve !== true) return;
 			    clearInterval(test.timers[promise_timer_id]);
 			    resolve('iframe promise resolved. ' + attributes.resolve_msg ?? '');
 			    keradan_log(`resolved after ${get_current_test_time()}s of test work`);
-			    iteration++;
+			    window.krdn_iteration++;
 			}, attributes.promise_attempt_interval);
 		});
 		return promise;
