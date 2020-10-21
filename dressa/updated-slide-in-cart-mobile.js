@@ -213,9 +213,11 @@
 					price: cart_item.querySelector('div.item__price .item__price_amount').innerHTML.replace(/[\D]+/g, ''),
 					sizes: {
 						current: get_size_data(cart_item.querySelector('app-cart-item-size-filter div.select__value')),
-						list: cart_item.querySelectorAll('app-cart-item-size-filter ul.select__dropdown li').map(item => get_size_data(item)),
+						list: [],
 					},
 				};
+				cart_item.querySelectorAll('app-cart-item-size-filter ul.select__dropdown li').forEach(item => product_data.sizes.list.push(get_size_data(item)));
+
 				cart_item.setAttribute('data-product-id', product_data.id);
 				cart_item.setAttribute('data-product-key', i);
 				window.keradan[test_data.name].products.push(product_data);
