@@ -173,6 +173,10 @@
 		})
 		.then(function(msg) {
 			keradan_log(msg);
+			if(iframe.doc.querySelector('.basket-wrapper .products h3.empty')) {
+				// Открываем корзину на этом этапе, и пишем там что она пустая
+				return Promise.reject();
+			}
 			iframe.doc.querySelector('.basket-btn app-dressa-button').click();
 			return get_iframe_promise(promises_attributes.basket_loaded); // Ждем пока загрузиться страница корзины
 		})
