@@ -196,6 +196,14 @@
 			// Если статус ready то можно юзать, если другой то надо ждать в промисе
 			// После этого можно будет переходить к работе над ивентами по открытию корзины
 			iframe.doc.querySelectorAll('app-cart-item').forEach(function(cart_item, i){
+				let get_size_data = function(elem) {
+					elem.innerText.split('-');
+					return {
+						size: elem[0].trim(),
+						shipment: elem[1].trim(),
+					};
+				}
+
 				let product_data = {
 					id: cart_item.querySelector('a.item__photo').getAttribute('href').split('-').reverse()[0],
 					img_src: cart_item.querySelector('a.item__photo img').getAttribute('src'),
@@ -203,8 +211,10 @@
 					title: cart_item.querySelector('h3.item__info_title').innerHTML,
 					quantity: cart_item.querySelector('div.item__quantity_counter span.counter__quantity').innerHTML,
 					price: cart_item.querySelector('div.item__price .item__price_amount').innerHTML.replace(/[\D]+/g, ''),
-					all_sizes: 'fjkdfjkdfjkfd',
-					size: 'dskjjkdjkdsjkdskjsjk',
+					sizes: {
+						current: get_size_data(cart_item.querySelector('app-cart-item-size-filter div.select__value')),
+						list: cart_item.querySelectorAll('app-cart-item-size-filter ul.select__dropdown li').map(item => get_size_data(item)),
+					},
 				};
 				cart_item.setAttribute('data-product-id', product_data.id);
 				cart_item.setAttribute('data-product-key', i);
