@@ -89,6 +89,7 @@
 
 	const basket_products_loaded_promise_attributes = {
 		is_resolve: function(iframe, timer_end, resolve_anyway){
+			keradan_log('timer_end:', timer_end);
 			if(timer_end) {
 				resolve_anyway('basket is empty');
 				return true;
