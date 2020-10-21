@@ -44,6 +44,7 @@
  	window.keradan[test_data.name].timers = [];
  	window.keradan[test_data.name].start_time = new Date().getTime();
  	window.keradan[test_data.name].products = [];
+ 	window.keradan[test_data.name].product_keys = {};
 
 	function get_current_test_time(){
 		return Math.round((new Date().getTime() - window.keradan[test_data.name].start_time) / 100) / 10;
@@ -142,6 +143,7 @@
 		let old_iframe = document.querySelector('.keradan-cart-iframe');
 		if(old_iframe) old_iframe.remove();
 		window.keradan[test_data.name].products = [];
+		window.keradan[test_data.name].product_keys = {};
 
 		let parent_doc_text = document.documentElement.innerHTML;
 		parent_doc_text = parent_doc_text.replace(/src=\"https:\/\/keradan\.github\.io\/cro_tests/, "src=\"");
@@ -193,10 +195,22 @@
 			// Нужно взять и начинить обьект данными из корзину. Так же должен для этого обьекта быть еще индикатор статуса.
 			// Если статус ready то можно юзать, если другой то надо ждать в промисе
 			// После этого можно будет переходить к работе над ивентами по открытию корзины
-			window.keradan[test_data.name].products.push({
-	 			name: 'платье какоето',
-	 			price: '3232',
-	 		});
+			iframe.doc.querySelectorAll('app-cart-item').forEach(function(cart_item, i){
+				let product_data = {
+					id: cart_item.querySelector('a.item__photo').getAttribute('href').split('-').reverse()[0],
+					img_src: cart_item.querySelector('a.item__photo img').getAttribute('src'),
+					link: cart_item.querySelector('a.item__photo').getAttribute('href'), // 'https://dressa.com.ua'
+					title: cart_item.querySelector('h3.item__info_title').innerHTML,
+					quantity: cart_item.querySelector('div.item__quantity_counter span.counter__quantity').innerHTML,
+					price: cart_item.querySelector('div.item__price .item__price_amount').innerHTML.replace(/[\D]+/g, ''),
+					all_sizes: 'fjkdfjkdfjkfd',
+					size: 'dskjjkdjkdsjkdskjsjk',
+				};
+				cart_item.setAttribute('data-product-id', product_data.id);
+				cart_item.setAttribute('data-product-key', i);
+				window.keradan[test_data.name].products.push(product_data);
+				window.keradan[test_data.name].product_keys[product_data.id] = i;
+			});
 	 		window.keradan[test_data.name].show_cart();
 		})
 		.catch(error => console.error(error));
