@@ -89,8 +89,11 @@
 
 	const basket_products_loaded_promise_attributes = {
 		is_resolve: function(iframe, timer_end, resolve_anyway){
+			if(timer_end) {
+				resolve_anyway('basket is empty');
+				return true;
+			}
 			if(!iframe.doc.querySelector('section.basket-page .buttons__checkout app-dressa-button')) return false;
-			if(timer_end) resolve_anyway('basket is empty');
 		    return true;
 		},
 		reject_msg: 'Not found basket products in iframe by 15 seconds.',
