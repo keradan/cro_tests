@@ -197,10 +197,10 @@
 			// После этого можно будет переходить к работе над ивентами по открытию корзины
 			iframe.doc.querySelectorAll('app-cart-item').forEach(function(cart_item, i){
 				let get_size_data = function(elem) {
-					elem.innerText.split('-');
+					let size_data = elem.innerText.split('-');
 					return {
-						size: elem[0].trim(),
-						shipment: elem[1].trim(),
+						size: size_data[0].trim(),
+						shipment: size_data[1].trim(),
 					};
 				}
 
