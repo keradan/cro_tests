@@ -47,60 +47,56 @@
 	function get_current_test_time(){
 		return Math.round((new Date().getTime() - window.keradan[test_data.name].start_time) / 100) / 10;
 	}
-	
 
 	console.log('Test "Updated slide in cart - Mobile" is here');
 
-	const iframe_is_created_promise_attributes = {
-		is_resolve: function(iframe){
-			if(iframe.status != 'created') return false;
-		    if(!iframe.doc) return false;
-		    if(!iframe.doc.querySelector('.link__shopping')) return false;
-		    return true;
+	const promises_attributes = {
+		iframe_is_created: {
+			is_resolve: function(iframe){
+				if(iframe.status != 'created') return false;
+			    if(!iframe.doc) return false;
+			    if(!iframe.doc.querySelector('.link__shopping')) return false;
+			    return true;
+			},
+			reject_msg: 'Iframe not created longer than 15 seconds.',
+			resolve_msg: 'Running cart in iframe: iframe_is_created.',
 		},
-		reject_msg: 'Iframe not created longer than 15 seconds.',
-		resolve_msg: 'Running cart in iframe: iframe_is_created.',
-	};
-	
-	const basket_button_ready_promise_attributes = {
-		is_resolve: function(iframe){
-			// if(!iframe.doc.querySelector('section.basket-page')) return false;
-			if(!iframe.doc.querySelector('.link__shopping')) return false;
-			if(!iframe.doc.querySelector('.basket-btn app-dressa-button')) {
-				iframe.doc.querySelector('.link__shopping').click();
-				return false;
-			}
-		    return true;
+		basket_button_ready: {
+			is_resolve: function(iframe){
+				if(!iframe.doc.querySelector('.link__shopping')) return false;
+				if(!iframe.doc.querySelector('.basket-btn app-dressa-button')) {
+					iframe.doc.querySelector('.link__shopping').click();
+					return false;
+				}
+			    return true;
+			},
+			reject_msg: 'Not found basket_button in iframe by 15 seconds.',
+			resolve_msg: 'Running cart in iframe: basket_button_ready.',
+			promise_attempt_interval: 500,
 		},
-		reject_msg: 'Not found basket_button in iframe by 15 seconds.',
-		resolve_msg: 'Running cart in iframe: basket_button_ready.',
-		promise_attempt_interval: 500,
-		// max_promise_time: 20000,
-	};
-	
-	const basket_loaded_promise_attributes = {
-		is_resolve: function(iframe){
-			if(!iframe.doc.querySelector('section.basket-page')) return false;
-		    return true;
+		basket_loaded: {
+			is_resolve: function(iframe){
+				if(!iframe.doc.querySelector('section.basket-page')) return false;
+			    return true;
+			},
+			reject_msg: 'Not found section.basket-page in iframe by 15 seconds.',
+			resolve_msg: 'Running cart in iframe: section.basket-page founded - basket page has been loaded.',
 		},
-		reject_msg: 'Not found section.basket-page in iframe by 15 seconds.',
-		resolve_msg: 'Running cart in iframe: section.basket-page founded - basket page has been loaded.',
-	};
-
-	const basket_products_loaded_promise_attributes = {
-		is_resolve: function(iframe, timer_end, resolve_anyway){
-			keradan_log('timer_end:', timer_end);
-			if(timer_end) {
-				resolve_anyway('basket is empty');
-				return true;
-			}
-			if(!iframe.doc.querySelector('section.basket-page .buttons__checkout app-dressa-button')) return false;
-		    return true;
+		basket_products_loaded: {
+			is_resolve: function(iframe, timer_end, resolve_anyway){
+				// keradan_log('timer_end:', timer_end);
+				// if(timer_end) {
+				// 	resolve_anyway('basket is empty');
+				// 	return true;
+				// }
+				if(!iframe.doc.querySelector('section.basket-page .buttons__checkout app-dressa-button')) return false;
+			    return true;
+			},
+			reject_msg: 'Not found basket products in iframe by 15 seconds.',
+			resolve_msg: 'Running cart in iframe: basket products founded in iframe.',
+			max_promise_time: 3000,
+			promise_attempt_interval: 100,
 		},
-		reject_msg: 'Not found basket products in iframe by 15 seconds.',
-		resolve_msg: 'Running cart in iframe: basket products founded in iframe.',
-		max_promise_time: 3000,
-		promise_attempt_interval: 100,
 	};
 
 	function get_iframe_promise (attributes) {
@@ -108,12 +104,12 @@
 		if (!attributes.max_promise_time) attributes.max_promise_time = 15000;
 		if (!attributes.promise_attempt_interval) attributes.promise_attempt_interval = 200;
 		
-		let promise = new Promise(function(resolve, reject) {		  
+		let promise = new Promise(function(resolve, reject) {
 			let promise_timer_id = test.timers.push(null) - 1;
-			let last_iteration = attributes.max_promise_time / attributes.promise_attempt_interval;
-			let iteration = 0;
-			let timer_end = false;
-			keradan_log('last_iteration', last_iteration);
+			// let last_iteration = attributes.max_promise_time / attributes.promise_attempt_interval;
+			// let iteration = 0;
+			// let timer_end = false;
+			// keradan_log('last_iteration', last_iteration);
 
 			setTimeout(function(){
 				clearInterval(test.timers[promise_timer_id]);
@@ -121,18 +117,19 @@
 			}, attributes.max_promise_time);
 
 			test.timers[promise_timer_id] = setInterval(function(){
-				iteration++;
-				let resolve_anyway = function(msg = null){
-					resolve('iframe promise force resolved. ' + msg ?? '');
-			    	keradan_log(`resolved after ${get_current_test_time()}s of test work`);
-				}
-				keradan_log('iteration', iteration);
-				if (iteration == last_iteration) timer_end = true;
-				let is_resolve = attributes.is_resolve(test.iframe, timer_end, resolve_anyway);
-				if(is_resolve !== true) return;
+				// iteration++;
+				// let resolve_anyway = function(msg = null){
+				// 	resolve('iframe promise force resolved. ' + msg ?? '');
+			 //    	keradan_log(`resolved after ${get_current_test_time()}s of test work`);
+				// }
+				// keradan_log('iteration', iteration);
+				// if (iteration == last_iteration) timer_end = true;
+				// let is_resolve = attributes.is_resolve(test.iframe, timer_end, resolve_anyway);
+				// if(is_resolve !== true) return;
+				if(attributes.is_resolve(test.iframe) !== true) return;
 			    clearInterval(test.timers[promise_timer_id]);
-			    resolve('iframe promise resolved. ' + attributes.resolve_msg ?? '');
-			    keradan_log(`resolved after ${get_current_test_time()}s of test work`);
+			    resolve(`iframe promise resolved. ${attributes.resolve_msg ?? ''} \r resolved after ${get_current_test_time()}s of test work.`);
+			    // keradan_log();
 			}, attributes.promise_attempt_interval);
 		});
 		return promise;
@@ -146,11 +143,9 @@
 
 		let parent_doc_text = document.documentElement.innerHTML;
 		parent_doc_text = parent_doc_text.replace(/src=\"https:\/\/keradan\.github\.io\/cro_tests/, "src=\"");
-		// parent_doc_text = parent_doc_text.replace(/<(\w+)\s[^>]*id=\"styles-dressa-updated-slide-in-cart-mobile\"[^>]*>[\s\S]*\1>/, "");
 
 		iframe.el = document.createElement('iframe');
 		iframe.el.classList.add('keradan-cart-iframe');
-		// iframe.el.setAttribute('src', 'https://dressa.com.ua/cart');
 		iframe.el.setAttribute('width', '350');
 		iframe.el.setAttribute('height', '500');
 		iframe.el.setAttribute('style', 'border: 2px solid red; margin-bottom: 100px;');
@@ -161,9 +156,6 @@
 
 		iframe.doc.open();
 		iframe.doc.write(parent_doc_text);
-		// iframe.doc.querySelector('#script-' + test_data.name).remove();
-		// iframe.doc.querySelector('#styles-' + test_data.name).remove();
-		// iframe.doc.querySelector('iframe.keradan-cart-iframe').remove();
 		iframe.doc.close();
 
 		iframe.status = 'created';
@@ -173,20 +165,20 @@
 	window.keradan[test_data.name].run_iframe = function() {
 		let iframe = window.keradan[test_data.name].iframe;
 
-		get_iframe_promise(iframe_is_created_promise_attributes) // Ждем когда появится кнопка корзины чтобы нажать на нее и вывести попап с корзиной
+		get_iframe_promise(promises_attributes.iframe_is_created) // Ждем когда появится кнопка корзины чтобы нажать на нее и вывести попап с корзиной
 		.then(function(msg) {
 			keradan_log(msg);
 			iframe.doc.querySelector('.link__shopping').click();
-			return get_iframe_promise(basket_button_ready_promise_attributes); // Ждем когда в попапе появится кнопка оформить заказ, чтобы мы могли перейти на страницу корзины
+			return get_iframe_promise(promises_attributes.basket_button_ready); // Ждем когда в попапе появится кнопка оформить заказ, чтобы мы могли перейти на страницу корзины
 		})
 		.then(function(msg) {
 			keradan_log(msg);
 			iframe.doc.querySelector('.basket-btn app-dressa-button').click();
-			return get_iframe_promise(basket_loaded_promise_attributes); // Ждем пока загрузиться страница корзины
+			return get_iframe_promise(promises_attributes.basket_loaded); // Ждем пока загрузиться страница корзины
 		})
 		.then(function(msg) {
 			keradan_log(msg);
-			return get_iframe_promise(basket_products_loaded_promise_attributes); // Ждем когда появятся товары
+			return get_iframe_promise(promises_attributes.basket_products_loaded); // Ждем когда появятся товары
 		})
 		.then(function(msg) {
 			keradan_log(msg);
@@ -203,16 +195,16 @@
 		iframe.doc.querySelectorAll('.counter__add')[1].click();
 	}
 
-	document.addEventListener('readystatechange', function(){
-		keradan_log('keradan readyState changed and now is: ', document.readyState);
-		if (document.readyState == 'complete') {
+	// document.addEventListener('readystatechange', function(){
+	// 	keradan_log('keradan readyState changed and now is: ', document.readyState);
+	// 	if (document.readyState == 'complete') {
 
-			keradan_log(`keradan create and run iframe, after ${get_current_test_time()} seconds of waiting`);
+	// 		keradan_log(`keradan create and run iframe, after ${get_current_test_time()} seconds of waiting`);
 
 			window.keradan[test_data.name].create_iframe();
 			window.keradan[test_data.name].run_iframe();
-		}
-	});
+	// 	}
+	// });
 
 	// ПОДСКАЗКА:
 	// window.keradan["dressa-updated-slide-in-cart-mobile"]
