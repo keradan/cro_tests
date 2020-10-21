@@ -111,7 +111,7 @@
 		let promise = new Promise(function(resolve, reject) {		  
 			let promise_timer_id = test.timers.push(null) - 1;
 			let last_iteration = attributes.max_promise_time / attributes.promise_attempt_interval;
-			let window.krdn_iteration = 0;
+			window.krdn_iteration = 0;
 			let timer_end = false;
 			keradan_log('last_iteration', last_iteration);
 
