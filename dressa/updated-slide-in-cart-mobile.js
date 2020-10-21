@@ -43,6 +43,7 @@
  	window.keradan[test_data.name].iframe = {el: null, doc: null, status: null};
  	window.keradan[test_data.name].timers = [];
  	window.keradan[test_data.name].start_time = new Date().getTime();
+ 	window.keradan[test_data.name].products = [];
 
 	function get_current_test_time(){
 		return Math.round((new Date().getTime() - window.keradan[test_data.name].start_time) / 100) / 10;
@@ -140,6 +141,7 @@
 		iframe.status = 'loading';
 		let old_iframe = document.querySelector('.keradan-cart-iframe');
 		if(old_iframe) old_iframe.remove();
+		window.keradan[test_data.name].products = [];
 
 		let parent_doc_text = document.documentElement.innerHTML;
 		parent_doc_text = parent_doc_text.replace(/src=\"https:\/\/keradan\.github\.io\/cro_tests/, "src=\"");
@@ -175,6 +177,7 @@
 			keradan_log(msg);
 			if(iframe.doc.querySelector('.basket-wrapper .products h3.empty')) {
 				// Открываем корзину на этом этапе, и пишем там что она пустая
+				window.keradan[test_data.name].show_cart();
 				return Promise.reject();
 			}
 			iframe.doc.querySelector('.basket-btn app-dressa-button').click();
@@ -190,11 +193,18 @@
 			// Нужно взять и начинить обьект данными из корзину. Так же должен для этого обьекта быть еще индикатор статуса.
 			// Если статус ready то можно юзать, если другой то надо ждать в промисе
 			// После этого можно будет переходить к работе над ивентами по открытию корзины
-			
+			window.keradan[test_data.name].products.push({
+	 			name: 'платье какоето',
+	 			price: '3232',
+	 		});
+	 		window.keradan[test_data.name].show_cart();
 		})
 		.catch(error => console.error(error));
 	}
 
+	window.keradan[test_data.name].show_cart = function() {
+		keradan_log('keradan showing cart with products: ', window.keradan[test_data.name].products);
+	}
 	window.keradan[test_data.name].change_something_in_cart = function() {
 		iframe.doc.querySelectorAll('.counter__add')[1].click();
 	}
