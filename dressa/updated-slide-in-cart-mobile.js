@@ -209,15 +209,15 @@
 					img_src: cart_item.querySelector('a.item__photo img').getAttribute('src'),
 					link: cart_item.querySelector('a.item__photo').getAttribute('href'), // 'https://dressa.com.ua'
 					title: cart_item.querySelector('h3.item__info_title').innerHTML,
-					quantity: cart_item.querySelector('div.item__quantity_counter span.counter__quantity').innerHTML,
-					price: cart_item.querySelector('div.item__price .item__price_amount').innerHTML.replace(/[\D]+/g, ''),
+					quantity: parseInt(cart_item.querySelector('div.item__quantity_counter span.counter__quantity').innerHTML),
+					price: parseInt(cart_item.querySelector('div.item__price .item__price_amount').innerHTML.replace(/[\D]+/g, '')),
 					sizes: {
 						current: get_size_data(cart_item.querySelector('app-cart-item-size-filter div.select__value')),
 						list: [],
 					},
 				};
 				cart_item.querySelectorAll('app-cart-item-size-filter ul.select__dropdown li').forEach(item => product_data.sizes.list.push(get_size_data(item)));
-				product_data.price_singular = parseInt(product_data.price) / parseInt(product_data.quantity);
+				product_data.price_singular = product_data.price / product_data.quantity;
 
 				cart_item.setAttribute('data-product-id', product_data.id);
 				cart_item.setAttribute('data-product-key', i);
