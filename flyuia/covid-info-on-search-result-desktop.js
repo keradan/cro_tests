@@ -29,7 +29,7 @@
 
 	keradan_log('test_data: ', test_data);
 
-	window.keradan[test_data.name].lang = window.location.pathname.replace(/^\/{1}/, '').split('/')[0];
+	window.keradan[test_data.name].lang = window.location.pathname.replace(/^\/{1}/, '').split('/')[0].toLowerCase();
 
 	window.keradan[test_data.name].flight_info = {
 		departure_code: null,
