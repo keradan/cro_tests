@@ -38,17 +38,30 @@
 	 	.${test_data.css_scope_name}-top-box {
 	 		background: red;
 	 	}
+	 	app-search-results .control-section {
+	 		position: relative;
+	 	}
+	 	.${test_data.css_scope_name}-button-popup {
+	 		position: absolute;
+		    right: 15px;
+		    bottom: calc(100% - 1rem);
+		    display: flex;
+		    justify-content: center;
+		    align-items: center;
+		    background: white;
+		    width: 290px;
+	 	}
  	`;
 
- 	let markup_el = document.createElement('div');
- 	markup_el.classList.add(`${test_data.css_scope_name}-top-box`);
- 	markup_el.innerHTML = 'keradan here helloooo';
- 	document.querySelector('app-search-results .flights-section .outbound-section').prepend(markup_el);
-
- 	window.keradan[test_data.name].start_time = new Date().getTime();
-	function get_current_test_time(){
-		return (Math.round((new Date().getTime() - window.keradan[test_data.name].start_time) / 100) / 10) + 's';
-	}
+ 	let markup_els = {
+ 		top_box: document.createElement('div').classList.add(`${test_data.css_scope_name}-top-box`),
+ 		button_popup: document.createElement('div').classList.add(`${test_data.css_scope_name}-button-popup`),
+ 	};
+ 	// markup_els.top_box.classList.add(`${test_data.css_scope_name}-top-box`);
+ 	markup_els.top_box.innerHTML = 'keradan here helloooo';
+ 	
+ 	// markup_els.button_popup.classList.add(`${test_data.css_scope_name}-button-popup`);
+ 	markup_els.button_popup.innerHTML = 'popup over button';
 
 	console.log('Test "Covid info on search result desktop" is here');
 
@@ -60,6 +73,16 @@
 		departure_code: departure_code,
 		arrival_code: arrival_code,
 	});
+
+	function run() {
+		// тут делаем проверку: если уже есть мои куски верстки - тогда ничего не надо делать.
+		// Проверка вторая: что за рейсы откуда и куда - в зависимости от этого мы выводим нужную инфо, или не выводим ничего
+		document.querySelector('app-search-results .flights-section .outbound-section').prepend(markup_els.top_box);
+		document.querySelector('app-search-results .control-section button#next-page-button').before(markup_els.button_popup);
+
+	}
+
+	run();
 
 
 

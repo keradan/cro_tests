@@ -31,6 +31,13 @@ if (!wk.get_test_data) wk.get_test_data = function (sc) {
 	};
 	td.name = td.client + '-' + td.file_name;
 	td.css_scope_name = `krdn${wk.simple_str_hash(td.name)}`;
+	td.start_time = new Date().getTime();
 	wk[td.name] = {};
 	return td;
 }
+if (!wk.get_test_time) wk.get_test_time = (tdn) => (Math.round((new Date().getTime() - wk[tdn].start_time) / 100) / 10) + 's';
+
+
+
+
+
