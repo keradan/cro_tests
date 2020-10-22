@@ -154,9 +154,11 @@
 		setInterval(function(){
 			console.log('lang monitor');
 			let new_lang = window.location.pathname.replace(/^\/{1}/, '').split('/')[0].toLowerCase();
+			let new_main_title = document.querySelector('app-search-results .flights-section .outbound-section .product__title').innerHTML;
 
-			if (new_lang !== window.keradan[test_data.name].lang) {
+			if (new_lang !== window.keradan[test_data.name].lang || new_main_title !== window.keradan[test_data.name].main_title) {
 				window.keradan[test_data.name].lang = new_lang;
+				window.keradan[test_data.name].main_title = new_main_title;
 				run();
 			}
 		}, 500);
