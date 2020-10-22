@@ -167,6 +167,11 @@
 	.catch(error => console.error(error));
 
 	function exit_test() {
+		keradan_log('exit_test function goes: ');
+		keradan_log('markup_els: ', markup_els);
+		keradan_log('top_box class: ', markup_els.top_box.getAttribute('class'));
+		keradan_log('top_box in dom: ', document.querySelector(markup_els.top_box.getAttribute('class')));
+		
 		if (document.querySelector(markup_els.top_box.getAttribute('class'))) {
 			markup_els.top_box.querySelectorAll('.big-right-text, .small-left-text').forEach(item => item.innerHTML = '');
 			markup_els.top_box.remove();
