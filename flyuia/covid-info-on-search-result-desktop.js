@@ -172,14 +172,14 @@
 		keradan_log('top_box class: ', markup_els.top_box.getAttribute('class'));
 		keradan_log('top_box in dom: ', document.querySelector(markup_els.top_box.getAttribute('class')));
 
-		if (document.querySelector(markup_els.top_box.getAttribute('class'))) {
+		// if (document.querySelector(markup_els.top_box.getAttribute('class'))) {
 			markup_els.top_box.querySelectorAll('.big-right-text, .small-left-text').forEach(item => item.innerHTML = '');
 			markup_els.top_box.remove();
-		}
-		if (document.querySelector(markup_els.button_popup.getAttribute('class'))) {
+		// }
+		// if (document.querySelector(markup_els.button_popup.getAttribute('class'))) {
 			markup_els.button_popup.querySelectorAll('.title, .text-1, .text-2').forEach(item => item.innerHTML = '');
 			markup_els.button_popup.remove();
-		}
+		// }
 	}
 
 	function run() {
