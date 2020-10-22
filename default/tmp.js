@@ -13,24 +13,12 @@ st.setAttribute('id', `styles-${test_info.client}-${test_info.file_name}`);
 document.querySelector('head').append(st);
 
 if (!window.keradan) window.keradan = {};
-let wk = window.keradan;
-if (!wk.simple_str_hash) wk.simple_str_hash = function (s) {
-    var h = 0;
-    if (s.length == 0) return h;
-    for (var i = 0; i < s.length; i++) {
-        var char = s.charCodeAt(i);
-        h = ((h<<5)-h)+char;
-        h = h & h;
-    }
-    return Math.abs(h).toString(16);
-}
-if (!wk.get_test_data) wk.get_test_data = function (sc) {
+if (!window.keradan.get_test_data) window.keradan.get_test_data = function (sc) {
 	let td = {
 		client: sc.dataset.testClient,
 		file_name: sc.dataset.testFileName,
+		name: sc.dataset.testClient + '-' + sc.dataset.testFileName,
 	};
-	td.name = td.client + '-' + td.file_name;
-	td.css_scope_name = `krdn${wk.simple_str_hash(td.name)}`;
-	wk[td.name] = {};
+	window.keradan[td.name] = {};
 	return td;
 }
