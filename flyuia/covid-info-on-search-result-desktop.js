@@ -40,15 +40,24 @@
  		depending_on_country: {
  			ru: {
  				"KBP-TLV": {
- 					text_1: 'dsjsdkj1',
- 					text_2: 'dsjsdkj1',
+ 					text_1: 'ru-dsjsdkj1',
+ 					text_2: 'ru-dsjsdkj1',
  				},
  				"TLV-KBP": {
- 					text_1: 'dsjsdkj2',
- 					text_2: 'dsjsdkj2',
+ 					text_1: 'ru-dsjsdkj2',
+ 					text_2: 'ru-dsjsdkj2',
  				},
  			},
- 			uk: {},
+ 			uk: {
+ 				"KBP-TLV": {
+ 					text_1: 'uk-dsjsdkj1',
+ 					text_2: 'uk-dsjsdkj1',
+ 				},
+ 				"TLV-KBP": {
+ 					text_1: 'uk-dsjsdkj2',
+ 					text_2: 'uk-dsjsdkj2',
+ 				},
+ 			},
  			en: {},
  		},
  		sksjskjaa: `dsjsdjhsdhj`,
