@@ -47,6 +47,14 @@
 
 	console.log('Test "Covid info on search result desktop" is here');
 
+	let flight_info = document.querySelector('app-flights-product .flight-info-container .flight-info');
+	let departure_code = flight_info.querySelector('.departure-info .info-code').innerHTML;
+	let arrival_code = flight_info.querySelector('.arrival-info .info-code').innerHTML;
+	
+	keradan_log('flight_info', {
+		departure_code: departure_code,
+		arrival_code: arrival_code,
+	});
 
 
 
