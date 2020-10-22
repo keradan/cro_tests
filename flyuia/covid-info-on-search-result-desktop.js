@@ -54,13 +54,13 @@
  	`;
 
  	let markup_els = {
- 		top_box: document.createElement('div').classList.add(`${test_data.css_scope_name}-top-box`),
- 		button_popup: document.createElement('div').classList.add(`${test_data.css_scope_name}-button-popup`),
+ 		top_box: document.createElement('div'),
+ 		button_popup: document.createElement('div'),
  	};
- 	// markup_els.top_box.classList.add(`${test_data.css_scope_name}-top-box`);
+ 	markup_els.top_box.classList.add(`${test_data.css_scope_name}-top-box`);
  	markup_els.top_box.innerHTML = 'keradan here helloooo';
  	
- 	// markup_els.button_popup.classList.add(`${test_data.css_scope_name}-button-popup`);
+ 	markup_els.button_popup.classList.add(`${test_data.css_scope_name}-button-popup`);
  	markup_els.button_popup.innerHTML = 'popup over button';
 
 	console.log('Test "Covid info on search result desktop" is here');
