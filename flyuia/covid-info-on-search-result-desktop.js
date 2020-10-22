@@ -29,6 +29,8 @@
 
 	keradan_log('test_data: ', test_data);
 
+	window.keradan[test_data.name].lang = window.location.pathname.replace(/^\/{1}/, '').split('/')[0];
+
 	window.keradan[test_data.name].flight_info = {
 		departure_code: null,
 		arrival_code: null,
@@ -110,11 +112,9 @@
 	})
 	.catch(error => console.error(error));
 
-
-
 	function run() {
 		let flight_info = window.keradan[test_data.name].flight_info;
-		let text_data = markup_content.depending_on_country.ru[`${flight_info.departure_code}-${flight_info.arrival_code}`];
+		let text_data = markup_content.depending_on_country[window.keradan[test_data.name].lang][`${flight_info.departure_code}-${flight_info.arrival_code}`];
 		keradan_log('flight_info', flight_info);
 		keradan_log('тексты выбранны: ', text_data);
 
