@@ -29,8 +29,26 @@
 
 	keradan_log('test_data: ', test_data);
 
+	window.keradan[test_data.name].flight_info = {
+		departure_code: null,
+		arrival_code: null,
+	};
+
 	let markup_content = {
- 		ddsjhdsjh: 'djdshjdsjh',
+ 		depending_on_country: {
+ 			ru: {
+ 				"KBP-TLV": {
+ 					text_1: 'dsjsdkj1',
+ 					text_2: 'dsjsdkj1',
+ 				},
+ 				"TLV-KBP": {
+ 					text_1: 'dsjsdkj2',
+ 					text_2: 'dsjsdkj2',
+ 				},
+ 			},
+ 			uk: {},
+ 			en: {},
+ 		},
  		sksjskjaa: `dsjsdjhsdhj`,
  	};
 
@@ -65,16 +83,41 @@
 
 	console.log('Test "Covid info on search result desktop" is here');
 
-	let flight_info = document.querySelector('app-flights-product .flight-info-container .flight-info');
-	let departure_code = flight_info.querySelector('.departure-info .info-code').innerHTML;
-	let arrival_code = flight_info.querySelector('.arrival-info .info-code').innerHTML;
-	
-	keradan_log('flight_info', {
-		departure_code: departure_code,
-		arrival_code: arrival_code,
+	let flight_info_promise = new Promise(function(resolve, reject) {
+		setTimeout(function(){
+			clearInterval(flight_info_promise_timer_id);
+			reject(new Error('iframe promise rejected. ' + attributes.reject_msg ?? ''));
+		}, 5000);
+
+		flight_info_promise_timer_id = setInterval(function(){
+			let flight_info_el = document.querySelector('app-flights-product .flight-info-container .flight-info');
+			if(!flight_info_el) return;
+
+			window.keradan[test_data.name].flight_info = {
+				departure_code: flight_info_el.querySelector('.departure-info .info-code').innerHTML,
+				arrival_code: flight_info_el.querySelector('.arrival-info .info-code').innerHTML,
+			};
+		    
+		    clearInterval(flight_info_promise_timer_id);
+		    resolve('keradan flight info received');
+		}, 100);
 	});
 
+	flight_info_promise
+	.then(function(msg) {
+		keradan_log(msg);
+		run();
+	})
+	.catch(error => console.error(error));
+
+
+
 	function run() {
+		let flight_info = window.keradan[test_data.name].flight_info;
+		let text_data = markup_content.depending_on_country.ru[`${flight_info.departure_code}-${flight_info.arrival_code}`];
+		keradan_log('flight_info', flight_info);
+		keradan_log('тексты выбранны: ', text_data);
+
 		// тут делаем проверку: если уже есть мои куски верстки - тогда ничего не надо делать.
 		// Проверка вторая: что за рейсы откуда и куда - в зависимости от этого мы выводим нужную инфо, или не выводим ничего
 		document.querySelector('app-search-results .flights-section .outbound-section').prepend(markup_els.top_box);
@@ -82,7 +125,7 @@
 
 	}
 
-	run();
+	
 
 
 
