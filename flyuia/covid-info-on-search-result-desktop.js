@@ -29,8 +29,6 @@
 
 	keradan_log('test_data: ', test_data);
 
-	// window.keradan[test_data.name].lang = window.location.pathname.replace(/^\/{1}/, '').split('/')[0].toLowerCase();
-
 	window.keradan[test_data.name].flight_info = {
 		departure_code: null,
 		arrival_code: null,
@@ -167,19 +165,10 @@
 	.catch(error => console.error(error));
 
 	function reset() {
-		keradan_log('reset function goes: ');
-		keradan_log('markup_els: ', markup_els);
-		keradan_log('top_box class: ', markup_els.top_box.getAttribute('class'));
-		keradan_log('top_box in dom: ', document.querySelector(markup_els.top_box.getAttribute('class')));
-
-		// if (document.querySelector(markup_els.top_box.getAttribute('class'))) {
-			markup_els.top_box.querySelectorAll('.big-right-text, .small-left-text').forEach(item => item.innerHTML = '');
-			markup_els.top_box.remove();
-		// }
-		// if (document.querySelector(markup_els.button_popup.getAttribute('class'))) {
-			markup_els.button_popup.querySelectorAll('.title, .text-1, .text-2').forEach(item => item.innerHTML = '');
-			markup_els.button_popup.remove();
-		// }
+		markup_els.top_box.querySelectorAll('.big-right-text, .small-left-text').forEach(item => item.innerHTML = '');
+		markup_els.top_box.remove();
+		markup_els.button_popup.querySelectorAll('.title, .text-1, .text-2').forEach(item => item.innerHTML = '');
+		markup_els.button_popup.remove();
 	}
 
 	function run() {
@@ -194,9 +183,6 @@
 			reset();
 			return;
 		}
-
-		keradan_log('flight_info', flight_info);
-		keradan_log('тексты выбранны: ', text_data);
 
 		if (!document.querySelector(markup_els.top_box.getAttribute('class')))
 			document.querySelector('app-search-results .flights-section .outbound-section').prepend(markup_els.top_box);
