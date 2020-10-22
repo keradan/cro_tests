@@ -152,10 +152,11 @@
 		keradan_log(msg);
 		
 		setInterval(function(){
+			console.log('lang monitor');
 			let new_lang = window.location.pathname.replace(/^\/{1}/, '').split('/')[0].toLowerCase();
 
-			if (new_lang !== window.keradan[test_data.name]) {
-				window.keradan[test_data.name] = new_lang;
+			if (new_lang !== window.keradan[test_data.name].lang) {
+				window.keradan[test_data.name].lang = new_lang;
 				run();
 			}
 		}, 500);
