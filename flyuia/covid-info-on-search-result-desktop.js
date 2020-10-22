@@ -30,6 +30,7 @@
 	keradan_log('test_data: ', test_data);
 
 	window.keradan[test_data.name].lang = window.location.pathname.replace(/^\/{1}/, '').split('/')[0].toLowerCase();
+	window.keradan[test_data.name].old_lang = window.keradan[test_data.name].lang;
 
 	window.keradan[test_data.name].flight_info = {
 		departure_code: null,
@@ -37,30 +38,56 @@
 	};
 
 	let markup_content = {
+		covid_img_src: 'dsdsjdsjkdsjkdjksdksjdsjk',
+ 		popup_title: {
+ 			ru: 'Вам остался всего 1 шаг',
+ 			uk: 'Вам залишився всього 1 крок',
+ 			en: 'You only have 1 step left',
+ 		},
  		depending_on_country: {
  			ru: {
  				"KBP-TLV": {
- 					text_1: 'ru-dsjsdkj1',
- 					text_2: 'ru-dsjsdkj1',
+ 					popup_text_1: 'Бесплатное изменение дат',
+ 					popup_text_2: 'Если планы изменятся, самостоятельно меняйте даты путешествия.',
+ 					top_box_text_1: 'Въезд для граждан и резидентов Израиля свободный.',
+ 					top_box_text_2: 'Для граждан других стран действуют ограничения.',
  				},
  				"TLV-KBP": {
- 					text_1: 'ru-dsjsdkj2',
- 					text_2: 'ru-dsjsdkj2',
+ 					popup_text_1: 'Бесплатное изменение дат',
+ 					popup_text_2: 'Если планы изменятся, самостоятельно меняйте даты путешествия.',
+ 					top_box_text_1: 'Для граждан и резидентов Украины въезд свободный.',
+ 					top_box_text_2: 'Иностранцам въезд разрешён только при наличии страхового полиса от COVID-19.',
  				},
  			},
  			uk: {
  				"KBP-TLV": {
- 					text_1: 'uk-dsjsdkj1',
- 					text_2: 'uk-dsjsdkj1',
+ 					popup_text_1: 'Безкоштовна зміна дат',
+ 					popup_text_2: 'Якщо плани зміняться, самостійно змінюйте дати подорожі.',
+ 					top_box_text_1: 'В‘їзд для громадян та резидентів Ізраїлю вільний.',
+ 					top_box_text_2: 'Для громадян інших країн діють обмеження.',
  				},
  				"TLV-KBP": {
- 					text_1: 'uk-dsjsdkj2',
- 					text_2: 'uk-dsjsdkj2',
+ 					popup_text_1: 'Безкоштовна зміна дат',
+ 					popup_text_2: 'Якщо плани зміняться, самостійно змінюйте дати подорожі.',
+ 					top_box_text_1: 'Для громадян та резидентів України в‘їзд вільний.',
+ 					top_box_text_2: 'Іноземцям в‘їзд дозволений лише при наявності страхового полісу від COVID-19.',
  				},
  			},
- 			en: {},
+ 			en: {
+ 				"KBP-TLV": {
+ 					popup_text_1: 'Free date change',
+ 					popup_text_2: 'Book with confidence and, if needed, change travel dates yourself.',
+ 					top_box_text_1: 'Entry for citizens and residents of Israel is free.',
+ 					top_box_text_2: 'Entry restrictions apply to citizens of other countries.',
+ 				},
+ 				"TLV-KBP": {
+ 					popup_text_1: 'Free date change',
+ 					popup_text_2: 'Book with confidence and, if needed, change travel dates yourself.',
+ 					top_box_text_1: 'Entry is free for Ukrainian citizens and residents.',
+ 					top_box_text_2: 'Foreign citizens are allowed to enter if they are relatives of the first line of citizens of Ukraine, or have an official valid work permit in Ukraine.',
+ 				},
+ 			},
  		},
- 		sksjskjaa: `dsjsdjhsdhj`,
  	};
 
 	document.querySelector("#styles-" + test_data.name).innerHTML = `
@@ -87,10 +114,17 @@
  		button_popup: document.createElement('div'),
  	};
  	markup_els.top_box.classList.add(`${test_data.css_scope_name}-top-box`);
- 	markup_els.top_box.innerHTML = 'keradan here helloooo';
+ 	markup_els.top_box.innerHTML = `
+ 		<div class="big-right-text"></div>
+ 		<div class="small-left-text"></div>
+ 	`;
  	
  	markup_els.button_popup.classList.add(`${test_data.css_scope_name}-button-popup`);
- 	markup_els.button_popup.innerHTML = 'popup over button';
+ 	markup_els.button_popup.innerHTML = `
+ 		<div class="title"></div>
+ 		<div class="text-1"></div>
+ 		<div class="text-2"></div>
+ 	`;
 
 	console.log('Test "Covid info on search result desktop" is here');
 
@@ -117,29 +151,55 @@
 	flight_info_promise
 	.then(function(msg) {
 		keradan_log(msg);
-		run();
+		
+		setInterval(function(){
+			let new_lang = window.location.pathname.replace(/^\/{1}/, '').split('/')[0].toLowerCase();
+
+			if (new_lang !== window.keradan[test_data.name]) {
+				window.keradan[test_data.name] = new_lang;
+				run();
+			}
+		}, 500);
+		
 	})
 	.catch(error => console.error(error));
 
+	function exit_test() {
+		if (document.querySelector(markup_els.top_box.getAttribute('class'))) {
+			markup_els.top_box.querySelectorAll('.big-right-text, .small-left-text').forEach(item => item.innerHTML = '');
+			markup_els.top_box.remove();
+		}
+		if (document.querySelector(markup_els.button_popup.getAttribute('class'))) {
+			markup_els.button_popup.querySelectorAll('.title, .text-1, .text-2').forEach(item => item.innerHTML = '');
+			markup_els.button_popup.remove();
+		}
+	}
+
 	function run() {
+		let lang = window.keradan[test_data.name].lang;
+		if (lang !== 'ru' && lang !== 'uk' && lang !== 'en') return exit_test();
 		let flight_info = window.keradan[test_data.name].flight_info;
-		let text_data = markup_content.depending_on_country[window.keradan[test_data.name].lang][`${flight_info.departure_code}-${flight_info.arrival_code}`];
+		let text_data = markup_content.depending_on_country[lang][`${flight_info.departure_code}-${flight_info.arrival_code}`];
+		if (!text_data) return exit_test();
+
 		keradan_log('flight_info', flight_info);
 		keradan_log('тексты выбранны: ', text_data);
 
-		// тут делаем проверку: если уже есть мои куски верстки - тогда ничего не надо делать.
-		// Проверка вторая: что за рейсы откуда и куда - в зависимости от этого мы выводим нужную инфо, или не выводим ничего
-		document.querySelector('app-search-results .flights-section .outbound-section').prepend(markup_els.top_box);
-		document.querySelector('app-search-results .control-section button#next-page-button').before(markup_els.button_popup);
+		if (!document.querySelector(markup_els.top_box.getAttribute('class')))
+			document.querySelector('app-search-results .flights-section .outbound-section').prepend(markup_els.top_box);
+		
+		if (!document.querySelector(markup_els.button_popup.getAttribute('class')))
+			document.querySelector('app-search-results .control-section button#next-page-button').before(markup_els.button_popup);
 
+		markup_els.top_box.querySelector('.big-right-text').innerHTML = text_data.top_box_text_1;
+		markup_els.top_box.querySelector('.small-left-text').innerHTML = text_data.top_box_text_2;
+
+		markup_els.button_popup.querySelector('.title').innerHTML = markup_content.popup_title[lang];
+		markup_els.button_popup.querySelector('.text-1').innerHTML = text_data.popup_text_1;
+		markup_els.button_popup.querySelector('.text-2').innerHTML = text_data.popup_text_2;
 	}
 
 	
-
-
-
-
-
 
 
 
