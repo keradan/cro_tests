@@ -166,12 +166,12 @@
 	})
 	.catch(error => console.error(error));
 
-	function exit_test() {
-		keradan_log('exit_test function goes: ');
+	function reset() {
+		keradan_log('reset function goes: ');
 		keradan_log('markup_els: ', markup_els);
 		keradan_log('top_box class: ', markup_els.top_box.getAttribute('class'));
 		keradan_log('top_box in dom: ', document.querySelector(markup_els.top_box.getAttribute('class')));
-		
+
 		if (document.querySelector(markup_els.top_box.getAttribute('class'))) {
 			markup_els.top_box.querySelectorAll('.big-right-text, .small-left-text').forEach(item => item.innerHTML = '');
 			markup_els.top_box.remove();
@@ -184,10 +184,16 @@
 
 	function run() {
 		let lang = window.keradan[test_data.name].lang;
-		if (lang !== 'ru' && lang !== 'uk' && lang !== 'en') return exit_test();
+		if (lang !== 'ru' && lang !== 'uk' && lang !== 'en') {
+			reset();
+			return;
+		}
 		let flight_info = window.keradan[test_data.name].flight_info;
 		let text_data = markup_content.depending_on_country[lang][`${flight_info.departure_code}-${flight_info.arrival_code}`];
-		if (!text_data) return exit_test();
+		if (!text_data) {
+			reset();
+			return;
+		}
 
 		keradan_log('flight_info', flight_info);
 		keradan_log('тексты выбранны: ', text_data);
