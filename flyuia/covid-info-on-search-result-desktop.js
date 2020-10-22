@@ -131,7 +131,7 @@
 	let flight_info_promise = new Promise(function(resolve, reject) {
 		setTimeout(function(){
 			clearInterval(flight_info_promise_timer_id);
-			reject(new Error('iframe promise rejected. ' + attributes.reject_msg ?? ''));
+			reject(new Error('keradan flight info not received by 5 s'));
 		}, 5000);
 
 		flight_info_promise_timer_id = setInterval(function(){
