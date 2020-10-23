@@ -47,7 +47,7 @@
 		    padding-left: 90px;
 		    padding-right: 25px;
 		    overflow: hidden;
-		    transition: all 0.15s ease;
+		    transition: all 0.08s ease;
 		    opacity: 1;
 	 	}
 	 	.${test_data.css_scope_name}-top-box.hide {
@@ -158,8 +158,6 @@
 	 	.${test_data.css_scope_name}-button-popup .text-2-wrapper {
 	 		background: rgba(0, 0, 0, 0.1);
 	 	}
-
-
  	`;
 
  	let markup_content = {
