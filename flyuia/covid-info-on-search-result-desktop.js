@@ -44,7 +44,7 @@
 		    display: flex;
 		    justify-content: space-between;
 		    align-items: center;
-		    padding-left: 80px;
+		    padding-left: 90px;
 		    padding-right: 25px;
 		    overflow: hidden;
 	 	}
@@ -72,8 +72,15 @@
 	 	}
 	 	.${test_data.css_scope_name}-top-box .small-left-text {
 	 		width: 50%;
-	 		z-index: 1;
-	 		text-align: right;
+		    z-index: 1;
+		    font-family: Open Sans;
+		    font-style: normal;
+		    font-weight: 600;
+		    font-size: 14px;
+		    line-height: 21px;
+		    text-align: right;
+		    letter-spacing: -0.02em;
+		    color: #096F4A;
 	 	}
 
 	 	.${test_data.css_scope_name}-top-box img.corona {
