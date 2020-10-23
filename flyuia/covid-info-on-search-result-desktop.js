@@ -331,7 +331,7 @@
 		
 		setInterval(function(){
 			let new_main_title_el = document.querySelector('app-search-results .flights-section .outbound-section .product__title');
-			if(!new_main_title) return;
+			if(!new_main_title_el) return;
 
 			let new_flight_info_el = document.querySelector('app-flights-product .flight-info-container .flight-info');
 			if(!new_flight_info_el) return;
