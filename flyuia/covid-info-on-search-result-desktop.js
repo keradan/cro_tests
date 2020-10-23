@@ -115,13 +115,13 @@
  				"KBP-TLV": {
  					popup_text_1: 'Бесплатное изменение дат',
  					popup_text_2: 'Если планы изменятся, самостоятельно меняйте даты путешествия.',
- 					top_box_text_1: 'Въезд для граждан и резидентов Израиля свободный.',
+ 					top_box_text_1: 'Въезд для граждан и резидентов<br>Израиля свободный.',
  					top_box_text_2: 'Для граждан других стран действуют ограничения.',
  				},
  				"TLV-KBP": {
  					popup_text_1: 'Бесплатное изменение дат',
  					popup_text_2: 'Если планы изменятся, самостоятельно меняйте даты путешествия.',
- 					top_box_text_1: 'Для граждан и резидентов Украины въезд свободный.',
+ 					top_box_text_1: 'Для граждан и резидентов Украины<br>въезд свободный.',
  					top_box_text_2: 'Иностранцам въезд разрешён только при наличии страхового полиса от COVID-19.',
  				},
  			},
@@ -129,13 +129,13 @@
  				"KBP-TLV": {
  					popup_text_1: 'Безкоштовна зміна дат',
  					popup_text_2: 'Якщо плани зміняться, самостійно змінюйте дати подорожі.',
- 					top_box_text_1: 'В‘їзд для громадян та резидентів Ізраїлю вільний.',
+ 					top_box_text_1: 'В‘їзд для громадян та резидентів<br>Ізраїлю вільний.',
  					top_box_text_2: 'Для громадян інших країн діють обмеження.',
  				},
  				"TLV-KBP": {
  					popup_text_1: 'Безкоштовна зміна дат',
  					popup_text_2: 'Якщо плани зміняться, самостійно змінюйте дати подорожі.',
- 					top_box_text_1: 'Для громадян та резидентів України в‘їзд вільний.',
+ 					top_box_text_1: 'Для громадян та резидентів України<br>в‘їзд вільний.',
  					top_box_text_2: 'Іноземцям в‘їзд дозволений лише при наявності страхового полісу від COVID-19.',
  				},
  			},
@@ -143,13 +143,13 @@
  				"KBP-TLV": {
  					popup_text_1: 'Free date change',
  					popup_text_2: 'Book with confidence and, if needed, change travel dates yourself.',
- 					top_box_text_1: 'Entry for citizens and residents of Israel is free.',
+ 					top_box_text_1: 'Entry for citizens and residents of<br>Israel is free.',
  					top_box_text_2: 'Entry restrictions apply to citizens of other countries.',
  				},
  				"TLV-KBP": {
  					popup_text_1: 'Free date change',
  					popup_text_2: 'Book with confidence and, if needed, change travel dates yourself.',
- 					top_box_text_1: 'Entry is free for Ukrainian citizens and residents.',
+ 					top_box_text_1: 'Entry is free for Ukrainian<br>citizens and residents.',
  					top_box_text_2: 'Foreign citizens are allowed to enter if they are relatives of the first line of citizens of Ukraine, or have an official valid work permit in Ukraine.',
  				},
  			},
