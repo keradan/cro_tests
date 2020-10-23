@@ -70,7 +70,7 @@
 	 	.${test_data.css_scope_name}-top-box .big-right-text {
 	 		width: 40%;
 		    z-index: 1;
-		    font-family: Open Sans;
+		    /* font-family: Open Sans; */
 		    font-weight: 600;
 		    font-size: 18px;
 		    align-items: center;
@@ -81,7 +81,7 @@
 	 	.${test_data.css_scope_name}-top-box .small-left-text {
 	 		width: 50%;
 		    z-index: 1;
-		    font-family: Open Sans;
+		    /* font-family: Open Sans; */
 		    font-style: normal;
 		    font-weight: 600;
 		    font-size: 14px;
@@ -126,7 +126,7 @@
 		    visibility: visible;
 		}
 	 	.${test_data.css_scope_name}-button-popup .title {
-	 		font-family: Open Sans;
+	 		/* font-family: Open Sans; */
 			font-weight: 600;
 			font-size: 12px;
 			letter-spacing: -0.02em;
@@ -147,7 +147,7 @@
 	 	.${test_data.css_scope_name}-button-popup .text-1-wrapper {
 	 		background: rgba(9, 111, 74, 0.1);
 		    margin-bottom: 7px;
-		    font-family: Open Sans;
+		    /* font-family: Open Sans; */
 		    font-style: normal;
 		    font-weight: normal;
 		    font-size: 13px;
