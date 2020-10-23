@@ -314,7 +314,7 @@
 		markup_els.button_popup.querySelector('.text-1').innerHTML = text_data.popup_text_1;
 		markup_els.button_popup.querySelector('.text-2').innerHTML = text_data.popup_text_2;
 
-		// setTimeout(() => markup_els.top_box.classList.remove('hide'), 100);
+		setTimeout(() => markup_els.top_box.classList.remove('hide'), 0);
 	}
 
 	
