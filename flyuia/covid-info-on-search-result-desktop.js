@@ -250,7 +250,7 @@
  				},
  				"TLV-KBP": {
  					top_box_text_1: 'Free date change. Book with confidence and, if needed, change travel dates yourself.',
- 					top_box_text_2: 'Entry is free for Ukrainian citizens and residents. Foreign citizens are allowed to enter if they are relatives of the first line of citizens of Ukraine, or have an official valid work permit in Ukraine.',
+ 					top_box_text_2: 'Entry is free for Ukrainian citizens and residents. Foreign citizens<br>are allowed to enter if they are relatives of the first line of citizens of Ukraine,<br>or have an official valid work permit in Ukraine.',
  				},
  				"KBP-IST": {
  					top_box_text_1: 'Free date change. Book with confidence and, if needed, change travel dates yourself.',
@@ -258,7 +258,7 @@
  				},
  				"IST-KBP": {
  					top_box_text_1: 'Free date change. Book with confidence and, if needed, change travel dates yourself.',
- 					top_box_text_2: 'Entry is free for Ukrainian citizens and residents. Foreign citizens are allowed to enter if they are relatives of the first line of citizens of Ukraine, or have an official valid work permit in Ukraine.',
+ 					top_box_text_2: 'Entry is free for Ukrainian citizens and residents. Foreign citizens<br>are allowed to enter if they are relatives of the first line of citizens of Ukraine,<br>or have an official valid work permit in Ukraine.',
  				},
  				"KBP-LGW": {
  					top_box_text_1: 'Free date change. Book with confidence and, if needed, change travel dates yourself.',
@@ -266,7 +266,7 @@
  				},
  				"LGW-KBP": {
  					top_box_text_1: 'Free date change. Book with confidence and, if needed, change travel dates yourself.',
- 					top_box_text_2: 'Entry is free for Ukrainian citizens and residents. Foreign citizens are allowed to enter if they are relatives of the first line of citizens of Ukraine, or have an official valid work permit in Ukraine.',
+ 					top_box_text_2: 'Entry is free for Ukrainian citizens and residents. Foreign citizens<br>are allowed to enter if they are relatives of the first line of citizens of Ukraine,<br>or have an official valid work permit in Ukraine.',
  				},
  				"KBP-DXB": {
  					top_box_text_1: 'Free date change. Book with confidence and, if needed, change travel dates yourself.',
@@ -274,7 +274,7 @@
  				},
  				"DXB-KBP": {
  					top_box_text_1: 'Free date change. Book with confidence and, if needed, change travel dates yourself.',
- 					top_box_text_2: 'Entry is free for Ukrainian citizens and residents. Foreign citizens are allowed to enter if they are relatives of the first line of citizens of Ukraine, or have an official valid work permit in Ukraine.',
+ 					top_box_text_2: 'Entry is free for Ukrainian citizens and residents. Foreign citizens<br>are allowed to enter if they are relatives of the first line of citizens of Ukraine,<br>or have an official valid work permit in Ukraine.',
  				},
  			},
  		},
