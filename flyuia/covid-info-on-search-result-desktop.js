@@ -103,13 +103,16 @@
 		    width: 290px;
 		    box-shadow: 0px 6px 13px rgba(0, 0, 0, 0.2);
 		    border-radius: 6px;
-		    padding: 7px;
+		    padding: 0 7px;
 		    box-sizing: border-box;
+		    max-height: 0;
+		    opacity: 0;
+		    transition: all 0.2s ease;
 	 	}
 	 	app-search-results .control-section button#next-page-button:hover + .${test_data.css_scope_name}-button-popup {
-		    height: 0;
-		    padding: 0 7px;
-		    opacity: 0;
+		    max-height: 300px;
+		    padding: 7px;
+		    opacity: 1;
 		}
 	 	.${test_data.css_scope_name}-button-popup .title {
 	 		font-family: Open Sans;
