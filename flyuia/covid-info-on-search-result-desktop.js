@@ -94,7 +94,7 @@
 	 	.${test_data.css_scope_name}-button-popup {
 	 		position: absolute;
 		    right: 15px;
-		    bottom: calc(100% - 1rem);
+		    bottom: 200%;
 		    display: flex;
 		    flex-flow: column;
 		    justify-content: flex-start;
@@ -110,6 +110,7 @@
 		    transition: all 0.2s ease;
 	 	}
 	 	app-search-results .control-section button#next-page-button:hover + .${test_data.css_scope_name}-button-popup {
+	 		bottom: calc(100% - 1rem);
 		    max-height: 300px;
 		    padding: 7px;
 		    opacity: 1;
