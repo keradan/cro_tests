@@ -59,7 +59,7 @@
 	 	.${test_data.css_scope_name}-top-box::before {
 	 		content: "";
 	 		position: absolute;
-	 		width: 55%;
+	 		width: 53%;
 	 		height: 100%;
 	 		top: 0;
 	 		right: -50px;
@@ -67,23 +67,23 @@
 	 		background: rgba(9, 111, 74, 0.05);
 	 		transform: skew(-35deg, 0);
 	 	}
-	 	.${test_data.css_scope_name}-top-box .big-right-text {
-	 		width: 40%;
+	 	.${test_data.css_scope_name}-top-box .big-left-text {
+	 		width: 48%;
 		    z-index: 1;
 		    /* font-family: Open Sans; */
-		    font-weight: 600;
+		    font-weight: 500;
 		    font-size: 18px;
 		    align-items: center;
 		    letter-spacing: -0.02em;
 		    text-transform: uppercase;
 		    color: #096F4A;
 	 	}
-	 	.${test_data.css_scope_name}-top-box .small-left-text {
+	 	.${test_data.css_scope_name}-top-box .small-right-text {
 	 		width: 50%;
 		    z-index: 1;
 		    /* font-family: Open Sans; */
 		    font-style: normal;
-		    font-weight: 600;
+		    font-weight: 500;
 		    font-size: 14px;
 		    line-height: 21px;
 		    text-align: right;
@@ -286,8 +286,8 @@
  	markup_els.top_box.classList.add(`${test_data.css_scope_name}-top-box`, 'hide');
  	markup_els.top_box.innerHTML = `
  		<img src="${markup_content.covid_img_src}" class="corona">
- 		<div class="big-right-text"></div>
- 		<div class="small-left-text"></div>
+ 		<div class="big-left-text"></div>
+ 		<div class="small-right-text"></div>
  	`;
  	
  	// markup_els.button_popup.classList.add(`${test_data.css_scope_name}-button-popup`);
@@ -345,7 +345,7 @@
 	function reset() {
 		markup_els.top_box.classList.add('hide');
 		setTimeout(function(){
-			markup_els.top_box.querySelectorAll('.big-right-text, .small-left-text').forEach(item => item.innerHTML = '');
+			markup_els.top_box.querySelectorAll('.big-left-text, .small-right-text').forEach(item => item.innerHTML = '');
 			markup_els.top_box.remove();
 			// markup_els.button_popup.querySelectorAll('.title, .text-1, .text-2').forEach(item => item.innerHTML = '');
 			// markup_els.button_popup.remove();
@@ -371,8 +371,8 @@
 		// if (!document.querySelector(markup_els.button_popup.getAttribute('class')))
 		// 	document.querySelector('app-search-results .control-section button#next-page-button').after(markup_els.button_popup);
 
-		markup_els.top_box.querySelector('.big-right-text').innerHTML = text_data.top_box_text_1;
-		markup_els.top_box.querySelector('.small-left-text').innerHTML = text_data.top_box_text_2;
+		markup_els.top_box.querySelector('.big-left-text').innerHTML = text_data.top_box_text_1;
+		markup_els.top_box.querySelector('.small-right-text').innerHTML = text_data.top_box_text_2;
 
 		// markup_els.button_popup.querySelector('.title').innerHTML = markup_content.popup_title[lang];
 		// markup_els.button_popup.querySelector('.text-1').innerHTML = text_data.popup_text_1;
