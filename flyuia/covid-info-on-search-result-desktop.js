@@ -95,29 +95,38 @@
 		    margin-top: 10px;
 		    height: 100px;
 		    display: flex;
-		    justify-content: center;
+		    justify-content: space-between;
 		    align-items: center;
 		    padding-left: 80px;
+		    padding-right: 25px;
 		    overflow: hidden;
 	 	}
 	 	.${test_data.css_scope_name}-top-box::before {
 	 		content: "";
 	 		position: absolute;
-	 		width: 70%;
+	 		width: 55%;
 	 		height: 100%;
 	 		top: 0;
 	 		right: -50px;
 	 		z-index: 0;
-	 		background: background: rgba(9, 111, 74, 0.05);
-	 		transform: skew(-20deg, 0);
+	 		background: rgba(9, 111, 74, 0.05);
+	 		transform: skew(-35deg, 0);
 	 	}
 	 	.${test_data.css_scope_name}-top-box .big-right-text {
-	 		width: 46%;
-	 		z-index: 1;
+	 		width: 40%;
+		    z-index: 1;
+		    font-family: Open Sans;
+		    font-weight: 600;
+		    font-size: 18px;
+		    align-items: center;
+		    letter-spacing: -0.02em;
+		    text-transform: uppercase;
+		    color: #096F4A;
 	 	}
 	 	.${test_data.css_scope_name}-top-box .small-left-text {
-	 		width: 54%;
+	 		width: 50%;
 	 		z-index: 1;
+	 		text-align: right;
 	 	}
 	 	app-search-results .control-section {
 	 		position: relative;
