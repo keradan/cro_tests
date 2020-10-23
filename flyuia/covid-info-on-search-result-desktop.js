@@ -265,7 +265,6 @@
 		keradan_log(msg);
 		
 		setInterval(function(){
-			console.log('lang monitor');
 			let new_lang = window.location.pathname.replace(/^\/{1}/, '').split('/')[0].toLowerCase();
 			let new_main_title = document.querySelector('app-search-results .flights-section .outbound-section .product__title').innerHTML;
 
@@ -315,7 +314,7 @@
 		markup_els.button_popup.querySelector('.text-1').innerHTML = text_data.popup_text_1;
 		markup_els.button_popup.querySelector('.text-2').innerHTML = text_data.popup_text_2;
 
-		setTimeout(() => markup_els.top_box.classList.remove('hide'), 0);
+		setTimeout(() => markup_els.top_box.classList.remove('hide'), 100);
 	}
 
 	
