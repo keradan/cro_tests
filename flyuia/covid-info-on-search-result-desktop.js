@@ -47,7 +47,15 @@
 		    padding-left: 90px;
 		    padding-right: 25px;
 		    overflow: hidden;
+		    transition: all 0.15s ease;
+		    opacity: 1;
 	 	}
+	 	.${test_data.css_scope_name}-top-box.hide {
+		    height: 0px;
+		    margin-top: 0;
+		    margin-bottom: 0;
+		    opacity: 0;
+		}
 	 	.${test_data.css_scope_name}-top-box::before {
 	 		content: "";
 	 		position: absolute;
@@ -122,7 +130,8 @@
 			letter-spacing: -0.02em;
 			text-transform: uppercase;
 			color: #000000;
-			margin-bottom: 5px;
+			margin-top: 5px;
+			margin-bottom: 10px;
 	 	}
 	 	.${test_data.css_scope_name}-button-popup .text-1-wrapper, .${test_data.css_scope_name}-button-popup .text-2-wrapper {
 	 		border-radius: 3px;
@@ -210,7 +219,7 @@
  		top_box: document.createElement('div'),
  		button_popup: document.createElement('div'),
  	};
- 	markup_els.top_box.classList.add(`${test_data.css_scope_name}-top-box`);
+ 	markup_els.top_box.classList.add(`${test_data.css_scope_name}-top-box`, 'hide');
  	markup_els.top_box.innerHTML = `
  		<img src="${markup_content.covid_img_src}" class="corona">
  		<div class="big-right-text"></div>
@@ -271,10 +280,13 @@
 	.catch(error => console.error(error));
 
 	function reset() {
-		markup_els.top_box.querySelectorAll('.big-right-text, .small-left-text').forEach(item => item.innerHTML = '');
-		markup_els.top_box.remove();
-		markup_els.button_popup.querySelectorAll('.title, .text-1, .text-2').forEach(item => item.innerHTML = '');
-		markup_els.button_popup.remove();
+		markup_els.top_box.classList.add('hide');
+		setTimeout(function(){
+			markup_els.top_box.querySelectorAll('.big-right-text, .small-left-text').forEach(item => item.innerHTML = '');
+			markup_els.top_box.remove();
+			markup_els.button_popup.querySelectorAll('.title, .text-1, .text-2').forEach(item => item.innerHTML = '');
+			markup_els.button_popup.remove();
+		}, 200);
 	}
 
 	function run() {
@@ -302,6 +314,8 @@
 		markup_els.button_popup.querySelector('.title').innerHTML = markup_content.popup_title[lang];
 		markup_els.button_popup.querySelector('.text-1').innerHTML = text_data.popup_text_1;
 		markup_els.button_popup.querySelector('.text-2').innerHTML = text_data.popup_text_2;
+
+		setTimeout(() => markup_els.top_box.classList.remove('hide'), 0);
 	}
 
 	
