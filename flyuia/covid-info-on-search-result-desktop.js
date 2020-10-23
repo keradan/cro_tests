@@ -143,14 +143,17 @@
 		    height: 50px;
 		    width: 100%;
 		    padding: 0 15px;
+
+		    font-family: sans-serif;
+		    font-style: normal;
+		    font-weight: normal;
+		    font-size: 15px;
+		    letter-spacing: 0.3px;
 	 	}
 	 	.${test_data.css_scope_name}-button-popup .text-1-wrapper {
 	 		background: rgba(9, 111, 74, 0.1);
 		    margin-bottom: 7px;
 		    /* font-family: Open Sans; */
-		    font-style: normal;
-		    font-weight: normal;
-		    font-size: 13px;
 		    color: #096F4A;
 	 	}
 	 	.${test_data.css_scope_name}-button-popup .text-1-wrapper .check-mark {
@@ -159,6 +162,7 @@
 	 	}
 	 	.${test_data.css_scope_name}-button-popup .text-2-wrapper {
 	 		background: rgba(0, 0, 0, 0.1);
+	 		color: #11415F;
 	 	}
  	`;
 
