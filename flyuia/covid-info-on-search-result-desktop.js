@@ -116,12 +116,14 @@
 		    max-height: 0;
 		    opacity: 0;
 		    transition: all 0.2s ease;
+		    visibility: hidden;
 	 	}
 	 	app-search-results .control-section button#next-page-button:hover + .${test_data.css_scope_name}-button-popup {
 	 		bottom: calc(100% - 1rem);
 		    max-height: 300px;
 		    padding: 7px;
 		    opacity: 1;
+		    visibility: visible;
 		}
 	 	.${test_data.css_scope_name}-button-popup .title {
 	 		font-family: Open Sans;
