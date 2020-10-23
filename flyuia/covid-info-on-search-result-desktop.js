@@ -305,10 +305,10 @@
 	console.log('Test "Covid info on search result desktop" is here');
 
 	let flight_info_promise = new Promise(function(resolve, reject) {
-		setTimeout(function(){
-			clearInterval(flight_info_promise_timer_id);
-			reject(new Error('keradan flight info not received by 15 s'));
-		}, 15000);
+		// setTimeout(function(){
+		// 	clearInterval(flight_info_promise_timer_id);
+		// 	reject(new Error('keradan flight info not received by 15 s'));
+		// }, 15000);
 
 		flight_info_promise_timer_id = setInterval(function(){
 			let flight_info_el = document.querySelector('app-flights-product .flight-info-container .flight-info');
