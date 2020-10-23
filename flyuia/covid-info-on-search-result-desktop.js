@@ -72,7 +72,8 @@
 		    z-index: 1;
 		    /* font-family: Open Sans; */
 		    font-weight: 500;
-		    font-size: 18px;
+		    font-size: 16px;
+		    line-height: 24px;
 		    align-items: center;
 		    letter-spacing: -0.02em;
 		    text-transform: uppercase;
@@ -329,12 +330,27 @@
 		keradan_log(msg);
 		
 		setInterval(function(){
-			let new_lang = window.location.pathname.replace(/^\/{1}/, '').split('/')[0].toLowerCase();
-			let new_main_title = document.querySelector('app-search-results .flights-section .outbound-section .product__title').innerHTML;
+			let new_main_title_el = document.querySelector('app-search-results .flights-section .outbound-section .product__title');
+			if(!new_main_title) return;
 
-			if (new_lang !== window.keradan[test_data.name].lang || new_main_title !== window.keradan[test_data.name].main_title) {
+			let new_flight_info_el = document.querySelector('app-flights-product .flight-info-container .flight-info');
+			if(!new_flight_info_el) return;
+
+			let new_lang = window.location.pathname.replace(/^\/{1}/, '').split('/')[0].toLowerCase();
+
+			let new_flight_info = {
+				departure_code: new_flight_info_el.querySelector('.departure-info .info-code').innerHTML,
+				arrival_code: new_flight_info_el.querySelector('.arrival-info .info-code').innerHTML,
+			};
+			let new_flight_info_text = `${new_flight_info.departure_code}-${new_flight_info.arrival_code}`;
+
+			let old_flight_info = window.keradan[test_data.name].flight_info;
+			let old_flight_info_text = `${old_flight_info.departure_code}-${old_flight_info.arrival_code}`;
+			
+			if (new_lang !== window.keradan[test_data.name].lang || new_main_title_el.innerHTML !== window.keradan[test_data.name].main_title || new_flight_info_text !== old_flight_info_text) {
 				window.keradan[test_data.name].lang = new_lang;
-				window.keradan[test_data.name].main_title = new_main_title;
+				window.keradan[test_data.name].main_title = new_main_title_el.innerHTML;
+				window.keradan[test_data.name].flight_info = new_flight_info;
 				run();
 			}
 		}, 500);
