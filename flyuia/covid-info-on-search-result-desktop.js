@@ -96,10 +96,32 @@
 		    right: 15px;
 		    bottom: calc(100% - 1rem);
 		    display: flex;
-		    justify-content: center;
+		    flex-flow: column;
+		    justify-content: flex-start;
 		    align-items: center;
 		    background: white;
 		    width: 290px;
+		    box-shadow: 0px 6px 13px rgba(0, 0, 0, 0.2);
+		    border-radius: 6px;
+		    padding: 7px;
+		    box-sizing: border-box;
+	 	}
+	 	.${test_data.css_scope_name}-button-popup .title {
+	 		font-family: Open Sans;
+			font-weight: 600;
+			font-size: 12px;
+			letter-spacing: -0.02em;
+			text-transform: uppercase;
+			color: #000000;
+	 	}
+	 	.${test_data.css_scope_name}-button-popup .text-1, .${test_data.css_scope_name}-button-popup .text-2 {
+	 		border-radius: 3px;
+	 	}
+	 	.${test_data.css_scope_name}-button-popup .text-1 {
+	 		background: rgba(9, 111, 74, 0.1);
+	 	}
+	 	.${test_data.css_scope_name}-button-popup .text-2 {
+	 		background: rgba(0, 0, 0, 0.1);
 	 	}
  	`;
 
@@ -122,7 +144,7 @@
  					popup_text_1: 'Бесплатное изменение дат',
  					popup_text_2: 'Если планы изменятся, самостоятельно меняйте даты путешествия.',
  					top_box_text_1: 'Для граждан и резидентов Украины<br>въезд свободный.',
- 					top_box_text_2: 'Иностранцам въезд разрешён только при наличии страхового полиса от COVID-19.',
+ 					top_box_text_2: 'Иностранцам въезд разрешён только при наличии<br>страхового полиса от COVID-19.',
  				},
  			},
  			uk: {
@@ -136,7 +158,7 @@
  					popup_text_1: 'Безкоштовна зміна дат',
  					popup_text_2: 'Якщо плани зміняться, самостійно змінюйте дати подорожі.',
  					top_box_text_1: 'Для громадян та резидентів України<br>в‘їзд вільний.',
- 					top_box_text_2: 'Іноземцям в‘їзд дозволений лише при наявності страхового полісу від COVID-19.',
+ 					top_box_text_2: 'Іноземцям в‘їзд дозволений лише при наявності<br>страхового полісу від COVID-19.',
  				},
  			},
  			en: {
@@ -170,8 +192,10 @@
  	markup_els.button_popup.classList.add(`${test_data.css_scope_name}-button-popup`);
  	markup_els.button_popup.innerHTML = `
  		<div class="title"></div>
- 		<div class="text-1"></div>
- 		<div class="text-2"></div>
+ 		<div class="body">
+	 		<div class="text-1"></div>
+	 		<div class="text-2"></div>
+ 		</div>
  	`;
 
 	console.log('Test "Covid info on search result desktop" is here');
