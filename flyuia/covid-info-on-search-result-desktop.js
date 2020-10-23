@@ -130,6 +130,7 @@
 		    justify-content: flex-start;
 		    align-items: center;
 		    height: 50px;
+		    width: 100%;
 		    padding: 0 15px;
 	 	}
 	 	.${test_data.css_scope_name}-button-popup .text-1-wrapper {
@@ -220,6 +221,7 @@
  	markup_els.button_popup.innerHTML = `
  		<div class="title"></div>
  		<div class="text-1-wrapper">
+ 			<div class="check-mark"><svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.28025 7.71975L11.25 0.75L12.3105 1.8105L4.28025 9.84075L0 5.5605L1.0605 4.5L4.28025 7.71975Z" fill="#096F4A"/></svg></div>
  			<div class="text-1"></div>
  		</div>
  		<div class="text-2-wrapper">
