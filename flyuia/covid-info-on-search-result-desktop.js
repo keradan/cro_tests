@@ -34,8 +34,70 @@
 		arrival_code: null,
 	};
 
-	let markup_content = {
-		covid_img_src: 'dsdsjdsjkdsjkdjksdksjdsjk',
+	document.querySelector("#styles-" + test_data.name).innerHTML = `
+	 	.${test_data.css_scope_name}-top-box {
+	 		position: relative;
+	 		background: #DFECE7;
+		    margin: 17px;
+		    margin-top: 10px;
+		    height: 100px;
+		    display: flex;
+		    justify-content: space-between;
+		    align-items: center;
+		    padding-left: 80px;
+		    padding-right: 25px;
+		    overflow: hidden;
+	 	}
+	 	.${test_data.css_scope_name}-top-box::before {
+	 		content: "";
+	 		position: absolute;
+	 		width: 55%;
+	 		height: 100%;
+	 		top: 0;
+	 		right: -50px;
+	 		z-index: 0;
+	 		background: rgba(9, 111, 74, 0.05);
+	 		transform: skew(-35deg, 0);
+	 	}
+	 	.${test_data.css_scope_name}-top-box .big-right-text {
+	 		width: 40%;
+		    z-index: 1;
+		    font-family: Open Sans;
+		    font-weight: 600;
+		    font-size: 18px;
+		    align-items: center;
+		    letter-spacing: -0.02em;
+		    text-transform: uppercase;
+		    color: #096F4A;
+	 	}
+	 	.${test_data.css_scope_name}-top-box .small-left-text {
+	 		width: 50%;
+	 		z-index: 1;
+	 		text-align: right;
+	 	}
+
+	 	.${test_data.css_scope_name}-top-box img.corona {
+	 		position: absolute;
+	 		top: 0;
+	 		left: 0;
+	 	}
+	 	app-search-results .control-section {
+	 		position: relative;
+	 	}
+	 	.${test_data.css_scope_name}-button-popup {
+	 		position: absolute;
+		    right: 15px;
+		    bottom: calc(100% - 1rem);
+		    display: flex;
+		    justify-content: center;
+		    align-items: center;
+		    background: white;
+		    width: 290px;
+	 	}
+ 	`;
+
+ 	let markup_content = {
+		covid_img_src: 'https://i.ibb.co/QXrCTqw/mau-corona.png',
  		popup_title: {
  			ru: 'Вам остался всего 1 шаг',
  			uk: 'Вам залишився всього 1 крок',
@@ -87,68 +149,13 @@
  		},
  	};
 
-	document.querySelector("#styles-" + test_data.name).innerHTML = `
-	 	.${test_data.css_scope_name}-top-box {
-	 		position: relative;
-	 		background: #DFECE7;
-		    margin: 17px;
-		    margin-top: 10px;
-		    height: 100px;
-		    display: flex;
-		    justify-content: space-between;
-		    align-items: center;
-		    padding-left: 80px;
-		    padding-right: 25px;
-		    overflow: hidden;
-	 	}
-	 	.${test_data.css_scope_name}-top-box::before {
-	 		content: "";
-	 		position: absolute;
-	 		width: 55%;
-	 		height: 100%;
-	 		top: 0;
-	 		right: -50px;
-	 		z-index: 0;
-	 		background: rgba(9, 111, 74, 0.05);
-	 		transform: skew(-35deg, 0);
-	 	}
-	 	.${test_data.css_scope_name}-top-box .big-right-text {
-	 		width: 40%;
-		    z-index: 1;
-		    font-family: Open Sans;
-		    font-weight: 600;
-		    font-size: 18px;
-		    align-items: center;
-		    letter-spacing: -0.02em;
-		    text-transform: uppercase;
-		    color: #096F4A;
-	 	}
-	 	.${test_data.css_scope_name}-top-box .small-left-text {
-	 		width: 50%;
-	 		z-index: 1;
-	 		text-align: right;
-	 	}
-	 	app-search-results .control-section {
-	 		position: relative;
-	 	}
-	 	.${test_data.css_scope_name}-button-popup {
-	 		position: absolute;
-		    right: 15px;
-		    bottom: calc(100% - 1rem);
-		    display: flex;
-		    justify-content: center;
-		    align-items: center;
-		    background: white;
-		    width: 290px;
-	 	}
- 	`;
-
  	let markup_els = {
  		top_box: document.createElement('div'),
  		button_popup: document.createElement('div'),
  	};
  	markup_els.top_box.classList.add(`${test_data.css_scope_name}-top-box`);
  	markup_els.top_box.innerHTML = `
+ 		<img src="${markup_content.covid_img_src}" class="corona">
  		<div class="big-right-text"></div>
  		<div class="small-left-text"></div>
  	`;
