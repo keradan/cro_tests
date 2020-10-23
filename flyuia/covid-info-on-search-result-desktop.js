@@ -114,13 +114,14 @@
 			text-transform: uppercase;
 			color: #000000;
 	 	}
-	 	.${test_data.css_scope_name}-button-popup .text-1, .${test_data.css_scope_name}-button-popup .text-2 {
+	 	.${test_data.css_scope_name}-button-popup .text-1-wrapper, .${test_data.css_scope_name}-button-popup .text-2-wrapper {
 	 		border-radius: 3px;
 	 	}
-	 	.${test_data.css_scope_name}-button-popup .text-1 {
+	 	.${test_data.css_scope_name}-button-popup .text-1-wrapper {
 	 		background: rgba(9, 111, 74, 0.1);
+	 		display: flex;
 	 	}
-	 	.${test_data.css_scope_name}-button-popup .text-2 {
+	 	.${test_data.css_scope_name}-button-popup .text-2-wrapper {
 	 		background: rgba(0, 0, 0, 0.1);
 	 	}
  	`;
@@ -193,8 +194,12 @@
  	markup_els.button_popup.innerHTML = `
  		<div class="title"></div>
  		<div class="body">
-	 		<div class="text-1"></div>
-	 		<div class="text-2"></div>
+	 		<div class="text-1-wrapper">
+	 			<div class="text-1"></div>
+	 		</div>
+	 		<div class="text-2-wrapper">
+	 			<div class="text-2"></div>
+	 		</div>
  		</div>
  	`;
 
