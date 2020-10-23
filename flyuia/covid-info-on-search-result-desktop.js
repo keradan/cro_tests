@@ -89,7 +89,35 @@
 
 	document.querySelector("#styles-" + test_data.name).innerHTML = `
 	 	.${test_data.css_scope_name}-top-box {
-	 		background: red;
+	 		position: relative;
+	 		background: #DFECE7;
+		    margin: 17px;
+		    margin-top: 10px;
+		    height: 100px;
+		    display: flex;
+		    justify-content: center;
+		    align-items: center;
+		    padding-left: 80px;
+		    overflow: hidden;
+	 	}
+	 	.${test_data.css_scope_name}-top-box::before {
+	 		content: "";
+	 		position: absolute;
+	 		width: 70%;
+	 		height: 100%;
+	 		top: 0;
+	 		right: -50px;
+	 		z-index: 0;
+	 		background: background: rgba(9, 111, 74, 0.05);
+	 		transform: skew(-20deg, 0);
+	 	}
+	 	.${test_data.css_scope_name}-top-box .big-right-text {
+	 		width: 46%;
+	 		z-index: 1;
+	 	}
+	 	.${test_data.css_scope_name}-top-box .small-left-text {
+	 		width: 54%;
+	 		z-index: 1;
 	 	}
 	 	app-search-results .control-section {
 	 		position: relative;
