@@ -247,8 +247,8 @@
 	let flight_info_promise = new Promise(function(resolve, reject) {
 		setTimeout(function(){
 			clearInterval(flight_info_promise_timer_id);
-			reject(new Error('keradan flight info not received by 5 s'));
-		}, 5000);
+			reject(new Error('keradan flight info not received by 15 s'));
+		}, 15000);
 
 		flight_info_promise_timer_id = setInterval(function(){
 			let flight_info_el = document.querySelector('app-flights-product .flight-info-container .flight-info');
