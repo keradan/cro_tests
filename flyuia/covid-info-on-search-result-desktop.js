@@ -96,7 +96,9 @@
 	 		top: 0;
 	 		left: 0;
 	 	}
-	 	app-search-results .control-section {
+ 	`;
+ 	/* button-popup styles он в итоге стал не нужен
+ 		app-search-results .control-section {
 	 		position: relative;
 	 	}
 	 	.${test_data.css_scope_name}-button-popup {
@@ -126,7 +128,6 @@
 		    visibility: visible;
 		}
 	 	.${test_data.css_scope_name}-button-popup .title {
-	 		/* font-family: Open Sans; */
 			font-weight: 600;
 			font-size: 12px;
 			letter-spacing: -0.02em;
@@ -153,7 +154,6 @@
 	 	.${test_data.css_scope_name}-button-popup .text-1-wrapper {
 	 		background: rgba(9, 111, 74, 0.1);
 		    margin-bottom: 7px;
-		    /* font-family: Open Sans; */
 		    color: #096F4A;
 	 	}
 	 	.${test_data.css_scope_name}-button-popup .text-1-wrapper .check-mark {
@@ -164,7 +164,7 @@
 	 		background: rgba(0, 0, 0, 0.1);
 	 		color: #11415F;
 	 	}
- 	`;
+ 	*/
 
  	let markup_content = {
 		covid_img_src: 'https://i.ibb.co/QXrCTqw/mau-corona.png',
@@ -176,44 +176,104 @@
  		depending_on_country: {
  			ru: {
  				"KBP-TLV": {
- 					popup_text_1: 'Бесплатное изменение дат',
- 					popup_text_2: 'Если планы изменятся, меняйте даты путешествия самостоятельно.',
- 					top_box_text_1: 'Въезд для граждан и резидентов<br>Израиля свободный.',
- 					top_box_text_2: 'Для граждан других стран действуют ограничения.',
+ 					top_box_text_1: 'Бесплатное изменение дат. Если планы изменятся, меняйте даты путешествия самостоятельно.',
+ 					top_box_text_2: 'Въезд для граждан и резидентов Израиля свободный. Для граждан других стран действуют ограничения.',
  				},
  				"TLV-KBP": {
- 					popup_text_1: 'Бесплатное изменение дат',
- 					popup_text_2: 'Если планы изменятся, меняйте даты путешествия самостоятельно.',
- 					top_box_text_1: 'Для граждан и резидентов Украины<br>въезд свободный.',
- 					top_box_text_2: 'Иностранцам въезд разрешён только при наличии<br>страхового полиса от COVID-19.',
+ 					top_box_text_1: 'Бесплатное изменение дат. Если планы изменятся, меняйте даты путешествия самостоятельно.',
+ 					top_box_text_2: 'Для граждан и резидентов Украины въезд свободный. Иностранцам въезд разрешён только при наличии страхового полиса от COVID-19.',
+ 				},
+ 				"KBP-IST": {
+ 					top_box_text_1: 'Бесплатное изменение дат. Если планы изменятся, меняйте даты путешествия самостоятельно.',
+ 					top_box_text_2: 'Въезд для граждан и резидентов Турции и Украины свободный.',
+ 				},
+ 				"IST-KBP": {
+ 					top_box_text_1: 'Бесплатное изменение дат. Если планы изменятся, меняйте даты путешествия самостоятельно.',
+ 					top_box_text_2: 'Для граждан и резидентов Украины въезд свободный. Иностранцам въезд разрешён только при наличии страхового полиса от COVID-19.',
+ 				},
+ 				"KBP-LGW": {
+ 					top_box_text_1: 'Бесплатное изменение дат. Если планы изменятся, меняйте даты путешествия самостоятельно.',
+ 					top_box_text_2: 'Пассажиры, которые прилетают в Великобританию, подлежат самоизоляции на 14 суток.',
+ 				},
+ 				"LGW-KBP": {
+ 					top_box_text_1: 'Бесплатное изменение дат. Если планы изменятся, меняйте даты путешествия самостоятельно.',
+ 					top_box_text_2: 'Для граждан и резидентов Украины въезд свободный. Иностранцам въезд разрешён только при наличии страхового полиса от COVID-19.',
+ 				},
+ 				"KBP-DXB": {
+ 					top_box_text_1: 'Бесплатное изменение дат. Если планы изменятся, меняйте даты путешествия самостоятельно.',
+ 					top_box_text_2: 'Все пассажиры, которые летят в Дубай из любого города, должны иметь распечатанный отрицательный сертификат ПЦР-теста на COVID-19.',
+ 				},
+ 				"DXB-KBP": {
+ 					top_box_text_1: 'Бесплатное изменение дат. Если планы изменятся, меняйте даты путешествия самостоятельно.',
+ 					top_box_text_2: 'Для граждан и резидентов Украины въезд свободный. Иностранцам въезд разрешён только при наличии страхового полиса от COVID-19.',
  				},
  			},
  			uk: {
  				"KBP-TLV": {
- 					popup_text_1: 'Безкоштовна зміна дат',
- 					popup_text_2: 'Якщо плани зміняться, самостійно змінюйте дати подорожі.',
- 					top_box_text_1: 'В‘їзд для громадян та резидентів<br>Ізраїлю вільний.',
- 					top_box_text_2: 'Для громадян інших країн діють обмеження.',
+ 					top_box_text_1: 'Безкоштовна зміна дат. Якщо плани зміняться, самостійно змінюйте дати подорожі.',
+ 					top_box_text_2: 'В‘їзд для громадян та резидентів Ізраїлю вільний. Для громадян інших країн діють обмеження.',
  				},
  				"TLV-KBP": {
- 					popup_text_1: 'Безкоштовна зміна дат',
- 					popup_text_2: 'Якщо плани зміняться, самостійно змінюйте дати подорожі.',
- 					top_box_text_1: 'Для громадян та резидентів України<br>в‘їзд вільний.',
- 					top_box_text_2: 'Іноземцям в‘їзд дозволений лише при наявності<br>страхового полісу від COVID-19.',
+ 					top_box_text_1: 'Безкоштовна зміна дат. Якщо плани зміняться, самостійно змінюйте дати подорожі.',
+ 					top_box_text_2: 'Для громадян та резидентів України в‘їзд вільний. Іноземцям в‘їзд дозволений лише при наявності страхового полісу від COVID-19.',
+ 				},
+ 				"KBP-IST": {
+ 					top_box_text_1: 'Безкоштовна зміна дат. Якщо плани зміняться, самостійно змінюйте дати подорожі.',
+ 					top_box_text_2: 'В‘їзд для громадян та резидентів Туреччини та України вільний.',
+ 				},
+ 				"IST-KBP": {
+ 					top_box_text_1: 'Безкоштовна зміна дат. Якщо плани зміняться, самостійно змінюйте дати подорожі.',
+ 					top_box_text_2: 'Для громадян та резидентів України в‘їзд вільний. Іноземцям в‘їзд дозволений лише при наявності страхового полісу від COVID-19.',
+ 				},
+ 				"KBP-LGW": {
+ 					top_box_text_1: 'Безкоштовна зміна дат. Якщо плани зміняться, самостійно змінюйте дати подорожі.',
+ 					top_box_text_2: 'Пасажири, що прибувають до Великобританії, підлягають самоізоляції протягом 14 днів.',
+ 				},
+ 				"LGW-KBP": {
+ 					top_box_text_1: 'Безкоштовна зміна дат. Якщо плани зміняться, самостійно змінюйте дати подорожі.',
+ 					top_box_text_2: 'Для громадян та резидентів України в‘їзд вільний. Іноземцям в‘їзд дозволений лише при наявності страхового полісу від COVID-19.',
+ 				},
+ 				"KBP-DXB": {
+ 					top_box_text_1: 'Безкоштовна зміна дат. Якщо плани зміняться, самостійно змінюйте дати подорожі.',
+ 					top_box_text_2: 'Усі пасажири, які подорожують до Дубая з будь-якого міста, повинні мати роздрукований негативний сертифікат ПЛР-тесту на COVID-19.',
+ 				},
+ 				"DXB-KBP": {
+ 					top_box_text_1: 'Безкоштовна зміна дат. Якщо плани зміняться, самостійно змінюйте дати подорожі.',
+ 					top_box_text_2: 'Для громадян та резидентів України в‘їзд вільний. Іноземцям в‘їзд дозволений лише при наявності страхового полісу від COVID-19.',
  				},
  			},
  			en: {
  				"KBP-TLV": {
- 					popup_text_1: 'Free date change',
- 					popup_text_2: 'Book with confidence and, if needed, change travel dates yourself.',
- 					top_box_text_1: 'Entry for citizens and residents of<br>Israel is free.',
- 					top_box_text_2: 'Entry restrictions apply to citizens of other countries.',
+ 					top_box_text_1: 'Free date change. Book with confidence and, if needed, change travel dates yourself.',
+ 					top_box_text_2: 'Entry for citizens and residents of Israel is free. Entry restrictions apply to citizens of other countries.',
  				},
  				"TLV-KBP": {
- 					popup_text_1: 'Free date change',
- 					popup_text_2: 'Book with confidence and, if needed, change travel dates yourself.',
- 					top_box_text_1: 'Entry is free for Ukrainian<br>citizens and residents.',
- 					top_box_text_2: 'Foreign citizens are allowed to enter if they are relatives of the first line of citizens of Ukraine, or have an official valid work permit in Ukraine.',
+ 					top_box_text_1: 'Free date change. Book with confidence and, if needed, change travel dates yourself.',
+ 					top_box_text_2: 'Entry is free for Ukrainian citizens and residents. Foreign citizens are allowed to enter if they are relatives of the first line of citizens of Ukraine, or have an official valid work permit in Ukraine.',
+ 				},
+ 				"KBP-IST": {
+ 					top_box_text_1: 'Free date change. Book with confidence and, if needed, change travel dates yourself.',
+ 					top_box_text_2: 'Entry for citizens and residents of Turkey and Ukraine is free.',
+ 				},
+ 				"IST-KBP": {
+ 					top_box_text_1: 'Free date change. Book with confidence and, if needed, change travel dates yourself.',
+ 					top_box_text_2: 'Entry is free for Ukrainian citizens and residents. Foreign citizens are allowed to enter if they are relatives of the first line of citizens of Ukraine, or have an official valid work permit in Ukraine.',
+ 				},
+ 				"KBP-LGW": {
+ 					top_box_text_1: 'Free date change. Book with confidence and, if needed, change travel dates yourself.',
+ 					top_box_text_2: 'Passengers arriving to the UK are subject to self-isolation for 14 days.',
+ 				},
+ 				"LGW-KBP": {
+ 					top_box_text_1: 'Free date change. Book with confidence and, if needed, change travel dates yourself.',
+ 					top_box_text_2: 'Entry is free for Ukrainian citizens and residents. Foreign citizens are allowed to enter if they are relatives of the first line of citizens of Ukraine, or have an official valid work permit in Ukraine.',
+ 				},
+ 				"KBP-DXB": {
+ 					top_box_text_1: 'Free date change. Book with confidence and, if needed, change travel dates yourself.',
+ 					top_box_text_2: 'All passengers travelling to Dubai from any destination must have a printed negative COVID-19 PCR test certificate.',
+ 				},
+ 				"DXB-KBP": {
+ 					top_box_text_1: 'Free date change. Book with confidence and, if needed, change travel dates yourself.',
+ 					top_box_text_2: 'Entry is free for Ukrainian citizens and residents. Foreign citizens are allowed to enter if they are relatives of the first line of citizens of Ukraine, or have an official valid work permit in Ukraine.',
  				},
  			},
  		},
@@ -230,17 +290,17 @@
  		<div class="small-left-text"></div>
  	`;
  	
- 	markup_els.button_popup.classList.add(`${test_data.css_scope_name}-button-popup`);
- 	markup_els.button_popup.innerHTML = `
- 		<div class="title"></div>
- 		<div class="text-1-wrapper">
- 			<div class="check-mark"><svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.28025 7.71975L11.25 0.75L12.3105 1.8105L4.28025 9.84075L0 5.5605L1.0605 4.5L4.28025 7.71975Z" fill="#096F4A"/></svg></div>
- 			<div class="text-1"></div>
- 		</div>
- 		<div class="text-2-wrapper">
- 			<div class="text-2"></div>
- 		</div>
- 	`;
+ 	// markup_els.button_popup.classList.add(`${test_data.css_scope_name}-button-popup`);
+ 	// markup_els.button_popup.innerHTML = `
+ 	// 	<div class="title"></div>
+ 	// 	<div class="text-1-wrapper">
+ 	// 		<div class="check-mark"><svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.28025 7.71975L11.25 0.75L12.3105 1.8105L4.28025 9.84075L0 5.5605L1.0605 4.5L4.28025 7.71975Z" fill="#096F4A"/></svg></div>
+ 	// 		<div class="text-1"></div>
+ 	// 	</div>
+ 	// 	<div class="text-2-wrapper">
+ 	// 		<div class="text-2"></div>
+ 	// 	</div>
+ 	// `;
 
 	console.log('Test "Covid info on search result desktop" is here');
 
@@ -287,8 +347,8 @@
 		setTimeout(function(){
 			markup_els.top_box.querySelectorAll('.big-right-text, .small-left-text').forEach(item => item.innerHTML = '');
 			markup_els.top_box.remove();
-			markup_els.button_popup.querySelectorAll('.title, .text-1, .text-2').forEach(item => item.innerHTML = '');
-			markup_els.button_popup.remove();
+			// markup_els.button_popup.querySelectorAll('.title, .text-1, .text-2').forEach(item => item.innerHTML = '');
+			// markup_els.button_popup.remove();
 		}, 200);
 	}
 
@@ -308,15 +368,15 @@
 		if (!document.querySelector(markup_els.top_box.getAttribute('class')))
 			document.querySelector('app-search-results .flights-section .outbound-section').prepend(markup_els.top_box);
 		
-		if (!document.querySelector(markup_els.button_popup.getAttribute('class')))
-			document.querySelector('app-search-results .control-section button#next-page-button').after(markup_els.button_popup);
+		// if (!document.querySelector(markup_els.button_popup.getAttribute('class')))
+		// 	document.querySelector('app-search-results .control-section button#next-page-button').after(markup_els.button_popup);
 
 		markup_els.top_box.querySelector('.big-right-text').innerHTML = text_data.top_box_text_1;
 		markup_els.top_box.querySelector('.small-left-text').innerHTML = text_data.top_box_text_2;
 
-		markup_els.button_popup.querySelector('.title').innerHTML = markup_content.popup_title[lang];
-		markup_els.button_popup.querySelector('.text-1').innerHTML = text_data.popup_text_1;
-		markup_els.button_popup.querySelector('.text-2').innerHTML = text_data.popup_text_2;
+		// markup_els.button_popup.querySelector('.title').innerHTML = markup_content.popup_title[lang];
+		// markup_els.button_popup.querySelector('.text-1').innerHTML = text_data.popup_text_1;
+		// markup_els.button_popup.querySelector('.text-2').innerHTML = text_data.popup_text_2;
 
 		setTimeout(() => markup_els.top_box.classList.remove('hide'), 0);
 	}
