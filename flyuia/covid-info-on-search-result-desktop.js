@@ -219,13 +219,11 @@
  	markup_els.button_popup.classList.add(`${test_data.css_scope_name}-button-popup`);
  	markup_els.button_popup.innerHTML = `
  		<div class="title"></div>
- 		<div class="body">
-	 		<div class="text-1-wrapper">
-	 			<div class="text-1"></div>
-	 		</div>
-	 		<div class="text-2-wrapper">
-	 			<div class="text-2"></div>
-	 		</div>
+ 		<div class="text-1-wrapper">
+ 			<div class="text-1"></div>
+ 		</div>
+ 		<div class="text-2-wrapper">
+ 			<div class="text-2"></div>
  		</div>
  	`;
 
