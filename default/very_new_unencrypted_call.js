@@ -3,8 +3,6 @@ let d = test_info.production ? 'https://keradan.github.io' : 'https://keradan.gi
 
 let sc = document.createElement('script');
 sc.setAttribute('data-test-info', window.btoa(JSON.stringify(test_info)));
-// sc.setAttribute('data-test-client', test_info.client);
-// sc.setAttribute('data-test-file-name', test_info.file_name);
 sc.setAttribute('id', `script-${test_info.client}-${test_info.file_name}`);
 sc.setAttribute('src', `${d}/cro_tests/${test_info.client}/${test_info.file_name}.js?v=${v}`);
 document.querySelector('head').append(sc);
@@ -44,7 +42,7 @@ if (!wk.get_cur_test) wk.get_cur_test = function (sc) {
 			'eventAction': event_action
 		};
 		if (event_label) ga['eventLabel'] = event_label;
-		wk[o.name].log('keradan ga event: ', ga);
+		wk[o.name].log('%c keradan ga event: ', 'background: #ffcf66; color: #4285f4;', ga);
 		if(wk[o.name].init.enable_ga_events) dl.push(ga);
 	};
 	return wk[o.name];

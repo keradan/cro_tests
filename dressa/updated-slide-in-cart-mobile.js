@@ -30,7 +30,6 @@
 
  	cur_test.iframe = {el: null, doc: null, status: null};
  	cur_test.timers = [];
- 	cur_test.start_time = new Date().getTime();
  	cur_test.products = [];
  	cur_test.product_keys = {};
 
