@@ -45,10 +45,12 @@
  	window.keradan[test_data.name].start_time = new Date().getTime();
  	window.keradan[test_data.name].products = [];
  	window.keradan[test_data.name].product_keys = {};
+ 	
+ 	
 
-	function get_current_test_time(){
-		return Math.round((new Date().getTime() - window.keradan[test_data.name].start_time) / 100) / 10;
-	}
+	// function get_current_test_time(){
+	// 	return Math.round((new Date().getTime() - window.keradan[test_data.name].start_time) / 100) / 10;
+	// }
 
 	console.log('Test "Updated slide in cart - Mobile" is here');
 
@@ -130,7 +132,8 @@
 				// if(is_resolve !== true) return;
 				if(attributes.is_resolve(test.iframe) !== true) return;
 			    clearInterval(test.timers[promise_timer_id]);
-			    resolve(`iframe promise resolved. ${attributes.resolve_msg ?? ''} \r resolved after ${get_current_test_time()}s of test work.`);
+			    // resolve(`iframe promise resolved. ${attributes.resolve_msg ?? ''} \r resolved after ${get_current_test_time()}s of test work.`);
+			    resolve(`iframe promise resolved. ${attributes.resolve_msg ?? ''} \r resolved after ${window.keradan.get_test_time(test_data.name)}s of test work.`);
 			    // keradan_log();
 			}, attributes.promise_attempt_interval);
 		});
