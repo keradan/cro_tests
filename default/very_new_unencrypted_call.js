@@ -26,7 +26,7 @@ if (!wk.simple_str_hash) wk.simple_str_hash = function (s) {
     return Math.abs(h).toString(16);
 }
 if (!wk.get_cur_test) wk.get_cur_test = function (sc) {
-	let o = window.atob(JSON.parse(sc.dataset.testInfo));
+	let o = JSON.parse(window.atob(sc.dataset.testInfo));
 	o.start_time = new Date().getTime();
 	o.name = o.client + '-' + o.file_name;
 	o.css_scope_name = `krdn${wk.simple_str_hash(o.name)}`;

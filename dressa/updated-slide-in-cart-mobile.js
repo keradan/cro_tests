@@ -1,11 +1,12 @@
 (function () {
 	// Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 	const cur_test = window.keradan.get_cur_test(document.currentScript);
-	cur_test.log(`Test "${cur_test.init.go_title}" is here: `, cur_test);
 
 	// Set dev behavior:
 	cur_test.init.enable_log = true;
 	cur_test.init.enable_ga_events = false;
+
+	cur_test.log(`Test "${cur_test.init.go_title}" is here: `, cur_test);
 
 	cur_test.ga_event('loaded');
 
