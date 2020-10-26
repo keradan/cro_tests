@@ -180,7 +180,7 @@
 			console.log({
 				this: this,
 				e_target: e.target,
-				closest: this.closest('.scope-parent'),
+				// closest: this.closest('.scope-parent'),
 				closest_e_target: e.target.closest('.scope-parent'),
 				event_handler: cur_test.event_handlers[this.dataset.eventHandlerName],
 			});
