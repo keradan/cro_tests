@@ -36,7 +36,8 @@
  	const promises_attributes = {
 		iframe_is_created: {
 			is_resolve: function(iframe){
-				if(iframe.status != 'created') return false;
+				// if(iframe.status != 'created') return false;
+				if(!['created', 'is_showing_loading_cart'].includes(iframe.status)) return false;
 			    if(!iframe.doc) return false;
 			    if(!iframe.doc.querySelector('.link__shopping')) return false;
 			    return true;
@@ -122,6 +123,7 @@
 		cur_test.iframe.doc.write(parent_doc_text);
 		cur_test.iframe.doc.close();
 
+		cur_test.log('iframe is created');
 		cur_test.iframe.status = 'created';
 		return cur_test.iframe;
 	}
