@@ -276,6 +276,9 @@
 				</div>
 			`;
 
+			document.querySelectorAll(`${scope_parent} .product-wrapper`).append(product_el);
+			product_el.querySelectorAll(`*[data-event][data-event-handler-name]:not([data-already-listened])`).forEach(cur_test.add_cart_event);
+
 			if(i == cur_test.products.length - 1) cur_test.change_status('is_showing_cart_filled_with_product');
 		});
 		
