@@ -78,21 +78,20 @@
 	};
 
 	function get_iframe_promise (attributes) {
-		let test = cur_test;
 		if (!attributes.max_promise_time) attributes.max_promise_time = 15000;
 		if (!attributes.promise_attempt_interval) attributes.promise_attempt_interval = 200;
 		
 		let promise = new Promise(function(resolve, reject) {
-			let promise_timer_id = test.timers.push(null) - 1;
+			let promise_timer_id = cur_test.timers.push(null) - 1;
 
 			setTimeout(function(){
-				clearInterval(test.timers[promise_timer_id]);
+				clearInterval(cur_test.timers[promise_timer_id]);
 				reject(new Error('iframe promise rejected. ' + attributes.reject_msg ?? ''));
 			}, attributes.max_promise_time);
 
-			test.timers[promise_timer_id] = setInterval(function(){
-				if(attributes.is_resolve(test.iframe) !== true) return;
-			    clearInterval(test.timers[promise_timer_id]);
+			cur_test.timers[promise_timer_id] = setInterval(function(){
+				if(attributes.is_resolve(cur_test.iframe) !== true) return;
+			    clearInterval(cur_test.timers[promise_timer_id]);
 			    resolve(`iframe promise resolved. ${attributes.resolve_msg ?? ''} \r resolved after ${window.keradan.get_test_time(cur_test.init.name)}s of test work.`);
 			}, attributes.promise_attempt_interval);
 		});
@@ -127,9 +126,34 @@
 		return cur_test.iframe;
 	}
 
-	cur_test.run_iframe = function() {
-		// let iframe = cur_test.iframe;
+	cur_test.parse_cart_item = function(cart_item) {
+		let get_size_data = function(elem) {
+			let size_data = elem.innerText.split('-');
+			return {
+				size: size_data[0].trim().replace(/[\D]+/g, ''),
+				shipment: size_data[1].trim(),
+			};
+		}
 
+		let product_data = {
+			id: cart_item.querySelector('a.item__photo').getAttribute('href').split('-').reverse()[0],
+			img_src: cart_item.querySelector('a.item__photo img').getAttribute('src'),
+			link: cart_item.querySelector('a.item__photo').getAttribute('href'), // 'https://dressa.com.ua'
+			title: cart_item.querySelector('h3.item__info_title').innerHTML,
+			quantity: parseInt(cart_item.querySelector('div.item__quantity_counter span.counter__quantity').innerHTML),
+			price: parseInt(cart_item.querySelector('div.item__price .item__price_amount').innerHTML.replace(/[\D]+/g, '')),
+			sizes: {
+				current: get_size_data(cart_item.querySelector('app-cart-item-size-filter div.select__value')),
+				list: [],
+			},
+		};
+		cart_item.querySelectorAll('app-cart-item-size-filter ul.select__dropdown li').forEach(item => product_data.sizes.list.push(get_size_data(item)));
+		product_data.price_singular = product_data.price / product_data.quantity;
+
+		return product_data;
+	}
+
+	cur_test.run_iframe = function() {
 		get_iframe_promise(promises_attributes.iframe_is_created) // Ждем когда появится кнопка корзины чтобы нажать на нее и вывести попап с корзиной
 		.then(function(msg) {
 			cur_test.log(msg);
@@ -157,44 +181,48 @@
 			// Если статус ready то можно юзать, если другой то надо ждать в промисе
 			// После этого можно будет переходить к работе над ивентами по открытию корзины
 			cur_test.iframe.doc.querySelectorAll('app-cart-item').forEach(function(cart_item, i){
-				let get_size_data = function(elem) {
-					let size_data = elem.innerText.split('-');
-					return {
-						size: size_data[0].trim().replace(/[\D]+/g, ''),
-						shipment: size_data[1].trim(),
-					};
-				}
-
-				let product_data = {
-					id: cart_item.querySelector('a.item__photo').getAttribute('href').split('-').reverse()[0],
-					img_src: cart_item.querySelector('a.item__photo img').getAttribute('src'),
-					link: cart_item.querySelector('a.item__photo').getAttribute('href'), // 'https://dressa.com.ua'
-					title: cart_item.querySelector('h3.item__info_title').innerHTML,
-					quantity: parseInt(cart_item.querySelector('div.item__quantity_counter span.counter__quantity').innerHTML),
-					price: parseInt(cart_item.querySelector('div.item__price .item__price_amount').innerHTML.replace(/[\D]+/g, '')),
-					sizes: {
-						current: get_size_data(cart_item.querySelector('app-cart-item-size-filter div.select__value')),
-						list: [],
-					},
-				};
-				cart_item.querySelectorAll('app-cart-item-size-filter ul.select__dropdown li').forEach(item => product_data.sizes.list.push(get_size_data(item)));
-				product_data.price_singular = product_data.price / product_data.quantity;
+				let product_data = cur_test.parse_cart_item(cart_item);
 
 				cart_item.setAttribute('data-product-id', product_data.id);
 				cart_item.setAttribute('data-product-key', i);
 				cur_test.products.push(product_data);
 				cur_test.product_keys[product_data.id] = i;
 			});
-	 		cur_test.show_cart();
 		})
-		.catch(error => console.error(error));
+		.catch(error => console.error(error))
+		.finally(() => cur_test.fill_cart());
+	}
+
+	cur_test.close_cart = function() {
+		// когда я закрываю корзину, начинаем перегружать айфрейм
+		cur_test.create_iframe();
 	}
 
 	cur_test.show_cart = function() {
-		cur_test.log('keradan showing cart with products: ', cur_test.products);
+		cur_test.iframe.status = 'is_showing_loading_cart';
+		cur_test.log('keradan showing cart without products (loading)');
+	}
+	cur_test.fill_cart = function() {
+		cur_test.log('keradan filling cart with products: ', cur_test.products);
+		cur_test.iframe.status = 'is_showing_cart_filled_with_product';
 	}
 	cur_test.change_something_in_cart = function() {
 		iframe.doc.querySelectorAll('.counter__add')[1].click();
+	}
+
+	cur_test.cart_monitoring = function() {
+		let cart_monitoring_timer_id = setInterval(function(){
+			// тут чекаем открыта ли дефолтная корзина
+			let default_cart_els = document.querySelectorAll('#isBasketOpen, app-add-product-to-card-modal');
+			if(default_cart_els.length == 0) return;
+			if(['is_showing_loading_cart', 'is_showing_cart_filled_with_product'].includes(cur_test.iframe.status)) return;
+
+
+			// если да тогда мы показываем нашу и запускаем айфрейм ран
+			cur_test.show_cart();
+			cur_test.run_iframe();
+			// когда промис резолвнется или реджектнется мы выводим туда контент наш
+		}, 200);
 	}
 
 	// document.addEventListener('readystatechange', function(){
@@ -204,7 +232,7 @@
 	// 		cur_test.log(`keradan create and run iframe, after ${get_current_test_time()} seconds of waiting`);
 
 			cur_test.create_iframe();
-			cur_test.run_iframe();
+			cur_test.cart_monitoring();
 	// 	}
 	// });
 
