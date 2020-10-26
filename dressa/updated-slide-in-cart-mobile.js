@@ -17,8 +17,9 @@
 		cur_test.log('Hotjar error: ', e);
 	}
 
+	let scope_parent = `.scope-parent[data-scope-name=${cur_test.init.css_scope_name}]`;
 	document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
-	 	.${cur_test.init.css_scope_name}-cart-wrapper {
+	 	${scope_parent}.cart-wrapper {
 	 		position: fixed;
 	 		top: 0;
 	 		left: 0;
@@ -29,7 +30,7 @@
 	 		transition: all 0.3s ease;
 	 		opacity: 1;
 	 	}
-	 	.${cur_test.init.css_scope_name}-cart-wrapper.hide {
+	 	${scope_parent}.cart-wrapper.hide {
 	 		opacity: 0;
 	 	}
  	`;
@@ -46,9 +47,14 @@
 
  	let cart_el = cur_test.markup.elements.cart;
 
- 	cart_el.classList.add(`${cur_test.init.css_scope_name}-cart-wrapper`, 'hide');
+ 	cart_el.classList.add(`scope-parent`, 'cart-wrapper', 'hide');
+ 	cart_el.setAttribute('data-scope-name', cur_test.init.css_scope_name);
+ 	cart_el.setAttribute('data-test-name', cur_test.init.name);
  	cart_el.innerHTML = `
- 		blablab labblablab labblablablabbla blablab bl abla b la b dsdsklsdlk
+ 		<div class="inner">
+ 			<div class="close">close</div>
+ 			<div> sdjksdjkdskjdsjkdsjkdsjk</div>
+ 		</div>
  	`;
 
  	cur_test.iframe = {el: null, doc: null, status: null};
@@ -234,6 +240,16 @@
 		document.body.append(cart_el);
 		setTimeout(() => cart_el.classList.toggle('hide', false), 0);
 	}
+
+	cur_test.run_cart_event_listeners = function() {
+		document.querySelector(`${scope_parent} .inner .close`).addEventListener('click', function(e){
+			let cur_test = window.keradan[this.closest('.scope-parent').dataset.testName];
+			cur_test.log('close clicked. cur_test: ', cur_test);
+
+			cur_test.close_cart();
+		});
+	}
+
 	cur_test.fill_cart = function() {
 		cur_test.log('keradan filling cart with products: ', cur_test.products);
 		cur_test.iframe.status = 'is_showing_cart_filled_with_product';
