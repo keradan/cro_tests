@@ -52,7 +52,7 @@
  	cart_el.setAttribute('data-test-name', cur_test.init.name);
  	cart_el.innerHTML = `
  		<div class="inner">
- 			<div class="close">close</div>
+ 			<div class="close-cart">close</div>
  			<div> sdjksdjkdskjdsjkdsjkdsjk</div>
  		</div>
  	`;
@@ -67,9 +67,9 @@
 			is_resolve: function(iframe){
 				// if(iframe.status != 'created') return false;
 				if(!['created', 'is_showing_loading_cart'].includes(iframe.status)) return false;
-			    if(!iframe.doc) return false;
-			    if(!iframe.doc.querySelector('#bx24_form_container_15')) return false; // этот елемент прогружается не сразу, юзаем его как индикатор что страница загрузилась (хоть примерно)
-			    if(!iframe.doc.querySelector('.link__shopping')) return false;
+			    // if(!iframe.doc) return false;
+			    // if(!iframe.doc.querySelector('#bx24_form_container_15')) return false; // этот елемент прогружается не сразу, юзаем его как индикатор что страница загрузилась (хоть примерно)
+			    // if(!iframe.doc.querySelector('.link__shopping')) return false;
 			    return true;
 			},
 			reject_msg: 'Iframe not created longer than 15 seconds.',
@@ -153,8 +153,16 @@
 		cur_test.iframe.doc.write(parent_doc_text);
 		cur_test.iframe.doc.close();
 
-		cur_test.log('iframe is created');
-		cur_test.iframe.status = 'created';
+		let iframe_creating_timer = setInterval(function(){
+			if(!iframe.doc) return false;
+			if(!cur_test.iframe.doc.querySelector('#bx24_form_container_15')) return false; // этот елемент прогружается не сразу, юзаем его как индикатор что страница загрузилась (хоть примерно)
+			if(!iframe.doc.querySelector('.link__shopping')) return false;
+			
+			clearInterval(iframe_creating_timer);
+			cur_test.iframe.status = 'created_and_ready_for_run_cart';
+			cur_test.log('iframe is created');
+		}, 200);
+
 		return cur_test.iframe;
 	}
 
@@ -226,23 +234,26 @@
 	}
 
 	cur_test.close_cart = function() {
+		cur_test.iframe.status = 'closed';
+
 		document.querySelectorAll('#isBasketOpen .close-btn, app-add-product-to-card-modal .close').forEach((default_close_btn) => default_close_btn.click());
 		
 		cart_el.classList.toggle('hide', true);
 		setTimeout(() => cart_el.remove(), 300);
 		
-		setTimeout(() => cur_test.create_iframe(), 0); // когда я закрываю корзину, начинаем перегружать айфрейм
+		setTimeout(() => cur_test.create_iframe(), 601); // когда я закрываю корзину, начинаем перегружать айфрейм
 	}
 
 	cur_test.show_cart = function() {
 		cur_test.iframe.status = 'is_showing_loading_cart';
 		cur_test.log('keradan showing cart without products (loading)');
 		document.body.append(cart_el);
+		cur_test.run_cart_event_listeners();
 		setTimeout(() => cart_el.classList.toggle('hide', false), 0);
 	}
 
 	cur_test.run_cart_event_listeners = function() {
-		document.querySelector(`${scope_parent} .inner .close`).addEventListener('click', function(e){
+		document.querySelector(`${scope_parent} .inner .close-cart`).addEventListener('click', function(e){
 			let cur_test = window.keradan[this.closest('.scope-parent').dataset.testName];
 			cur_test.log('close clicked. cur_test: ', cur_test);
 
@@ -263,7 +274,8 @@
 			// тут чекаем открыта ли дефолтная корзина
 			let default_cart_els = document.querySelectorAll('#isBasketOpen, app-add-product-to-card-modal');
 			if(default_cart_els.length == 0) return;
-			if(['is_showing_loading_cart', 'is_showing_cart_filled_with_product'].includes(cur_test.iframe.status)) return;
+			if(cur_test.iframe.status != 'created_and_ready_for_run_cart') return;
+			// if(['is_showing_loading_cart', 'is_showing_cart_filled_with_product'].includes(cur_test.iframe.status)) return;
 
 
 			// если да тогда мы показываем нашу и запускаем айфрейм ран
