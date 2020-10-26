@@ -227,10 +227,15 @@
  			'100% money-back guarantee',
  		],
  		shipping_schedule_body: `
-			<p>Order before the 14th and your box will ship by the 24th.</p>
+			<p>Order by the 14th, your box will ship by the 24th that month.</p>
+			<p>Order after the 14th, your box will ship by the 24th of next month.</p>
+			<p>Want it sooner? Order and email <a href="mailto:info@thenomadik.com">info@thenomadik.com</a>, we’ll ship your first box immediately (for FREE).</p>
+ 		`,
+ 		/* OLD: 
+ 			<p>Order before the 14th and your box will ship by the 24th.</p>
 			<p>Order after the 14th and your box will ship before the 24th of next month.</p>
 			<p>If you want it sooner, email us after you order <a href="mailto:info@thenomadik.com">info@thenomadik.com</a> and we’ll expedite your first box for free.</p>
- 		`,
+ 		*/
  	};
 
  	let markup = `
