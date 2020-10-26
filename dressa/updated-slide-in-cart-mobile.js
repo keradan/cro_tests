@@ -325,7 +325,7 @@
 
 			let product_el = elem.closest('.scope-product');
 			
-			let iframe_product_el = cur_test.iframe.doc.querySelector(`app-cart-item[data-product-id=${product_el.dataset.productId}]`);
+			let iframe_product_el = cur_test.iframe.doc.querySelector(`app-cart-item[data-product-id="${product_el.dataset.productId}"]`);
 			iframe_product_el.querySelector('.counter__add').click();
 		},
 		decrease_product_quantity: function(elem, cur_test) {
