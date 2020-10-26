@@ -190,7 +190,7 @@
 		document.body.append(cur_test.markup.elements.cart);
 		document.querySelectorAll(`${scope_parent} *[data-event][data-event-handler-name]:not([data-already-listened])`).forEach(cur_test.add_cart_event);
 		document.querySelector(`${scope_parent}.cart-wrapper`).addEventListener('click', function(e){
-			if(e.target == this) event_handlers.close_cart(this, window.keradan[this.dataset.testName]);
+			if(e.target == this) cur_test.event_handlers.close_cart(this, window.keradan[this.dataset.testName]);
 		});
 
 		setTimeout(() => cur_test.markup.elements.cart.classList.toggle('hide', false), 0);
