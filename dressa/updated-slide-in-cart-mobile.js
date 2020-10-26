@@ -55,7 +55,9 @@
  			<button class="close-cart" data-event="click" data-event-handler-name="close_cart">close X</button>
  			<button class="return-to-shopping" data-event="click" data-event-handler-name="close_cart">Продолжить покупки</button>
  			<button class="checkout" data-event="click" data-event-handler-name="checkout">Оформить заказ</button>
- 			<button data-event="click" data-event-handler-name="assign_promo_code">Оформить заказ</button>
+ 			
+ 			<button data-event="click" data-event-handler-name="assign_promo_code">Подтвердить</button>
+ 			
  			<div> sdjksdjkdskjdsjkdsjkdsjk</div>
  		</div>
  	`;
@@ -251,6 +253,9 @@
 		.finally(() => cur_test.fill_cart());
 	}
 
+	cur_test.assign_promo_code = function() {
+	}
+
 	cur_test.checkout = function() {
 		let default_buttons = document.querySelectorAll('#isBasketOpen .order-btn app-dressa-button, app-product-info .shop_in_dressa_buttons .button__confirm app-dressa-button');
 		if(default_buttons.length == 0) return;
@@ -282,17 +287,21 @@
 	cur_test.run_cart_event_listeners = function() {
 		let event_handlers = {
 			close_cart: function(elem, cur_test) {
-				cur_test.log('close cart button clicked.');
+				cur_test.log('cart closed.');
 				cur_test.close_cart();
 			},
 			checkout: function(elem, cur_test) {
 				cur_test.log('checkout button clicked.');
 				cur_test.checkout();
 			},
+			assign_promo_code: function(elem, cur_test) {
+				cur_test.log('assign_promo_code button clicked.');
+				cur_test.assign_promo_code();
+			},
 		};
 
 		document.querySelectorAll(`${scope_parent} *[data-event][data-event-handler-name]`).forEach(function(elem){
-			elem.addEventListener(elem.dataset.event, () => event_handlers[elem.dataset.eventHandlerName](this, window.keradan[this.closest('.scope-parent').dataset.testName]));
+			elem.addEventListener(elem.dataset.event, (e) => event_handlers[this.dataset.eventHandlerName](this, window.keradan[e.target.closest('.scope-parent').dataset.testName]));
 		});
 		
 		document.querySelector(`${scope_parent}.cart-wrapper`).addEventListener('click', function(event){
