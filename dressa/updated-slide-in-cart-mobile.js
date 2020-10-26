@@ -37,7 +37,7 @@
 
  	cur_test.markup = {
  		elements: {
- 			cart: get_default_cart_el(cur_test),
+ 			cart: cur_test.get_default_cart_el(cur_test),
  		},
  		content: {
 	 		sddsdssd: 'djdshjdsjh',
@@ -275,7 +275,7 @@
 		cart_el.classList.toggle('hide', true);
 		setTimeout(function(){
 			cart_el.remove();
-			cart_el = get_default_cart_el(cur_test);
+			cart_el = cur_test.get_default_cart_el(cur_test);
 		}, 300);
 		
 		setTimeout(() => cur_test.create_iframe(), 601); // когда я закрываю корзину, начинаем перегружать айфрейм
