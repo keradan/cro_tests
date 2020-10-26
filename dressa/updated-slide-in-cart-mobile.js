@@ -153,9 +153,14 @@
 		cur_test.iframe.doc = cur_test.iframe.el.contentWindow.document;
 		cur_test.iframe.el.contentWindow.test_updated_slide_in_cart_mobile_already_running = true;
 
-		cur_test.iframe.doc.open();
-		cur_test.iframe.doc.write(parent_doc_text);
-		cur_test.iframe.doc.close();
+		try {
+	    	cur_test.iframe.doc.open();
+			cur_test.iframe.doc.write(parent_doc_text);
+			cur_test.iframe.doc.close();
+	    }
+	    catch (e) {
+			cur_test.log('iframe creation error: ', e);
+		}
 
 		let iframe_creating_timer = setInterval(function(){
 			if(!cur_test.iframe.doc) return false;
