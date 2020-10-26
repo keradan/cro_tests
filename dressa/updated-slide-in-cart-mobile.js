@@ -52,7 +52,10 @@
  	cart_el.setAttribute('data-test-name', cur_test.init.name);
  	cart_el.innerHTML = `
  		<div class="inner">
- 			<div class="close-cart">close</div>
+ 			<button class="close-cart" data-event="click" data-event-handler-name="close_cart">close X</button>
+ 			<button class="return-to-shopping" data-event="click" data-event-handler-name="close_cart">Продолжить покупки</button>
+ 			<button class="checkout" data-event="click" data-event-handler-name="checkout">Оформить заказ</button>
+ 			<button data-event="click" data-event-handler-name="assign_promo_code">Оформить заказ</button>
  			<div> sdjksdjkdskjdsjkdsjkdsjk</div>
  		</div>
  	`;
@@ -123,7 +126,7 @@
 			cur_test.timers[promise_timer_id] = setInterval(function(){
 				if(attributes.is_resolve(cur_test.iframe) !== true) return;
 			    clearInterval(cur_test.timers[promise_timer_id]);
-			    resolve(`iframe promise resolved. ${attributes.resolve_msg ?? ''} \r resolved after ${window.keradan.get_test_time(cur_test.init.name)}s of test work.`);
+			    resolve(`iframe promise resolved. ${attributes.resolve_msg ?? ''} \r resolved after ${window.keradan.get_test_time(cur_test.init.name)} of test work.`);
 			}, attributes.promise_attempt_interval);
 		});
 		return promise;
@@ -160,9 +163,7 @@
 			if(!cur_test.iframe.doc.querySelector('.link__shopping')) return false;
 			
 			clearInterval(iframe_creating_timer);
-			// cur_test.iframe.status = 'created_and_ready_for_run_cart';
 			cur_test.change_status('created_and_ready_for_run_cart');
-			cur_test.log('iframe is created');
 		}, 200);
 
 		return cur_test.iframe;
@@ -170,7 +171,7 @@
 
 	cur_test.change_status = function(new_status) {
 		cur_test.iframe.status = new_status;
-		cur_test.log('%c iframe status changed: ', 'background: #8cc8d6; color: #004077', new_status);
+		cur_test.log(`%c keradan iframe status changed (${window.keradan.get_test_time(cur_test.init.name)}): `, 'background: #8cc8d6; color: #004077', new_status);
 	}
 
 	cur_test.parse_cart_item = function(cart_item) {
@@ -240,6 +241,13 @@
 		.finally(() => cur_test.fill_cart());
 	}
 
+	cur_test.checkout = function() {
+		let default_buttons = document.querySelectorAll('#isBasketOpen .order-btn app-dressa-button, app-product-info .shop_in_dressa_buttons .button__confirm app-dressa-button');
+		if(default_buttons.length == 0) return;
+
+		default_buttons[0].click();
+	}
+
 	cur_test.close_cart = function() {
 		// cur_test.iframe.status = 'closed';
 		cur_test.change_status('closed');
@@ -262,11 +270,29 @@
 	}
 
 	cur_test.run_cart_event_listeners = function() {
-		document.querySelector(`${scope_parent} .inner .close-cart`).addEventListener('click', function(e){
-			let cur_test = window.keradan[this.closest('.scope-parent').dataset.testName];
-			cur_test.log('close clicked. cur_test: ', cur_test);
+		let event_handlers = {
+			close_cart: function(elem, cur_test) {
+				cur_test.log('close cart button clicked.');
+				cur_test.close_cart();
+			},
+			checkout: function(elem, cur_test) {
+				cur_test.log('checkout button clicked.');
+				cur_test.checkout();
+			},
+		};
 
-			cur_test.close_cart();
+		document.querySelectorAll(`${scope_parent} *[data-event][data-event-handler-name]`).forEach(function(elem){
+			elem.addEventListener(elem.dataset.event, () => event_handlers[elem.dataset.eventHandlerName](this, window.keradan[this.closest('.scope-parent').dataset.testName]));
+		});
+		
+		document.querySelector(`${scope_parent}.cart-wrapper`).addEventListener('click', function(event){
+			console.log('___________________________');
+			console.log('query: ', document.querySelector(`${scope_parent}.cart-wrapper`));
+			console.log('this: ', this);
+			console.log('e.target: ', event.target);
+			console.log('___________________________');
+
+			if(event.target == this) event_handlers.close_cart(this, window.keradan[this.dataset.testName]);
 		});
 	}
 
