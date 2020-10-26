@@ -154,9 +154,9 @@
 		cur_test.iframe.doc.close();
 
 		let iframe_creating_timer = setInterval(function(){
-			if(!iframe.doc) return false;
+			if(!cur_test.iframe.doc) return false;
 			if(!cur_test.iframe.doc.querySelector('#bx24_form_container_15')) return false; // этот елемент прогружается не сразу, юзаем его как индикатор что страница загрузилась (хоть примерно)
-			if(!iframe.doc.querySelector('.link__shopping')) return false;
+			if(!cur_test.iframe.doc.querySelector('.link__shopping')) return false;
 			
 			clearInterval(iframe_creating_timer);
 			cur_test.iframe.status = 'created_and_ready_for_run_cart';
