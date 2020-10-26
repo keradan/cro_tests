@@ -220,10 +220,12 @@
 	}
 
 	cur_test.close_cart = function() {
-		// когда я закрываю корзину, начинаем перегружать айфрейм
-		cur_test.create_iframe();
+		document.querySelectorAll('#isBasketOpen .close-btn, app-add-product-to-card-modal .close').forEach((default_close_btn) => default_close_btn.click());
+		
 		cart_el.classList.toggle('hide', true);
 		setTimeout(() => cart_el.remove(), 300);
+		
+		setTimeout(() => cur_test.create_iframe(), 0); // когда я закрываю корзину, начинаем перегружать айфрейм
 	}
 
 	cur_test.show_cart = function() {
