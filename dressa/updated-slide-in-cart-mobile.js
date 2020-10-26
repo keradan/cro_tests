@@ -37,7 +37,7 @@
 
  	cur_test.markup = {
  		elements: {
- 			cart: document.createElement('div'),
+ 			cart: get_default_cart_el(cur_test),
  		},
  		content: {
 	 		sddsdssd: 'djdshjdsjh',
@@ -46,21 +46,6 @@
  	};
 
  	let cart_el = cur_test.markup.elements.cart;
-
- 	cart_el.classList.add(`scope-parent`, 'cart-wrapper', 'hide');
- 	cart_el.setAttribute('data-scope-name', cur_test.init.css_scope_name);
- 	cart_el.setAttribute('data-test-name', cur_test.init.name);
- 	cart_el.innerHTML = `
- 		<div class="inner">
- 			<button class="close-cart" data-event="click" data-event-handler-name="close_cart">close X</button>
- 			<button class="return-to-shopping" data-event="click" data-event-handler-name="close_cart">Продолжить покупки</button>
- 			<button class="checkout" data-event="click" data-event-handler-name="checkout">Оформить заказ</button>
- 			
- 			<button data-event="click" data-event-handler-name="assign_promo_code">Подтвердить</button>
- 			
- 			<div> sdjksdjkdskjdsjkdsjkdsjk</div>
- 		</div>
- 	`;
 
  	cur_test.iframe = {el: null, doc: null, status: null};
  	cur_test.timers = [];
@@ -132,6 +117,25 @@
 			}, attributes.promise_attempt_interval);
 		});
 		return promise;
+	}
+
+	cur_test.get_default_cart_el = function(cur_test) {
+		let cart_el = document.createElement('div');
+	 	cart_el.classList.add(`scope-parent`, 'cart-wrapper', hide);
+	 	cart_el.setAttribute('data-scope-name', cur_test.init.css_scope_name);
+	 	cart_el.setAttribute('data-test-name', cur_test.init.name);
+		cart_el.innerHTML = `
+	 		<div class="inner">
+	 			<button class="close-cart" data-event="click" data-event-handler-name="close_cart">close X</button>
+	 			<button class="return-to-shopping" data-event="click" data-event-handler-name="close_cart">Продолжить покупки</button>
+	 			<button class="checkout" data-event="click" data-event-handler-name="checkout">Оформить заказ</button>
+	 			
+	 			<button data-event="click" data-event-handler-name="assign_promo_code">Подтвердить</button>
+	 			
+	 			<div> sdjksdjkdskjdsjkdsjkdsjk</div>
+	 		</div>
+	 	`;
+	 	return cart_el;
 	}
 
 	cur_test.create_iframe = function() {
@@ -264,13 +268,15 @@
 	}
 
 	cur_test.close_cart = function() {
-		// cur_test.iframe.status = 'closed';
 		cur_test.change_status('closed');
 
 		document.querySelectorAll('#isBasketOpen .close-btn, app-add-product-to-card-modal .close').forEach((default_close_btn) => default_close_btn.click());
 		
 		cart_el.classList.toggle('hide', true);
-		setTimeout(() => cart_el.remove(), 300);
+		setTimeout(function(){
+			cart_el.remove();
+			cart_el = get_default_cart_el(cur_test);
+		}, 300);
 		
 		setTimeout(() => cur_test.create_iframe(), 601); // когда я закрываю корзину, начинаем перегружать айфрейм
 	}
