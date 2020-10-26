@@ -260,9 +260,9 @@
 					</div>
 					<div class="quantity-wrapper">
 						<div class="controls">
-							<button class="inc" data-event="click" data-event-handler-name="increase_product_quantity">-</button>
+							<button class="dec" data-event="click" data-event-handler-name="decrease_product_quantity">-</button>
 							<span class="num">${product_data.quantity}</span>
-							<button class="dec" data-event="click" data-event-handler-name="decrease_product_quantity">+</button>
+							<button class="inc" data-event="click" data-event-handler-name="increase_product_quantity">+</button>
 						</div>
 						<div class="price">
 							<span class="number">${product_data.price}</span>
@@ -411,7 +411,8 @@
 	 	}
 	 	${scope_parent}.cart-wrapper .product-item-wrapper {
 	 		display: flex;
-	 		background: grey;
+	 		background: transparent;
+	 		background: white;
 	 		margin: 10px 0;
 	 		padding: 5px;
 	 	}
@@ -429,6 +430,8 @@
 	 	}
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col {
 	 		max-width: 60%;
+	 		box-sizing: border-box;
+	 		padding: 0 10px;
 	 		display: flex;
 		    flex-flow: column;
 		    align-items: flex-start;
@@ -447,13 +450,52 @@
 	 		color: red;
 	 	}
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper .choosen-size-box .arrow {
-	 		color: red;
+	 		color: green;
 	 	}
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper .select-size-box {
 	 		color: green;
+	 		position: absolute;
+		    height: 0;
+		    overflow: hidden;
 	 	}
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper .select-size-box .size-item {
 	 		color: purple;
+	 	}
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .quantity-wrapper {
+	 		display: flex;
+		    width: 100%;
+		    justify-content: space-between;
+		    align-items: center;
+	 	}
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .quantity-wrapper .controls {
+	 		display: flex;
+		    width: 45%;
+		    justify-content: space-between;
+		    align-items: center;
+		    border: 1px solid #CCCCCC;
+	 	}
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .quantity-wrapper .controls button {
+	 		width: 30px;
+		    height: 30px;
+		    font-family: monospace;
+		    font-size: 23px;
+		    display: flex;
+		    justify-content: center;
+		    align-items: center;
+		    background: transparent;
+		    padding-bottom: 2px;
+	 	}
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .quantity-wrapper .controls button.dec {
+	 		color: #989898;
+	 	}
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .quantity-wrapper .controls button.inc {
+	 		color: black;
+	 	}
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .quantity-wrapper .controls span.num {
+	 		font-family: Roboto;
+		    font-weight: 500;
+		    font-size: 14px;
+		    color: black;
 	 	}
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .actions-col {
 	 		max-width: 10%;
@@ -461,6 +503,10 @@
 		    flex-flow: column;
 		    justify-content: space-between;
 		    align-items: center;
+	 	}
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .actions-col button {
+	 		padding: 3px;
+	 		background: transparent;
 	 	}
  	`;
 
