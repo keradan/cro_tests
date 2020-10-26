@@ -301,7 +301,7 @@
 		};
 
 		document.querySelectorAll(`${scope_parent} *[data-event][data-event-handler-name]`).forEach(function(elem){
-			elem.addEventListener(elem.dataset.event, (e) => event_handlers[this.dataset.eventHandlerName](this, window.keradan[e.target.closest('.scope-parent').dataset.testName]));
+			elem.addEventListener(elem.dataset.event, (e) => event_handlers[e.target.dataset.eventHandlerName](e.target, window.keradan[e.target.closest('.scope-parent').dataset.testName]));
 		});
 		
 		document.querySelector(`${scope_parent}.cart-wrapper`).addEventListener('click', function(event){
