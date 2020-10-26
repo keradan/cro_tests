@@ -62,6 +62,7 @@
 				// if(iframe.status != 'created') return false;
 				if(!['created', 'is_showing_loading_cart'].includes(iframe.status)) return false;
 			    if(!iframe.doc) return false;
+			    if(!iframe.doc.querySelector('#bx24_form_container_15')) return false; // этот елемент прогружается не сразу, юзаем его как индикатор что страница загрузилась (хоть примерно)
 			    if(!iframe.doc.querySelector('.link__shopping')) return false;
 			    return true;
 			},
