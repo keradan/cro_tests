@@ -130,7 +130,8 @@
 	}
 
 	cur_test.create_iframe = function() {
-		cur_test.iframe.status = 'loading';
+		// cur_test.iframe.status = 'loading';
+		cur_test.change_status('loading');
 		let old_iframe = document.querySelector('.keradan-cart-iframe');
 		if(old_iframe) old_iframe.remove();
 		cur_test.products = [];
@@ -159,11 +160,17 @@
 			if(!cur_test.iframe.doc.querySelector('.link__shopping')) return false;
 			
 			clearInterval(iframe_creating_timer);
-			cur_test.iframe.status = 'created_and_ready_for_run_cart';
+			// cur_test.iframe.status = 'created_and_ready_for_run_cart';
+			cur_test.change_status('created_and_ready_for_run_cart');
 			cur_test.log('iframe is created');
 		}, 200);
 
 		return cur_test.iframe;
+	}
+
+	cur_test.change_status = function(new_status) {
+		cur_test.iframe.status = new_status;
+		cur_test.log('%c iframe status changed: ', 'background: #8cc8d6; color: #004077', new_status);
 	}
 
 	cur_test.parse_cart_item = function(cart_item) {
@@ -234,7 +241,8 @@
 	}
 
 	cur_test.close_cart = function() {
-		cur_test.iframe.status = 'closed';
+		// cur_test.iframe.status = 'closed';
+		cur_test.change_status('closed');
 
 		document.querySelectorAll('#isBasketOpen .close-btn, app-add-product-to-card-modal .close').forEach((default_close_btn) => default_close_btn.click());
 		
@@ -245,7 +253,8 @@
 	}
 
 	cur_test.show_cart = function() {
-		cur_test.iframe.status = 'is_showing_loading_cart';
+		// cur_test.iframe.status = 'is_showing_loading_cart';
+		cur_test.change_status('is_showing_loading_cart');
 		cur_test.log('keradan showing cart without products (loading)');
 		document.body.append(cart_el);
 		cur_test.run_cart_event_listeners();
@@ -263,7 +272,8 @@
 
 	cur_test.fill_cart = function() {
 		cur_test.log('keradan filling cart with products: ', cur_test.products);
-		cur_test.iframe.status = 'is_showing_cart_filled_with_product';
+		// cur_test.iframe.status = 'is_showing_cart_filled_with_product';
+		cur_test.change_status('is_showing_cart_filled_with_product');
 	}
 	cur_test.change_something_in_cart = function() {
 		iframe.doc.querySelectorAll('.counter__add')[1].click();
