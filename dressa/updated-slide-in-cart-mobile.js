@@ -187,7 +187,7 @@
 			});
 			// let event_handler = cur_test.event_handlers[this.dataset.eventHandlerName];
 			event_handler(this, cur_test);
-		}.bind(this));
+		}.bind(elem));
 		elem.setAttribute('data-already-listened', null);
 	}
 
