@@ -182,9 +182,10 @@
 				e_target: e.target,
 				// closest: this.closest('.scope-parent'),
 				closest_e_target: e.target.closest('.scope-parent'),
-				event_handler: cur_test.event_handlers[this.dataset.eventHandlerName],
+				event_handler: cur_test.event_handlers[this.dataset],
+				// event_handler: cur_test.event_handlers[e.target.dataset.eventHandlerName],
 			});
-			let event_handler = cur_test.event_handlers[this.dataset.eventHandlerName];
+			// let event_handler = cur_test.event_handlers[this.dataset.eventHandlerName];
 			event_handler(this, cur_test);
 		}.bind(this));
 		elem.setAttribute('data-already-listened', null);
