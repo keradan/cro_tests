@@ -163,6 +163,11 @@
 		}
 
 		let iframe_creating_timer = setInterval(function(){
+			cur_test.log('attempt to create iframe: ', {
+				doc: cur_test.iframe.doc,
+				bx24_form_container_15: cur_test.iframe.doc.querySelector('#bx24_form_container_15'),
+				link__shopping: cur_test.iframe.doc.querySelector('.link__shopping'),
+			});
 			if(!cur_test.iframe.doc) return false;
 			if(!cur_test.iframe.doc.querySelector('#bx24_form_container_15')) return false; // этот елемент прогружается не сразу, юзаем его как индикатор что страница загрузилась (хоть примерно)
 			if(!cur_test.iframe.doc.querySelector('.link__shopping')) return false;
