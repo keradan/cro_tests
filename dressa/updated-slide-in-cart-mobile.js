@@ -423,7 +423,7 @@
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .photo-col a {
 	 		display: block;
 	 	}
-	 	${scope_parent}.cart-wrapper .product-item-wrapper .photo-col a {
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .photo-col a img {
 	 		display: block;
 	 		max-width: 100%;
 	 	}
