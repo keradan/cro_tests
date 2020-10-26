@@ -287,15 +287,15 @@
 	cur_test.run_cart_event_listeners = function() {
 		let event_handlers = {
 			close_cart: function(elem, cur_test) {
-				cur_test.log('cart closed.');
+				cur_test.log('cart closed. event target: ', elem);
 				cur_test.close_cart();
 			},
 			checkout: function(elem, cur_test) {
-				cur_test.log('checkout button clicked.');
+				cur_test.log('checkout button clicked. event target: ', elem);
 				cur_test.checkout();
 			},
 			assign_promo_code: function(elem, cur_test) {
-				cur_test.log('assign_promo_code button clicked.');
+				cur_test.log('assign_promo_code button clicked. event target: ', elem);
 				cur_test.assign_promo_code();
 			},
 		};
@@ -304,14 +304,8 @@
 			elem.addEventListener(elem.dataset.event, (e) => event_handlers[e.target.dataset.eventHandlerName](e.target, window.keradan[e.target.closest('.scope-parent').dataset.testName]));
 		});
 		
-		document.querySelector(`${scope_parent}.cart-wrapper`).addEventListener('click', function(event){
-			console.log('___________________________');
-			console.log('query: ', document.querySelector(`${scope_parent}.cart-wrapper`));
-			console.log('this: ', this);
-			console.log('e.target: ', event.target);
-			console.log('___________________________');
-
-			if(event.target == this) event_handlers.close_cart(this, window.keradan[this.dataset.testName]);
+		document.querySelector(`${scope_parent}.cart-wrapper`).addEventListener('click', function(e){
+			if(e.target == this) event_handlers.close_cart(this, window.keradan[this.dataset.testName]);
 		});
 	}
 
