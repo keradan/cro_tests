@@ -17,87 +17,6 @@
 		cur_test.log('Hotjar error: ', e);
 	}
 
-	let scope_parent = `.scope-parent[data-scope-name=${cur_test.init.css_scope_name}]`;
-	document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
-	 	${scope_parent}.cart-wrapper {
-	 		position: fixed;
-	 		top: 0;
-	 		left: 0;
-	 		height: 70vh;
-	 		width: 70vw;
-	 		background: green;
-	 		z-index: 9999999999999999999999999999;
-	 		transition: all 0.3s ease;
-	 		opacity: 1;
-	 	}
-	 	${scope_parent}.cart-wrapper.hide {
-	 		opacity: 0;
-	 	}
- 	`;
-
- 	cur_test.markup = {
- 		elements: {
- 			cart: cur_test.get_default_cart_el(cur_test),
- 		},
- 		content: {
-	 		sddsdssd: 'djdshjdsjh',
-	 		sksjskjaa: `dsjsdjhsdhj`,
-	 	},
- 	};
-
- 	let cart_el = cur_test.markup.elements.cart;
-
- 	cur_test.iframe = {el: null, doc: null, status: null};
- 	cur_test.timers = [];
- 	cur_test.products = [];
- 	cur_test.product_keys = {};
-
- 	const promises_attributes = {
-		iframe_is_created: {
-			is_resolve: function(iframe){
-				// if(iframe.status != 'created') return false;
-				if(!['created', 'is_showing_loading_cart'].includes(iframe.status)) return false;
-			    // if(!iframe.doc) return false;
-			    // if(!iframe.doc.querySelector('#bx24_form_container_15')) return false; // этот елемент прогружается не сразу, юзаем его как индикатор что страница загрузилась (хоть примерно)
-			    // if(!iframe.doc.querySelector('.link__shopping')) return false;
-			    return true;
-			},
-			reject_msg: 'Iframe not created longer than 15 seconds.',
-			resolve_msg: 'Running cart in iframe: iframe_is_created.',
-		},
-		basket_button_ready: {
-			is_resolve: function(iframe){
-				if(!iframe.doc.querySelector('.link__shopping')) return false;
-				if(!iframe.doc.querySelector('.basket-btn app-dressa-button')) {
-					iframe.doc.querySelector('.link__shopping').click();
-					return false;
-				}
-			    return true;
-			},
-			reject_msg: 'Not found basket_button in iframe by 15 seconds.',
-			resolve_msg: 'Running cart in iframe: basket_button_ready.',
-			promise_attempt_interval: 500,
-		},
-		basket_loaded: {
-			is_resolve: function(iframe){
-				if(!iframe.doc.querySelector('section.basket-page')) return false;
-			    return true;
-			},
-			reject_msg: 'Not found section.basket-page in iframe by 15 seconds.',
-			resolve_msg: 'Running cart in iframe: section.basket-page founded - basket page has been loaded.',
-		},
-		basket_products_loaded: {
-			is_resolve: function(iframe, timer_end, resolve_anyway){
-				if(!iframe.doc.querySelector('section.basket-page .buttons__checkout app-dressa-button')) return false;
-			    return true;
-			},
-			reject_msg: 'Not found basket products in iframe by 15 seconds.',
-			resolve_msg: 'Running cart in iframe: basket products founded in iframe.',
-			max_promise_time: 3000,
-			promise_attempt_interval: 100,
-		},
-	};
-
 	function get_iframe_promise (attributes) {
 		if (!attributes.max_promise_time) attributes.max_promise_time = 15000;
 		if (!attributes.promise_attempt_interval) attributes.promise_attempt_interval = 200;
@@ -272,10 +191,10 @@
 
 		document.querySelectorAll('#isBasketOpen .close-btn, app-add-product-to-card-modal .close').forEach((default_close_btn) => default_close_btn.click());
 		
-		cart_el.classList.toggle('hide', true);
+		cur_test.markup.elements.cart.classList.toggle('hide', true);
 		setTimeout(function(){
-			cart_el.remove();
-			cart_el = cur_test.get_default_cart_el(cur_test);
+			cur_test.markup.elements.cart.remove();
+			cur_test.markup.elements.cart = cur_test.get_default_cart_el(cur_test);
 		}, 300);
 		
 		setTimeout(() => cur_test.create_iframe(), 601); // когда я закрываю корзину, начинаем перегружать айфрейм
@@ -285,9 +204,9 @@
 		// cur_test.iframe.status = 'is_showing_loading_cart';
 		cur_test.change_status('is_showing_loading_cart');
 		cur_test.log('keradan showing cart without products (loading)');
-		document.body.append(cart_el);
+		document.body.append(cur_test.markup.elements.cart);
 		cur_test.run_cart_event_listeners();
-		setTimeout(() => cart_el.classList.toggle('hide', false), 0);
+		setTimeout(() => cur_test.markup.elements.cart.classList.toggle('hide', false), 0);
 	}
 
 	cur_test.run_cart_event_listeners = function() {
@@ -320,6 +239,7 @@
 		// cur_test.iframe.status = 'is_showing_cart_filled_with_product';
 		cur_test.change_status('is_showing_cart_filled_with_product');
 	}
+
 	cur_test.change_something_in_cart = function() {
 		iframe.doc.querySelectorAll('.counter__add')[1].click();
 	}
@@ -339,6 +259,87 @@
 			// когда промис резолвнется или реджектнется мы выводим туда контент наш
 		}, 200);
 	}
+
+	cur_test.iframe = {el: null, doc: null, status: null};
+ 	cur_test.timers = [];
+ 	cur_test.products = [];
+ 	cur_test.product_keys = {};
+
+ 	const promises_attributes = {
+		iframe_is_created: {
+			is_resolve: function(iframe){
+				// if(iframe.status != 'created') return false;
+				if(!['created', 'is_showing_loading_cart'].includes(iframe.status)) return false;
+			    // if(!iframe.doc) return false;
+			    // if(!iframe.doc.querySelector('#bx24_form_container_15')) return false; // этот елемент прогружается не сразу, юзаем его как индикатор что страница загрузилась (хоть примерно)
+			    // if(!iframe.doc.querySelector('.link__shopping')) return false;
+			    return true;
+			},
+			reject_msg: 'Iframe not created longer than 15 seconds.',
+			resolve_msg: 'Running cart in iframe: iframe_is_created.',
+		},
+		basket_button_ready: {
+			is_resolve: function(iframe){
+				if(!iframe.doc.querySelector('.link__shopping')) return false;
+				if(!iframe.doc.querySelector('.basket-btn app-dressa-button')) {
+					iframe.doc.querySelector('.link__shopping').click();
+					return false;
+				}
+			    return true;
+			},
+			reject_msg: 'Not found basket_button in iframe by 15 seconds.',
+			resolve_msg: 'Running cart in iframe: basket_button_ready.',
+			promise_attempt_interval: 500,
+		},
+		basket_loaded: {
+			is_resolve: function(iframe){
+				if(!iframe.doc.querySelector('section.basket-page')) return false;
+			    return true;
+			},
+			reject_msg: 'Not found section.basket-page in iframe by 15 seconds.',
+			resolve_msg: 'Running cart in iframe: section.basket-page founded - basket page has been loaded.',
+		},
+		basket_products_loaded: {
+			is_resolve: function(iframe, timer_end, resolve_anyway){
+				if(!iframe.doc.querySelector('section.basket-page .buttons__checkout app-dressa-button')) return false;
+			    return true;
+			},
+			reject_msg: 'Not found basket products in iframe by 15 seconds.',
+			resolve_msg: 'Running cart in iframe: basket products founded in iframe.',
+			max_promise_time: 3000,
+			promise_attempt_interval: 100,
+		},
+	};
+
+	let scope_parent = `.scope-parent[data-scope-name=${cur_test.init.css_scope_name}]`;
+	document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
+	 	${scope_parent}.cart-wrapper {
+	 		position: fixed;
+	 		top: 0;
+	 		left: 0;
+	 		height: 70vh;
+	 		width: 70vw;
+	 		background: green;
+	 		z-index: 9999999999999999999999999999;
+	 		transition: all 0.3s ease;
+	 		opacity: 1;
+	 	}
+	 	${scope_parent}.cart-wrapper.hide {
+	 		opacity: 0;
+	 	}
+ 	`;
+
+ 	cur_test.markup = {
+ 		elements: {
+ 			cart: cur_test.get_default_cart_el(cur_test),
+ 		},
+ 		content: {
+	 		sddsdssd: 'djdshjdsjh',
+	 		sksjskjaa: `dsjsdjhsdhj`,
+	 	},
+ 	};
+
+	
 
 	// document.addEventListener('readystatechange', function(){
 	// 	cur_test.log('keradan readyState changed and now is: ', document.readyState);
