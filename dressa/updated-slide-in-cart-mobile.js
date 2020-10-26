@@ -51,7 +51,7 @@
 	 			
 	 			<button data-event="click" data-event-handler-name="assign_promo_code">Подтвердить</button>
 	 			
-	 			<div class="product-wrapper"></div>
+	 			<div class="products-wrapper"></div>
 	 		</div>
 	 	`;
 	 	return cart_el;
@@ -276,12 +276,11 @@
 				</div>
 			`;
 
-			document.querySelector(`${scope_parent} .product-wrapper`).append(product_el);
+			document.querySelector(`${scope_parent} .products-wrapper`).append(product_el);
 			product_el.querySelectorAll(`*[data-event][data-event-handler-name]:not([data-already-listened])`).forEach(cur_test.add_cart_event);
 
 			if(i == cur_test.products.length - 1) cur_test.change_status('is_showing_cart_filled_with_product');
 		});
-		
 	}
 
 	cur_test.change_something_in_cart = function() {
@@ -395,9 +394,9 @@
 	 		position: fixed;
 	 		top: 0;
 	 		left: 0;
-	 		height: 70vh;
-	 		width: 70vw;
-	 		background: green;
+	 		height: 100vh;
+	 		width: 100vw;
+	 		background: #00000099;
 	 		z-index: 9999999999999999999999999999;
 	 		transition: all 0.3s ease;
 	 		opacity: 1;
@@ -406,12 +405,62 @@
 	 		opacity: 0;
 	 	}
 
+	 	${scope_parent}.cart-wrapper .products-wrapper {
+	 		overflow-y: scroll;
+	 		max-height: 60vh;
+	 	}
 	 	${scope_parent}.cart-wrapper .product-item-wrapper {
 	 		display: flex;
-	 		flex-flow: column;
 	 		background: grey;
 	 		margin: 10px 0;
 	 		padding: 5px;
+	 	}
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .photo-col {
+	 		display: block;
+		    width: 30%;
+		    overflow: hidden;
+	 	}
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .photo-col a {
+	 		display: block;
+	 	}
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .photo-col a {
+	 		display: block;
+	 		max-width: 100%;
+	 	}
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col {
+	 		max-width: 60%;
+	 		display: flex;
+		    flex-flow: column;
+		    align-items: flex-start;
+		    justify-content: space-between;
+	 	}
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col a.title {
+	 		color: red;
+	 	}
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper {
+	 		color: red;
+	 	}
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper .choosen-size-box {
+	 		color: blue;
+	 	}
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper .choosen-size-box .content {
+	 		color: red;
+	 	}
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper .choosen-size-box .arrow {
+	 		color: red;
+	 	}
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper .select-size-box {
+	 		color: green;
+	 	}
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper .select-size-box .size-item {
+	 		color: purple;
+	 	}
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .actions-col {
+	 		max-width: 10%;
+		    display: flex;
+		    flex-flow: column;
+		    justify-content: space-between;
+		    align-items: center;
 	 	}
  	`;
 
