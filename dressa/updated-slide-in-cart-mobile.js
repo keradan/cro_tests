@@ -17,15 +17,38 @@
 		cur_test.log('Hotjar error: ', e);
 	}
 
-	let markup_content = {
- 		ddsjhdsjh: 'djdshjdsjh',
- 		sksjskjaa: `dsjsdjhsdhj`,
+	document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
+	 	.${cur_test.init.css_scope_name}-cart-wrapper {
+	 		position: fixed;
+	 		top: 0;
+	 		left: 0;
+	 		height: 70vh;
+	 		width: 70vw;
+	 		background: green;
+	 		z-index: 9999999999999999999999999999;
+	 		transition: all 0.3s ease;
+	 		opacity: 1;
+	 	}
+	 	.${cur_test.init.css_scope_name}-cart-wrapper.hide {
+	 		opacity: 0;
+	 	}
+ 	`;
+
+ 	cur_test.markup = {
+ 		elements: {
+ 			cart: document.createElement('div'),
+ 		},
+ 		content: {
+	 		sddsdssd: 'djdshjdsjh',
+	 		sksjskjaa: `dsjsdjhsdhj`,
+	 	},
  	};
 
-	document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
-	 	.${cur_test.init.css_scope_name}-something {
-	 		background: red;
-	 	}
+ 	let cart_el = cur_test.markup.elements.cart;
+
+ 	cart_el.classList.add(`${test_data.css_scope_name}-cart-wrapper`, 'hide');
+ 	cart_el.innerHTML = `
+ 		blablab labblablab labblablablabbla blablab bl abla b la b dsdsklsdlk
  	`;
 
  	cur_test.iframe = {el: null, doc: null, status: null};
@@ -198,11 +221,15 @@
 	cur_test.close_cart = function() {
 		// когда я закрываю корзину, начинаем перегружать айфрейм
 		cur_test.create_iframe();
+		cart_el.classList.toggle('hide', true);
+		setTimeout(() => cart_el.remove(), 300);
 	}
 
 	cur_test.show_cart = function() {
 		cur_test.iframe.status = 'is_showing_loading_cart';
 		cur_test.log('keradan showing cart without products (loading)');
+		document.body.append(cart_el);
+		setTimeout(() => cart_el.classList.toggle('hide', false), 0);
 	}
 	cur_test.fill_cart = function() {
 		cur_test.log('keradan filling cart with products: ', cur_test.products);
