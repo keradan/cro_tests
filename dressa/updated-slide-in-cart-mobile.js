@@ -175,17 +175,13 @@
 
 	cur_test.add_cart_event = function(elem){
 		elem.addEventListener(elem.dataset.event, function (e) {
-			// let cur_test = window.keradan[this.closest('.scope-parent').dataset.testName];
-			// cur_test.event_handlers[this.dataset.eventHandlerName](this, cur_test);
-
 			let cur_test = window.keradan[e.currentTarget.closest('.scope-parent').dataset.testName];
 			cur_test.event_handlers[e.currentTarget.dataset.eventHandlerName](e.currentTarget, cur_test);
-		}); // .bind(elem)
-		elem.setAttribute('data-already-listened', null);
+		});
+		elem.setAttribute('data-already-listened', '');
 	}
 
 	cur_test.show_cart = function() {
-		// cur_test.iframe.status = 'is_showing_loading_cart';
 		cur_test.change_status('is_showing_loading_cart');
 		cur_test.log('keradan showing cart without products (loading)');
 		
@@ -326,6 +322,11 @@
 		},
 		increase_product_quantity: function(elem, cur_test) {
 			cur_test.log('increase_product_quantity button clicked. event target: ', elem);
+
+			let product_el = elem.closest('.scope-product');
+			
+			let iframe_product_el = cur_test.iframe.doc.querySelector(`app-cart-item[data-product-id=${product_el.dataset.productId}]`);
+			iframe_product_el.querySelector('.counter__add').click();
 		},
 		decrease_product_quantity: function(elem, cur_test) {
 			cur_test.log('decrease_product_quantity button clicked. event target: ', elem);
