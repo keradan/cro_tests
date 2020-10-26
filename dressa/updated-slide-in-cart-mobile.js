@@ -179,7 +179,7 @@
 			let event_handler = cur_test.event_handlers[e.target.dataset.eventHandlerName];
 			event_handler(e.target, cur_test);
 		});
-		elem.setAttribute('data-already-listened');
+		elem.setAttribute('data-already-listened', null);
 	}
 
 	cur_test.show_cart = function() {
