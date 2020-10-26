@@ -176,7 +176,7 @@
 	cur_test.add_cart_event = function(elem){
 		elem.addEventListener(elem.dataset.event, function (e) {
 			
-			let cur_test = window.keradan[this.closest('.scope-parent').dataset.testName];
+			let cur_test = window.keradan[e.target.closest('.scope-parent').dataset.testName];
 			console.log({
 				this: this,
 				e_target: e.target,
