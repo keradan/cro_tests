@@ -175,10 +175,10 @@
 
 	cur_test.add_cart_event = function(elem){
 		elem.addEventListener(elem.dataset.event, function (e) {
-			let cur_test = window.keradan[e.target.closest('.scope-parent').dataset.testName];
-			let event_handler = cur_test.event_handlers[e.target.dataset.eventHandlerName];
-			event_handler(e.target, cur_test);
-		});
+			let cur_test = window.keradan[this.closest('.scope-parent').dataset.testName];
+			let event_handler = cur_test.event_handlers[this.dataset.eventHandlerName];
+			event_handler(this, cur_test);
+		}.bind(this));
 		elem.setAttribute('data-already-listened', null);
 	}
 
