@@ -46,7 +46,7 @@
 
  	let cart_el = cur_test.markup.elements.cart;
 
- 	cart_el.classList.add(`${test_data.css_scope_name}-cart-wrapper`, 'hide');
+ 	cart_el.classList.add(`${cur_test.init.css_scope_name}-cart-wrapper`, 'hide');
  	cart_el.innerHTML = `
  		blablab labblablab labblablablabbla blablab bl abla b la b dsdsklsdlk
  	`;
