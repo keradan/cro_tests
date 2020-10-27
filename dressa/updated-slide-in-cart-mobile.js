@@ -404,23 +404,23 @@
 				elem: elem,
 				elem_dataset: elem.dataset,
 			});
+			
+			if(elem.hasAttribute("data-size-item-disabled")) return;
+
 			cur_test.change_status('is_showing_cart_updating_products_and_total');
 
 			let product_el = elem.closest('.scope-product');
 			let iframe_product_el = cur_test.iframe.doc.querySelector(`app-cart-item[data-product-id="${product_el.dataset.productId}"]`);
-			let item_key = parseInt(elem.dataset.sizeItemKey) + 1;
-			let item_el = iframe_product_el.querySelector(`app-cart-item-size-filter ul.select__dropdown li:nth-child(${item_key})`);
-			if(item_el.hasAttribute("data-size-item-disabled")) return;
-
+			let iframe_item_el = iframe_product_el.querySelector(`app-cart-item-size-filter ul.select__dropdown li:nth-child(${parseInt(elem.dataset.sizeItemKey) + 1})`);
+			
 			cur_test.start_cart_recounting(product_el, iframe_product_el);
 
 			console.log({
-				item_key: item_key,
-				item_el: item_el,
-				item_el_click: item_el.click,
+				iframe_item_el: iframe_item_el,
+				item_el_click: iframe_item_el.click,
 			});
 
-			iframe_product_el.querySelector(`app-cart-item-size-filter ul.select__dropdown li:nth-child(${item_key})`).click();
+			iframe_item_el.click();
 		},
 	};
 
