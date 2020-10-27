@@ -246,7 +246,7 @@
 		let get_size_data = function(elem) {
 			return {
 				size: elem.cloneNode().innerText.trim().replace(/Размер:/i, ''),
-				shipment: elem.querySelectorAll('.select__dropdown_item_variant, .select__value_variant')[0].innerHTML.replace(/\<span.+span\>/g, '').trim();
+				shipment: elem.querySelectorAll('.select__dropdown_item_variant, .select__value_variant')[0].innerHTML.replace(/\<span.+span\>/g, '').trim(),
 			};
 		}
 
