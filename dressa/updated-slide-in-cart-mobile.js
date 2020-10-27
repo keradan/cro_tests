@@ -389,8 +389,8 @@
 		},
 		toggle_sizes_select_box: function(elem, cur_test) {
 			cur_test.log('toggle_sizes_select_box clicked. event target: ', elem);
-			cur_test.log('closest sizes-wrapper: ', elem.closest('sizes-wrapper'));
-			elem.closest('sizes-wrapper').classList.toggle('opened');
+			cur_test.log('closest sizes-wrapper: ', elem.closest('.sizes-wrapper'));
+			elem.closest('.sizes-wrapper').classList.toggle('opened');
 		},
 		choose_size: function(elem, cur_test) {
 			cur_test.log('choose_size clicked. event target: ', elem);
@@ -509,7 +509,11 @@
 		    justify-content: space-between;
 	 	}
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col a.title {
-	 		color: red;
+	 		color: black;
+	 		text-decoration: none;
+	 		font-family: Roboto;
+			font-weight: normal;
+			font-size: 13px;
 	 	}
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper {
 	 		position: relative;
