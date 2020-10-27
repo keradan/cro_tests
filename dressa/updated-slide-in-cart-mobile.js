@@ -408,7 +408,7 @@
 
 			let product_el = elem.closest('.scope-product');
 			let iframe_product_el = cur_test.iframe.doc.querySelector(`app-cart-item[data-product-id="${product_el.dataset.productId}"]`);
-			let item_key = parseInt(elem.dataset.dataSizeItemKey) + 1;
+			let item_key = parseInt(elem.dataset.sizeItemKey) + 1;
 			let item_el = iframe_product_el.querySelector(`app-cart-item-size-filter ul.select__dropdown li:nth-child(${item_key})`);
 			if(item_el.hasAttribute("data-size-item-disabled")) return;
 
