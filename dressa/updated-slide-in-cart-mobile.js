@@ -197,7 +197,7 @@
 	cur_test.render_cart_item = function(product_data) {
 		let select_size_box = [];
 		product_data.sizes.list.forEach((size_item, i) => select_size_box.push(`
-			<div class="size-item" data-event="click" data-event-handler-name="choose_size" data-size-item-key="${i}" data-size-item-disabled>
+			<div class="size-item" data-event="click" data-event-handler-name="choose_size" data-size-item-key="${i}" ${size_item.is_disabled ? 'data-size-item-disabled' : null}>
 				<span class="size">Размер: ${size_item.size}</span>
 				<br>
 				<span class="shipment">(${size_item.shipment})</span>
@@ -245,6 +245,7 @@
 	cur_test.parse_iframe_cart_item = function(cart_item) {
 		let get_size_data = function(elem) {
 			return {
+				is_disabled: elem.classList.contains('select__dropdown_item--gray'),
 				size: elem.cloneNode().innerText.trim().replace(/Размер:/i, ''),
 				shipment: elem.querySelectorAll('.select__dropdown_item_variant, .select__value_variant')[0].innerHTML.replace(/\<span.+span\>/g, '').trim(),
 			};
@@ -397,11 +398,12 @@
 
 			let product_el = elem.closest('.scope-product');
 			let iframe_product_el = cur_test.iframe.doc.querySelector(`app-cart-item[data-product-id="${product_el.dataset.productId}"]`);
+			let item_key = parseInt(elem.dataset.dataSizeItemKey) + 1;
+			let item_el = iframe_product_el.querySelector(`app-cart-item-size-filter ul.select__dropdown li:nth-child(${item_key})`);
+			if(item_el.hasAttribute("data-size-item-disabled")) return;
 
 			cur_test.start_cart_recounting(product_el, iframe_product_el);
 
-			let item_key = parseInt(elem.dataset.dataSizeItemKey) + 1;
-			let item_el = iframe_product_el.querySelector(`app-cart-item-size-filter ul.select__dropdown li:nth-child(${item_key})`);
 			console.log({
 				item_key: item_key,
 				item_el: item_el,
@@ -587,6 +589,9 @@
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper .choosen-size-box .content span.shipment,
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper .select-size-box .size-item span.shipment {
 	 		font-size: 12px;
+	 	}
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper .select-size-box .size-item[data-size-item-disabled] {
+	 		color: #9b9b9b;
 	 	}
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .quantity-wrapper {
 	 		display: flex;
