@@ -197,7 +197,7 @@
 	cur_test.render_cart_item = function(product_data) {
 		let select_size_box = [];
 		product_data.sizes.list.forEach((size_item, i) => select_size_box.push(`
-			<div class="size-item" data-event="click" data-event-handler-name="choose_size" data-size-item-key="${i}" ${size_item.is_disabled ? 'data-size-item-disabled' : null}>
+			<div class="size-item" data-event="click" data-event-handler-name="choose_size" data-size-item-key="${i + 1}" ${size_item.is_disabled ? 'data-size-item-disabled' : null}>
 				<span class="size">Размер: ${size_item.size}</span>
 				<br>
 				<span class="shipment">(${size_item.shipment})</span>
@@ -398,6 +398,7 @@
 			cur_test.log('choose_size clicked. event target: ', {
 				elem: elem,
 				elem_dataset: elem.dataset,
+				elem_has_attr: elem.hasAttribute("data-size-item-disabled"),
 			});
 			
 			if(elem.hasAttribute("data-size-item-disabled")) return;
@@ -406,7 +407,7 @@
 
 			let product_el = elem.closest('.scope-product');
 			let iframe_product_el = cur_test.iframe.doc.querySelector(`app-cart-item[data-product-id="${product_el.dataset.productId}"]`);
-			let iframe_item_el = iframe_product_el.querySelector(`app-cart-item-size-filter ul.select__dropdown li:nth-child(${parseInt(elem.dataset.sizeItemKey) + 1})`);
+			let iframe_item_el = iframe_product_el.querySelector(`app-cart-item-size-filter ul.select__dropdown li:nth-child(${elem.dataset.sizeItemKey})`);
 			
 			cur_test.start_cart_recounting(product_el, iframe_product_el);
 
