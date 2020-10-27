@@ -248,7 +248,7 @@
  			},
  			en: {
  				"KBP-TLV": {
- 					top_box_text_1: '<span>Free date change</span><br>Book with confidence and, if needed, change travel dates yourself',
+ 					top_box_text_1: '<span>Free date change</span><br>Book with confidence and, if needed,<br>change travel dates yourself',
  					top_box_text_2: 'Citizens or residents of Israel and foreign citizens with permission<br>to enter Israel, may enter Israel from a red zone must country but should be<br>quarantined and fill out a report on the passage of quarantine.',
  				},
  				"TLV-KBP": {
