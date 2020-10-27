@@ -223,7 +223,7 @@
 				</div>
 				<div class="quantity-wrapper">
 					<div class="controls">
-						<button class="dec" data-event="click" data-event-handler-name="decrease_product_quantity" ${is_minimal_quantity ? 'data-disabled-button' : null}>-</button>
+						<button class="dec" data-event="click" data-event-handler-name="decrease_product_quantity" ${product_data.is_minimal_quantity ? 'data-disabled-button' : null}>-</button>
 						<span class="num">${product_data.quantity}</span>
 						<button class="inc" data-event="click" data-event-handler-name="increase_product_quantity">+</button>
 					</div>
