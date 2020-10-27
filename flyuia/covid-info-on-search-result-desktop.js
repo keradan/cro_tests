@@ -40,11 +40,11 @@
 	 		background: #DFECE7;
 		    margin: 17px;
 		    margin-top: 10px;
-		    height: 100px;
+		    height: 90px;
 		    display: flex;
 		    justify-content: space-between;
 		    align-items: center;
-		    padding-left: 90px;
+		    padding-left: 80px;
 		    padding-right: 25px;
 		    overflow: hidden;
 		    transition: all 0.08s ease;
@@ -57,15 +57,15 @@
 		    opacity: 0;
 		}
 	 	.${test_data.css_scope_name}-top-box::before {
-	 		content: "";
-	 		position: absolute;
-	 		width: 53%;
-	 		height: 100%;
-	 		top: 0;
-	 		right: -50px;
-	 		z-index: 0;
-	 		background: rgba(9, 111, 74, 0.05);
-	 		transform: skew(-35deg, 0);
+			content: "";
+			position: absolute;
+			width: 62%;
+			height: 100%;
+			top: 0;
+			right: -50px;
+			z-index: 0;
+			background: rgba(9, 111, 74, 0.05);
+			transform: skew(-30deg, 0);
 	 	}
 	 	.${test_data.css_scope_name}-top-box .big-left-text {
 	 		width: 40%;
@@ -83,22 +83,22 @@
 			font-weight: 500;
 		}
 	 	.${test_data.css_scope_name}-top-box .small-right-text {
-	 		width: 50%;
+	 		width: 71%;
 		    z-index: 1;
-		    /* font-family: Open Sans; */
 		    font-style: normal;
-		    font-weight: 500;
-		    font-size: 14px;
-		    line-height: 21px;
+		    font-weight: 400;
+		    font-size: 13px;
+		    line-height: 22px;
 		    text-align: right;
 		    letter-spacing: -0.02em;
 		    color: #096F4A;
 	 	}
 
 	 	.${test_data.css_scope_name}-top-box img.corona {
-	 		position: absolute;
-	 		top: 0;
-	 		left: 0;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 70px;
 	 	}
  	`;
  	/* button-popup styles он в итоге стал не нужен
