@@ -196,8 +196,8 @@
 
 	cur_test.render_cart_item = function(product_data) {
 		let select_size_box = [];
-		product_data.sizes.list.forEach((size_item) => select_size_box.push(`
-			<div class="size-item" data-event="click" data-event-handler-name="choose_size">
+		product_data.sizes.list.forEach((size_item, i) => select_size_box.push(`
+			<div class="size-item" data-event="click" data-event-handler-name="choose_size" data-size-item-key="${i}" data-size-item-disabled>
 				<span class="size">Размер: ${size_item.size}</span>
 				<br>
 				<span class="shipment">(${size_item.shipment})</span>
@@ -394,6 +394,14 @@
 		},
 		choose_size: function(elem, cur_test) {
 			cur_test.log('choose_size clicked. event target: ', elem);
+			cur_test.change_status('is_showing_cart_updating_products_and_total');
+
+			let product_el = elem.closest('.scope-product');
+			let iframe_product_el = cur_test.iframe.doc.querySelector(`app-cart-item[data-product-id="${product_el.dataset.productId}"]`);
+
+			cur_test.start_cart_recounting(product_el, iframe_product_el);
+
+			iframe_product_el.querySelector(`app-cart-item-size-filter ul.select__dropdown li:nth-child(${elem.dataset.dataSizeItemKey})`).click();
 		},
 	};
 
@@ -523,7 +531,7 @@
 	 		border: 1px solid #CCCCCC;
 	 		width: 100%;
 	 		box-sizing: border-box;
-	 		padding: 10px;
+	 		padding: 5px 10px;
 	 		display: flex;
 	 		justify-content: space-between;
 	 		align-items: center;
@@ -531,6 +539,9 @@
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper .choosen-size-box .arrow {
 	 		transform: rotateX(0);
 			transition: transform 0.2s ease;
+	 	}
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper .choosen-size-box .content {
+	 		margin: 0!important;
 	 	}
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper.opened .choosen-size-box .arrow {
 	 		transform: rotateX(-180deg);
@@ -546,6 +557,7 @@
 		    background: white;
 		    border: 1px solid;
 		    border-color: transparent;
+		    border-top: none;
 		    transition: all 0.3s ease;
 		    z-index: 1;
 	 	}
@@ -561,11 +573,11 @@
 			font-size: 14px;
 			letter-spacing: 0.055em;
 	 	}
-	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper .choosen-size-box .content .size-item span.size,
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper .choosen-size-box .content span.size,
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper .select-size-box .size-item span.size {
-	 		font-weight: bold;
+	 		font-weight: 500;
 	 	}
-	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper .choosen-size-box .content .size-item span.shipment,
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper .choosen-size-box .content span.shipment,
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper .select-size-box .size-item span.shipment {
 	 		font-size: 12px;
 	 	}
