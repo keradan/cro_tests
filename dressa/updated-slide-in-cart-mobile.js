@@ -200,7 +200,7 @@
 			<div class="size-item" data-event="click" data-event-handler-name="choose_size">
 				<span class="size">Размер: ${size_item.size}</span>
 				<br>
-				<span class="shipment">${size_item.shipment}</span>
+				<span class="shipment">(${size_item.shipment})</span>
 			</div>
 		`));
 
@@ -215,7 +215,7 @@
 						<div class="content">
 							<span class="size">Размер: ${product_data.sizes.current.size}</span>
 							<br>
-							<span class="shipment">${product_data.sizes.current.shipment}</span>
+							<span class="shipment">(${product_data.sizes.current.shipment})</span>
 						</div>
 						<div class="arrow">${cur_test.markup.content.arrow_icon}</div>
 					</div>
@@ -520,13 +520,20 @@
 	 		width: 100%;
 	 	}
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper .choosen-size-box {
-	 		color: blue;
-	 	}
-	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper .choosen-size-box .content {
-	 		color: red;
+	 		border: 1px solid #CCCCCC;
+	 		width: 100%;
+	 		box-sizing: border-box;
+	 		padding: 10px;
+	 		display: flex;
+	 		justify-content: space-between;
+	 		align-items: center;
 	 	}
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper .choosen-size-box .arrow {
-	 		color: green;
+	 		transform: rotateX(0);
+	 		transition: transform 0.2s ease;
+	 	}
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper.opened .choosen-size-box .arrow {
+	 		transform: rotateX(-180deg);
 	 	}
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper .select-size-box {
 	 		position: absolute;
@@ -537,22 +544,30 @@
 		    overflow: hidden;
 		    padding: 0 10px;
 		    background: white;
-		    border-left: 1px solid;
-		    border-right: 1px solid;
+		    border: 1px solid;
 		    border-color: transparent;
 		    transition: all 0.3s ease;
 		    z-index: 1;
 	 	}
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper.opened .select-size-box {
-		    padding: 5px 10px;
 		    max-height: 100vh;
-		    border: 1px solid;
 		    border-color: #CCCCCC;
 		    z-index: 2;
 	 	}
-    
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper .choosen-size-box .content,
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper .select-size-box .size-item {
-	 		margin: 5px 0;
+	 		margin: 10px 0;
+	 		font-family: Roboto;
+			font-size: 14px;
+			letter-spacing: 0.055em;
+	 	}
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper .choosen-size-box .content .size-item span.size,
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper .select-size-box .size-item span.size {
+	 		font-weight: bold;
+	 	}
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper .choosen-size-box .content .size-item span.shipment,
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper .select-size-box .size-item span.shipment {
+	 		font-size: 12px;
 	 	}
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .quantity-wrapper {
 	 		display: flex;
