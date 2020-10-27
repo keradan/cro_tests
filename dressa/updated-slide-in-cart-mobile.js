@@ -626,11 +626,12 @@
 		    background: transparent;
 		    padding-bottom: 2px;
 	 	}
-	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .quantity-wrapper .controls button.dec {
-	 		color: #989898;
-	 	}
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .quantity-wrapper .controls button.dec,
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .quantity-wrapper .controls button.inc {
 	 		color: black;
+	 	}
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .quantity-wrapper .controls button.dec[data-disabled-button] {
+	 		color: #d4d4d4;
 	 	}
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .quantity-wrapper .controls span.num {
 	 		font-family: Roboto;
