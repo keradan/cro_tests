@@ -137,7 +137,7 @@
 			// Если статус ready то можно юзать, если другой то надо ждать в промисе
 			// После этого можно будет переходить к работе над ивентами по открытию корзины
 			cur_test.iframe.doc.querySelectorAll('app-cart-item').forEach(function(cart_item, i){
-				let product_data = cur_test.parse_cart_item(cart_item);
+				let product_data = cur_test.parse_iframe_cart_item(cart_item);
 
 				cart_item.setAttribute('data-product-id', product_data.id);
 				cart_item.setAttribute('data-product-key', i);
@@ -194,7 +194,55 @@
 		setTimeout(() => cur_test.markup.elements.cart.classList.toggle('hide', false), 0);
 	}
 
-	cur_test.parse_cart_item = function(cart_item) {
+	cur_test.render_cart_item = function(product_data) {
+		let select_size_box = [];
+		product_data.sizes.list.forEach((size_item) => select_size_box.push(`
+			<div class="size-item" data-event="click" data-event-handler-name="choose_size">
+				<span class="size">Размер: ${size_item.size}</span>
+				<br>
+				<span class="shipment">${size_item.shipment}</span>
+			</div>
+		`));
+
+		let markup = `
+			<div class="photo-col">
+				<a href="${product_data.link}"><img src="${product_data.img_src}"></a>
+			</div>
+			<div class="content-col">
+				<a class="title" href="${product_data.link}">${product_data.title}</a>
+				<div class="sizes-wrapper">
+					<div class="choosen-size-box" data-event="click" data-event-handler-name="open_sizes">
+						<div class="content">
+							<span class="size">Размер: ${product_data.sizes.current.size}</span>
+							<br>
+							<span class="shipment">${product_data.sizes.current.shipment}</span>
+						</div>
+						<div class="arrow">${cur_test.markup.content.arrow_icon}</div>
+					</div>
+					<div class="select-size-box">${select_size_box.join('')}</div>
+				</div>
+				<div class="quantity-wrapper">
+					<div class="controls">
+						<button class="dec" data-event="click" data-event-handler-name="decrease_product_quantity">-</button>
+						<span class="num">${product_data.quantity}</span>
+						<button class="inc" data-event="click" data-event-handler-name="increase_product_quantity">+</button>
+					</div>
+					<div class="price">
+						<span class="number">${product_data.price}</span>
+						<span class="currency">${product_data.currency}</span>
+					</div>
+				</div>
+			</div>
+			<div class="actions-col">
+				<button class="favorites" data-event="click" data-event-handler-name="add_to_favorites">${cur_test.markup.content.heart_icon}</button>
+				<button class="delete" data-event="click" data-event-handler-name="delete_product">${cur_test.markup.content.trash_icon}</button>
+			</div>
+		`;
+
+		return markup;
+	}
+
+	cur_test.parse_iframe_cart_item = function(cart_item) {
 		let get_size_data = function(elem) {
 			let size_data = elem.innerText.split('-');
 			return {
@@ -229,50 +277,7 @@
 			product_el.classList.add('scope-product', 'product-item-wrapper');
 			product_el.setAttribute('data-product-key', i);
 			product_el.setAttribute('data-product-id', product_data.id);
-
-			let select_size_box = [];
-			product_data.sizes.list.forEach((size_item) => select_size_box.push(`
-				<div class="size-item" data-event="click" data-event-handler-name="choose_size">
-					<span class="size">Размер: ${size_item.size}</span>
-					<br>
-					<span class="shipment">${size_item.shipment}</span>
-				</div>
-			`));
-
-			product_el.innerHTML = `
-				<div class="photo-col">
-					<a href="${product_data.link}"><img src="${product_data.img_src}"></a>
-				</div>
-				<div class="content-col">
-					<a class="title" href="${product_data.link}">${product_data.title}</a>
-					<div class="sizes-wrapper">
-						<div class="choosen-size-box" data-event="click" data-event-handler-name="open_sizes">
-							<div class="content">
-								<span class="size">Размер: ${product_data.sizes.current.size}</span>
-								<br>
-								<span class="shipment">${product_data.sizes.current.shipment}</span>
-							</div>
-							<div class="arrow">${cur_test.markup.content.arrow_icon}</div>
-						</div>
-						<div class="select-size-box">${select_size_box.join('')}</div>
-					</div>
-					<div class="quantity-wrapper">
-						<div class="controls">
-							<button class="dec" data-event="click" data-event-handler-name="decrease_product_quantity">-</button>
-							<span class="num">${product_data.quantity}</span>
-							<button class="inc" data-event="click" data-event-handler-name="increase_product_quantity">+</button>
-						</div>
-						<div class="price">
-							<span class="number">${product_data.price}</span>
-							<span class="currency">${product_data.currency}</span>
-						</div>
-					</div>
-				</div>
-				<div class="actions-col">
-					<button class="favorites" data-event="click" data-event-handler-name="add_to_favorites">${cur_test.markup.content.heart_icon}</button>
-					<button class="delete" data-event="click" data-event-handler-name="delete_product">${cur_test.markup.content.trash_icon}</button>
-				</div>
-			`;
+			product_el.innerHTML = cur_test.render_cart_item(product_data);
 
 			document.querySelector(`${scope_parent} .products-wrapper`).append(product_el);
 			product_el.querySelectorAll(`*[data-event][data-event-handler-name]:not([data-already-listened])`).forEach(cur_test.add_cart_event);
@@ -301,6 +306,27 @@
 		}, 200);
 	}
 
+	cur_test.start_cart_recounting = function(product_el, iframe_product_el) {
+		get_iframe_promise(promises_attributes.cart_payment_updating_begin)
+		.then(function(msg) {
+			cur_test.log(msg);
+			return get_iframe_promise(promises_attributes.cart_payment_updating_end);
+		})
+		.then(function(msg) {
+			cur_test.log(msg);
+			// тут нужно сделать перерендеринг товара
+			let product_data = cur_test.parse_iframe_cart_item(iframe_product_el);
+			product_el.innerHTML = cur_test.render_cart_item(product_data);
+
+			// тут будет пересчет тотала
+
+
+			product_el.querySelectorAll(`*[data-event][data-event-handler-name]:not([data-already-listened])`).forEach(cur_test.add_cart_event);
+			cur_test.change_status('is_showing_cart_filled_with_product');
+		})
+		.catch(error => console.error(error));
+	}
+
 	cur_test.iframe = {el: null, doc: null, status: null};
  	cur_test.timers = [];
  	cur_test.products = [];
@@ -322,14 +348,25 @@
 		},
 		increase_product_quantity: function(elem, cur_test) {
 			cur_test.log('increase_product_quantity button clicked. event target: ', elem);
+			cur_test.change_status('is_showing_cart_updating_products_and_total');
 
 			let product_el = elem.closest('.scope-product');
-			
 			let iframe_product_el = cur_test.iframe.doc.querySelector(`app-cart-item[data-product-id="${product_el.dataset.productId}"]`);
+
+			cur_test.start_cart_recounting(product_el, iframe_product_el);
+
 			iframe_product_el.querySelector('.counter__add').click();
 		},
 		decrease_product_quantity: function(elem, cur_test) {
 			cur_test.log('decrease_product_quantity button clicked. event target: ', elem);
+			cur_test.change_status('is_showing_cart_updating_products_and_total');
+
+			let product_el = elem.closest('.scope-product');
+			let iframe_product_el = cur_test.iframe.doc.querySelector(`app-cart-item[data-product-id="${product_el.dataset.productId}"]`);
+
+			cur_test.start_cart_recounting(product_el, iframe_product_el);
+
+			iframe_product_el.querySelector('.counter__delete').click();
 		},
 		delete_product: function(elem, cur_test) {
 			cur_test.log('delete_product button clicked. event target: ', elem);
@@ -348,11 +385,7 @@
  	const promises_attributes = {
 		iframe_is_created: {
 			is_resolve: function(iframe){
-				// if(iframe.status != 'created') return false;
 				if(!['created', 'is_showing_loading_cart'].includes(iframe.status)) return false;
-			    // if(!iframe.doc) return false;
-			    // if(!iframe.doc.querySelector('#bx24_form_container_15')) return false; // этот елемент прогружается не сразу, юзаем его как индикатор что страница загрузилась (хоть примерно)
-			    // if(!iframe.doc.querySelector('.link__shopping')) return false;
 			    return true;
 			},
 			reject_msg: 'Iframe not created longer than 15 seconds.',
@@ -388,6 +421,26 @@
 			resolve_msg: 'Running cart in iframe: basket products founded in iframe.',
 			max_promise_time: 3000,
 			promise_attempt_interval: 100,
+		},
+		cart_payment_updating_begin: {
+			is_resolve: function(iframe){
+				if(!iframe.doc.querySelector('app-checkout-cart-mobile-block .cart.cart--payment-update')) return false;
+			    return true;
+			},
+			reject_msg: 'Not found .cart.cart--payment-update in iframe by 5 seconds.',
+			resolve_msg: 'Changing product data in cart: iframe cart updating started',
+			max_promise_time: 5000,
+			promise_attempt_interval: 70,
+		},
+		cart_payment_updating_end: {
+			is_resolve: function(iframe){
+				if(iframe.doc.querySelector('app-checkout-cart-mobile-block .cart.cart--payment-update') != null) return false;
+			    return true;
+			},
+			reject_msg: '.cart.cart--payment-update updating too long: 5 seconds.',
+			resolve_msg: 'Changing product data in cart: iframe cart updating ended',
+			max_promise_time: 5000,
+			promise_attempt_interval: 70,
 		},
 	};
 
