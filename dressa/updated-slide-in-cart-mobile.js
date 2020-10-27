@@ -244,18 +244,13 @@
 
 	cur_test.parse_iframe_cart_item = function(cart_item) {
 		let get_size_data = function(elem) {
-			console.log({
+			let size_item_data = {
 				is_disabled: elem.classList.contains('select__dropdown_item--gray'),
-				// size: elem.cloneNode().innerText.trim().replace(/Размер:/i, ''),
-				size: elem.innerHTML.replace(/\<span.+span\>/gs, '').replace(/Размер:/i, '').trim(),
-				shipment: elem.querySelectorAll('.select__dropdown_item_variant, .select__value_variant')[0].innerHTML.replace(/\<span.+span\>/g, '').trim(),
-			});
-			return {
-				is_disabled: elem.classList.contains('select__dropdown_item--gray'),
-				// size: elem.cloneNode().innerText.trim().replace(/Размер:/i, ''),
 				size: elem.innerHTML.replace(/\<span.+span\>/gs, '').replace(/Размер:/i, '').trim(),
 				shipment: elem.querySelectorAll('.select__dropdown_item_variant, .select__value_variant')[0].innerHTML.replace(/\<span.+span\>/g, '').trim(),
 			};
+			// console.log(size_item_data);
+			return size_item_data;
 		}
 
 		let product_data = {
