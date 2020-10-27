@@ -211,7 +211,7 @@
 			<div class="content-col">
 				<a class="title" href="${product_data.link}">${product_data.title}</a>
 				<div class="sizes-wrapper">
-					<div class="choosen-size-box" data-event="click" data-event-handler-name="open_sizes">
+					<div class="choosen-size-box" data-event="click" data-event-handler-name="toggle_sizes_select_box">
 						<div class="content">
 							<span class="size">Размер: ${product_data.sizes.current.size}</span>
 							<br>
@@ -387,8 +387,9 @@
 		add_to_favorites: function(elem, cur_test) {
 			cur_test.log('add_to_favorites button clicked. event target: ', elem);
 		},
-		open_sizes: function(elem, cur_test) {
-			cur_test.log('open_sizes clicked. event target: ', elem);
+		toggle_sizes_select_box: function(elem, cur_test) {
+			cur_test.log('toggle_sizes_select_box clicked. event target: ', elem);
+			elem.closest('dsssds').classList.toggle('opened');
 		},
 		choose_size: function(elem, cur_test) {
 			cur_test.log('choose_size clicked. event target: ', elem);
@@ -510,7 +511,7 @@
 	 		color: red;
 	 	}
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper {
-	 		color: red;
+	 		position: relative;
 	 	}
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper .choosen-size-box {
 	 		color: blue;
@@ -522,13 +523,24 @@
 	 		color: green;
 	 	}
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper .select-size-box {
-	 		color: green;
 	 		position: absolute;
-		    height: 0;
+	 		left: 0;
+	 		top: 100%;
+	 		width: 100%;
+		    max-height: 0;
 		    overflow: hidden;
+		    padding: 0 10px;
+		    background: white;
+		    border: 1px solid red;
+		    transition: all 0.3s ease;
 	 	}
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper.opened .select-size-box {
+		    padding: 5px 10px;
+		    max-height: 100vh;
+	 	}
+    
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper .select-size-box .size-item {
-	 		color: purple;
+	 		margin: 5px 0;
 	 	}
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .quantity-wrapper {
 	 		display: flex;
