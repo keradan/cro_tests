@@ -244,24 +244,16 @@
 
 	cur_test.parse_iframe_cart_item = function(cart_item) {
 		let get_size_data = function(elem) {
-			console.log('get_size_data elem:', elem);
-			// let size_data = elem.innerText.split(' - ');
-			
-			// let shipment_el = elem.querySelector('.select__dropdown_item_variant');
-			// shipment_el.querySelector('.select__dropdown_item_variant_line').innerHTML = '';
 			return {
-				// size: size_data[0].trim().replace(/[\D]+/g, ''),
-				// shipment: size_data[1].trim(),
-
 				size: elem.cloneNode().innerText.trim().replace(/Размер:/i, ''),
-				shipment: elem.querySelectorAll('.select__dropdown_item_variant, .select__value_variant')[0].cloneNode().innerText.trim(),
+				shipment: elem.querySelectorAll('.select__dropdown_item_variant, .select__value_variant')[0].innerHTML.replace(/\<span.+span\>/g, '').trim();
 			};
 		}
 
 		let product_data = {
 			id: cart_item.querySelector('a.item__photo').getAttribute('href').split('-').reverse()[0],
 			img_src: cart_item.querySelector('a.item__photo img').getAttribute('src'),
-			link: cart_item.querySelector('a.item__photo').getAttribute('href'), // 'https://dressa.com.ua'
+			link: cart_item.querySelector('a.item__photo').getAttribute('href'),
 			title: cart_item.querySelector('h3.item__info_title').innerHTML,
 			quantity: parseInt(cart_item.querySelector('div.item__quantity_counter span.counter__quantity').innerHTML),
 			price: parseInt(cart_item.querySelector('div.item__price .item__price_amount').innerHTML.replace(/[\D]+/g, '')),
