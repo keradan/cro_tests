@@ -249,15 +249,15 @@
  			en: {
  				"KBP-TLV": {
  					top_box_text_1: '<span>Free date change</span><br>Book with confidence and, if needed, change travel dates yourself',
- 					top_box_text_2: 'Citizens or residents of Israel and foreigners with permission<br>to enter Israel entering the territory of the country from a country belonging to the<br>red zone must be quarantined and fill out a report on the passage of quarantine',
+ 					top_box_text_2: 'Citizens or residents of Israel and foreign citizens with permission<br>to enter Israel, may enter Israel from a red zone must country but should be<br>quarantined and fill out a report on the passage of quarantine.',
  				},
  				"TLV-KBP": {
  					top_box_text_1: '<span>Free date change</span><br>Book with confidence and, if needed, change travel dates yourself',
- 					top_box_text_2: 'Those who come from the “red zone” can choose to install ”Diy.Home” and<br>spend 14 days in self-isolation, or take a COVID-19 test (no more than 48 hours before<br>crossing the border, and if the result is negative, no self-isolate.',
+ 					top_box_text_2: 'Passengers who come from the “red zone” can choose to: install the ”Diy.Home”<br>application and self-isolate for 14 days, or take a COVID-19 test (no more than<br>48 hours before crossing the border), and subject to a negative result, avoid self-isolation.',
  				},
  				"KBP-IST": {
  					top_box_text_1: '<span>Free date change</span><br>Book with confidence and, if needed, change travel dates yourself',
- 					top_box_text_2: 'Entry for citizens and residents of Turkey and Ukraine is free.',
+ 					top_box_text_2: 'Entry for citizens and residents of Turkey and Ukraine is free if they<br>have insurance covering the costs of COVID-19 treatment.',
  				},
  				"IST-KBP": {
  					top_box_text_1: '<span>Free date change</span><br>Book with confidence and, if needed, change travel dates yourself',
@@ -265,19 +265,19 @@
  				},
  				"KBP-LGW": {
  					top_box_text_1: '<span>Free date change</span><br>Book with confidence and, if needed, change travel dates yourself',
- 					top_box_text_2: 'Passengers arriving to the UK are subject to self-isolation for 14 days.',
+ 					top_box_text_2: 'Passengers arriving to the UK are required by law to self-isolate for 14 days.',
  				},
  				"LGW-KBP": {
  					top_box_text_1: '<span>Free date change</span><br>Book with confidence and, if needed, change travel dates yourself',
- 					top_box_text_2: 'Those who come from the “red zone” can choose to install ”Diy.Home” and<br>spend 14 days in self-isolation, or take a COVID-19 test (no more than 48 hours before<br>crossing the border, and if the result is negative, no self-isolate.',
+ 					top_box_text_2: 'Those who come from a “red zone” country can choose to install ”Diy.Home” and<br>spend 14 days in self-isolation, or take a COVID-19 test no earlier than 48 hours before crossing<br>the border, with a negative result. If the result is negative, there is no need to self-isolate.',
  				},
  				"KBP-DXB": {
  					top_box_text_1: '<span>Free date change</span><br>Book with confidence and, if needed, change travel dates yourself',
- 					top_box_text_2: 'All passengers travelling to Dubai from any destination<br>must have a printed negative COVID-19 PCR test certificate and also an insurance<br>that covers the costs of COVID-19 treatment.',
+ 					top_box_text_2: 'All passengers travelling to Dubai from any destination<br>must have a printed negative COVID-19 PCR test certificate and also insurance<br>covering the costs of COVID-19 treatment.',
  				},
  				"DXB-KBP": {
  					top_box_text_1: '<span>Free date change</span><br>Book with confidence and, if needed, change travel dates yourself',
- 					top_box_text_2: 'Entry is free for Ukrainian citizens and residents. Foreign citizens are<br>allowed to enter if they have an insurance that covers the costs of COVID-19 treatment.',
+ 					top_box_text_2: 'Entry is free for Ukrainian citizens and residents. Foreign citizens are<br>allowed to enter if they have insurance covering the costs of COVID-19 treatment.',
  				},
  			},
  		},
