@@ -244,7 +244,7 @@
 
 	cur_test.parse_iframe_cart_item = function(cart_item) {
 		let get_size_data = function(elem) {
-			let size_data = elem.innerText.split('-');
+			let size_data = elem.innerText.split(' - ');
 			return {
 				size: size_data[0].trim().replace(/[\D]+/g, ''),
 				shipment: size_data[1].trim(),
@@ -401,7 +401,15 @@
 
 			cur_test.start_cart_recounting(product_el, iframe_product_el);
 
-			iframe_product_el.querySelector(`app-cart-item-size-filter ul.select__dropdown li:nth-child(${elem.dataset.dataSizeItemKey})`).click();
+			let item_key = parseInt(elem.dataset.dataSizeItemKey) + 1;
+			let item_el = iframe_product_el.querySelector(`app-cart-item-size-filter ul.select__dropdown li:nth-child(${item_key})`);
+			console.log({
+				item_key: item_key,
+				item_el: item_el,
+				item_el_click: item_el.click,
+			});
+
+			iframe_product_el.querySelector(`app-cart-item-size-filter ul.select__dropdown li:nth-child(${item_key})`).click();
 		},
 	};
 
