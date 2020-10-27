@@ -223,7 +223,7 @@
 				</div>
 				<div class="quantity-wrapper">
 					<div class="controls">
-						<button class="dec" data-event="click" data-event-handler-name="decrease_product_quantity">-</button>
+						<button class="dec" data-event="click" data-event-handler-name="decrease_product_quantity" ${is_minimal_quantity ? 'data-disabled-button' : null}>-</button>
 						<span class="num">${product_data.quantity}</span>
 						<button class="inc" data-event="click" data-event-handler-name="increase_product_quantity">+</button>
 					</div>
@@ -268,6 +268,7 @@
 		};
 		cart_item.querySelectorAll('app-cart-item-size-filter ul.select__dropdown li').forEach(item => product_data.sizes.list.push(get_size_data(item)));
 		product_data.price_singular = product_data.price / product_data.quantity;
+		product_data.is_minimal_quantity = product_data.quantity == 1;
 
 		return product_data;
 	}
@@ -366,6 +367,7 @@
 		},
 		decrease_product_quantity: function(elem, cur_test) {
 			cur_test.log('decrease_product_quantity button clicked. event target: ', elem);
+			if(elem.hasAttribute("data-disabled-button")) return;
 			cur_test.change_status('is_showing_cart_updating_products_and_total');
 
 			let product_el = elem.closest('.scope-product');
@@ -395,11 +397,12 @@
 			elem.closest('.sizes-wrapper').classList.toggle('opened');
 		},
 		choose_size: function(elem, cur_test) {
-			cur_test.log('choose_size clicked. event target: ', {
-				elem: elem,
-				elem_dataset: elem.dataset,
-				elem_has_attr: elem.hasAttribute("data-size-item-disabled"),
-			});
+			cur_test.log('choose_size clicked. event target: ', elem);
+			// cur_test.log('elem debug: ', {
+			// 	elem: elem,
+			// 	elem_dataset: elem.dataset,
+			// 	elem_has_attr: elem.hasAttribute("data-size-item-disabled"),
+			// });
 			
 			if(elem.hasAttribute("data-size-item-disabled")) return;
 
