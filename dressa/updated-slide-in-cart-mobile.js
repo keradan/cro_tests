@@ -530,7 +530,7 @@
 	 	}
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper .choosen-size-box .arrow {
 	 		transform: rotateX(0);
-	 		transition: transform 0.2s ease;
+			transition: transform 0.2s ease;
 	 	}
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper.opened .choosen-size-box .arrow {
 	 		transform: rotateX(-180deg);
