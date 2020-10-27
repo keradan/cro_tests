@@ -244,10 +244,16 @@
 
 	cur_test.parse_iframe_cart_item = function(cart_item) {
 		let get_size_data = function(elem) {
-			let size_data = elem.innerText.split(' - ');
+			// let size_data = elem.innerText.split(' - ');
+			
+			// let shipment_el = elem.querySelector('.select__dropdown_item_variant');
+			// shipment_el.querySelector('.select__dropdown_item_variant_line').innerHTML = '';
 			return {
-				size: size_data[0].trim().replace(/[\D]+/g, ''),
-				shipment: size_data[1].trim(),
+				// size: size_data[0].trim().replace(/[\D]+/g, ''),
+				// shipment: size_data[1].trim(),
+
+				size: elem.cloneNode().innerText.trim().replace(/Размер:/i, ''),
+				shipment: elem.querySelector('.select__dropdown_item_variant').cloneNode().innerText.trim(),
 			};
 		}
 
