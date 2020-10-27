@@ -244,6 +244,7 @@
 
 	cur_test.parse_iframe_cart_item = function(cart_item) {
 		let get_size_data = function(elem) {
+			console.log('get_size_data elem:', elem);
 			// let size_data = elem.innerText.split(' - ');
 			
 			// let shipment_el = elem.querySelector('.select__dropdown_item_variant');
