@@ -254,7 +254,7 @@
 				// shipment: size_data[1].trim(),
 
 				size: elem.cloneNode().innerText.trim().replace(/Размер:/i, ''),
-				shipment: elem.querySelector('.select__dropdown_item_variant').cloneNode().innerText.trim(),
+				shipment: elem.querySelectorAll('.select__dropdown_item_variant, .select__value_variant')[0].cloneNode().innerText.trim(),
 			};
 		}
 
