@@ -253,7 +253,7 @@
 			return {
 				is_disabled: elem.classList.contains('select__dropdown_item--gray'),
 				// size: elem.cloneNode().innerText.trim().replace(/Размер:/i, ''),
-				size: elem.innerHTML.replace(/\<span.+span\>/g, '').replace(/Размер:/i, '').trim(),
+				size: elem.innerHTML.replace(/\<span.+span\>/gm, '').replace(/Размер:/i, '').trim(),
 				shipment: elem.querySelectorAll('.select__dropdown_item_variant, .select__value_variant')[0].innerHTML.replace(/\<span.+span\>/g, '').trim(),
 			};
 		}
