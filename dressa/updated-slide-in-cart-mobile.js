@@ -314,14 +314,19 @@
 		})
 		.then(function(msg) {
 			cur_test.log(msg);
-			// тут нужно сделать перерендеринг товара
-			let product_data = cur_test.parse_iframe_cart_item(iframe_product_el);
-			product_el.innerHTML = cur_test.render_cart_item(product_data);
 
 			// тут будет пересчет тотала
 
+			if(!cur_test.iframe.doc.contains(iframe_product_el)) { // если произошло удаление товара из корзины
+				product_el.innerHTML = '';
+				product_el.remove();
+			} else {
+				// делаем перерендеринг товара
+				let product_data = cur_test.parse_iframe_cart_item(iframe_product_el);
+				product_el.innerHTML = cur_test.render_cart_item(product_data);
+				product_el.querySelectorAll(`*[data-event][data-event-handler-name]:not([data-already-listened])`).forEach(cur_test.add_cart_event);
+			}
 
-			product_el.querySelectorAll(`*[data-event][data-event-handler-name]:not([data-already-listened])`).forEach(cur_test.add_cart_event);
 			cur_test.change_status('is_showing_cart_filled_with_product');
 		})
 		.catch(error => console.error(error));
@@ -370,6 +375,14 @@
 		},
 		delete_product: function(elem, cur_test) {
 			cur_test.log('delete_product button clicked. event target: ', elem);
+			cur_test.change_status('is_showing_cart_updating_products_and_total');
+
+			let product_el = elem.closest('.scope-product');
+			let iframe_product_el = cur_test.iframe.doc.querySelector(`app-cart-item[data-product-id="${product_el.dataset.productId}"]`);
+
+			cur_test.start_cart_recounting(product_el, iframe_product_el);
+
+			iframe_product_el.querySelector('.item__icons .icon__trash').click();
 		},
 		add_to_favorites: function(elem, cur_test) {
 			cur_test.log('add_to_favorites button clicked. event target: ', elem);
