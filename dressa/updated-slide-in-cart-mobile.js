@@ -244,6 +244,12 @@
 
 	cur_test.parse_iframe_cart_item = function(cart_item) {
 		let get_size_data = function(elem) {
+			console.log({
+				is_disabled: elem.classList.contains('select__dropdown_item--gray'),
+				// size: elem.cloneNode().innerText.trim().replace(/Размер:/i, ''),
+				size: elem.innerHTML.replace(/\<span.+span\>/g, '').replace(/Размер:/i, '').trim(),
+				shipment: elem.querySelectorAll('.select__dropdown_item_variant, .select__value_variant')[0].innerHTML.replace(/\<span.+span\>/g, '').trim(),
+			});
 			return {
 				is_disabled: elem.classList.contains('select__dropdown_item--gray'),
 				// size: elem.cloneNode().innerText.trim().replace(/Размер:/i, ''),
@@ -394,7 +400,10 @@
 			elem.closest('.sizes-wrapper').classList.toggle('opened');
 		},
 		choose_size: function(elem, cur_test) {
-			cur_test.log('choose_size clicked. event target: ', elem);
+			cur_test.log('choose_size clicked. event target: ', {
+				elem: elem,
+				elem_dataset: elem.dataset,
+			});
 			cur_test.change_status('is_showing_cart_updating_products_and_total');
 
 			let product_el = elem.closest('.scope-product');
