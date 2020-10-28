@@ -185,7 +185,7 @@
  				},
  				"TLV-KBP": {
  					top_box_text_1: '<span>Бесплатное изменение дат</span><br>Если планы изменятся, самостоятельно<br>меняйте даты путешествия',
- 					top_box_text_2: 'Те, кто приезжает из “красной зоны” могут на выбор: установить ”Дій.Вдома” и провести<br>14 дней на самоизоляции, либо сдать тест на COVID-19 (не более чем за 48 часов до<br>пересечения границ, и при условии отрицательного результата не проходить самоизоляцию.',
+ 					top_box_text_2: 'Пасажиры, которые приезжают из ”красной зоны” могут на выбор: установить приложение<br>”Дій.Вдома” и провести 14 дней на самоизоляции, или сдать тест на COVID-19  (не более<br>чем за 48 часов до момента пересечения границы) и при условии отрицательного результата не проходить самоизоляцию.',
  				},
  				"KBP-IST": {
  					top_box_text_1: '<span>Бесплатное изменение дат</span><br>Если планы изменятся, самостоятельно<br>меняйте даты путешествия',
@@ -219,7 +219,7 @@
  				},
  				"TLV-KBP": {
  					top_box_text_1: '<span>Безкоштовна зміна дат</span><br>Якщо плани зміняться, самостійно<br>змінюйте дати подорожі',
- 					top_box_text_2: 'Ті, хто приїжджає з “червоної зони” можуть на вибір: встановити “Дій.Вдома”<br>та провести 14 днів на самоізоляції, або здати тест на COVID-19 (не більше, ніж за<br>48 годин до перетину кордону), та за негативного результату не проходити самоізоляцію.',
+ 					top_box_text_2: 'Пасажири, які приїжджають з “червоної зони” можуть на вибір: встановити<br>“Дій.Вдома” та провести 14 днів на самоізоляції, або здати тест на COVID-19 (не більше<br>ніж за 48 годин до перетину кордону) та за умови негативного результату не проходити самоізоляцію.',
  				},
  				"KBP-IST": {
  					top_box_text_1: '<span>Безкоштовна зміна дат</span><br>Якщо плани зміняться, самостійно<br>змінюйте дати подорожі',
@@ -249,7 +249,7 @@
  			en: {
  				"KBP-TLV": {
  					top_box_text_1: '<span>Free date change</span><br>Book with confidence and, if needed,<br>change travel dates yourself',
- 					top_box_text_2: 'Citizens or residents of Israel and foreign citizens with permission<br>to enter Israel, may enter Israel from a red zone must country but should be<br>quarantined and fill out a report on the passage of quarantine.',
+ 					top_box_text_2: 'Citizens and residents of Israel along with foreigners that<br>have permission to enter, may enter Israel from a red zone country,<br>but only if quarantined with the quarantine form filled out.',
  				},
  				"TLV-KBP": {
  					top_box_text_1: '<span>Free date change</span><br>Book with confidence and, if needed,<br>change travel dates yourself',
