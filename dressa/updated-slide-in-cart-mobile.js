@@ -258,7 +258,7 @@
 			img_src: cart_item.querySelector('a.item__photo img').getAttribute('src'),
 			link: cart_item.querySelector('a.item__photo').getAttribute('href'),
 			title: cart_item.querySelector('h3.item__info_title').innerHTML,
-			is_favorite: cart_item.querySelector('.item__icons .icon__heart').contains('icon__heart--active'),
+			is_favorite: cart_item.querySelector('.item__icons .icon__heart').classList.contains('icon__heart--active'),
 			quantity: parseInt(cart_item.querySelector('div.item__quantity_counter span.counter__quantity').innerHTML),
 			price: parseInt(cart_item.querySelector('div.item__price .item__price_amount').innerHTML.replace(/[\D]+/g, '')),
 			currency: 'грн',
