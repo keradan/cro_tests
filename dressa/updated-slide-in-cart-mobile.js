@@ -291,8 +291,7 @@
 	cur_test.fill_cart = function() {
 		cur_test.log('keradan filling cart with products: ', cur_test.products);
 
-		if (cur_test.products.length > 0) let cart_totals_data = cur_test.render_cart_totals();
-		else let cart_totals_data = {
+		let cart_totals_data = cur_test.products.length > 0 ? cur_test.render_cart_totals() : {
 			body_totals_markup: `<div class="cart__payment_title">Корзина пуста</div>`,
 			bottom_total_price: '0 грн',
 		};
