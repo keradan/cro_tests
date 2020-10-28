@@ -607,6 +607,7 @@
 	 	}
 	 	${scope_parent}.cart-wrapper .products-wrapper {
 	 		width: 100%;
+	 		padding: 0 10px;
 	 	}
 	 	${scope_parent}.cart-wrapper .product-item-wrapper {
 	 		display: flex;
@@ -614,7 +615,8 @@
 	 		background: transparent;
 	 		margin: 10px 0;
 	 		padding: 5px;
-	 		border-top: 1px solid grey;
+	 		border-top: 1px solid #CCCCCC;
+
 	 	}
 	 	${scope_parent}.cart-wrapper .product-item-wrapper:first-child {
 		    border-top: none;
@@ -646,7 +648,7 @@
 	 		align-items: center;
 	 	}
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col a.product-title {
-	 		
+
 	 		display: block;
 	 		color: black;
 	 		text-decoration: none;
