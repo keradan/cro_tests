@@ -227,7 +227,7 @@
 			</div>
 			<div class="content-col">
 				<div class="head">
-					<a class="title" href="${product_data.link}">${product_data.title}</a>
+					<a class="product-title" href="${product_data.link}">${product_data.title}</a>
 					<button class="favorites ${product_data.is_favorite ? 'active' : ''}" data-event="click" data-event-handler-name="add_to_favorites">${cur_test.markup.content.heart_icon}</button>
 				</div>
 				<div class="sizes-wrapper">
@@ -645,7 +645,8 @@
 	 		justify-content: space-between;
 	 		align-items: center;
 	 	}
-	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col a.title {
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col a.product-title {
+	 		
 	 		display: block;
 	 		color: black;
 	 		text-decoration: none;
@@ -830,6 +831,7 @@
 	 	${scope_parent}.cart-wrapper .inner .bottom .buttons button.return-to-shopping {
 	 		color: black;
 	 		background: transparent;
+	 		line-height: 15px;
 	 	}
 	 	${scope_parent}.cart-wrapper .inner .bottom .buttons button.checkout {
 	 		color: white;
