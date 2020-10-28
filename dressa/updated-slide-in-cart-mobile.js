@@ -234,7 +234,7 @@
 				</div>
 			</div>
 			<div class="actions-col">
-				<button class="favorites" data-event="click" data-event-handler-name="add_to_favorites">${cur_test.markup.content.heart_icon}</button>
+				<button class="favorites ${product_data.is_favorite ? 'active' : null}" data-event="click" data-event-handler-name="add_to_favorites">${cur_test.markup.content.heart_icon}</button>
 				<button class="delete" data-event="click" data-event-handler-name="delete_product">${cur_test.markup.content.trash_icon}</button>
 			</div>
 		`;
@@ -258,6 +258,7 @@
 			img_src: cart_item.querySelector('a.item__photo img').getAttribute('src'),
 			link: cart_item.querySelector('a.item__photo').getAttribute('href'),
 			title: cart_item.querySelector('h3.item__info_title').innerHTML,
+			is_favorite: cart_item.querySelector('.item__icons .icon__heart').contains('icon__heart--active'),
 			quantity: parseInt(cart_item.querySelector('div.item__quantity_counter span.counter__quantity').innerHTML),
 			price: parseInt(cart_item.querySelector('div.item__price .item__price_amount').innerHTML.replace(/[\D]+/g, '')),
 			currency: 'грн',
@@ -390,8 +391,9 @@
 		},
 		add_to_favorites: function(elem, cur_test) {
 			cur_test.log('add_to_favorites button clicked. event target: ', elem);
-			if(document.querySelector('.popup__logout').innerHTML == "Выйти") return;
+			if(document.querySelector('.popup__logout').innerHTML != "Выйти" || cur_test.iframe.doc.querySelector('.popup__logout').innerHTML != "Выйти") return;
 			cur_test.log('is user authanticated: ', document.querySelector('.popup__logout').innerHTML == "Выйти");
+			cur_test.log('is user authanticated in iframe: ', cur_test.iframe.doc.querySelector('.popup__logout').innerHTML == "Выйти");
 			cur_test.change_status('is_showing_cart_updating_products_and_total');
 
 			let product_el = elem.closest('.scope-product');
@@ -400,7 +402,7 @@
 			cur_test.start_cart_recounting(product_el, iframe_product_el);
 
 			// поменять на сердечко
-			// iframe_product_el.querySelector('.item__icons .icon__trash').click();
+			iframe_product_el.querySelector('.item__icons .icon__heart').click();
 		},
 		toggle_sizes_select_box: function(elem, cur_test) {
 			cur_test.log('toggle_sizes_select_box clicked. event target: ', elem);
@@ -661,6 +663,12 @@
 	 		padding: 3px;
 	 		background: transparent;
 	 	}
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .actions-col button.heart_icon .bg {
+	 		opacity: 0;
+	 	}
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .actions-col button.heart_icon.active .bg {
+	 		opacity: 1;
+	 	}
  	`;
 
  	cur_test.markup = {
@@ -668,9 +676,9 @@
  			cart: cur_test.get_default_cart_el(cur_test),
  		},
  		content: {
-	 		arrow_icon: `<svg width="16" height="8" viewBox="0 0 16 8" fill="none"><path d="M15 0.999999L8 7L1 1" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
-	 		heart_icon: `<svg width="22" height="19" viewBox="0 0 22 19" fill="none"><path d="M10.7988 2.19947L11.2201 1.77698C12.0652 0.928653 13.1423 0.350836 14.3151 0.11667C15.4879 -0.117497 16.7035 0.00251563 17.8082 0.461516C18.913 0.920516 19.857 1.69787 20.521 2.69517C21.1849 3.69248 21.5389 4.8649 21.5381 6.06404C21.5381 7.67117 20.9012 9.21368 19.7669 10.3494L11.382 18.7579C11.2271 18.9129 11.0172 19 10.7984 19C10.5795 19 10.3696 18.9129 10.2147 18.7579L1.8298 10.3486C0.69642 9.21194 0.059737 7.67033 0.0598145 6.06292C0.0598919 4.4555 0.696724 2.91395 1.83021 1.7774C2.9637 0.640837 4.501 0.00236933 6.10392 0.002447C7.70684 0.00252466 9.24408 0.641142 10.3775 1.77781L10.7988 2.2003V2.19947ZM17.5934 10.1854L18.5988 9.17723C19.2137 8.56153 19.6325 7.77674 19.8024 6.92219C19.9722 6.06764 19.8854 5.18178 19.5529 4.37674C19.2204 3.5717 18.6572 2.88369 17.9346 2.39981C17.212 1.91594 16.3624 1.65795 15.4935 1.65852C14.3287 1.65852 13.2118 2.12243 12.3874 2.94919L11.3828 3.95737C11.2279 4.11268 11.0178 4.19992 10.7988 4.19992C10.5797 4.19992 10.3696 4.11268 10.2147 3.95737L9.20936 2.94919C8.38578 2.12319 7.26872 1.65911 6.10392 1.65903C4.93913 1.65895 3.82201 2.12289 2.99832 2.94878C2.17463 3.77467 1.71184 4.89486 1.71177 6.06292C1.71169 7.23098 2.17433 8.35123 2.99791 9.17723L10.7988 17.0008L17.5934 10.1862V10.1854Z" fill="#6458B7"/></svg>`,
-	 		trash_icon: `<svg width="20" height="21" viewBox="0 0 20 21" fill="none"><path d="M15.1766 3.8185H19.0266C19.5586 3.8185 19.9891 4.2455 19.9891 4.77225C19.9891 5.29987 19.5586 5.72688 19.0266 5.72688H18.0641V18.1361C18.0641 19.7181 16.7718 21 15.1766 21H5.55164C3.95651 21 2.66414 19.7181 2.66414 18.1361V5.72688H1.70164C1.16964 5.72688 0.739136 5.29987 0.739136 4.77312C0.739136 4.2455 1.16964 3.8185 1.70164 3.8185H5.55164V2.86387C5.55164 1.28188 6.84401 0 8.43914 0H12.2891C13.8843 0 15.1766 1.28188 15.1766 2.86387V3.81763V3.8185ZM13.2516 3.8185V2.86387C13.2516 2.33625 12.8211 1.90925 12.2891 1.90925H8.43914C7.90714 1.90925 7.47664 2.33625 7.47664 2.863V3.8185H13.2516ZM16.1391 5.72688H4.58914V18.1361C4.58914 18.6637 5.01964 19.0908 5.55164 19.0908H15.1766C15.7086 19.0908 16.1391 18.6637 16.1391 18.137V5.726V5.72688Z" fill="#BDBDBD"/></svg>`,
+	 		arrow_icon: `<svg width="16" height="8" viewBox="0 0 16 8"><path d="M15 0.999999L8 7L1 1" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+	 		heart_icon: `<svg height="23" width="22" viewBox="0 0 22 22"><path class="border" fill="#6458b7" d="M11.22 1.78c.85-.85 1.92-1.43 3.1-1.66 1.17-.24 2.38-.12 3.49.34 1.1.46 2.05 1.24 2.71 2.24.66.99 1.02 2.16 1.02 3.36 0 1.61-.64 3.15-1.77 4.29-.84.84-7.55 7.57-8.39 8.41-.15.15-.36.24-.58.24-.22 0-.43-.09-.59-.24-.83-.84-7.54-7.57-8.38-8.41C.7 9.21.06 7.67.06 6.06c0-1.6.64-3.15 1.77-4.28C2.96.64 4.5 0 6.1 0c1.61 0 3.14.64 4.28 1.78l.42.42.42-.42zm7.38 7.4c.61-.62 1.03-1.4 1.2-2.26.17-.85.09-1.74-.25-2.54-.33-.81-.89-1.5-1.62-1.98-.72-.48-1.57-.74-2.44-.74-1.16 0-2.28.46-3.1 1.29l-1.01 1.01c-.15.15-.36.24-.58.24-.22 0-.43-.09-.59-.24-.1-.1-.9-.91-1-1.01-.82-.83-1.94-1.29-3.11-1.29-1.16 0-2.28.46-3.1 1.29-.83.82-1.29 1.94-1.29 3.11S2.17 8.35 3 9.18c.52.52 3.12 3.13 7.8 7.82l6.79-6.81c.61-.61.94-.95 1.01-1.01z"></path><path class="bg" fill="#6458b7" d="M14 .88h2.65l2.43 1.57 1.8 2.43-.56 3.66-9.75 9.58-9.42-9.8-.17-2.65.79-2.54 2.6-1.97 3.6.17 2.83 2.03L14 .88z"></path></svg>`,
+	 		trash_icon: `<svg width="20" height="21" viewBox="0 0 20 21"><path d="M15.1766 3.8185H19.0266C19.5586 3.8185 19.9891 4.2455 19.9891 4.77225C19.9891 5.29987 19.5586 5.72688 19.0266 5.72688H18.0641V18.1361C18.0641 19.7181 16.7718 21 15.1766 21H5.55164C3.95651 21 2.66414 19.7181 2.66414 18.1361V5.72688H1.70164C1.16964 5.72688 0.739136 5.29987 0.739136 4.77312C0.739136 4.2455 1.16964 3.8185 1.70164 3.8185H5.55164V2.86387C5.55164 1.28188 6.84401 0 8.43914 0H12.2891C13.8843 0 15.1766 1.28188 15.1766 2.86387V3.81763V3.8185ZM13.2516 3.8185V2.86387C13.2516 2.33625 12.8211 1.90925 12.2891 1.90925H8.43914C7.90714 1.90925 7.47664 2.33625 7.47664 2.863V3.8185H13.2516ZM16.1391 5.72688H4.58914V18.1361C4.58914 18.6637 5.01964 19.0908 5.55164 19.0908H15.1766C15.7086 19.0908 16.1391 18.6637 16.1391 18.137V5.726V5.72688Z" fill="#BDBDBD"/></svg>`,
 	 	},
  	};
 
