@@ -95,6 +95,12 @@
 		    letter-spacing: -0.02em;
 		    color: #096F4A;
 	 	}
+	 	.${test_data.css_scope_name}-top-box .small-right-text .small-text-11 {
+	 		font-size: 11px;
+	 	}
+		.${test_data.css_scope_name}-top-box .small-right-text .small-text-10 {
+			font-size: 10px;
+		}
 
 	 	.${test_data.css_scope_name}-top-box img.corona {
 			position: absolute;
@@ -187,7 +193,7 @@
  				},
  				"TLV-KBP": {
  					top_box_text_1: '<span>Бесплатное изменение дат</span><br>Если планы изменятся, самостоятельно<br>меняйте даты путешествия',
- 					top_box_text_2: '<span style="font-size: 10px;">Пасажиры, которые приезжают из ”красной зоны” могут на выбор: установить приложение<br>”Дій.Вдома” и провести 14 дней на самоизоляции, или сдать тест на COVID-19  (не более чем за 48 часов<br>до момента пересечения границы) и при условии отрицательного результата не проходить самоизоляцию.</span>',
+ 					top_box_text_2: '<span class="small-text-10">Пасажиры, которые приезжают из ”красной зоны” могут на выбор: установить приложение<br>”Дій.Вдома” и провести 14 дней на самоизоляции, или сдать тест на COVID-19  (не более чем за 48 часов<br>до момента пересечения границы) и при условии отрицательного результата не проходить самоизоляцию.</span>',
  				},
  				"KBP-IST": {
  					top_box_text_1: '<span>Бесплатное изменение дат</span><br>Если планы изменятся, самостоятельно<br>меняйте даты путешествия',
@@ -203,7 +209,7 @@
  				},
  				"LGW-KBP": {
  					top_box_text_1: '<span>Бесплатное изменение дат</span><br>Если планы изменятся, самостоятельно<br>меняйте даты путешествия',
- 					top_box_text_2: 'Те, кто приезжает из “красной зоны” могут на выбор: установить ”Дій.Вдома” и провести<br>14 дней на самоизоляции, либо сдать тест на COVID-19 (не более чем за 48 часов до<br>пересечения границ, и при условии отрицательного результата не проходить самоизоляцию.',
+ 					top_box_text_2: '<span class="small-text-11">Те, кто приезжает из “красной зоны” могут на выбор: установить ”Дій.Вдома” и провести<br>14 дней на самоизоляции, либо сдать тест на COVID-19 (не более чем за 48 часов до<br>пересечения границ, и при условии отрицательного результата не проходить самоизоляцию.</span>',
  				},
  				"KBP-DXB": {
  					top_box_text_1: '<span>Бесплатное изменение дат</span><br>Если планы изменятся, самостоятельно<br>меняйте даты путешествия',
@@ -221,7 +227,7 @@
  				},
  				"TLV-KBP": {
  					top_box_text_1: '<span>Безкоштовна зміна дат</span><br>Якщо плани зміняться, самостійно<br>змінюйте дати подорожі',
- 					top_box_text_2: 'Пасажири, які приїжджають з “червоної зони” можуть на вибір: встановити<br>“Дій.Вдома” та провести 14 днів на самоізоляції, або здати тест на COVID-19 (не більше<br>ніж за 48 годин до перетину кордону) та за умови негативного результату не проходити самоізоляцію.',
+ 					top_box_text_2: '<span class="small-text-10">Пасажири, які приїжджають з “червоної зони” можуть на вибір: встановити<br>“Дій.Вдома” та провести 14 днів на самоізоляції, або здати тест на COVID-19 (не більше<br>ніж за 48 годин до перетину кордону) та за умови негативного результату не проходити самоізоляцію.</span>',
  				},
  				"KBP-IST": {
  					top_box_text_1: '<span>Безкоштовна зміна дат</span><br>Якщо плани зміняться, самостійно<br>змінюйте дати подорожі',
@@ -237,7 +243,7 @@
  				},
  				"LGW-KBP": {
  					top_box_text_1: '<span>Безкоштовна зміна дат</span><br>Якщо плани зміняться, самостійно<br>змінюйте дати подорожі',
- 					top_box_text_2: 'Ті, хто приїжджає з “червоної зони” можуть на вибір: встановити “Дій.Вдома”<br>та провести 14 днів на самоізоляції, або здати тест на COVID-19 (не більше, ніж<br>за 48 годин до перетину кордону), та за негативного результату не проходити самоізоляцію.',
+ 					top_box_text_2: 'Ті, хто приїжджає з “червоної зони” можуть на вибір: встановити “Дій.Вдома”<br>та провести 14 днів на самоізоляції, або здати тест на COVID-19 (не більше, ніж за 48<br>годин до перетину кордону), та за негативного результату не проходити самоізоляцію.',
  				},
  				"KBP-DXB": {
  					top_box_text_1: '<span>Безкоштовна зміна дат</span><br>Якщо плани зміняться, самостійно<br>змінюйте дати подорожі',
@@ -255,7 +261,7 @@
  				},
  				"TLV-KBP": {
  					top_box_text_1: '<span>Free date change</span><br>Book with confidence and, if needed,<br>change travel dates yourself',
- 					top_box_text_2: 'Passengers who come from the “red zone” can choose to: install the ”Diy.Home”<br>application and self-isolate for 14 days, or take a COVID-19 test (no more than<br>48 hours before crossing the border), and subject to a negative result, avoid self-isolation.',
+ 					top_box_text_2: '<span class="small-text-10">Passengers who come from the “red zone” can choose to: install the ”Diy.Home”<br>application and self-isolate for 14 days, or take a COVID-19 test (no more than<br>48 hours before crossing the border), and subject to a negative result, avoid self-isolation.</span>',
  				},
  				"KBP-IST": {
  					top_box_text_1: '<span>Free date change</span><br>Book with confidence and, if needed,<br>change travel dates yourself',
@@ -271,7 +277,7 @@
  				},
  				"LGW-KBP": {
  					top_box_text_1: '<span>Free date change</span><br>Book with confidence and, if needed,<br>change travel dates yourself',
- 					top_box_text_2: 'Those who come from a “red zone” country can choose to install ”Diy.Home” and<br>spend 14 days in self-isolation, or take a COVID-19 test no earlier than 48 hours before crossing<br>the border, with a negative result. If the result is negative, there is no need to self-isolate.',
+ 					top_box_text_2: '<span class="small-text-11">Those who come from a “red zone” country can choose to install ”Diy.Home” and<br>spend 14 days in self-isolation, or take a COVID-19 test no earlier than 48 hours before crossing<br>the border, with a negative result. If the result is negative, there is no need to self-isolate.</span>',
  				},
  				"KBP-DXB": {
  					top_box_text_1: '<span>Free date change</span><br>Book with confidence and, if needed,<br>change travel dates yourself',
