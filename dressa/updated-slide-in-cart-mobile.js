@@ -292,8 +292,8 @@
 		cur_test.log('keradan filling cart with products: ', cur_test.products);
 
 		let cart_totals_data = cur_test.render_cart_totals();
-		cur_test.markup.cart.querySelector('.inner .body .total').innerHTML = cart_totals_data.body_totals_markup;
-		cur_test.markup.cart.querySelector('.inner .bottom .total .price').innerHTML = cart_totals_data.bottom_total_price;
+		document.querySelector(`${scope_parent} .inner .body .total`).innerHTML = cart_totals_data.body_totals_markup;
+		document.querySelector(`${scope_parent} .inner .bottom .total .price`).innerHTML = cart_totals_data.bottom_total_price;
 
 		
 		cur_test.products.forEach(function(product_data, i){
@@ -336,8 +336,8 @@
 			cur_test.log(msg);
 
 			let cart_totals_data = cur_test.render_cart_totals();
-			cur_test.markup.cart.querySelector('.inner .body .total').innerHTML = cart_totals_data.body_totals_markup;
-			cur_test.markup.cart.querySelector('.inner .bottom .total .price').innerHTML = cart_totals_data.bottom_total_price;
+			document.querySelector(`${scope_parent} .inner .body .total`).innerHTML = cart_totals_data.body_totals_markup;
+			document.querySelector(`${scope_parent} .inner .bottom .total .price`).innerHTML = cart_totals_data.bottom_total_price;
 
 			if(product_el && iframe_product_el) {
 				if(!cur_test.iframe.doc.contains(iframe_product_el)) { // если произошло удаление товара из корзины
