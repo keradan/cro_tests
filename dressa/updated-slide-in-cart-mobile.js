@@ -760,6 +760,9 @@
 			margin: 0 auto;
 			transition: width 0.2s ease;
 	 	}
+	 	${scope_parent}.cart-wrapper .inner .bottom.show-total hr.top-line {
+	 		width: 100%;
+	 	}
 	 	${scope_parent}.cart-wrapper .inner .bottom .total {
 	 		display: flex;
 		    justify-content: space-between;
@@ -768,7 +771,18 @@
 		    font-size: 16px;
 		    line-height: 100%;
 		    color: #162319;
-		    padding: 15px 10px;
+		    padding: 0 10px;
+		    max-height: 1px;
+		    overflow: hidden;
+		    opacity: 0;
+		    transition: all 0.1s ease;
+		    transform: translateY(10px);
+	 	}
+	 	${scope_parent}.cart-wrapper .inner .bottom.show-total .total {
+	 		padding: 15px 10px;
+		    max-height: 100px;
+		    opacity: 1;
+		    transform: translateY(10px);
 	 	}
 	 	${scope_parent}.cart-wrapper .inner .bottom .total .title {
 	 		text-transform: uppercase;
