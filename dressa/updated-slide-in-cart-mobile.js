@@ -55,7 +55,7 @@
 	 				<div class="products-wrapper"></div>
 	 				<div class="total"></div>
 	 				<div class="promo-code-box">
-			 			<input type="text">
+			 			<input type="text" placeholder="Промокод">
 			 			<button data-event="click" data-event-handler-name="assign_promo_code">Подтвердить</button>
 		 			</div>
 	 			</div>
@@ -815,12 +815,34 @@
 		    padding: 0 10px;
 		    justify-content: center;
 		    align-items: center;
-		    margin: 30px 0;
+		    margin-top: 30px;
+		    margin-bottom: 100px;
 	 	}
 	 	${scope_parent}.cart-wrapper .inner .body .promo-code-box input,
 	 	${scope_parent}.cart-wrapper .inner .body .promo-code-box button {
-	 		display: block;
-	 		width: 40%;
+			display: block;
+			width: 40%;
+			border: 1px solid;
+			border-radius: 4px;
+			padding: 0 10px;
+			margin: 0;
+			background: transparent;
+			color: black;
+			height: 40px;
+	 	}
+	 	${scope_parent}.cart-wrapper .inner .body .promo-code-box input {
+	 		margin-right: 5%;
+	 		border-color: #cccccc;
+	 	}
+	 	${scope_parent}.cart-wrapper .inner .body .promo-code-box input::placeholder {
+	 		color: #cccccc;
+	 	}
+	 	${scope_parent}.cart-wrapper .inner .body .promo-code-box button {
+			border-color: #594fa4;
+			text-transform: uppercase;
+			font-weight: bold;
+			font-size: 12px;
+			letter-spacing: 0.08em;
 	 	}
 
 	 	${scope_parent}.cart-wrapper .inner .bottom hr.top-line {
