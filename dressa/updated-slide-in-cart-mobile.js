@@ -612,11 +612,9 @@
 	 	${scope_parent}.cart-wrapper .product-item-wrapper {
 	 		display: flex;
 	 		width: 100%;
-	 		background: transparent;
-	 		margin: 10px 0;
-	 		padding: 5px;
+	 		margin-top: 15px;
+	 		padding-top: 15px;
 	 		border-top: 1px solid #CCCCCC;
-
 	 	}
 	 	${scope_parent}.cart-wrapper .product-item-wrapper:first-child {
 		    border-top: none;
@@ -767,6 +765,62 @@
 	 	}
 	 	${scope_parent}.cart-wrapper .product-item-wrapper button.favorites.active .bg {
 	 		opacity: 1;
+	 	}
+	 	
+	 	/* ______ body ______ */
+
+	 	${scope_parent}.cart-wrapper .inner .body .total {
+			border-top: 1px solid #CCCCCC;
+			padding: 0 10px;
+			margin-top: 15px;
+			padding-top: 15px;
+	 	}
+	 	${scope_parent}.cart-wrapper .inner .body .total .cart__payment_title {
+	 		font-weight: bold;
+		    font-size: 15px;
+		    letter-spacing: 0.3em;
+		    text-transform: uppercase;
+		    color: #162319;
+		    margin-bottom: 15px;
+	 	}
+	 	${scope_parent}.cart-wrapper .inner .body .total .cart__payment_delivery {
+ 		    display: flex;
+		    justify-content: space-between;
+		    align-items: center;
+		    font-size: 14px;
+		    letter-spacing: 0.08em;
+		    color: black;
+	 	}
+	 	${scope_parent}.cart-wrapper .inner .body .total .cart__payment_total {
+ 		    display: flex;
+		    justify-content: space-between;
+		    align-items: center;
+		    font-weight: bold;
+		    font-size: 16px;
+		    letter-spacing: 0.08em;
+		    color: black;
+		    margin: 8px 0;
+	 	}
+	 	${scope_parent}.cart-wrapper .inner .body .total .cart__payment_shipping {
+	 		color: #6d6d6d;
+		    font-size: 13px;
+		    line-height: 150%;
+		    letter-spacing: 0.08em;
+		    text-align: justify;
+	 	}
+
+	 	${scope_parent}.cart-wrapper .inner .body .promo-code-box {
+	 		display: flex;
+		    width: 100%;
+		    padding: 0 10px;
+		    justify-content: center;
+		    align-items: center;
+		    margin: 30px 0;
+	 	}
+	 	${scope_parent}.cart-wrapper .inner .body .promo-code-box input,
+	 	${scope_parent}.cart-wrapper .inner .body .promo-code-box button {
+	 		display: block;
+	 		width: 40%;
 	 	}
 
 	 	${scope_parent}.cart-wrapper .inner .bottom hr.top-line {
