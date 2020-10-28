@@ -45,7 +45,9 @@
 	 	cart_el.setAttribute('data-test-name', cur_test.init.name);
 		cart_el.innerHTML = `
 	 		<div class="inner">
-	 			<button class="close-cart" data-event="click" data-event-handler-name="close_cart">close X</button>
+	 			<button class="close-cart" data-event="click" data-event-handler-name="close_cart" data-already-listened="">
+	 				<svg width="21" height="21" viewBox="0 0 21 21" fill="none"><path d="M18.715 20.5493L10.5 12.3213L2.28497 20.5493L0.450806 18.7151L8.67872 10.5001L0.450806 2.28509L2.28497 0.450928L10.5 8.67884L18.715 0.463845L20.5362 2.28509L12.3212 10.5001L20.5362 18.7151L18.715 20.5493Z" fill="black"></path></svg>
+	 			</button>
 	 			<div class="head">
 	 				<div class="title">Товары в корзине</div>
 	 			</div>
@@ -58,6 +60,7 @@
 		 			</div>
 	 			</div>
 	 			<div class="bottom">
+	 				<hr class="top-line">
 	 				<div class="total">
 	 					<div class="title">Итог заказа</div>
 	 					<div class="price"></div>
@@ -555,17 +558,39 @@
 	 		z-index: 9999999999999999999999999999;
 	 		transition: all 0.3s ease;
 	 		opacity: 1;
+
+	 		font-family: Roboto;
+			font-weight: normal;
+			color: #000000;
 	 	}
 	 	${scope_parent}.cart-wrapper.hide {
 	 		opacity: 0;
 	 	}
-
+	 	${scope_parent}.cart-wrapper .close-cart {
+	 		position: absolute;
+		    top: 0;
+		    right: 0;
+		    display: flex;
+		    padding: 10px;
+		    border: none;
+		    background: transparent;
+		    z-index: 1;
+	 	}
 	 	${scope_parent}.cart-wrapper .inner {
 	 		position: absolute;
 	 		bottom: 0;
 	 		left: 0;
 	 		width: 100vw;
 	 		background: white;
+	 	}
+	 	${scope_parent}.cart-wrapper .inner .head .title {
+	 		font-weight: bold;
+	    	font-size: 15px;
+		    text-align: center;
+		    letter-spacing: 0.3em;
+		    text-transform: uppercase;
+		    line-height: 73px;
+		    border-bottom: 1px solid #CCCCCC;
 	 	}
 	 	${scope_parent}.cart-wrapper .body {
 	 		overflow-y: scroll;
@@ -724,6 +749,33 @@
 	 	}
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .actions-col button.favorites.active .bg {
 	 		opacity: 1;
+	 	}
+
+	 	${scope_parent}.cart-wrapper .inner .botom hr.top-line {
+			height: 1px;
+			box-sizing: border-box;
+			border: none;
+			border-top: 1px solid #CCCCCC;
+			width: calc(100% - 20px);
+			margin: 0 auto;
+			transition: width 0.2s ease;
+	 	}
+	 	${scope_parent}.cart-wrapper .inner .botom .total {
+	 		display: flex;
+		    justify-content: space-between;
+		    align-items: center;
+		    font-weight: bold;
+		    font-size: 16px;
+		    line-height: 100%;
+		    color: #162319;
+		    padding: 15px 10px;
+	 	}
+	 	${scope_parent}.cart-wrapper .inner .botom .total .title {
+	 		text-transform: uppercase;
+	 		letter-spacing: 0.3em;
+	 	}
+	 	${scope_parent}.cart-wrapper .inner .botom .total .price {
+	 		letter-spacing: 0.08em;
 	 	}
  	`;
 
