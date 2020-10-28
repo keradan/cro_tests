@@ -49,7 +49,10 @@
 	 			<button class="return-to-shopping" data-event="click" data-event-handler-name="close_cart">Продолжить покупки</button>
 	 			<button class="checkout" data-event="click" data-event-handler-name="checkout">Оформить заказ</button>
 	 			
-	 			<button data-event="click" data-event-handler-name="assign_promo_code">Подтвердить</button>
+	 			<div class="promo-code-box">
+		 			<input class="" type="text">
+		 			<button data-event="click" data-event-handler-name="assign_promo_code">Подтвердить</button>
+	 			</div>
 	 			
 	 			<div class="products-wrapper"></div>
 	 		</div>
@@ -88,11 +91,6 @@
 		}
 
 		let iframe_creating_timer = setInterval(function(){
-			// cur_test.log('attempt to create iframe: ', {
-			// 	doc: cur_test.iframe.doc,
-			// 	bx24_form_container_15: cur_test.iframe.doc.querySelector('#bx24_form_container_15'),
-			// 	link__shopping: cur_test.iframe.doc.querySelector('.link__shopping'),
-			// });
 			if(!cur_test.iframe.doc) return false;
 			if(!cur_test.iframe.doc.querySelector('.bx-crm-widget-form-config-sidebar-hamburger')) return false; // этот елемент прогружается не сразу, юзаем его как индикатор что страница загрузилась (хоть примерно)
 			if(!cur_test.iframe.doc.querySelector('.link__shopping')) return false;
@@ -132,10 +130,6 @@
 		})
 		.then(function(msg) {
 			cur_test.log(msg);
-			// Hачинаем парсить товары, или что-то делаем с пустой корзиной
-			// Нужно взять и начинить обьект данными из корзину. Так же должен для этого обьекта быть еще индикатор статуса.
-			// Если статус ready то можно юзать, если другой то надо ждать в промисе
-			// После этого можно будет переходить к работе над ивентами по открытию корзины
 			cur_test.iframe.doc.querySelectorAll('app-cart-item').forEach(function(cart_item, i){
 				let product_data = cur_test.parse_iframe_cart_item(cart_item);
 
@@ -290,10 +284,6 @@
 		});
 	}
 
-	cur_test.change_something_in_cart = function() {
-		iframe.doc.querySelectorAll('.counter__add')[1].click();
-	}
-
 	cur_test.cart_monitoring = function() {
 		let cart_monitoring_timer_id = setInterval(function(){
 			// тут чекаем открыта ли дефолтная корзина
@@ -310,7 +300,7 @@
 		}, 200);
 	}
 
-	cur_test.start_cart_recounting = function(product_el, iframe_product_el) {
+	cur_test.start_cart_recounting = function(product_el = null, iframe_product_el = null) {
 		get_iframe_promise(promises_attributes.cart_payment_updating_begin)
 		.then(function(msg) {
 			cur_test.log(msg);
@@ -321,14 +311,17 @@
 
 			// тут будет пересчет тотала
 
-			if(!cur_test.iframe.doc.contains(iframe_product_el)) { // если произошло удаление товара из корзины
-				product_el.innerHTML = '';
-				product_el.remove();
-			} else {
-				// делаем перерендеринг товара
-				let product_data = cur_test.parse_iframe_cart_item(iframe_product_el);
-				product_el.innerHTML = cur_test.render_cart_item(product_data);
-				product_el.querySelectorAll(`*[data-event][data-event-handler-name]:not([data-already-listened])`).forEach(cur_test.add_cart_event);
+
+			if(product_el && iframe_product_el) {
+				if(!cur_test.iframe.doc.contains(iframe_product_el)) { // если произошло удаление товара из корзины
+					product_el.innerHTML = '';
+					product_el.remove();
+				} else {
+					// делаем перерендеринг товара
+					let product_data = cur_test.parse_iframe_cart_item(iframe_product_el);
+					product_el.innerHTML = cur_test.render_cart_item(product_data);
+					product_el.querySelectorAll(`*[data-event][data-event-handler-name]:not([data-already-listened])`).forEach(cur_test.add_cart_event);
+				}
 			}
 
 			cur_test.change_status('is_showing_cart_filled_with_product');
@@ -353,7 +346,15 @@
 		},
 		assign_promo_code: function(elem, cur_test) {
 			cur_test.log('assign_promo_code button clicked. event target: ', elem);
-			cur_test.assign_promo_code();
+			
+			let promo_code_input_el = cur_test.markup.elements.cart.querySelector(`.promo-code-box input`);
+			if(!promo_code_input_el.value) return;
+
+			cur_test.change_status('is_showing_cart_updating_products_and_total');
+			cur_test.start_cart_recounting();
+
+			iframe.doc.querySelectorAll('app-promo-code form input[name="promoCode"]').value = promo_code_input_el.value
+			iframe.doc.querySelectorAll('app-promo-code form app-dressa-button').click();
 		},
 		increase_product_quantity: function(elem, cur_test) {
 			cur_test.log('increase_product_quantity button clicked. event target: ', elem);
@@ -391,9 +392,11 @@
 		},
 		add_to_favorites: function(elem, cur_test) {
 			cur_test.log('add_to_favorites button clicked. event target: ', elem);
-			if(document.querySelector('.popup__logout').innerHTML != "Выйти" || cur_test.iframe.doc.querySelector('.popup__logout').innerHTML != "Выйти") return;
+
 			cur_test.log('is user authanticated: ', document.querySelector('.popup__logout').innerHTML == "Выйти");
 			cur_test.log('is user authanticated in iframe: ', cur_test.iframe.doc.querySelector('.popup__logout').innerHTML == "Выйти");
+			if(document.querySelector('.popup__logout').innerHTML != "Выйти" || cur_test.iframe.doc.querySelector('.popup__logout').innerHTML != "Выйти") return;
+			
 			cur_test.change_status('is_showing_cart_updating_products_and_total');
 
 			let product_el = elem.closest('.scope-product');
@@ -401,7 +404,6 @@
 
 			cur_test.start_cart_recounting(product_el, iframe_product_el);
 
-			// поменять на сердечко
 			iframe_product_el.querySelector('.item__icons .icon__heart').click();
 		},
 		toggle_sizes_select_box: function(elem, cur_test) {
@@ -411,11 +413,6 @@
 		},
 		choose_size: function(elem, cur_test) {
 			cur_test.log('choose_size clicked. event target: ', elem);
-			// cur_test.log('elem debug: ', {
-			// 	elem: elem,
-			// 	elem_dataset: elem.dataset,
-			// 	elem_has_attr: elem.hasAttribute("data-size-item-disabled"),
-			// });
 			
 			if(elem.hasAttribute("data-size-item-disabled")) return;
 
