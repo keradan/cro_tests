@@ -544,10 +544,6 @@
 
 	let scope_parent = `.scope-parent[data-scope-name=${cur_test.init.css_scope_name}]`;
 	document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
-	 	${scope_parent}.cart-wrapper .loading {
-	 		background-image: url(/assets/img/spinner.svg);
-	 	}
-
 	 	${scope_parent}.cart-wrapper {
 	 		position: fixed;
 	 		top: 0;
@@ -583,6 +579,19 @@
 	 		width: 100vw;
 	 		background: white;
 	 	}
+	 	${scope_parent}.cart-wrapper .inner.loading::after {
+		    content: "";
+		    position: absolute;
+		    top: 0;
+		    left: 0;
+		    width: 100%;
+		    height: 100%;
+		    background: rgb(255 255 255 / 0.85);
+		    background-image: url(/assets/img/spinner.svg);
+		    background-repeat: no-repeat;
+		    background-position: center;
+		    background-size: 50px;
+		}
 	 	${scope_parent}.cart-wrapper .inner .head .title {
 	 		font-weight: bold;
 	    	font-size: 15px;
@@ -782,7 +791,7 @@
 	 		padding: 15px 10px;
 		    max-height: 100px;
 		    opacity: 1;
-		    transform: translateY(10px);
+		    transform: translateY(0);
 	 	}
 	 	${scope_parent}.cart-wrapper .inner .bottom .total .title {
 	 		text-transform: uppercase;
