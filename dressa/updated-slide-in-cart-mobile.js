@@ -291,11 +291,16 @@
 	cur_test.fill_cart = function() {
 		cur_test.log('keradan filling cart with products: ', cur_test.products);
 
-		let cart_totals_data = cur_test.render_cart_totals();
+		if (cur_test.products.length > 0) let cart_totals_data = cur_test.render_cart_totals();
+		else let cart_totals_data = {
+			body_totals_markup: `<div class="cart__payment_title">Корзина пуста</div>`,
+			bottom_total_price: '0 грн',
+		};
+		
 		document.querySelector(`${scope_parent} .inner .body .total`).innerHTML = cart_totals_data.body_totals_markup;
 		document.querySelector(`${scope_parent} .inner .bottom .total .price`).innerHTML = cart_totals_data.bottom_total_price;
+		document.querySelector(`${scope_parent}`).classList.toggle('empty-cart', cur_test.products.length == 0);
 
-		
 		cur_test.products.forEach(function(product_data, i){
 			let product_el = document.createElement('div');
 			product_el.classList.add('scope-product', 'product-item-wrapper');
@@ -537,6 +542,10 @@
 
 	let scope_parent = `.scope-parent[data-scope-name=${cur_test.init.css_scope_name}]`;
 	document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
+	 	${scope_parent}.cart-wrapper .loading {
+	 		background-image: url(/assets/img/spinner.svg);
+	 	}
+
 	 	${scope_parent}.cart-wrapper {
 	 		position: fixed;
 	 		top: 0;
