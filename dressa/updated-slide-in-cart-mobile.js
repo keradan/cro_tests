@@ -66,7 +66,7 @@
 	 					<div class="price"></div>
 	 				</div>
 		 			<div class="buttons">
-		 				<button class="return-to-shopping" data-event="click" data-event-handler-name="close_cart">Продолжить покупки</button>
+		 				<button class="return-to-shopping" data-event="click" data-event-handler-name="close_cart">Продолжить<br>покупки</button>
 		 				<button class="checkout" data-event="click" data-event-handler-name="checkout">Оформить заказ</button>
 		 			</div>
 	 			</div>
@@ -788,7 +788,7 @@
 		    transform: translateY(10px);
 	 	}
 	 	${scope_parent}.cart-wrapper .inner .bottom.show-total .total {
-	 		padding: 15px 10px;
+	 		padding-top: 15px;
 		    max-height: 100px;
 		    opacity: 1;
 		    transform: translateY(0);
@@ -799,6 +799,30 @@
 	 	}
 	 	${scope_parent}.cart-wrapper .inner .bottom .total .price {
 	 		letter-spacing: 0.08em;
+	 	}
+	 	${scope_parent}.cart-wrapper .inner .bottom .buttons {
+	 		display: flex;
+		    justify-content: space-between;
+		    align-items: center;
+		    padding: 10px;
+		    padding-top: 15px;
+		    padding-bottom: 50px;
+	 	}
+	 	${scope_parent}.cart-wrapper .inner .bottom .buttons button {
+	 		display: block;
+		    width: calc(50% - 5px);
+		    border: 1px solid #594FA4;
+		    transition: transforn 0.2s ease;
+		    padding: 10px 0;
+		    border-radius: 4px;
+	 	}
+	 	${scope_parent}.cart-wrapper .inner .bottom .buttons button.return-to-shopping {
+	 		color: black;
+	 		background: transparent;
+	 	}
+	 	${scope_parent}.cart-wrapper .inner .bottom .buttons button.checkout {
+	 		color: white;
+	 		background: #594FA4;
 	 	}
  	`;
 
