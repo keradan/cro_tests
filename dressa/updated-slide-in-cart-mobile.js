@@ -60,10 +60,7 @@
 	 			<div class="bottom">
 	 				<div class="total">
 	 					<div class="title">Итог заказа</div>
-	 					<div class="price">
-		 					<span class="number">1253</span>
-		 					<span class="currency">грн</span>
-	 					</div>
+	 					<div class="price"></div>
 	 				</div>
 		 			<div class="buttons">
 		 				<button class="return-to-shopping" data-event="click" data-event-handler-name="close_cart">Продолжить покупки</button>
@@ -203,6 +200,14 @@
 		setTimeout(() => cur_test.markup.elements.cart.classList.toggle('hide', false), 0);
 	}
 
+	cur_test.render_cart_totals = function() {
+		let iframe_cart_payment_box = cur_test.iframe.doc.querySelector('app-checkout-cart-mobile-block .cart__payment');
+		return {
+			body_totals_markup: iframe_cart_payment_box.innerHTML.replace(/\<\!\-\-\-\-\>/g, '').replace(/_ng(.)+=""/g, ''),
+			bottom_total_price: iframe_cart_payment_box.querySelector('.cart__payment_total_text').innerHTML,
+		};
+	}
+
 	cur_test.render_cart_item = function(product_data) {
 		let select_size_box = [];
 		product_data.sizes.list.forEach((size_item, i) => select_size_box.push(`
@@ -285,6 +290,12 @@
 
 	cur_test.fill_cart = function() {
 		cur_test.log('keradan filling cart with products: ', cur_test.products);
+
+		let cart_totals_data = cur_test.render_cart_totals();
+		cur_test.markup.cart.querySelector('.inner .body .total').innerHTML = cart_totals_data.body_totals_markup;
+		cur_test.markup.cart.querySelector('.inner .bottom .total .price').innerHTML = cart_totals_data.bottom_total_price;
+
+		
 		cur_test.products.forEach(function(product_data, i){
 			let product_el = document.createElement('div');
 			product_el.classList.add('scope-product', 'product-item-wrapper');
@@ -324,8 +335,9 @@
 		.then(function(msg) {
 			cur_test.log(msg);
 
-			// тут будет пересчет тотала
-
+			let cart_totals_data = cur_test.render_cart_totals();
+			cur_test.markup.cart.querySelector('.inner .body .total').innerHTML = cart_totals_data.body_totals_markup;
+			cur_test.markup.cart.querySelector('.inner .bottom .total .price').innerHTML = cart_totals_data.bottom_total_price;
 
 			if(product_el && iframe_product_el) {
 				if(!cur_test.iframe.doc.contains(iframe_product_el)) { // если произошло удаление товара из корзины
