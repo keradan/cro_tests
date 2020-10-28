@@ -541,6 +541,10 @@
 	 	}
 
 	 	${scope_parent}.cart-wrapper .inner {
+	 		position: absolute;
+	 		bottom: 0;
+	 		left: 0;
+	 		width: 100vw;
 	 		background: white;
 	 	}
 	 	${scope_parent}.cart-wrapper .body {
