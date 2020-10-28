@@ -45,16 +45,35 @@
 	 	cart_el.setAttribute('data-test-name', cur_test.init.name);
 		cart_el.innerHTML = `
 	 		<div class="inner">
+	 			<div class="head">
+	 				<div class="title">Товары в корзине</div>
+	 			</div>
+	 			<div class="body">
+	 				<div class="products-wrapper"></div>
+	 				<div class="total"></div>
+	 			</div>
+	 			<div class="bottom">
+	 				<div class="total">
+	 					<div class="title">Итог заказа</div>
+	 					<div class="price">
+		 					<span class="number">1253</span>
+		 					<span class="currency">грн</span>
+	 					</div>
+	 				</div>
+		 			<div class="buttons">
+		 				<button class="return-to-shopping" data-event="click" data-event-handler-name="close_cart">Продолжить покупки</button>
+		 				<button class="checkout" data-event="click" data-event-handler-name="checkout">Оформить заказ</button>
+		 			</div>
+	 			</div>
 	 			<button class="close-cart" data-event="click" data-event-handler-name="close_cart">close X</button>
-	 			<button class="return-to-shopping" data-event="click" data-event-handler-name="close_cart">Продолжить покупки</button>
-	 			<button class="checkout" data-event="click" data-event-handler-name="checkout">Оформить заказ</button>
+	 			
 	 			
 	 			<div class="promo-code-box">
 		 			<input class="" type="text">
 		 			<button data-event="click" data-event-handler-name="assign_promo_code">Подтвердить</button>
 	 			</div>
 	 			
-	 			<div class="products-wrapper"></div>
+	 			
 	 		</div>
 	 	`;
 	 	return cart_el;
@@ -525,16 +544,21 @@
 	 		opacity: 0;
 	 	}
 
-	 	${scope_parent}.cart-wrapper .products-wrapper {
+	 	${scope_parent}.cart-wrapper .body {
 	 		overflow-y: scroll;
 	 		max-height: 60vh;
 	 	}
+	 	${scope_parent}.cart-wrapper .products-wrapper {
+	 		width: 100%;
+	 	}
 	 	${scope_parent}.cart-wrapper .product-item-wrapper {
 	 		display: flex;
+	 		width: 100%;
 	 		background: transparent;
 	 		background: white;
 	 		margin: 10px 0;
 	 		padding: 5px;
+	 		border-bottom: 1px solid grey;
 	 	}
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .photo-col {
 	 		display: block;
