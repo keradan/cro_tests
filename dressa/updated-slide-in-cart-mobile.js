@@ -544,6 +544,9 @@
 	 		opacity: 0;
 	 	}
 
+	 	${scope_parent}.cart-wrapper .inner {
+	 		background: white;
+	 	}
 	 	${scope_parent}.cart-wrapper .body {
 	 		overflow-y: scroll;
 	 		max-height: 60vh;
@@ -555,7 +558,6 @@
 	 		display: flex;
 	 		width: 100%;
 	 		background: transparent;
-	 		background: white;
 	 		margin: 10px 0;
 	 		padding: 5px;
 	 		border-bottom: 1px solid grey;
