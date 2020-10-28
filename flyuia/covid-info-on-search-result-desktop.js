@@ -42,7 +42,7 @@
 		    margin-top: 10px;
 		    height: 90px;
 		    display: flex;
-		    justify-content: space-between;
+		    justify-content: space-around;
 		    align-items: center;
 		    padding-left: 70px;
 		    padding-right: 10px;
@@ -109,8 +109,8 @@
 		.${test_data.css_scope_name}-top-box .small-right-text::before {
 			content: "";
 			position: absolute;
-			min-width: calc(100% + 80px);
-			right: -50px;
+			min-width: calc(100% + 530px);
+			right: -500px;
 			top: 50%;
 			z-index: -1;
 			background: rgba(9, 111, 74, 0.05);
@@ -213,7 +213,7 @@
  				},
  				"KBP-IST": {
  					top_box_text_1: '<span>Бесплатное изменение дат</span><br>Если планы изменятся, самостоятельно<br>меняйте даты путешествия',
- 					top_box_text_2: 'Въезд для граждан и резидентов Турции и Украины свободный при условии наличия<br>страхового полиса, который покрывает лечение COVID-19',
+ 					top_box_text_2: 'Въезд для граждан и резидентов Турции и Украины свободный при<br>условии наличия страхового полиса, который покрывает лечение COVID-19',
  				},
  				"IST-KBP": {
  					top_box_text_1: '<span>Бесплатное изменение дат</span><br>Если планы изменятся, самостоятельно<br>меняйте даты путешествия',
@@ -247,7 +247,7 @@
  				},
  				"KBP-IST": {
  					top_box_text_1: '<span>Безкоштовна зміна дат</span><br>Якщо плани зміняться, самостійно<br>змінюйте дати подорожі',
- 					top_box_text_2: 'В’їзд для громадян та резидентів України та Туреччини вільний за умови<br>наявності страхового полісу, що покриває лікування COVID-19',
+ 					top_box_text_2: 'В’їзд для громадян та резидентів України та Туреччини вільний<br>за умови наявності страхового полісу, що покриває лікування COVID-19',
  				},
  				"IST-KBP": {
  					top_box_text_1: '<span>Безкоштовна зміна дат</span><br>Якщо плани зміняться, самостійно<br>змінюйте дати подорожі',
@@ -281,7 +281,7 @@
  				},
  				"KBP-IST": {
  					top_box_text_1: '<span>Free date change</span><br>Book with confidence and, if needed,<br>change travel dates yourself',
- 					top_box_text_2: 'Entry for citizens and residents of Turkey and Ukraine is free if they<br>have insurance covering the costs of COVID-19 treatment.',
+ 					top_box_text_2: 'Entry for citizens and residents of Turkey and Ukraine is free<br>if they have insurance covering the costs of COVID-19 treatment.',
  				},
  				"IST-KBP": {
  					top_box_text_1: '<span>Free date change</span><br>Book with confidence and, if needed,<br>change travel dates yourself',
