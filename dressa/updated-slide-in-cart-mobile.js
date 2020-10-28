@@ -350,11 +350,24 @@
 			let promo_code_input_el = cur_test.markup.elements.cart.querySelector(`.promo-code-box input`);
 			if(!promo_code_input_el.value) return;
 
-			cur_test.change_status('is_showing_cart_updating_products_and_total');
-			cur_test.start_cart_recounting();
+			fetch("https://rest.dressa.com.ua/api/order-promocode/accept", {
+				headers: {
+					authorization: "Bearer Yzk4MGU0ZDViNjRjNGRjYjRjMTcxZTAzNDUzOGNjOWU0ZmNhNzExNTg3Zjk3ZTRlYmVmZGI5MGYzY2MxZmZhNQ",
+				},
+				body: JSON.stringify({code: promo_code_input_el.value}),
+				method: "POST",
+			}).then((response) => {
+				return response.json();
+			})
+			.then((data) => {
+				console.log(data);
+			}).catch(error => console.error(error));
 
-			iframe.doc.querySelectorAll('app-promo-code form input[name="promoCode"]').value = promo_code_input_el.value
-			iframe.doc.querySelectorAll('app-promo-code form app-dressa-button').click();
+			// cur_test.change_status('is_showing_cart_updating_products_and_total');
+			// cur_test.start_cart_recounting();
+
+			// iframe.doc.querySelector('app-promo-code form input[name="promoCode"]').value = promo_code_input_el.value;
+			// iframe.doc.querySelector('app-promo-code form app-dressa-button').click();
 		},
 		increase_product_quantity: function(elem, cur_test) {
 			cur_test.log('increase_product_quantity button clicked. event target: ', elem);
