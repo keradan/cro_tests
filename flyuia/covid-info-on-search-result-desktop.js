@@ -106,7 +106,8 @@
 				font-size: 10px;
 			}
 		}
-		.krdn2ef24cf9-top-box .small-right-text::before {
+		.${test_data.css_scope_name}-top-box .small-right-text::before {
+			content: "";
 			position: absolute;
 			min-width: calc(100% + 75px);
 			right: -50px;
