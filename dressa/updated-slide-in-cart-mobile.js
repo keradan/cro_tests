@@ -226,7 +226,10 @@
 				<a href="${product_data.link}"><img src="${product_data.img_src}"></a>
 			</div>
 			<div class="content-col">
-				<a class="title" href="${product_data.link}">${product_data.title}</a>
+				<div class="head">
+					<a class="title" href="${product_data.link}">${product_data.title}</a>
+					<button class="favorites ${product_data.is_favorite ? 'active' : ''}" data-event="click" data-event-handler-name="add_to_favorites">${cur_test.markup.content.heart_icon}</button>
+				</div>
 				<div class="sizes-wrapper">
 					<div class="choosen-size-box" data-event="click" data-event-handler-name="toggle_sizes_select_box">
 						<div class="content">
@@ -248,11 +251,8 @@
 						<span class="number">${product_data.price}</span>
 						<span class="currency">${product_data.currency}</span>
 					</div>
+					<button class="delete" data-event="click" data-event-handler-name="delete_product">${cur_test.markup.content.trash_icon}</button>
 				</div>
-			</div>
-			<div class="actions-col">
-				<button class="favorites ${product_data.is_favorite ? 'active' : ''}" data-event="click" data-event-handler-name="add_to_favorites">${cur_test.markup.content.heart_icon}</button>
-				<button class="delete" data-event="click" data-event-handler-name="delete_product">${cur_test.markup.content.trash_icon}</button>
 			</div>
 		`;
 
@@ -614,8 +614,11 @@
 	 		background: transparent;
 	 		margin: 10px 0;
 	 		padding: 5px;
-	 		border-bottom: 1px solid grey;
+	 		border-top: 1px solid grey;
 	 	}
+	 	${scope_parent}.cart-wrapper .product-item-wrapper:first-child {
+		    border-top: none;
+		}
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .photo-col {
 	 		display: block;
 		    width: 30%;
@@ -629,7 +632,7 @@
 	 		max-width: 100%;
 	 	}
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col {
-	 		max-width: 60%;
+	 		max-width: 70%;
 	 		box-sizing: border-box;
 	 		padding: 0 10px;
 	 		display: flex;
@@ -637,12 +640,22 @@
 		    align-items: flex-start;
 		    justify-content: space-between;
 	 	}
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .head {
+	 		display: flex;
+	 		justify-content: space-between;
+	 		align-items: center;
+	 	}
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col a.title {
+	 		display: block;
 	 		color: black;
 	 		text-decoration: none;
 	 		font-family: Roboto;
 			font-weight: normal;
 			font-size: 13px;
+	 	}
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col button.favorites {
+	 		padding: 3px;
+	 		background: transparent;
 	 	}
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper {
 	 		position: relative;
@@ -742,21 +755,14 @@
 		    font-size: 14px;
 		    color: black;
 	 	}
-	 	${scope_parent}.cart-wrapper .product-item-wrapper .actions-col {
-	 		max-width: 10%;
-		    display: flex;
-		    flex-flow: column;
-		    justify-content: space-between;
-		    align-items: center;
-	 	}
-	 	${scope_parent}.cart-wrapper .product-item-wrapper .actions-col button {
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .quantity-wrapper button.delete {
 	 		padding: 3px;
 	 		background: transparent;
 	 	}
-	 	${scope_parent}.cart-wrapper .product-item-wrapper .actions-col button.favorites .bg {
+	 	${scope_parent}.cart-wrapper .product-item-wrapper button.favorites .bg {
 	 		opacity: 0;
 	 	}
-	 	${scope_parent}.cart-wrapper .product-item-wrapper .actions-col button.favorites.active .bg {
+	 	${scope_parent}.cart-wrapper .product-item-wrapper button.favorites.active .bg {
 	 		opacity: 1;
 	 	}
 
@@ -813,8 +819,13 @@
 		    width: calc(50% - 5px);
 		    border: 1px solid #594FA4;
 		    transition: transforn 0.2s ease;
-		    padding: 10px 0;
 		    border-radius: 4px;
+		    height: 50px;
+		    font-weight: bold;
+		    font-size: 10px;
+		    line-height: inherit;
+		    letter-spacing: 0.2em;
+		    text-transform: uppercase;
 	 	}
 	 	${scope_parent}.cart-wrapper .inner .bottom .buttons button.return-to-shopping {
 	 		color: black;
