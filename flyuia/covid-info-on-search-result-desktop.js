@@ -95,11 +95,13 @@
 		    letter-spacing: -0.02em;
 		    color: #096F4A;
 	 	}
-	 	.${test_data.css_scope_name}-top-box .small-right-text .small-text-11 {
-	 		font-size: 11px;
-	 	}
-		.${test_data.css_scope_name}-top-box .small-right-text .small-text-10 {
-			font-size: 10px;
+	 	@media (max-width: 1420px) {
+		 	.${test_data.css_scope_name}-top-box .small-right-text .small-text-11 {
+		 		font-size: 11px;
+		 	}
+			.${test_data.css_scope_name}-top-box .small-right-text .small-text-10 {
+				font-size: 10px;
+			}
 		}
 
 	 	.${test_data.css_scope_name}-top-box img.corona {
