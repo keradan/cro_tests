@@ -390,6 +390,17 @@
 		},
 		add_to_favorites: function(elem, cur_test) {
 			cur_test.log('add_to_favorites button clicked. event target: ', elem);
+			if(document.querySelector('.popup__logout').innerHTML == "Выйти") return;
+			cur_test.log('is user authanticated: ', document.querySelector('.popup__logout').innerHTML == "Выйти");
+			cur_test.change_status('is_showing_cart_updating_products_and_total');
+
+			let product_el = elem.closest('.scope-product');
+			let iframe_product_el = cur_test.iframe.doc.querySelector(`app-cart-item[data-product-id="${product_el.dataset.productId}"]`);
+
+			cur_test.start_cart_recounting(product_el, iframe_product_el);
+
+			// поменять на сердечко
+			// iframe_product_el.querySelector('.item__icons .icon__trash').click();
 		},
 		toggle_sizes_select_box: function(elem, cur_test) {
 			cur_test.log('toggle_sizes_select_box clicked. event target: ', elem);
