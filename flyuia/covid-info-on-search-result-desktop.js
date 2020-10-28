@@ -88,7 +88,7 @@
 	 	.${test_data.css_scope_name}-top-box .small-right-text {
 			position: relative;
 			max-width: calc(100% - 305px);
-			min-width: calc(50% + 60px);
+			min-width: calc(50% + 20px);
 			z-index: 1;
 			font-style: normal;
 			font-weight: 400;
@@ -109,7 +109,7 @@
 		.${test_data.css_scope_name}-top-box .small-right-text::before {
 			content: "";
 			position: absolute;
-			min-width: calc(100% + 75px);
+			min-width: calc(100% + 80px);
 			right: -50px;
 			top: 50%;
 			z-index: -1;
