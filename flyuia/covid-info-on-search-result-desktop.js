@@ -44,8 +44,8 @@
 		    display: flex;
 		    justify-content: space-between;
 		    align-items: center;
-		    padding-left: 80px;
-		    padding-right: 25px;
+		    padding-left: 70px;
+		    padding-right: 10px;
 		    overflow: hidden;
 		    transition: all 0.08s ease;
 		    opacity: 1;
@@ -58,36 +58,38 @@
 		}
 	 	.${test_data.css_scope_name}-top-box::before {
 			content: "";
-			position: absolute;
-			width: 65%;
-			height: 100%;
-			top: 0;
-			right: -50px;
-			z-index: 0;
-			background: rgba(9, 111, 74, 0.05);
-			transform: skew(-30deg, 0);
+		    position: absolute;
+		    width: calc(100% - 330px);
+		    height: 100%;
+		    top: 0;
+		    right: -50px;
+		    z-index: 0;
+		    background: rgba(9, 111, 74, 0.05);
+		    transform: skew(-25deg, 0);
 	 	}
 	 	.${test_data.css_scope_name}-top-box .big-left-text {
-	 		width: 31%;
+ 		    width: 376px;
+ 		    width: 300px;
 		    z-index: 1;
 		    font-weight: 400;
-		    font-size: 16px;
+		    font-size: 15px;
 		    line-height: 24px;
 		    align-items: center;
 		    letter-spacing: -0.02em;
 		    color: #096F4A;
 	 	}
 	 	.${test_data.css_scope_name}-top-box .big-left-text span {
-			font-size: 20px;
+			font-size: 18px;
 			text-transform: uppercase;
 			font-weight: 500;
 		}
 	 	.${test_data.css_scope_name}-top-box .small-right-text {
 	 		width: 69%;
+	 		width: calc(100% - 305px);
 		    z-index: 1;
 		    font-style: normal;
 		    font-weight: 400;
-		    font-size: 13px;
+		    font-size: 10px;
 		    line-height: 22px;
 		    text-align: right;
 		    letter-spacing: -0.02em;
