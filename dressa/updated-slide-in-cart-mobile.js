@@ -45,12 +45,17 @@
 	 	cart_el.setAttribute('data-test-name', cur_test.init.name);
 		cart_el.innerHTML = `
 	 		<div class="inner">
+	 			<button class="close-cart" data-event="click" data-event-handler-name="close_cart">close X</button>
 	 			<div class="head">
 	 				<div class="title">Товары в корзине</div>
 	 			</div>
 	 			<div class="body">
 	 				<div class="products-wrapper"></div>
 	 				<div class="total"></div>
+	 				<div class="promo-code-box">
+			 			<input type="text">
+			 			<button data-event="click" data-event-handler-name="assign_promo_code">Подтвердить</button>
+		 			</div>
 	 			</div>
 	 			<div class="bottom">
 	 				<div class="total">
@@ -65,15 +70,6 @@
 		 				<button class="checkout" data-event="click" data-event-handler-name="checkout">Оформить заказ</button>
 		 			</div>
 	 			</div>
-	 			<button class="close-cart" data-event="click" data-event-handler-name="close_cart">close X</button>
-	 			
-	 			
-	 			<div class="promo-code-box">
-		 			<input class="" type="text">
-		 			<button data-event="click" data-event-handler-name="assign_promo_code">Подтвердить</button>
-	 			</div>
-	 			
-	 			
 	 		</div>
 	 	`;
 	 	return cart_el;
