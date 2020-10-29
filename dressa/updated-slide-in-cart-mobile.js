@@ -152,7 +152,19 @@
 		})
 		.then(function(msg) {
 			cur_test.log(msg);
-			cur_test.iframe.doc.querySelector('app-basket-page div.title').click(); // этот кусочек просто кликает по заголовку страницы, тем самым как-то оживляет почему-то спящий айфрейм
+
+			cur_test.log('keradan starting of title clicking');
+			
+			let title_clicking_timer = setInterval(function(){
+				cur_test.iframe.doc.querySelector('app-basket-page div.title').click(); // этот кусочек просто кликает по заголовку страницы, тем самым как-то оживляет почему-то спящий айфрейм
+				cur_test.log('title click');
+			}, 100);
+
+			setTimeout(function(){
+				clearInterval(title_clicking_timer);
+				cur_test.log('clicking failed');
+			}, 15000);
+			
 			return get_iframe_promise(promises_attributes.basket_products_loaded); // Ждем когда появятся товары
 		})
 		.then(function(msg) {
