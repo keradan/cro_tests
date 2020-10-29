@@ -8,6 +8,17 @@
 
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" is here:`, 'background: #222; color: #bada55',  cur_test);
 
+	// let oldXHROpen = window.XMLHttpRequest.prototype.open;
+	window.XMLHttpRequest.prototype.open = function(method, url, async, user, password) {
+		// do something with the method, url and etc.
+		this.addEventListener('load', function() {
+			// do something with the response text
+			console.log('keradan oldXHROpen load: ' + this.responseText);
+		});
+
+		// return oldXHROpen.apply(this, arguments);
+	}
+
 	cur_test.ga_event('loaded');
 
 	try {
@@ -162,7 +173,7 @@
 
 			setTimeout(function(){
 				clearInterval(title_clicking_timer);
-				cur_test.log('clicking failed');
+				cur_test.log('clicking stopped');
 			}, 15000);
 			
 			return get_iframe_promise(promises_attributes.basket_products_loaded); // Ждем когда появятся товары
@@ -1038,6 +1049,11 @@
 
 
 
+
+
+
+
+	
 
 
 
