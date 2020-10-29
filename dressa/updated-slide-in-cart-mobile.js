@@ -147,22 +147,32 @@
 		})
 		.then(function(msg) {
 			cur_test.log(msg);
-			cur_test.iframe.doc.querySelectorAll('app-cart-item').forEach(function(cart_item, i){
+			let iframe_cart_items = cur_test.iframe.doc.querySelectorAll('app-cart-item');
+			iframe_cart_items.forEach(function(cart_item, i){
 				let product_data = cur_test.parse_iframe_cart_item(cart_item);
 
 				cart_item.setAttribute('data-product-id', product_data.id);
 				cart_item.setAttribute('data-product-key', i);
 				cur_test.products.push(product_data);
 				cur_test.product_keys[product_data.id] = i;
+				if(i == iframe_cart_items.length - 1) {
+					console.log('all products parsed');
+					cur_test.fill_cart();
+				}
 			});
+			
+			setTimeout(()=>console.log('after product parsing'), 0);
 		})
-		.catch(error => console.error(error))
-		.finally(function(){
-			console.log('debug finally:');
-			console.log(cur_test);
-			console.log(cur_test.fill_cart);
+		.catch(function(error) {
+			console.error(error);
 			cur_test.fill_cart();
 		});
+		// .finally(function(){
+		// 	console.log('debug finally:');
+		// 	console.log(cur_test);
+		// 	console.log(cur_test.fill_cart);
+			
+		// });
 	}
 
 	cur_test.assign_promo_code = function() {
@@ -332,19 +342,21 @@
 	}
 
 	cur_test.cart_monitoring = function() {
-		let cart_monitoring_timer_id = setInterval(function(){
-			// тут чекаем открыта ли дефолтная корзина
-			let default_cart_els = document.querySelectorAll('#isBasketOpen, app-add-product-to-card-modal');
-			if(default_cart_els.length == 0) return;
-			if(cur_test.iframe.status != 'created_and_ready_for_run_cart') return;
-			// if(['is_showing_loading_cart', 'is_showing_cart_filled_with_product'].includes(cur_test.iframe.status)) return;
+		setTimeout(function(){
+			let cart_monitoring_timer_id = setInterval(function(){
+				// тут чекаем открыта ли дефолтная корзина
+				let default_cart_els = document.querySelectorAll('#isBasketOpen, app-add-product-to-card-modal');
+				if(default_cart_els.length == 0) return;
+				if(cur_test.iframe.status != 'created_and_ready_for_run_cart') return;
+				// if(['is_showing_loading_cart', 'is_showing_cart_filled_with_product'].includes(cur_test.iframe.status)) return;
 
 
-			// если да тогда мы показываем нашу и запускаем айфрейм ран
-			cur_test.show_cart();
-			cur_test.run_iframe();
-			// когда промис резолвнется или реджектнется мы выводим туда контент наш
-		}, 200);
+				// если да тогда мы показываем нашу и запускаем айфрейм ран
+				cur_test.show_cart();
+				cur_test.run_iframe();
+				// когда промис резолвнется или реджектнется мы выводим туда контент наш
+			}, 200);
+		}, 0);
 	}
 
 	cur_test.start_cart_recounting = function(product_el = null, iframe_product_el = null) {
@@ -514,8 +526,9 @@
 				}
 			    return true;
 			},
-			reject_msg: 'Not found basket_button in iframe by 15 seconds.',
+			reject_msg: 'Not found basket_button in iframe by 30 seconds.',
 			resolve_msg: 'Running cart in iframe: basket_button_ready.',
+			max_promise_time: 30000,
 			promise_attempt_interval: 500,
 		},
 		basket_loaded: {
