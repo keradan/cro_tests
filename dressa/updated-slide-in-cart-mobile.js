@@ -127,10 +127,8 @@
 		.then(function(msg) {
 			cur_test.log(msg);
 
-			// если товаров нет и я знаю об этом заранее, тогда мы не ждем их появления
+			// если товаров нет и я знаю об этом заранее, тогда мы не ждем их появления а сразу вызываем корзину
 			if(document.querySelector('.basket-wrapper .products h3.empty')) {
-				// promises_attributes.basket_products_loaded.max_promise_time = 1;
-				// Открываем корзину на этом этапе, и пишем там что она пустая
 				cur_test.show_cart();
 				return Promise.reject(new Error('iframe promise rejected. Basket is empty (known in advance).'));
 			}
@@ -299,7 +297,7 @@
 		cur_test.log('keradan filling cart with products: ', cur_test.products);
 
 		let cart_totals_data = cur_test.products.length > 0 ? cur_test.render_cart_totals() : {
-			body_totals_markup: `<div class="cart__payment_title">Корзина пуста</div>`,
+			body_totals_markup: '', // `<div class="cart__payment_title">Корзина пуста</div>`
 			bottom_total_price: '0 грн',
 		};
 		
@@ -596,6 +594,29 @@
 		    background-position: center;
 		    background-size: 50px;
 		}
+		${scope_parent}.cart-wrapper.empty-cart .inner .body::after {
+			content: "Корзина пуста";
+		    position: absolute;
+		    top: 0;
+		    height: 100%;
+		    width: 100%;
+		    display: flex;
+		    justify-content: center;
+		    align-items: center;
+		    font-weight: bold;
+		    font-size: 14px;
+		    text-align: center;
+		    letter-spacing: 0.3em;
+		    text-transform: uppercase;
+		    color: grey;
+		}
+
+		${scope_parent}.cart-wrapper.empty-cart .inner .body .products-wrapper,
+		${scope_parent}.cart-wrapper.empty-cart .inner .body .total,
+		${scope_parent}.cart-wrapper.empty-cart .inner .body .promo-code-box {
+			display: none;
+		}
+
 	 	${scope_parent}.cart-wrapper .inner .head .title {
 	 		font-weight: bold;
 	    	font-size: 15px;
@@ -607,7 +628,9 @@
 	 	}
 	 	${scope_parent}.cart-wrapper .body {
 	 		overflow-y: scroll;
-	 		max-height: 60vh;
+		    max-height: 60vh;
+		    min-height: 40vh;
+		    position: relative;
 	 	}
 	 	${scope_parent}.cart-wrapper .products-wrapper {
 	 		width: 100%;
