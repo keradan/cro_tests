@@ -203,6 +203,7 @@
 		});
 
 		setTimeout(() => cur_test.markup.elements.cart.classList.toggle('hide', false), 0);
+		setTimeout(() => cur_test.markup.elements.cart.classList.toggle('loading', true), 0);
 	}
 
 	cur_test.render_cart_totals = function() {
@@ -304,6 +305,7 @@
 		document.querySelector(`${scope_parent} .inner .body .total`).innerHTML = cart_totals_data.body_totals_markup;
 		document.querySelector(`${scope_parent} .inner .bottom .total .price`).innerHTML = cart_totals_data.bottom_total_price;
 		document.querySelector(`${scope_parent}`).classList.toggle('empty-cart', cur_test.products.length == 0);
+		setTimeout(() => cur_test.markup.elements.cart.classList.toggle('loading', false), 0);
 
 		cur_test.products.forEach(function(product_data, i){
 			let product_el = document.createElement('div');
@@ -581,7 +583,13 @@
 	 		width: 100vw;
 	 		background: white;
 	 	}
-	 	${scope_parent}.cart-wrapper .inner.loading::after {
+	 	${scope_parent}.cart-wrapper .body {
+	 		overflow-y: scroll;
+		    max-height: 60vh;
+		    min-height: 40vh;
+		    position: relative;
+	 	}
+	 	${scope_parent}.cart-wrapper.loading .inner .body::after {
 		    content: "";
 		    position: absolute;
 		    top: 0;
@@ -593,8 +601,9 @@
 		    background-repeat: no-repeat;
 		    background-position: center;
 		    background-size: 50px;
+		    z-index: 2;
 		}
-		${scope_parent}.cart-wrapper.empty-cart .inner .body::after {
+		${scope_parent}.cart-wrapper.empty-cart .inner .body::before {
 			content: "Корзина пуста";
 		    position: absolute;
 		    top: 0;
@@ -609,11 +618,15 @@
 		    letter-spacing: 0.3em;
 		    text-transform: uppercase;
 		    color: grey;
+		    z-index: 1;
 		}
 
 		${scope_parent}.cart-wrapper.empty-cart .inner .body .products-wrapper,
 		${scope_parent}.cart-wrapper.empty-cart .inner .body .total,
-		${scope_parent}.cart-wrapper.empty-cart .inner .body .promo-code-box {
+		${scope_parent}.cart-wrapper.empty-cart .inner .body .promo-code-box,
+		${scope_parent}.cart-wrapper.loading .inner .body .products-wrapper,
+		${scope_parent}.cart-wrapper.loading .inner .body .total,
+		${scope_parent}.cart-wrapper.loading .inner .body .promo-code-box {
 			display: none;
 		}
 
@@ -625,12 +638,6 @@
 		    text-transform: uppercase;
 		    line-height: 73px;
 		    border-bottom: 1px solid #CCCCCC;
-	 	}
-	 	${scope_parent}.cart-wrapper .body {
-	 		overflow-y: scroll;
-		    max-height: 60vh;
-		    min-height: 40vh;
-		    position: relative;
 	 	}
 	 	${scope_parent}.cart-wrapper .products-wrapper {
 	 		width: 100%;
@@ -673,7 +680,6 @@
 	 		align-items: center;
 	 	}
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col a.product-title {
-
 	 		display: block;
 	 		color: black;
 	 		text-decoration: none;
