@@ -6,17 +6,17 @@
 	cur_test.init.enable_log = true;
 	cur_test.init.enable_ga_events = false;
 
-	let v = 1;
+	let v = 2;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 
-	// let oldXHROpen = window.XMLHttpRequest.prototype.open;
+	let oldXHROpen = window.XMLHttpRequest.prototype.open;
 	window.XMLHttpRequest.prototype.open = function(method, url, async, user, password) {
-		console.log('keradan window.XMLHttpRequest.prototype.open');
+		
 		// do something with the method, url and etc.
-		// this.addEventListener('load', function() {
-		// 	// do something with the response text
-		// 	console.log('keradan oldXHROpen load: ' + this.responseText);
-		// });
+		this.addEventListener('load', function() {
+			// do something with the response text
+			console.log('keradan oldXHROpen load: ' + this.responseText);
+		});
 
 		return oldXHROpen.apply(this, arguments);
 	}
