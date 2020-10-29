@@ -88,9 +88,10 @@
 
 		cur_test.iframe.el = document.createElement('iframe');
 		cur_test.iframe.el.classList.add('keradan-cart-iframe');
-		// cur_test.iframe.el.setAttribute('width', '350');
-		// cur_test.iframe.el.setAttribute('height', '500');
-		cur_test.iframe.el.setAttribute('style', 'display: none;'); //border: 2px solid red; margin-bottom: 100px;
+		cur_test.iframe.el.setAttribute('width', '350');
+		cur_test.iframe.el.setAttribute('height', '500');
+		cur_test.iframe.el.setAttribute('style', 'border: 2px solid red; margin-bottom: 100px;');
+		// cur_test.iframe.el.setAttribute('style', 'display: none;'); //border: 2px solid red; margin-bottom: 100px;
 		document.body.append(cur_test.iframe.el);
 
 		cur_test.iframe.doc = cur_test.iframe.el.contentWindow.document;

@@ -9,8 +9,8 @@
 	let keradan_ga_event = function(eventAction, eventLabel = null) {
 		let dataLayer = window.dataLayer || [];
 		let ga_data = {
-			'event': 'event-to-ga',
-			'eventCategory': 'dfhjfdhdjfjhdfhjdfhjdfhdfdhfjhdfhjdfhdhjddfhjdfhjdfhjhjdfhjdhhjdhjdfhjdfhjfd',
+			'event': 'autoEvent2',
+			'eventCategory': 'Exp - Search results - covid info',
 			'eventAction': eventAction
 		};
 		if (eventLabel) ga_data['eventLabel'] = eventLabel;
@@ -18,10 +18,19 @@
 		if(false) dataLayer.push(ga_data);
 	}
 
-	keradan_ga_event('loaded');
+	keradan_ga_event('activated');
 
 	try {
-    	// jdksdjdskjdsjkdsjkdsjkdsjkd
+		(function(h,o,t,j,a,r){
+		    h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+		    h._hjSettings={hjid:1657822,hjsv:6};
+		    a=o.getElementsByTagName('head')[0];
+		    r=o.createElement('script');r.async=1;
+		    r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+		    a.appendChild(r);
+		})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+		window.hj = window.hj || function(){(hj.q = hj.q || []).push(arguments)};
+		hj('trigger', 'search-results-covid-info');
     }
     catch (e) {
 		keradan_log('Hotjar error: ', e);
