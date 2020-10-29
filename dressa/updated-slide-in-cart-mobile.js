@@ -157,7 +157,12 @@
 			});
 		})
 		.catch(error => console.error(error))
-		.finally(() => cur_test.fill_cart());
+		.finally(function(){
+			console.log('debug finally:');
+			console.log(cur_test);
+			console.log(cur_test.fill_cart);
+			cur_test.fill_cart();
+		});
 	}
 
 	cur_test.assign_promo_code = function() {
