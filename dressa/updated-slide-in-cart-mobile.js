@@ -132,7 +132,7 @@
 				// promises_attributes.basket_products_loaded.max_promise_time = 1;
 				// Открываем корзину на этом этапе, и пишем там что она пустая
 				cur_test.show_cart();
-				return Promise.reject('basket is empty (known in advance).');
+				return Promise.reject('iframe promise rejected. Basket is empty (known in advance).');
 			}
 
 			cur_test.iframe.doc.querySelector('.link__shopping').click();
