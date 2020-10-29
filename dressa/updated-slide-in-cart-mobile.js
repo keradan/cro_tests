@@ -88,9 +88,9 @@
 
 		cur_test.iframe.el = document.createElement('iframe');
 		cur_test.iframe.el.classList.add('keradan-cart-iframe');
-		cur_test.iframe.el.setAttribute('width', '350');
-		cur_test.iframe.el.setAttribute('height', '500');
-		cur_test.iframe.el.setAttribute('style', 'border: 2px solid red; margin-bottom: 100px;');
+		// cur_test.iframe.el.setAttribute('width', '350');
+		// cur_test.iframe.el.setAttribute('height', '500');
+		cur_test.iframe.el.setAttribute('style', 'display: none;'); //border: 2px solid red; margin-bottom: 100px;
 		document.body.append(cur_test.iframe.el);
 
 		cur_test.iframe.doc = cur_test.iframe.el.contentWindow.document;
@@ -293,6 +293,8 @@
 		cart_item.querySelectorAll('app-cart-item-size-filter ul.select__dropdown li').forEach(item => product_data.sizes.list.push(get_size_data(item)));
 		product_data.price_singular = product_data.price / product_data.quantity;
 		product_data.is_minimal_quantity = product_data.quantity == 1;
+
+		cur_test.log(`%c product_data for render product item:`, 'background: #d5ff00; color: #004454',  product_data);
 
 		return product_data;
 	}
@@ -560,8 +562,6 @@
 
 
 		/* Our test styles: */
-		.keradan-cart-iframe {display: none;}
-
 	 	${scope_parent}.cart-wrapper {
 	 		position: fixed;
 	 		top: 0;
