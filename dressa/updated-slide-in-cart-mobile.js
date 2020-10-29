@@ -16,7 +16,7 @@
 			console.log('keradan oldXHROpen load: ' + this.responseText);
 		});
 
-		// return oldXHROpen.apply(this, arguments);
+		return oldXHROpen.apply(this, arguments);
 	}
 
 	cur_test.ga_event('loaded');
