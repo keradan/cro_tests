@@ -126,18 +126,20 @@
 		get_iframe_promise(promises_attributes.iframe_is_created) // Ждем когда появится кнопка корзины чтобы нажать на нее и вывести попап с корзиной
 		.then(function(msg) {
 			cur_test.log(msg);
+
+			// если товаров нет и я знаю об этом заранее, тогда мы не ждем их появления
+			if(document.querySelector('.basket-wrapper .products h3.empty')) {
+				// promises_attributes.basket_products_loaded.max_promise_time = 1;
+				// Открываем корзину на этом этапе, и пишем там что она пустая
+				cur_test.show_cart();
+				return Promise.reject();
+			}
+
 			cur_test.iframe.doc.querySelector('.link__shopping').click();
 			return get_iframe_promise(promises_attributes.basket_button_ready); // Ждем когда в попапе появится кнопка оформить заказ, чтобы мы могли перейти на страницу корзины
 		})
 		.then(function(msg) {
 			cur_test.log(msg);
-			// если товаров нет и я знаю об этом заранее, тогда мы не ждем их появления
-			// if(cur_test.iframe.doc.querySelector('.basket-wrapper .products h3.empty')) {
-			// 	promises_attributes.basket_products_loaded.max_promise_time = 1;
-			// 	// Открываем корзину на этом этапе, и пишем там что она пустая
-			// 	// cur_test.show_cart();
-			// 	// return Promise.reject();
-			// }
 			cur_test.iframe.doc.querySelector('.basket-btn app-dressa-button').click();
 			return get_iframe_promise(promises_attributes.basket_loaded); // Ждем пока загрузиться страница корзины
 		})
