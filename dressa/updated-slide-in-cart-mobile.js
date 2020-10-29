@@ -230,7 +230,7 @@
 			<div class="content-col">
 				<div class="head">
 					<a class="product-title" href="${product_data.link}">${product_data.title}</a>
-					<button class="favorites ${product_data.is_favorite ? 'active' : ''}" data-event="click" data-event-handler-name="add_to_favorites">${cur_test.markup.content.heart_icon}</button>
+					<button class="favorites ${product_data.is_favorite ? 'active' : ''}" data-event="click" data-event-handler-name="add_to_favorites" ${product_data.disable_favorite ? 'data-disable-favorite' : ''}>${cur_test.markup.content.heart_icon}</button>
 				</div>
 				<div class="sizes-wrapper">
 					<div class="choosen-size-box" data-event="click" data-event-handler-name="toggle_sizes_select_box">
@@ -272,12 +272,16 @@
 			return size_item_data;
 		}
 
+		let popup_logout = document.querySelector('.popup__logout');
+		let iframe_popup_logout = cur_test.iframe.doc.querySelector('.popup__logout');
+
 		let product_data = {
 			id: cart_item.querySelector('a.item__photo').getAttribute('href').split('-').reverse()[0],
 			img_src: cart_item.querySelector('a.item__photo img').getAttribute('src'),
 			link: cart_item.querySelector('a.item__photo').getAttribute('href'),
 			title: cart_item.querySelector('h3.item__info_title').innerHTML,
 			is_favorite: cart_item.querySelector('.item__icons .icon__heart').classList.contains('icon__heart--active'),
+			disable_favorite: (!popup_logout || !iframe_popup_logout || popup_logout.querySelector('.popup__logout').innerHTML != "Выйти" || iframe_popup_logout.querySelector('.popup__logout').innerHTML != "Выйти"),
 			quantity: parseInt(cart_item.querySelector('div.item__quantity_counter span.counter__quantity').innerHTML),
 			price: parseInt(cart_item.querySelector('div.item__price .item__price_amount').innerHTML.replace(/[\D]+/g, '')),
 			currency: 'грн',
@@ -443,9 +447,11 @@
 		add_to_favorites: function(elem, cur_test) {
 			cur_test.log('add_to_favorites button clicked. event target: ', elem);
 
-			cur_test.log('is user authanticated: ', document.querySelector('.popup__logout').innerHTML == "Выйти");
-			cur_test.log('is user authanticated in iframe: ', cur_test.iframe.doc.querySelector('.popup__logout').innerHTML == "Выйти");
-			if(document.querySelector('.popup__logout').innerHTML != "Выйти" || cur_test.iframe.doc.querySelector('.popup__logout').innerHTML != "Выйти") return;
+			// cur_test.log('is user authanticated: ', document.querySelector('.popup__logout').innerHTML == "Выйти");
+			// cur_test.log('is user authanticated in iframe: ', cur_test.iframe.doc.querySelector('.popup__logout').innerHTML == "Выйти");
+			let popup_logout = document.querySelector('.popup__logout');
+			let iframe_popup_logout = cur_test.iframe.doc.querySelector('.popup__logout');
+			if (!popup_logout || !iframe_popup_logout || popup_logout.querySelector('.popup__logout').innerHTML != "Выйти" || iframe_popup_logout.querySelector('.popup__logout').innerHTML != "Выйти") return;
 			
 			cur_test.change_status('is_showing_cart_updating_products_and_total');
 
@@ -697,6 +703,10 @@
 	 		padding: 3px;
 	 		background: transparent;
 	 	}
+	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col button.favorites[data-disable-favorite] {
+	 		display: none;
+	 	}
+	 	
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .content-col .sizes-wrapper {
 	 		position: relative;
 	 		width: 100%;
