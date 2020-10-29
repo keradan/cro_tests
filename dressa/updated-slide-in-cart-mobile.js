@@ -547,6 +547,13 @@
 
 	let scope_parent = `.scope-parent[data-scope-name=${cur_test.init.css_scope_name}]`;
 	document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
+		/* Default elements hide: */
+		#isBasketOpen, .header__main_links .basket-wrapper .products-overlay {
+			display: none;
+		}
+
+
+		/* Our test styles: */
 	 	${scope_parent}.cart-wrapper {
 	 		position: fixed;
 	 		top: 0;
