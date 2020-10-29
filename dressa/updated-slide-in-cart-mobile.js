@@ -324,11 +324,12 @@
 			body_totals_markup: '', // `<div class="cart__payment_title">Корзина пуста</div>`
 			bottom_total_price: '0 грн',
 		};
-		
+		document.querySelector(`${scope_parent} .inner .body`).addEventListener('touchmove', (e) => e.stopPropagation(), true);
 		document.querySelector(`${scope_parent} .inner .body .total`).innerHTML = cart_totals_data.body_totals_markup;
 		document.querySelector(`${scope_parent} .inner .bottom .total .price`).innerHTML = cart_totals_data.bottom_total_price;
 		document.querySelector(`${scope_parent}`).classList.toggle('empty-cart', cur_test.products.length == 0);
 		setTimeout(() => cur_test.markup.elements.cart.classList.toggle('loading', false), 0);
+
 
 		cur_test.products.forEach(function(product_data, i){
 			let product_el = document.createElement('div');
