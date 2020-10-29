@@ -131,11 +131,13 @@
 		})
 		.then(function(msg) {
 			cur_test.log(msg);
-			if(cur_test.iframe.doc.querySelector('.basket-wrapper .products h3.empty')) {
-				// Открываем корзину на этом этапе, и пишем там что она пустая
-				cur_test.show_cart();
-				return Promise.reject();
-			}
+			// если товаров нет и я знаю об этом заранее, тогда мы не ждем их появления
+			// if(cur_test.iframe.doc.querySelector('.basket-wrapper .products h3.empty')) {
+			// 	promises_attributes.basket_products_loaded.max_promise_time = 1;
+			// 	// Открываем корзину на этом этапе, и пишем там что она пустая
+			// 	// cur_test.show_cart();
+			// 	// return Promise.reject();
+			// }
 			cur_test.iframe.doc.querySelector('.basket-btn app-dressa-button').click();
 			return get_iframe_promise(promises_attributes.basket_loaded); // Ждем пока загрузиться страница корзины
 		})
@@ -517,7 +519,7 @@
 			},
 			reject_msg: 'Not found basket products in iframe by 15 seconds.',
 			resolve_msg: 'Running cart in iframe: basket products founded in iframe.',
-			max_promise_time: 3000,
+			max_promise_time: 15000,
 			promise_attempt_interval: 100,
 		},
 		cart_payment_updating_begin: {
