@@ -92,11 +92,12 @@
 		// cur_test.iframe.el.setAttribute('height', '500');
 		cur_test.iframe.el.setAttribute('style', `
 			position: fixed;
-			top: 110px;
-			height: 90vh
-			left: 5vw;
-			border: 2px solid red;
-			width: 90vw;
+		    top: 110px;
+		    height: 85vh;
+		    left: 1vw;
+		    border: 2px solid red;
+		    width: 80vw;
+		    opacity: 0.8;
 		`);
 		// cur_test.iframe.el.setAttribute('style', 'display: none;'); //border: 2px solid red; margin-bottom: 100px;
 		document.body.append(cur_test.iframe.el);
