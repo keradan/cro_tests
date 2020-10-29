@@ -355,7 +355,7 @@
 	}
 
 	cur_test.start_cart_recounting = function(product_el = null, iframe_product_el = null) {
-		cur_test.markup.cart.classList.toggle('loading', true);
+		cur_test.markup.elements.cart.classList.toggle('loading', true);
 		get_iframe_promise(promises_attributes.cart_payment_updating_begin)
 		.then(function(msg) {
 			cur_test.log(msg);
@@ -379,7 +379,7 @@
 					product_el.querySelectorAll(`*[data-event][data-event-handler-name]:not([data-already-listened])`).forEach(cur_test.add_cart_event);
 				}
 			}
-			cur_test.markup.cart.classList.toggle('loading', false);
+			cur_test.markup.elements.cart.classList.toggle('loading', false);
 			cur_test.change_status('is_showing_cart_filled_with_product');
 		})
 		.catch(error => console.error(error));
