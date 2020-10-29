@@ -544,10 +544,10 @@
 				if(iframe.doc.querySelector('app-checkout-cart-mobile-block .cart.cart--payment-update') != null) return false;
 			    return true;
 			},
-			reject_msg: '.cart.cart--payment-update updating too long: 5 seconds.',
+			reject_msg: '.cart.cart--payment-update updating too long: 15 seconds.',
 			resolve_msg: 'Changing product data in cart: iframe cart updating ended',
-			max_promise_time: 5000,
-			promise_attempt_interval: 70,
+			max_promise_time: 15000,
+			promise_attempt_interval: 500,
 		},
 	};
 
@@ -560,6 +560,8 @@
 
 
 		/* Our test styles: */
+		.keradan-cart-iframe {display: none;}
+
 	 	${scope_parent}.cart-wrapper {
 	 		position: fixed;
 	 		top: 0;
