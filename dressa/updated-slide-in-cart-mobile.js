@@ -40,7 +40,7 @@
 
 	cur_test.get_default_cart_el = function(cur_test) {
 		let cart_el = document.createElement('div');
-	 	cart_el.classList.add(`scope-parent`, 'cart-wrapper', 'hide');
+	 	cart_el.classList.add(`scope-parent`, 'cart-wrapper', 'hide', 'loading');
 	 	cart_el.setAttribute('data-scope-name', cur_test.init.css_scope_name);
 	 	cart_el.setAttribute('data-test-name', cur_test.init.name);
 		cart_el.innerHTML = `
@@ -203,7 +203,6 @@
 		});
 
 		setTimeout(() => cur_test.markup.elements.cart.classList.toggle('hide', false), 0);
-		setTimeout(() => cur_test.markup.elements.cart.classList.toggle('loading', true), 0);
 	}
 
 	cur_test.render_cart_totals = function() {
