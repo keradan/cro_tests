@@ -40,7 +40,7 @@
 
 	cur_test.get_default_cart_el = function(cur_test) {
 		let cart_el = document.createElement('div');
-	 	cart_el.classList.add(`scope-parent`, 'cart-wrapper', 'hide', 'loading');
+	 	cart_el.classList.add(`scope-parent`, 'cart-wrapper', 'hide', 'loading', 'empty-cart');
 	 	cart_el.setAttribute('data-scope-name', cur_test.init.css_scope_name);
 	 	cart_el.setAttribute('data-test-name', cur_test.init.name);
 		cart_el.innerHTML = `
@@ -166,11 +166,6 @@
 		.catch(function(error) {
 			console.error(error);
 			cur_test.fill_cart();
-		})
-		.finally(function(){
-			console.log('debug finally');
-			// console.log(cur_test);
-			// console.log(cur_test.fill_cart);
 		});
 	}
 
@@ -654,10 +649,7 @@
 
 		${scope_parent}.cart-wrapper.empty-cart .inner .body .products-wrapper,
 		${scope_parent}.cart-wrapper.empty-cart .inner .body .total,
-		${scope_parent}.cart-wrapper.empty-cart .inner .body .promo-code-box,
-		${scope_parent}.cart-wrapper.loading .inner .body .products-wrapper,
-		${scope_parent}.cart-wrapper.loading .inner .body .total,
-		${scope_parent}.cart-wrapper.loading .inner .body .promo-code-box {
+		${scope_parent}.cart-wrapper.empty-cart .inner .body .promo-code-box {
 			display: none;
 		}
 
@@ -959,7 +951,7 @@
 		    align-items: center;
 		    padding: 10px;
 		    padding-top: 15px;
-		    padding-bottom: 50px;
+		    padding-bottom: 80px;
 	 	}
 	 	${scope_parent}.cart-wrapper .inner .bottom .buttons button {
 	 		display: block;
