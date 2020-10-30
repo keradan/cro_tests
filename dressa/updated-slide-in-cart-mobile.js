@@ -6,39 +6,8 @@
 	cur_test.init.enable_log = true;
 	cur_test.init.enable_ga_events = false;
 
-	let v = 15;
+	let v = 16;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
-
-	let xhr_intercept_function = function() {
-		if (this.keradan_xhr_data.method == 'GET') return;
-		try {
-			let parsed_body = JSON.parse(this.keradan_xhr_data.body);
-			this.keradan_xhr_data.body = parsed_body;
-		}
-    	catch (e) { cur_test.log('keradan error when attempting to parse xhr body from json text: ', e); }
-
-    	if (!this.keradan_xhr_data.body.interaction || !this.keradan_xhr_data.body.interaction.type || this.keradan_xhr_data.body.interaction.type != 'addToBucket') return;
-		
-		cur_test.log(`%c Keradan product added to basket. Intercepted xhr: `, 'background: #222; color: #bada55',  this.keradan_xhr_data);
-		setTimeout(() => cur_test.product_add_intercepted = true, 2000);
-	}
-
-	let oldXHROpen = window.XMLHttpRequest.prototype.open;
-	window.XMLHttpRequest.prototype.open = function(method, url, async, user, password) {
-		if (!this.keradan_xhr_data) this.keradan_xhr_data = {};
-		this.keradan_xhr_data.url = url;
-		this.keradan_xhr_data.method = method;
-
-		this.addEventListener('load', xhr_intercept_function);
-		return oldXHROpen.apply(this, arguments);
-	}
-
-	let oldXHRSend = window.XMLHttpRequest.prototype.send;
-	window.XMLHttpRequest.prototype.send = function(body) {
-		if (!this.keradan_xhr_data) this.keradan_xhr_data = {};
-		this.keradan_xhr_data.body = body;
-		return oldXHRSend.apply(this, arguments);
-	}
 
 	cur_test.ga_event('loaded');
 
@@ -117,21 +86,23 @@
 
 		let parent_doc_text = document.documentElement.innerHTML;
 		parent_doc_text = parent_doc_text.replace(/src=\"https:\/\/keradan\.github\.io\/cro_tests/, "src=\"");
+		parent_doc_text = parent_doc_text.replace(/keradan/, "");
+		parent_doc_text = parent_doc_text.replace(/krdn/, "");
 
 		cur_test.iframe.el = document.createElement('iframe');
 		cur_test.iframe.el.classList.add('keradan-cart-iframe');
 		// cur_test.iframe.el.setAttribute('width', '350');
 		// cur_test.iframe.el.setAttribute('height', '500');
-		cur_test.iframe.el.setAttribute('style', `
-			position: fixed;
-		    top: 110px;
-		    height: 85vh;
-		    left: 1vw;
-		    border: 2px solid red;
-		    width: 80vw;
-		    opacity: 0.8;
-		`);
-		// cur_test.iframe.el.setAttribute('style', 'display: none;'); //border: 2px solid red; margin-bottom: 100px;
+		// cur_test.iframe.el.setAttribute('style', `
+		// 	position: fixed;
+		//     top: 110px;
+		//     height: 85vh;
+		//     left: 1vw;
+		//     border: 2px solid red;
+		//     width: 80vw;
+		//     opacity: 0.8;
+		// `);
+		cur_test.iframe.el.setAttribute('style', 'display: none;'); //border: 2px solid red; margin-bottom: 100px;
 		document.body.append(cur_test.iframe.el);
 
 		cur_test.iframe.doc = cur_test.iframe.el.contentWindow.document;
@@ -244,7 +215,7 @@
 			cur_test.markup.elements.cart = cur_test.get_default_cart_el(cur_test);
 		}, 300);
 		
-		setTimeout(() => cur_test.create_iframe(), 601); // когда я закрываю корзину, начинаем перегружать айфрейм
+		// setTimeout(() => cur_test.create_iframe(), 601); // когда я закрываю корзину, начинаем перегружать айфрейм
 	}
 
 	cur_test.add_cart_event = function(elem){
@@ -256,7 +227,7 @@
 	}
 
 	cur_test.show_cart = function() {
-		cur_test.change_status('is_showing_loading_cart');
+		// cur_test.change_status('is_showing_loading_cart');
 		cur_test.log('keradan showing cart without products (loading)');
 		
 		document.body.append(cur_test.markup.elements.cart);
@@ -396,17 +367,18 @@
 				// тут чекаем открыта ли дефолтная корзина
 				let default_cart_els = document.querySelectorAll('#isBasketOpen, app-add-product-to-card-modal');
 				if(default_cart_els.length == 0) return;
-				if(cur_test.iframe.status != 'created_and_ready_for_run_cart') return;
+				if(cur_test.iframe.status != 'closed') return;
 				// if(['is_showing_loading_cart', 'is_showing_cart_filled_with_product'].includes(cur_test.iframe.status)) return;
 
 
-				// если да тогда мы показываем нашу и запускаем айфрейм ран
+				// если да тогда мы показываем нашу, создаем айфрейм и запускаем айфрейм ран
+				cur_test.create_iframe();
 				cur_test.show_cart();
 				cur_test.run_iframe();
 				
-				let dsdsds = document.querySelector('app-add-product-to-card-modal');
+				// let dsdsds = document.querySelector('app-add-product-to-card-modal');
 
-				if(document.contains(document.querySelector('app-add-product-to-card-modal'))) cur_test.wait_for_basket_add_xhr = true;
+				// if(document.contains(document.querySelector('app-add-product-to-card-modal'))) cur_test.wait_for_basket_add_xhr = true;
 
 			}, 200);
 		}, 0);
@@ -443,11 +415,11 @@
 		.catch(error => console.error(error));
 	}
 
-	cur_test.iframe = {el: null, doc: null, status: null};
+	cur_test.iframe = {el: null, doc: null, status: 'closed'};
  	cur_test.timers = [];
  	cur_test.products = [];
  	cur_test.product_keys = {};
- 	cur_test.product_add_intercepted = false;
+ 	// cur_test.product_add_intercepted = false;
 
  	cur_test.event_handlers = {
 		close_cart: function(elem, cur_test) {
@@ -566,11 +538,12 @@
  	const promises_attributes = {
 		iframe_is_created: {
 			is_resolve: function(iframe){
-				if(!['created', 'is_showing_loading_cart'].includes(iframe.status)) return false;
+				if(!['created_and_ready_for_run_cart'].includes(iframe.status)) return false;
 			    return true;
 			},
-			reject_msg: 'Iframe not created longer than 15 seconds.',
+			reject_msg: 'Iframe not created longer than 30 seconds.',
 			resolve_msg: 'Running cart in iframe: iframe_is_created.',
+			max_promise_time: 30000,
 		},
 		basket_button_ready: {
 			is_resolve: function(iframe){
@@ -579,12 +552,12 @@
 					iframe.doc.querySelector('.link__shopping').click();
 					return false;
 				}
-				if (cur_test.wait_for_basket_add_xhr) {// тут мы проверяем что вообще должн именно новый товар добавится
-					if (!cur_test.product_add_intercepted) return false;
-				}
+				// if (cur_test.wait_for_basket_add_xhr) {// тут мы проверяем что вообще должн именно новый товар добавится
+				// 	if (!cur_test.product_add_intercepted) return false;
+				// }
 				
-				cur_test.product_add_intercepted = false;
-				cur_test.wait_for_basket_add_xhr = false;
+				// cur_test.product_add_intercepted = false;
+				// cur_test.wait_for_basket_add_xhr = false;
 			    return true;
 			},
 			reject_msg: 'Not found basket_button in iframe by 30 seconds. (or product add was not intercepted)',
@@ -1070,7 +1043,6 @@
 	 	},
  	};
 
-	cur_test.create_iframe();
 	cur_test.cart_monitoring();
 
 	// ПОДСКАЗКА:
