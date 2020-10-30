@@ -240,7 +240,7 @@
 			cart_bottom_elem.classList.toggle('show-total', need_trigger);
 			console.log('scroll data: ', {
 				scroll_to_trigger: scroll_to_trigger,
-				cart_body_elem.scrollTop: cart_body_elem.scrollTop,
+				cart_body_elem_scrollTop: cart_body_elem.scrollTop,
 				need_trigger: need_trigger,
 			});
 		});
