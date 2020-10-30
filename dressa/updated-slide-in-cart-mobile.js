@@ -6,7 +6,7 @@
 	cur_test.init.enable_log = true;
 	cur_test.init.enable_ga_events = false;
 
-	let v = 14;
+	let v = 15;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 
 	let xhr_intercept_function = function() {
@@ -20,7 +20,7 @@
     	if (!this.keradan_xhr_data.body.interaction || !this.keradan_xhr_data.body.interaction.type || this.keradan_xhr_data.body.interaction.type != 'addToBucket') return;
 		
 		cur_test.log(`%c Keradan product added to basket. Intercepted xhr: `, 'background: #222; color: #bada55',  this.keradan_xhr_data);
-		cur_test.product_add_intercepted = true;
+		setTimeout(() => cur_test.product_add_intercepted = true, 2000);
 	}
 
 	let oldXHROpen = window.XMLHttpRequest.prototype.open;
