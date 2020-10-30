@@ -6,7 +6,7 @@
 	cur_test.init.enable_log = true;
 	cur_test.init.enable_ga_events = false;
 
-	let v = 19;
+	let v = 44;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 
 	cur_test.ga_event('loaded');
@@ -234,6 +234,18 @@
 		document.querySelector(`${scope_parent}.cart-wrapper`).addEventListener('click', function(e){
 			if(e.target == this) cur_test.event_handlers.close_cart(this, window.keradan[this.dataset.testName]);
 		});
+
+		// document.querySelector(`.scope-parent[data-scope-name=krdn30d8a168].cart-wrapper .inner .body`).addEventListener('scroll', function(e){
+		document.querySelector(`${scope_parent}.cart-wrapper .inner .body`).addEventListener('scroll', function(e){
+			let cart_body_elem = e.currentTarget;
+			let cart_bottom_elem = document.querySelector(`${scope_parent}.cart-wrapper .inner .bottom`);
+
+			let scroll_to_trigger = (cart_body_elem.scrollHeight - cart_body_elem.offsetHeight) - 30;
+			let need_trigger = cart_body_elem.scrollTop > scroll_to_trigger;
+
+			cart_body_elem.classList.toggle('show-total', need_trigger);
+		});
+
 
 		setTimeout(() => cur_test.markup.elements.cart.classList.toggle('hide', false), 0);
 	}
@@ -702,6 +714,9 @@
 		    color: grey;
 		    z-index: 1;
 		}
+		${scope_parent}.cart-wrapper.empty-cart.loading .inner .body::before {
+			opacity: 0;
+		}
 
 		${scope_parent}.cart-wrapper.empty-cart .inner .body .products-wrapper,
 		${scope_parent}.cart-wrapper.empty-cart .inner .body .total,
@@ -731,6 +746,7 @@
 	 	}
 	 	${scope_parent}.cart-wrapper .product-item-wrapper:first-child {
 		    border-top: none;
+		    margin-top: 0;
 		}
 	 	${scope_parent}.cart-wrapper .product-item-wrapper .photo-col {
 	 		display: block;
