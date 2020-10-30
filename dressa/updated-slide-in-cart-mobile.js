@@ -899,6 +899,8 @@
 		    color: #162319;
 		    margin-bottom: 15px;
 	 	}
+	 	${scope_parent}.cart-wrapper .inner .body .total .cart__payment_prediscount,
+	 	${scope_parent}.cart-wrapper .inner .body .total .cart__payment_discount,
 	 	${scope_parent}.cart-wrapper .inner .body .total .cart__payment_delivery {
  		    display: flex;
 		    justify-content: space-between;
@@ -906,6 +908,7 @@
 		    font-size: 14px;
 		    letter-spacing: 0.08em;
 		    color: black;
+		    margin-bottom: 5px;
 	 	}
 	 	${scope_parent}.cart-wrapper .inner .body .total .cart__payment_total {
  		    display: flex;
