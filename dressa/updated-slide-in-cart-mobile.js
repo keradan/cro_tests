@@ -240,11 +240,11 @@
 			let need_trigger = cart_body_elem.scrollTop < (scroll_to_trigger  - 270);
 
 			cart_bottom_elem.classList.toggle('show-total', need_trigger);
-			console.log('scroll data: ', {
-				scroll_to_trigger: scroll_to_trigger,
-				cart_body_elem_scrollTop: cart_body_elem.scrollTop,
-				need_trigger: need_trigger,
-			});
+			// cur_test.log('scroll data: ', {
+			// 	scroll_to_trigger: scroll_to_trigger,
+			// 	cart_body_elem_scrollTop: cart_body_elem.scrollTop,
+			// 	need_trigger: need_trigger,
+			// });
 		});
 
 
@@ -947,7 +947,7 @@
 		    justify-content: center;
 		    align-items: center;
 		    margin-top: 30px;
-		    margin-bottom: 100px;
+		    margin-bottom: 150px;
 	 	}
 	 	${scope_parent}.cart-wrapper .inner .body .promo-code-box input,
 	 	${scope_parent}.cart-wrapper .inner .body .promo-code-box button {
