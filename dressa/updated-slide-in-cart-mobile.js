@@ -6,7 +6,7 @@
 	cur_test.init.enable_log = true;
 	cur_test.init.enable_ga_events = false;
 
-	let v = 13;
+	let v = 14;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 
 	let xhr_intercept_function = function() {
@@ -403,7 +403,11 @@
 				// если да тогда мы показываем нашу и запускаем айфрейм ран
 				cur_test.show_cart();
 				cur_test.run_iframe();
-				// когда промис резолвнется или реджектнется мы выводим туда контент наш
+				
+				let dsdsds = document.querySelector('app-add-product-to-card-modal');
+
+				if(document.contains(document.querySelector('app-add-product-to-card-modal'))) cur_test.wait_for_basket_add_xhr = true;
+
 			}, 200);
 		}, 0);
 	}
@@ -575,10 +579,12 @@
 					iframe.doc.querySelector('.link__shopping').click();
 					return false;
 				}
-				if (true) {// тут мы проверяем что вообще должн именно новый товар добавится
+				if (cur_test.wait_for_basket_add_xhr) {// тут мы проверяем что вообще должн именно новый товар добавится
 					if (!cur_test.product_add_intercepted) return false;
 				}
 				
+				cur_test.product_add_intercepted = false;
+				cur_test.wait_for_basket_add_xhr = false;
 			    return true;
 			},
 			reject_msg: 'Not found basket_button in iframe by 30 seconds. (or product add was not intercepted)',
