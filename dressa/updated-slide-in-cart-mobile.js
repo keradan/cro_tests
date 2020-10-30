@@ -61,7 +61,7 @@
 			 			<button data-event="click" data-event-handler-name="assign_promo_code">Подтвердить</button>
 		 			</div>
 	 			</div>
-	 			<div class="bottom show-total">
+	 			<div class="bottom">
 	 				<hr class="top-line">
 	 				<div class="total">
 	 					<div class="title">Итог заказа</div>
@@ -675,8 +675,8 @@
 	 	}
 	 	${scope_parent}.cart-wrapper .body {
 	 		overflow-y: scroll;
-		    max-height: 60vh;
-		    min-height: 40vh;
+		    max-height: 70vh;
+		    min-height: 50vh;
 		    position: relative;
 	 	}
 	 	${scope_parent}.cart-wrapper.loading .inner .body::after {
@@ -697,7 +697,7 @@
 			content: "Корзина пуста";
 		    position: absolute;
 		    top: 0;
-		    height: 100%;
+		    height: calc(100% - 100px);
 		    width: 100%;
 		    display: flex;
 		    justify-content: center;
