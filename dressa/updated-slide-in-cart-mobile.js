@@ -689,7 +689,7 @@
 		    background: rgb(255 255 255 / 0.85);
 		    background-image: url(/assets/img/spinner.svg);
 		    background-repeat: no-repeat;
-		    background-position: center 35%;
+		    background-position: center 30%;
 		    background-size: 50px;
 		    z-index: 2;
 		}
