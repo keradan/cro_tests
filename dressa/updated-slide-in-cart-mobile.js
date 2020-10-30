@@ -46,6 +46,7 @@
 	 	cart_el.setAttribute('data-scope-name', cur_test.init.css_scope_name);
 	 	cart_el.setAttribute('data-test-name', cur_test.init.name);
 		cart_el.innerHTML = `
+	 		<style>.esputnik-widget {display:none!important}</style>
 	 		<div class="inner">
 	 			<button class="close-cart" data-event="click" data-event-handler-name="close_cart">
 	 				<svg width="21" height="21" viewBox="0 0 21 21" fill="none"><path d="M18.715 20.5493L10.5 12.3213L2.28497 20.5493L0.450806 18.7151L8.67872 10.5001L0.450806 2.28509L2.28497 0.450928L10.5 8.67884L18.715 0.463845L20.5362 2.28509L12.3212 10.5001L20.5362 18.7151L18.715 20.5493Z" fill="black"></path></svg>
