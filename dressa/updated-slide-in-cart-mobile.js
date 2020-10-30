@@ -6,7 +6,7 @@
 	cur_test.init.enable_log = true;
 	cur_test.init.enable_ga_events = false;
 
-	let v = 16;
+	let v = 17;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 
 	cur_test.ga_event('loaded');
@@ -611,12 +611,14 @@
 		app-add-product-to-card-modal, .openAddProductModal, #isBasketOpen, .header__main_links .basket-wrapper .products-overlay {
 			display: none!important;
 		}
+		/*
 		body {
 			overflow: auto!important;
 		}
 
 		/* ___ TMP ___ */
 
+		/*
 		${scope_parent}.cart-wrapper {
 			height: 20vh!important;
 			overflow-y: scroll!important;
