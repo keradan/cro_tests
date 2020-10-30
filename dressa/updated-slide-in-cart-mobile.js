@@ -6,7 +6,7 @@
 	cur_test.init.enable_log = true;
 	cur_test.init.enable_ga_events = false;
 
-	let v = 12;
+	let v = 13;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 
 	let xhr_intercept_function = function() {
@@ -16,8 +16,11 @@
 			this.keradan_xhr_data.body = parsed_body;
 		}
     	catch (e) { cur_test.log('keradan error when attempting to parse xhr body from json text: ', e); }
+
+    	if (!this.keradan_xhr_data.body.interaction || !this.keradan_xhr_data.body.interaction.type || this.keradan_xhr_data.body.interaction.type != 'addToBucket') return;
 		
-		console.log('keradan xhr loaded: ', this.keradan_xhr_data);
+		cur_test.log(`%c Keradan product added to basket. Intercepted xhr: `, 'background: #222; color: #bada55',  this.keradan_xhr_data);
+		cur_test.product_add_intercepted = true;
 	}
 
 	let oldXHROpen = window.XMLHttpRequest.prototype.open;
@@ -440,6 +443,7 @@
  	cur_test.timers = [];
  	cur_test.products = [];
  	cur_test.product_keys = {};
+ 	cur_test.product_add_intercepted = false;
 
  	cur_test.event_handlers = {
 		close_cart: function(elem, cur_test) {
@@ -571,9 +575,13 @@
 					iframe.doc.querySelector('.link__shopping').click();
 					return false;
 				}
+				if (true) {// тут мы проверяем что вообще должн именно новый товар добавится
+					if (!cur_test.product_add_intercepted) return false;
+				}
+				
 			    return true;
 			},
-			reject_msg: 'Not found basket_button in iframe by 30 seconds.',
+			reject_msg: 'Not found basket_button in iframe by 30 seconds. (or product add was not intercepted)',
 			resolve_msg: 'Running cart in iframe: basket_button_ready.',
 			max_promise_time: 30000,
 			promise_attempt_interval: 500,
