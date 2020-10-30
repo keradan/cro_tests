@@ -591,9 +591,9 @@
 				}
 			    return true;
 			},
-			reject_msg: 'Not found section.basket-page in iframe by 30 seconds.',
+			reject_msg: 'Not found section.basket-page in iframe by 60 seconds.',
 			resolve_msg: 'Running cart in iframe: section.basket-page founded - basket page has been loaded.',
-			max_promise_time: 30000,
+			max_promise_time: 60000,
 		},
 		basket_products_loaded: {
 			is_resolve: function(iframe, timer_end, resolve_anyway){
