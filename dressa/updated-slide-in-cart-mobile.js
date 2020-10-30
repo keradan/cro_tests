@@ -6,39 +6,29 @@
 	cur_test.init.enable_log = true;
 	cur_test.init.enable_ga_events = false;
 
-	let v = 4;
+	let v = 5;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
+
+	let xhr_intercept_function = function() {
+		let xhr_data = {
+			url: url,
+			method: method,
+			body: this.keradan_body ?? null,
+		};
+		console.log('keradan xhr loaded: ', xhr_data);
+	}
 
 	let oldXHROpen = window.XMLHttpRequest.prototype.open;
 	window.XMLHttpRequest.prototype.open = function(method, url, async, user, password) {
-
-		// do something with the method, url and etc.
-		this.addEventListener('load', function() {
-			// do something with the response text
-			console.log('keradan oldXHROpen load: ', {
-				this: this,
-				method: method,
-				url: url,
-				body: this.keradan_body ?? 'sheet',
-			});
-		});
-
+		this.addEventListener('load', xhr_intercept_function);
 		return oldXHROpen.apply(this, arguments);
 	}
 
 	let oldXHRSend = window.XMLHttpRequest.prototype.send;
 	window.XMLHttpRequest.prototype.send = function(body) {
-		this.keradan_body = body ?? null;
-
-		// do something with the method, url and etc.
-		// this.addEventListener('load', function() {
-			// do something with the response text
-			// console.log('keradan oldXHRSend send: ', {
-			// 	this: this,
-			// 	body: body,
-			// });
-		// });
-
+		try { body = JSON.parse(body); }
+	    catch (e) { cur_test.log('keradan error when attempting to parse xhr body from json text: ', e); }
+		this.keradan_body = body;
 		return oldXHRSend.apply(this, arguments);
 	}
 
