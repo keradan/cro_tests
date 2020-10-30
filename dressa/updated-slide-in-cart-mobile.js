@@ -584,7 +584,11 @@
 		},
 		basket_loaded: {
 			is_resolve: function(iframe){
-				if(!iframe.doc.querySelector('section.basket-page')) return false;
+				if(!iframe.doc.querySelector('.basket-btn app-dressa-button')) return false;
+				if(!iframe.doc.querySelector('section.basket-page')) {
+					iframe.doc.querySelector('.basket-btn app-dressa-button').click();
+					return false;
+				}
 			    return true;
 			},
 			reject_msg: 'Not found section.basket-page in iframe by 30 seconds.',
@@ -593,6 +597,9 @@
 		},
 		basket_products_loaded: {
 			is_resolve: function(iframe, timer_end, resolve_anyway){
+				iframe.doc.querySelector('app-basket-page div.title').click(); // этот кусочек просто кликает по заголовку страницы, тем самым как-то оживляет почему-то спящий айфрейм
+				cur_test.log('title click');
+
 				if(!iframe.doc.querySelector('section.basket-page .buttons__checkout app-dressa-button')) return false;
 			    return true;
 			},
