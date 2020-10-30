@@ -6,7 +6,7 @@
 	cur_test.init.enable_log = true;
 	cur_test.init.enable_ga_events = false;
 
-	let v = 17;
+	let v = 18;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 
 	cur_test.ga_event('loaded');
@@ -205,14 +205,13 @@
 	}
 
 	cur_test.close_cart = function() {
-		cur_test.change_status('closed');
-
 		document.querySelectorAll('#isBasketOpen .close-btn, app-add-product-to-card-modal .close').forEach((default_close_btn) => default_close_btn.click());
 		
 		cur_test.markup.elements.cart.classList.toggle('hide', true);
 		setTimeout(function(){
 			cur_test.markup.elements.cart.remove();
 			cur_test.markup.elements.cart = cur_test.get_default_cart_el(cur_test);
+			cur_test.change_status('closed');
 		}, 300);
 		
 		// setTimeout(() => cur_test.create_iframe(), 601); // когда я закрываю корзину, начинаем перегружать айфрейм
