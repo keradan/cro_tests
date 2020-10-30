@@ -48,7 +48,7 @@
 		cart_el.innerHTML = `
 	 		<style>
 		 		body {
-		 			touch-action: pan-x!important;
+		 			touch-action: none!important;
 		 			overflow: hidden!important;
 		 		}
 		 		.esputnik-widget {
