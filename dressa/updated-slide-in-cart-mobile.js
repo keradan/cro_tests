@@ -77,7 +77,6 @@
 	}
 
 	cur_test.create_iframe = function() {
-		// cur_test.iframe.status = 'loading';
 		cur_test.change_status('loading');
 		let old_iframe = document.querySelector('.keradan-cart-iframe');
 		if(old_iframe) old_iframe.remove();
@@ -94,13 +93,13 @@
 		// cur_test.iframe.el.setAttribute('width', '350');
 		// cur_test.iframe.el.setAttribute('height', '500');
 		// cur_test.iframe.el.setAttribute('style', `
-		// 	position: fixed;
-		//     top: 110px;
-		//     height: 85vh;
-		//     left: 1vw;
-		//     border: 2px solid red;
-		//     width: 80vw;
-		//     opacity: 0.8;
+			// position: fixed;
+		 //    top: 110px;
+		 //    height: 85vh;
+		 //    left: 1vw;
+		 //    border: 2px solid red;
+		 //    width: 80vw;
+		 //    opacity: 0.8;
 		// `);
 		cur_test.iframe.el.setAttribute('style', 'display: none;'); //border: 2px solid red; margin-bottom: 100px;
 		document.body.append(cur_test.iframe.el);
@@ -108,14 +107,9 @@
 		cur_test.iframe.doc = cur_test.iframe.el.contentWindow.document;
 		cur_test.iframe.el.contentWindow.test_updated_slide_in_cart_mobile_already_running = true;
 
-		// try {
-	    	cur_test.iframe.doc.open();
-			cur_test.iframe.doc.write(parent_doc_text);
-			cur_test.iframe.doc.close();
-	 //    }
-	 //    catch (e) {
-		// 	cur_test.log('iframe creation error: ', e);
-		// }
+    	cur_test.iframe.doc.open();
+		cur_test.iframe.doc.write(parent_doc_text);
+		cur_test.iframe.doc.close();
 
 		let iframe_creating_timer = setInterval(function(){
 			if(!cur_test.iframe.doc) return false;
@@ -240,10 +234,15 @@
 			let cart_body_elem = e.currentTarget;
 			let cart_bottom_elem = document.querySelector(`${scope_parent}.cart-wrapper .inner .bottom`);
 
-			let scroll_to_trigger = (cart_body_elem.scrollHeight - cart_body_elem.offsetHeight) - 30;
-			let need_trigger = cart_body_elem.scrollTop > scroll_to_trigger;
+			let scroll_to_trigger = cart_body_elem.scrollHeight - cart_body_elem.offsetHeight;
+			let need_trigger = cart_body_elem.scrollTop > (scroll_to_trigger  - 30);
 
-			cart_body_elem.classList.toggle('show-total', need_trigger);
+			cart_bottom_elem.classList.toggle('show-total', need_trigger);
+			console.log(djkdskds, {
+				scroll_to_trigger: scroll_to_trigger,
+				cart_body_elem.scrollTop: cart_body_elem.scrollTop,
+				need_trigger: need_trigger,
+			});
 		});
 
 
@@ -560,29 +559,24 @@
 			is_resolve: function(iframe){
 				if(!iframe.doc.querySelector('.link__shopping')) return false;
 				if(!iframe.doc.querySelector('.basket-btn app-dressa-button')) {
-					iframe.doc.querySelector('.link__shopping').click();
+					// iframe.doc.querySelector('.link__shopping').click();
 					return false;
 				}
-				// if (cur_test.wait_for_basket_add_xhr) {// тут мы проверяем что вообще должн именно новый товар добавится
-				// 	if (!cur_test.product_add_intercepted) return false;
-				// }
-				
-				// cur_test.product_add_intercepted = false;
-				// cur_test.wait_for_basket_add_xhr = false;
 			    return true;
 			},
-			reject_msg: 'Not found basket_button in iframe by 30 seconds. (or product add was not intercepted)',
+			reject_msg: 'Not found basket_button in iframe by 30 seconds.',
 			resolve_msg: 'Running cart in iframe: basket_button_ready.',
 			max_promise_time: 30000,
-			promise_attempt_interval: 500,
+			promise_attempt_interval: 200,
 		},
 		basket_loaded: {
 			is_resolve: function(iframe){
 				if(!iframe.doc.querySelector('section.basket-page')) return false;
 			    return true;
 			},
-			reject_msg: 'Not found section.basket-page in iframe by 15 seconds.',
+			reject_msg: 'Not found section.basket-page in iframe by 30 seconds.',
 			resolve_msg: 'Running cart in iframe: section.basket-page founded - basket page has been loaded.',
+			max_promise_time: 30000,
 		},
 		basket_products_loaded: {
 			is_resolve: function(iframe, timer_end, resolve_anyway){
