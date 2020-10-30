@@ -10,7 +10,7 @@
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 
 	let xhr_intercept_function = function() {
-		if (method == 'GET') return;
+		if (this.keradan_xhr_data.method == 'GET') return;
 		// 	try {
 		// 		parsed_body = JSON.parse(this.keradan_xhr_data.body);
 		// 		this.keradan_xhr_data.body = parsed_body;
