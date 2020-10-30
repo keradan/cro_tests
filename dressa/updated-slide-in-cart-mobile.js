@@ -6,10 +6,10 @@
 	cur_test.init.enable_log = true;
 	cur_test.init.enable_ga_events = false;
 
-	let v = 8;
+	let v = 9;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 
-	let xhr_intercept_function = function() {
+	window.keradan_xhr_intercept_function = function() {
 		if (method == 'POST') {
 			try {
 				parsed_body = JSON.parse(this.keradan_xhr_data.body);
@@ -27,7 +27,7 @@
 		this.keradan_xhr_data.url = url;
 		this.keradan_xhr_data.method = method;
 
-		this.addEventListener('load', xhr_intercept_function);
+		this.addEventListener('load', window.keradan_xhr_intercept_function);
 		return oldXHROpen.apply(this, arguments);
 	}
 
