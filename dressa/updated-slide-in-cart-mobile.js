@@ -6,7 +6,7 @@
 	cur_test.init.enable_log = true;
 	cur_test.init.enable_ga_events = false;
 
-	let v = 44;
+	let v = 45;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 
 	cur_test.ga_event('loaded');
@@ -100,6 +100,7 @@
 		 //    border: 2px solid red;
 		 //    width: 80vw;
 		 //    opacity: 0.8;
+		 //    z-index: 99999999999999999999999999999;
 		// `);
 		cur_test.iframe.el.setAttribute('style', 'display: none;'); //border: 2px solid red; margin-bottom: 100px;
 		document.body.append(cur_test.iframe.el);
@@ -139,7 +140,7 @@
 				return Promise.reject(new Error('iframe promise rejected. Basket is empty (known in advance).'));
 			}
 
-			cur_test.iframe.doc.querySelector('.link__shopping').click();
+			// cur_test.iframe.doc.querySelector('.link__shopping').click();
 			return get_iframe_promise(promises_attributes.basket_button_ready); // Ждем когда в попапе появится кнопка оформить заказ, чтобы мы могли перейти на страницу корзины
 		})
 		.then(function(msg) {
@@ -559,7 +560,7 @@
 			is_resolve: function(iframe){
 				if(!iframe.doc.querySelector('.link__shopping')) return false;
 				if(!iframe.doc.querySelector('.basket-btn app-dressa-button')) {
-					// iframe.doc.querySelector('.link__shopping').click();
+					iframe.doc.querySelector('.link__shopping').click();
 					return false;
 				}
 			    return true;
