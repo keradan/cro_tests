@@ -6,7 +6,7 @@
 	cur_test.init.enable_log = true;
 	cur_test.init.enable_ga_events = false;
 
-	let v = 46;
+	let v = 47;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -905,7 +905,7 @@
 	 	}
 	 	${scope_parent}.cart-wrapper .inner .body .total .cart__payment_title {
 	 		font-weight: bold;
-		    font-size: 15px;
+		    font-size: 16px;
 		    letter-spacing: 0.3em;
 		    text-transform: uppercase;
 		    color: #162319;
@@ -976,6 +976,14 @@
 			letter-spacing: 0.08em;
 	 	}
 
+	 	${scope_parent}.cart-wrapper .inner .bottom {
+	 		position: fixed;
+		    bottom: 0;
+		    left: 0;
+		    width: 100%;
+		    background: white;
+		    z-index: 1;
+	 	}
 	 	${scope_parent}.cart-wrapper .inner .bottom hr.top-line {
 			height: 1px;
 			box-sizing: border-box;
@@ -1020,9 +1028,7 @@
 	 		display: flex;
 		    justify-content: space-between;
 		    align-items: center;
-		    padding: 10px;
-		    padding-top: 15px;
-		    padding-bottom: 80px;
+		    padding: 15px 10px;
 	 	}
 	 	${scope_parent}.cart-wrapper .inner .bottom .buttons button {
 	 		display: block;
