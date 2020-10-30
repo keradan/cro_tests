@@ -6,7 +6,7 @@
 	cur_test.init.enable_log = true;
 	cur_test.init.enable_ga_events = false;
 
-	let v = 45;
+	let v = 46;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 
 	cur_test.ga_event('loaded');
@@ -60,7 +60,7 @@
 			 			<button data-event="click" data-event-handler-name="assign_promo_code">Подтвердить</button>
 		 			</div>
 	 			</div>
-	 			<div class="bottom">
+	 			<div class="bottom show-total">
 	 				<hr class="top-line">
 	 				<div class="total">
 	 					<div class="title">Итог заказа</div>
@@ -236,7 +236,7 @@
 			let cart_bottom_elem = document.querySelector(`${scope_parent}.cart-wrapper .inner .bottom`);
 
 			let scroll_to_trigger = cart_body_elem.scrollHeight - cart_body_elem.offsetHeight;
-			let need_trigger = cart_body_elem.scrollTop > (scroll_to_trigger  - 30);
+			let need_trigger = cart_body_elem.scrollTop < (scroll_to_trigger  - 270);
 
 			cart_bottom_elem.classList.toggle('show-total', need_trigger);
 			console.log('scroll data: ', {
