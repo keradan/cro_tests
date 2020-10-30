@@ -6,7 +6,7 @@
 	cur_test.init.enable_log = true;
 	cur_test.init.enable_ga_events = false;
 
-	let v = 49;
+	let v = 50;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -543,6 +543,7 @@
 
 			let product_el = elem.closest('.scope-product');
 			let iframe_product_el = cur_test.iframe.doc.querySelector(`app-cart-item[data-product-id="${product_el.dataset.productId}"]`);
+			let iframe_select_el = iframe_product_el.querySelector(`app-cart-item-size-filter section.select .select__value`);
 			let iframe_item_el = iframe_product_el.querySelector(`app-cart-item-size-filter ul.select__dropdown li:nth-child(${elem.dataset.sizeItemKey})`);
 			
 			cur_test.start_cart_recounting(product_el, iframe_product_el);
@@ -552,7 +553,8 @@
 				item_el_click: iframe_item_el.click,
 			});
 
-			iframe_item_el.click();
+			iframe_select_el.click();
+			setTimeout(() => iframe_item_el.click(), 250);
 		},
 	};
 
