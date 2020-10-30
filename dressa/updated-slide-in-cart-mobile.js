@@ -6,7 +6,7 @@
 	cur_test.init.enable_log = true;
 	cur_test.init.enable_ga_events = false;
 
-	let v = 3;
+	let v = 4;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 
 	let oldXHROpen = window.XMLHttpRequest.prototype.open;
@@ -19,13 +19,27 @@
 				this: this,
 				method: method,
 				url: url,
-				"async": async,
-				user: user,
-				password: password,
+				body: this.keradan_body ?? 'sheet',
 			});
 		});
 
 		return oldXHROpen.apply(this, arguments);
+	}
+
+	let oldXHRSend = window.XMLHttpRequest.prototype.send;
+	window.XMLHttpRequest.prototype.send = function(body) {
+		this.keradan_body = body ?? null;
+
+		// do something with the method, url and etc.
+		// this.addEventListener('load', function() {
+			// do something with the response text
+			// console.log('keradan oldXHRSend send: ', {
+			// 	this: this,
+			// 	body: body,
+			// });
+		// });
+
+		return oldXHRSend.apply(this, arguments);
 	}
 
 	cur_test.ga_event('loaded');
