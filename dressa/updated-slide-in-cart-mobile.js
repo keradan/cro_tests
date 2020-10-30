@@ -6,7 +6,7 @@
 	cur_test.init.enable_log = true;
 	cur_test.init.enable_ga_events = false;
 
-	let v = 18;
+	let v = 19;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 
 	cur_test.ga_event('loaded');
@@ -158,15 +158,15 @@
 
 			cur_test.log('keradan starting of title clicking');
 			
-			let title_clicking_timer = setInterval(function(){
-				cur_test.iframe.doc.querySelector('app-basket-page div.title').click(); // этот кусочек просто кликает по заголовку страницы, тем самым как-то оживляет почему-то спящий айфрейм
-				cur_test.log('title click');
-			}, 100);
+			// let title_clicking_timer = setInterval(function(){
+			// 	cur_test.iframe.doc.querySelector('app-basket-page div.title').click(); // этот кусочек просто кликает по заголовку страницы, тем самым как-то оживляет почему-то спящий айфрейм
+			// 	cur_test.log('title click');
+			// }, 100);
 
-			setTimeout(function(){
-				clearInterval(title_clicking_timer);
-				cur_test.log('clicking stopped');
-			}, 15000);
+			// setTimeout(function(){
+			// 	clearInterval(title_clicking_timer);
+			// 	cur_test.log('clicking stopped');
+			// }, 15000);
 			
 			return get_iframe_promise(promises_attributes.basket_products_loaded); // Ждем когда появятся товары
 		})
