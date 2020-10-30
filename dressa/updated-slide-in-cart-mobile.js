@@ -6,7 +6,7 @@
 	cur_test.init.enable_log = true;
 	cur_test.init.enable_ga_events = false;
 
-	let v = 47;
+	let v = 48;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -237,7 +237,7 @@
 			let cart_bottom_elem = document.querySelector(`${scope_parent}.cart-wrapper .inner .bottom`);
 
 			let scroll_to_trigger = cart_body_elem.scrollHeight - cart_body_elem.offsetHeight;
-			let need_trigger = cart_body_elem.scrollTop < (scroll_to_trigger  - 270);
+			let need_trigger = cart_body_elem.scrollTop < (scroll_to_trigger  - 320);
 
 			cart_bottom_elem.classList.toggle('show-total', need_trigger);
 			// cur_test.log('scroll data: ', {
@@ -689,7 +689,7 @@
 		    background: rgb(255 255 255 / 0.85);
 		    background-image: url(/assets/img/spinner.svg);
 		    background-repeat: no-repeat;
-		    background-position: center;
+		    background-position: center 35%;
 		    background-size: 50px;
 		    z-index: 2;
 		}
