@@ -6,7 +6,7 @@
 	cur_test.init.enable_log = true;
 	cur_test.init.enable_ga_events = false;
 
-	let v = 51;
+	let v = 52;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -36,7 +36,7 @@
 				if(attributes.is_resolve(cur_test.iframe) !== true) return;
 			    clearInterval(cur_test.timers[promise_timer_id]);
 			    let promise_step_current_time = (Math.round((new Date().getTime() - promise_step_start_time) / 100) / 10) + 's';
-			    
+
 			    // let promise_step_current_time = window.keradan.get_test_time(cur_test.init.name) - (cur_test.promise_steps_start_time[promise_timer_id] ?? 0);
 			    resolve(`iframe promise resolved. ${attributes.resolve_msg ?? ''} \r resolved after ${promise_step_current_time} of promise step.`);
 			}, attributes.promise_attempt_interval);
@@ -47,7 +47,7 @@
 
 	cur_test.get_default_cart_el = function(cur_test) {
 		let cart_el = document.createElement('div');
-	 	cart_el.classList.add(`scope-parent`, 'cart-wrapper', 'hide', 'loading', 'empty-cart');
+	 	cart_el.classList.add(`scope-parent`, 'cart-wrapper', 'hide', 'loading', 'empty-cart', 'debug');
 	 	cart_el.setAttribute('data-scope-name', cur_test.init.css_scope_name);
 	 	cart_el.setAttribute('data-test-name', cur_test.init.name);
 		cart_el.innerHTML = `
@@ -104,7 +104,7 @@
 		parent_doc_text = parent_doc_text.replace(/krdn/, "");
 
 		cur_test.iframe.el = document.createElement('iframe');
-		cur_test.iframe.el.classList.add('keradan-cart-iframe');
+		cur_test.iframe.el.classList.add('keradan-cart-iframe', 'debug');
 		// cur_test.iframe.el.setAttribute('width', '350');
 		// cur_test.iframe.el.setAttribute('height', '500');
 		// cur_test.iframe.el.setAttribute('style', `
