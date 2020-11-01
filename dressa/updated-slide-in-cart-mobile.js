@@ -25,6 +25,7 @@
 		
 		let promise = new Promise(function(resolve, reject) {
 			let promise_timer_id = cur_test.timers.push(null) - 1;
+			let promise_step_start_time = new Date().getTime();
 
 			setTimeout(function(){
 				clearInterval(cur_test.timers[promise_timer_id]);
@@ -34,8 +35,12 @@
 			cur_test.timers[promise_timer_id] = setInterval(function(){
 				if(attributes.is_resolve(cur_test.iframe) !== true) return;
 			    clearInterval(cur_test.timers[promise_timer_id]);
-			    resolve(`iframe promise resolved. ${attributes.resolve_msg ?? ''} \r resolved after ${window.keradan.get_test_time(cur_test.init.name)} of test work.`);
+			    let promise_step_current_time = (Math.round((new Date().getTime() - promise_step_start_time) / 100) / 10) + 's';
+			    
+			    // let promise_step_current_time = window.keradan.get_test_time(cur_test.init.name) - (cur_test.promise_steps_start_time[promise_timer_id] ?? 0);
+			    resolve(`iframe promise resolved. ${attributes.resolve_msg ?? ''} \r resolved after ${promise_step_current_time} of promise step.`);
 			}, attributes.promise_attempt_interval);
+			// cur_test.promise_steps_start_time[promise_timer_id] = Math.round(new Date().getTime() / 100) / 10;
 		});
 		return promise;
 	}
@@ -643,13 +648,23 @@
 
 		/* ___ TMP ___ */
 
-		/*
-		${scope_parent}.cart-wrapper {
+		${scope_parent}.cart-wrapper.debug {
 			height: 20vh!important;
 			overflow-y: scroll!important;
 			bottom: 0!important;
 			top: auto!important;
+		}
 
+		.keradan-cart-iframe.debug {
+			display: block!important;
+			position: fixed;
+		    top: 110px;
+		    height: 85vh;
+		    left: 1vw;
+		    border: 2px solid red;
+		    width: 80vw;
+		    opacity: 0.8;
+		    z-index: 99999999999999999999999999999;
 		}
 		
 		/* ___ TMP ___ */
