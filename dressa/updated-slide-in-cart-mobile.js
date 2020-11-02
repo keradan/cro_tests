@@ -7,7 +7,7 @@
 	cur_test.init.enable_ga_events = false;
 	cur_test.init.debug_mode = false;
 
-	let v = 55;
+	let v = 56;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -588,7 +588,7 @@
 			reject_msg: 'Not found basket_button in iframe by 30 seconds.',
 			resolve_msg: 'Running cart in iframe: basket_button_ready.',
 			max_promise_time: 30000,
-			promise_attempt_interval: 200,
+			promise_attempt_interval: 600,
 		},
 		basket_loaded: {
 			is_resolve: function(iframe){
