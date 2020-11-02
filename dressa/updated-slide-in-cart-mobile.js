@@ -7,7 +7,7 @@
 	cur_test.init.enable_ga_events = false;
 	cur_test.init.debug_mode = true;
 
-	let v = 59;
+	let v = 60;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -423,23 +423,36 @@
 		.then(function(msg) {
 			cur_test.log(msg);
 
-			let cart_totals_data = cur_test.render_cart_totals();
-			document.querySelector(`${scope_parent} .inner .body .total`).innerHTML = cart_totals_data.body_totals_markup;
-			document.querySelector(`${scope_parent} .inner .bottom .total .price`).innerHTML = cart_totals_data.bottom_total_price;
-
-			if(product_el && iframe_product_el) {
-				if(!cur_test.iframe.doc.contains(iframe_product_el)) { // если произошло удаление товара из корзины
+			if (!cur_test.iframe.doc.querySelector('app-checkout-cart-mobile-block .cart__payment')) {
+				// корзина пуста
+				document.querySelector(`${scope_parent} .inner .body .total`).innerHTML = '';
+				document.querySelector(`${scope_parent} .inner .bottom .total .price`).innerHTML = '0 грн';
+				if(product_el) {
 					product_el.innerHTML = '';
 					product_el.remove();
-				} else {
-					// делаем перерендеринг товара
-					let product_data = cur_test.parse_iframe_cart_item(iframe_product_el);
-					product_el.innerHTML = cur_test.render_cart_item(product_data);
-					product_el.querySelectorAll(`*[data-event][data-event-handler-name]:not([data-already-listened])`).forEach(cur_test.add_cart_event);
 				}
+
+				document.querySelector(`${scope_parent}`).classList.toggle('empty-cart', cur_test.products.length == 0);
+
+			} else {
+				let cart_totals_data = cur_test.render_cart_totals();
+				document.querySelector(`${scope_parent} .inner .body .total`).innerHTML = cart_totals_data.body_totals_markup;
+				document.querySelector(`${scope_parent} .inner .bottom .total .price`).innerHTML = cart_totals_data.bottom_total_price;
+
+				if(product_el && iframe_product_el) {
+					if(!cur_test.iframe.doc.contains(iframe_product_el)) { // если произошло удаление товара из корзины
+						product_el.innerHTML = '';
+						product_el.remove();
+					} else {
+						// делаем перерендеринг товара
+						let product_data = cur_test.parse_iframe_cart_item(iframe_product_el);
+						product_el.innerHTML = cur_test.render_cart_item(product_data);
+						product_el.querySelectorAll(`*[data-event][data-event-handler-name]:not([data-already-listened])`).forEach(cur_test.add_cart_event);
+					}
+				}
+				cur_test.change_status('is_showing_cart_filled_with_product');
 			}
 			cur_test.markup.elements.cart.classList.toggle('loading', false);
-			cur_test.change_status('is_showing_cart_filled_with_product');
 		})
 		.catch(error => console.error(error));
 	}
