@@ -437,7 +437,7 @@
 					product_el.remove();
 				}
 
-				document.querySelector(`${scope_parent}`).classList.toggle('empty-cart', cur_test.products.length == 0);
+				document.querySelector(`${scope_parent}`).classList.toggle('empty-cart', true);
 
 			} else {
 				let cart_totals_data = cur_test.render_cart_totals();
