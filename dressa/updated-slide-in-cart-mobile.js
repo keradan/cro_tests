@@ -7,7 +7,7 @@
 	cur_test.init.enable_ga_events = false;
 	cur_test.init.debug_mode = true;
 
-	let v = 60;
+	let v = 61;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -44,6 +44,11 @@
 			// cur_test.promise_steps_start_time[promise_timer_id] = Math.round(new Date().getTime() / 100) / 10;
 		});
 		return promise;
+	}
+
+	function iframe_arise (iframe) { // этот кусочек просто кликает по заголовку страницы, тем самым как-то оживляет почему-то спящий айфрейм
+		iframe.doc.querySelectorAll('app-basket-page div.title, app-product-info h1.info__title_text').forEach((el) => el.click());
+		cur_test.log('iframe_arise');
 	}
 
 	cur_test.get_default_cart_el = function(cur_test) {
@@ -620,8 +625,7 @@
 		},
 		basket_products_loaded: {
 			is_resolve: function(iframe, timer_end, resolve_anyway){
-				iframe.doc.querySelector('app-basket-page div.title').click(); // этот кусочек просто кликает по заголовку страницы, тем самым как-то оживляет почему-то спящий айфрейм
-				cur_test.log('title click');
+				iframe_arise(iframe);
 
 				if(!iframe.doc.querySelector('section.basket-page .buttons__checkout app-dressa-button')) return false;
 			    return true;
@@ -633,8 +637,7 @@
 		},
 		cart_payment_updating_begin: {
 			is_resolve: function(iframe){
-				iframe.doc.querySelector('app-basket-page div.title').click(); // этот кусочек просто кликает по заголовку страницы, тем самым как-то оживляет почему-то спящий айфрейм
-				cur_test.log('title click');
+				iframe_arise(iframe);
 
 				if(!iframe.doc.querySelector('app-checkout-cart-mobile-block .cart.cart--payment-update')) return false;
 			    return true;
@@ -646,8 +649,7 @@
 		},
 		cart_payment_updating_end: {
 			is_resolve: function(iframe){
-				iframe.doc.querySelector('app-basket-page div.title').click(); // этот кусочек просто кликает по заголовку страницы, тем самым как-то оживляет почему-то спящий айфрейм
-				cur_test.log('title click');
+				iframe_arise(iframe);
 
 				if(iframe.doc.querySelector('app-checkout-cart-mobile-block .cart.cart--payment-update') != null) return false;
 			    return true;
