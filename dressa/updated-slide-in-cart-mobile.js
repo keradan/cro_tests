@@ -5,9 +5,9 @@
 	// Set dev behavior:
 	cur_test.init.enable_log = true;
 	cur_test.init.enable_ga_events = false;
-	cur_test.init.debug_mode = false;
+	cur_test.init.debug_mode = true;
 
-	let v = 57;
+	let v = 58;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
