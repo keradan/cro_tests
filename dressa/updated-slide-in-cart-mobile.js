@@ -7,7 +7,7 @@
 	cur_test.init.enable_ga_events = false;
 	cur_test.init.debug_mode = true;
 
-	let v = 58;
+	let v = 59;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -620,6 +620,9 @@
 		},
 		cart_payment_updating_begin: {
 			is_resolve: function(iframe){
+				iframe.doc.querySelector('app-basket-page div.title').click(); // этот кусочек просто кликает по заголовку страницы, тем самым как-то оживляет почему-то спящий айфрейм
+				cur_test.log('title click');
+
 				if(!iframe.doc.querySelector('app-checkout-cart-mobile-block .cart.cart--payment-update')) return false;
 			    return true;
 			},
@@ -630,6 +633,9 @@
 		},
 		cart_payment_updating_end: {
 			is_resolve: function(iframe){
+				iframe.doc.querySelector('app-basket-page div.title').click(); // этот кусочек просто кликает по заголовку страницы, тем самым как-то оживляет почему-то спящий айфрейм
+				cur_test.log('title click');
+
 				if(iframe.doc.querySelector('app-checkout-cart-mobile-block .cart.cart--payment-update') != null) return false;
 			    return true;
 			},
@@ -776,6 +782,7 @@
 	 	${scope_parent}.cart-wrapper .products-wrapper {
 	 		width: 100%;
 	 		padding: 0 10px;
+	 		background: white;
 	 	}
 	 	${scope_parent}.cart-wrapper .product-item-wrapper {
 	 		display: flex;
