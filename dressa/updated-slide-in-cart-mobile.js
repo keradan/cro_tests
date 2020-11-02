@@ -595,6 +595,7 @@
 				// if(!iframe.doc.querySelector('.basket-btn app-dressa-button')) return false;
 				if(!iframe.doc.querySelector('section.basket-page')) {
 					if(iframe.doc.querySelector('.basket-btn app-dressa-button')) iframe.doc.querySelector('.basket-btn app-dressa-button').click();
+					else iframe.doc.querySelector('.link__shopping').click();
 					return false;
 				}
 			    return true;
@@ -602,6 +603,7 @@
 			reject_msg: 'Not found section.basket-page in iframe by 60 seconds.',
 			resolve_msg: 'Running cart in iframe: section.basket-page founded - basket page has been loaded.',
 			max_promise_time: 60000,
+			promise_attempt_interval: 600,
 		},
 		basket_products_loaded: {
 			is_resolve: function(iframe, timer_end, resolve_anyway){
