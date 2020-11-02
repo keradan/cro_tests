@@ -7,7 +7,7 @@
 	cur_test.init.enable_ga_events = false;
 	cur_test.init.debug_mode = false;
 
-	let v = 56;
+	let v = 57;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -654,10 +654,16 @@
 		/* ___ TMP ___ */
 
 		${scope_parent}.cart-wrapper.debug {
-			height: 20vh!important;
+			height: 30vh!important;
 			overflow-y: scroll!important;
 			bottom: 0!important;
 			top: auto!important;
+		}
+		${scope_parent}.cart-wrapper.debug .inner, ${scope_parent}.cart-wrapper.debug .inner .body {
+			max-height: 100%;
+		}
+		${scope_parent}.cart-wrapper.debug .inner .head, ${scope_parent}.cart-wrapper.debug .inner .bottom {
+			display: none;
 		}
 
 		.keradan-cart-iframe.debug {
