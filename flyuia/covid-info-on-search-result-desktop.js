@@ -134,9 +134,13 @@
 			width: 70px;
 	 	}
 	 	@media (min-width: 2300px) {
+		 	.${test_data.css_scope_name}-top-box {
+		 		height: 110px;
+		 	}
 		 	.${test_data.css_scope_name}-top-box .big-left-text {
 		 		font-size: 20px;
 		 		line-height: 26px;
+		 		width: auto;
 		 	}
 			.${test_data.css_scope_name}-top-box .big-left-text span {
 				font-size: 24px;
