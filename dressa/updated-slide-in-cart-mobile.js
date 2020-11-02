@@ -7,7 +7,7 @@
 	cur_test.init.enable_ga_events = false;
 	cur_test.init.debug_mode = true;
 
-	let v = 62;
+	let v = 63;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -638,6 +638,8 @@
 		cart_payment_updating_begin: {
 			is_resolve: function(iframe){
 				iframe_arise(iframe);
+
+				if(!iframe.doc.querySelector('section.basket-page .buttons__checkout app-dressa-button')) return true;
 
 				if(!iframe.doc.querySelector('app-checkout-cart-mobile-block .cart.cart--payment-update')) return false;
 			    return true;
