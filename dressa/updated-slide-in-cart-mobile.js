@@ -5,8 +5,9 @@
 	// Set dev behavior:
 	cur_test.init.enable_log = true;
 	cur_test.init.enable_ga_events = false;
+	cur_test.init.debug_mode = true;
 
-	let v = 53;
+	let v = 54;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -47,7 +48,7 @@
 
 	cur_test.get_default_cart_el = function(cur_test) {
 		let cart_el = document.createElement('div');
-	 	cart_el.classList.add(`scope-parent`, 'cart-wrapper', 'hide', 'loading', 'empty-cart', 'debug');
+	 	cart_el.classList.add(`scope-parent`, 'cart-wrapper', 'hide', 'loading', 'empty-cart', cur_test.init.debug_mode ? 'debug' : '');
 	 	cart_el.setAttribute('data-scope-name', cur_test.init.css_scope_name);
 	 	cart_el.setAttribute('data-test-name', cur_test.init.name);
 		cart_el.innerHTML = `
@@ -104,7 +105,7 @@
 		parent_doc_text = parent_doc_text.replace(/krdn/, "");
 
 		cur_test.iframe.el = document.createElement('iframe');
-		cur_test.iframe.el.classList.add('keradan-cart-iframe', 'debug');
+		cur_test.iframe.el.classList.add('keradan-cart-iframe', cur_test.init.debug_mode ? 'debug' : '');
 		// cur_test.iframe.el.setAttribute('width', '350');
 		// cur_test.iframe.el.setAttribute('height', '500');
 		// cur_test.iframe.el.setAttribute('style', `
