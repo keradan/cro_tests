@@ -48,7 +48,8 @@
 
 	cur_test.get_default_cart_el = function(cur_test) {
 		let cart_el = document.createElement('div');
-	 	cart_el.classList.add(`scope-parent`, 'cart-wrapper', 'hide', 'loading', 'empty-cart', cur_test.init.debug_mode ? 'debug' : '');
+	 	cart_el.classList.add(`scope-parent`, 'cart-wrapper', 'hide', 'loading', 'empty-cart');
+	 	cart_el.classList.toggle('debug', cur_test.init.debug_mode);
 	 	cart_el.setAttribute('data-scope-name', cur_test.init.css_scope_name);
 	 	cart_el.setAttribute('data-test-name', cur_test.init.name);
 		cart_el.innerHTML = `
@@ -105,7 +106,8 @@
 		parent_doc_text = parent_doc_text.replace(/krdn/, "");
 
 		cur_test.iframe.el = document.createElement('iframe');
-		cur_test.iframe.el.classList.add('keradan-cart-iframe', cur_test.init.debug_mode ? 'debug' : '');
+		cur_test.iframe.el.classList.add('keradan-cart-iframe');
+		cur_test.iframe.el.classList.toggle('debug', cur_test.init.debug_mode);
 		// cur_test.iframe.el.setAttribute('width', '350');
 		// cur_test.iframe.el.setAttribute('height', '500');
 		// cur_test.iframe.el.setAttribute('style', `
