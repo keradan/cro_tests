@@ -1,6 +1,10 @@
 (function () {	
 	let test_data = window.keradan.get_test_data(document.currentScript);
 
+	let v = 1;
+	console.log(`%c Keradan's test "Flyuia covid info banner" (v - ${v}) is here:`, 'background: #222; color: #bada55');
+	console.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
+
 	let keradan_enable_log = true;
 	function keradan_log() {
 		if(keradan_enable_log) console.log.apply(this, arguments);
