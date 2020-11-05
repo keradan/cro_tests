@@ -1,6 +1,7 @@
 (function () {
 	// Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 	const cur_test = window.keradan.get_cur_test(document.currentScript);
+	cur_test.init.event_category = 'Exp - Updated slide-in cart';
 
 	// Set dev behavior:
 	cur_test.init.enable_log = true;
@@ -11,10 +12,17 @@
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
-	cur_test.ga_event('loaded');
-
 	try {
-    	// jdksdjdskjdsjkdsjkdsjkdsjkd
+	    (function(h,o,t,j,a,r){
+	        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+	        h._hjSettings={hjid:1914694,hjsv:6};
+	        a=o.getElementsByTagName('head')[0];
+	        r=o.createElement('script');r.async=1;
+	        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+	        a.appendChild(r);
+	    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+		window.hj=window.hj||function(){(hj.q=hj.q||[]).push(arguments)};
+		hj('trigger', 'Updated_slide_in_cart');
     }
     catch (e) {
 		cur_test.log('Hotjar error: ', e);
@@ -78,7 +86,7 @@
 	 				<div class="products-wrapper"></div>
 	 				<div class="total"></div>
 	 				<div class="promo-code-box">
-			 			<input type="text" placeholder="Промокод">
+			 			<input type="text" placeholder="Промокод" data-event="click" data-event-handler-name="promo_code_text_field">
 			 			<button data-event="click" data-event-handler-name="assign_promo_code">Подтвердить</button>
 		 			</div>
 	 			</div>
@@ -272,6 +280,7 @@
 
 
 		setTimeout(() => cur_test.markup.elements.cart.classList.toggle('hide', false), 0);
+		cur_test.ga_event('slide-in cart loaded');
 	}
 
 	cur_test.render_cart_totals = function() {
@@ -471,6 +480,10 @@
  	cur_test.event_handlers = {
 		close_cart: function(elem, cur_test) {
 			cur_test.log('cart closed. event target: ', elem);
+			if (elem.classList.contains('return-to-shopping')) cur_test.ga_event('click on Continue shopping');
+			if (elem.classList.contains('close-cart')) cur_test.ga_event('click on X to close');
+			if (elem.classList.contains('cart-wrapper')) cur_test.ga_event('click on Background to close');
+
 			cur_test.close_cart();
 		},
 		checkout: function(elem, cur_test) {
@@ -480,12 +493,18 @@
 		},
 		link_checkout: function(elem, cur_test) {
 			cur_test.log('checkout link clicked. event target: ', elem);
+			cur_test.ga_event('click on Checkout');
 			// cur_test.checkout();
 			cur_test.close_cart();
 		},
+		promo_code_text_field: function(elem, cur_test) {
+			cur_test.log('promo_code_text_field text input clicked. event target: ', elem);
+			cur_test.ga_event('click to Enter promocode');
+		},
 		assign_promo_code: function(elem, cur_test) {
 			cur_test.log('assign_promo_code button clicked. event target: ', elem);
-			
+			cur_test.ga_event('click to Apply promocode');
+
 			let promo_code_input_el = cur_test.markup.elements.cart.querySelector(`.promo-code-box input`);
 			if(!promo_code_input_el.value) return;
 
@@ -510,6 +529,8 @@
 		},
 		increase_product_quantity: function(elem, cur_test) {
 			cur_test.log('increase_product_quantity button clicked. event target: ', elem);
+			cur_test.ga_event('click to Select quantity plus');
+			
 			cur_test.change_status('is_showing_cart_updating_products_and_total');
 
 			let product_el = elem.closest('.scope-product');
@@ -521,6 +542,8 @@
 		},
 		decrease_product_quantity: function(elem, cur_test) {
 			cur_test.log('decrease_product_quantity button clicked. event target: ', elem);
+			cur_test.ga_event('click to Select quantity minus');
+
 			if(elem.hasAttribute("data-disabled-button")) return;
 			cur_test.change_status('is_showing_cart_updating_products_and_total');
 
@@ -533,6 +556,8 @@
 		},
 		delete_product: function(elem, cur_test) {
 			cur_test.log('delete_product button clicked. event target: ', elem);
+			cur_test.ga_event('click to Delete item');
+
 			cur_test.change_status('is_showing_cart_updating_products_and_total');
 
 			let product_el = elem.closest('.scope-product');
@@ -544,9 +569,8 @@
 		},
 		add_to_favorites: function(elem, cur_test) {
 			cur_test.log('add_to_favorites button clicked. event target: ', elem);
+			cur_test.ga_event('click to Add to favorites');
 
-			// cur_test.log('is user authanticated: ', document.querySelector('.popup__logout').innerHTML == "Выйти");
-			// cur_test.log('is user authanticated in iframe: ', cur_test.iframe.doc.querySelector('.popup__logout').innerHTML == "Выйти");
 			let popup_logout = document.querySelector('.popup__logout');
 			let iframe_popup_logout = cur_test.iframe.doc.querySelector('.popup__logout');
 			if (!popup_logout || !iframe_popup_logout || popup_logout.querySelector('.popup__logout').innerHTML != "Выйти" || iframe_popup_logout.querySelector('.popup__logout').innerHTML != "Выйти") return;
@@ -564,10 +588,12 @@
 			cur_test.log('toggle_sizes_select_box clicked. event target: ', elem);
 			cur_test.log('closest sizes-wrapper: ', elem.closest('.sizes-wrapper'));
 			elem.closest('.sizes-wrapper').classList.toggle('opened');
+			cur_test.ga_event('click on Size dropdown');
 		},
 		choose_size: function(elem, cur_test) {
 			cur_test.log('choose_size clicked. event target: ', elem);
-			
+			cur_test.ga_event('click to Select size');
+
 			if(elem.hasAttribute("data-size-item-disabled")) return;
 
 			cur_test.change_status('is_showing_cart_updating_products_and_total');
