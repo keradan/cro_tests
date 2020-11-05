@@ -91,6 +91,7 @@
 		 			<div class="buttons">
 		 				<button class="return-to-shopping" data-event="click" data-event-handler-name="close_cart">Продолжить<br>покупки</button>
 		 				<button class="checkout" data-event="click" data-event-handler-name="checkout">Оформить заказ</button>
+		 				<a class="checkout" data-event="click" data-event-handler-name="link_checkout" href="https://dressa.com.ua/checkout/customer-information">Оформить заказ</a>
 		 			</div>
 	 			</div>
 	 		</div>
@@ -466,7 +467,6 @@
  	cur_test.timers = [];
  	cur_test.products = [];
  	cur_test.product_keys = {};
- 	// cur_test.product_add_intercepted = false;
 
  	cur_test.event_handlers = {
 		close_cart: function(elem, cur_test) {
@@ -476,6 +476,11 @@
 		checkout: function(elem, cur_test) {
 			cur_test.log('checkout button clicked. event target: ', elem);
 			cur_test.checkout();
+			cur_test.close_cart();
+		},
+		link_checkout: function(elem, cur_test) {
+			cur_test.log('checkout link clicked. event target: ', elem);
+			// cur_test.checkout();
 			cur_test.close_cart();
 		},
 		assign_promo_code: function(elem, cur_test) {
@@ -1100,7 +1105,8 @@
 		    align-items: center;
 		    padding: 15px 10px;
 	 	}
-	 	${scope_parent}.cart-wrapper .inner .bottom .buttons button {
+	 	${scope_parent}.cart-wrapper .inner .bottom .buttons button,
+	 	${scope_parent}.cart-wrapper .inner .bottom .buttons a {
 	 		display: block;
 		    width: calc(50% - 5px);
 		    border: 1px solid #594FA4;
@@ -1118,7 +1124,7 @@
 	 		background: transparent;
 	 		line-height: 15px;
 	 	}
-	 	${scope_parent}.cart-wrapper .inner .bottom .buttons button.checkout {
+	 	${scope_parent}.cart-wrapper .inner .bottom .buttons a.checkout {
 	 		color: white;
 	 		background: #594FA4;
 	 	}
@@ -1136,10 +1142,6 @@
  	};
 
 	cur_test.cart_monitoring();
-
-	// ПОДСКАЗКА:
-	// window.keradan["dressa-updated-slide-in-cart-mobile"]
-	// window.keradan["dressa-updated-slide-in-cart-mobile"].create_iframe(); window.keradan["dressa-updated-slide-in-cart-mobile"].run_iframe();
 
 
 
