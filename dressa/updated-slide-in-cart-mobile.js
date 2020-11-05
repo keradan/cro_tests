@@ -90,7 +90,6 @@
 	 				</div>
 		 			<div class="buttons">
 		 				<button class="return-to-shopping" data-event="click" data-event-handler-name="close_cart">Продолжить<br>покупки</button>
-		 				<button class="checkout" data-event="click" data-event-handler-name="checkout">Оформить заказ</button>
 		 				<a class="checkout" data-event="click" data-event-handler-name="link_checkout" href="https://dressa.com.ua/checkout/customer-information">Оформить заказ</a>
 		 			</div>
 	 			</div>
@@ -98,6 +97,7 @@
 	 	`;
 	 	return cart_el;
 	}
+	// <button class="checkout" data-event="click" data-event-handler-name="checkout">Оформить заказ</button>
 
 	cur_test.create_iframe = function() {
 		cur_test.change_status('loading');
