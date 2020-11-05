@@ -1107,7 +1107,9 @@
 	 	}
 	 	${scope_parent}.cart-wrapper .inner .bottom .buttons button,
 	 	${scope_parent}.cart-wrapper .inner .bottom .buttons a {
-	 		display: block;
+	 		display: flex;
+		    justify-content: center;
+		    align-items: center;
 		    width: calc(50% - 5px);
 		    border: 1px solid #594FA4;
 		    transition: transforn 0.2s ease;
@@ -1127,6 +1129,8 @@
 	 	${scope_parent}.cart-wrapper .inner .bottom .buttons a.checkout {
 	 		color: white;
 	 		background: #594FA4;
+	 		text-align: center;
+	 		text-decoration: none;
 	 	}
  	`;
 
