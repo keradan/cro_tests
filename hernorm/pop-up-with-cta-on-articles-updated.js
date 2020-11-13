@@ -53,13 +53,18 @@
             transform: translateX(-101%);
         }
         ${scope_parent}.banner span {
-            transition: all 0.25s ease;
-            transition-delay: 0.5s;
+            transition: all 0.25s cubic-bezier(0.5, -0.5, 0.1, 2);
             position: relative;
             transform: translateX(0);
         }
         ${scope_parent}.banner.hide span {
-            transform: translateX(-101%);
+            transform: translateX(-100px);
+        }
+        ${scope_parent}.banner span.text {
+            transition-delay: 0.8s;
+        }
+        ${scope_parent}.banner span.button {
+            transition-delay: 0.2s;
         }
 
         ${scope_parent}.banner span.text {
