@@ -5,7 +5,7 @@
 
     // Set dev behavior:
     cur_test.init.enable_log = true;
-    cur_test.init.enable_ga_events = false;
+    cur_test.init.enable_ga_events = true;
     // cur_test.init.debug_mode = false;
 
     let v = 1;
