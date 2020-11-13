@@ -52,13 +52,13 @@
             opacity: 0;
             transform: translateX(-101%);
         }
-        ${scope_parent}.banner div {
+        ${scope_parent}.banner span {
             transition: all 0.25s ease;
             transition-delay: 0.5s;
             position: relative;
             transform: translateX(0);
         }
-        ${scope_parent}.banner.hide div {
+        ${scope_parent}.banner.hide span {
             transform: translateX(-101%);
         }
 
@@ -104,16 +104,15 @@
     banner.setAttribute('data-scope-name', cur_test.init.css_scope_name);
     banner.setAttribute('href', cur_test.markup.content.link);
     banner.innerHTML = `
-        <div>
-            <span class="text">${cur_test.markup.content.text}</span>
-            <span class="button">${cur_test.markup.content.arrow_icon}</span>
-        </div>
+        <span class="text">${cur_test.markup.content.text}</span>
+        <span class="button">${cur_test.markup.content.arrow_icon}</span>
     `;
     banner.addEventListener('click', () => cur_test.ga_event('BGC sale'));
     document.querySelector('body').prepend(banner);
 
     setTimeout(function(){
-        document.querySelector('div[data-gg-moat]').classList.add('hide-sticky-add');
+        let sticky_add = document.querySelector('div[data-gg-moat]');
+        if(sticky_add) sticky_add.classList.add('hide-sticky-add');
         banner.classList.toggle('hide', false);
     },10000);
 
