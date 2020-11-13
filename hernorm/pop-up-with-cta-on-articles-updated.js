@@ -71,13 +71,13 @@
             transform: translateX(0);
         }
         ${scope_parent}.banner.hide span {
-            transform: translateX(-100px);
+            transform: translateX(-50px);
         }
         ${scope_parent}.banner span.text {
-            transition-delay: 0.8s;
+            transition-delay: 0.2s;
         }
         ${scope_parent}.banner span.button {
-            transition-delay: 0.2s;
+            transition-delay: 0.1s;
         }
 
         ${scope_parent}.banner span.text {
