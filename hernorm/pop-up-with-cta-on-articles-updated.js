@@ -113,8 +113,8 @@
         // link: `https://www.truthfinder.com/p/home/?utm_source=BBX3&traffic[source]=BBX3&utm_medium=affiliate&traffic[medium]=affiliate&utm_campaign=&traffic[campaign]=bb219299a9q8ccc0a82fquns6cpssak8t5m9bpifv3rlt1bm85mzpm7ix1ei:&utm_term=&traffic[term]=&utm_content=&traffic[content]=&s1=&s2=bb219299a9q8ccc0a82fquns6cpssak8t5m9bpifv3rlt1bm85mzpm7ix1ei&s3=&s4=&s5=&traffic[funnel]=tf&traffic[sub_id]=&traffic[s2]=bb219299a9q8ccc0a82fquns6cpssak8t5m9bpifv3rlt1bm85mzpm7ix1ei&subtheme=cheaters&tone=caution`,
         link: `https://hernorm.com/recommends/bgc`,
         clients_tracking_attrs: {
-            "tracking-group": 'digistore24',
-            "action": 'sale.hso',
+            "tracking-group": 'cake',
+            "action": 'sale.bgc',
         },
         text: `3 Ways to Find Out If He’s Cheating?`,
         arrow_icon: `<svg width="10" height="16" viewBox="0 0 10 16" fill="none"><path d="M9.44469 7.37568L2.32449 0.255608C2.15981 0.090796 1.93997 0 1.70557 0C1.47116 0 1.25133 0.090796 1.08664 0.255608L0.562291 0.779831C0.22109 1.12142 0.22109 1.6766 0.562291 2.01767L6.5413 7.99668L0.555657 13.9823C0.390975 14.1471 0.300049 14.3668 0.300049 14.6011C0.300049 14.8357 0.390975 15.0554 0.555657 15.2203L1.08001 15.7444C1.24482 15.9092 1.46453 16 1.69893 16C1.93334 16 2.15317 15.9092 2.31785 15.7444L9.44469 8.61782C9.60976 8.45248 9.70043 8.23174 9.69991 7.99707C9.70043 7.7615 9.60976 7.54088 9.44469 7.37568Z" fill="white"/></svg>`,
