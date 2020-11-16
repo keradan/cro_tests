@@ -126,7 +126,7 @@
     banner.setAttribute('data-scope-name', cur_test.init.css_scope_name);
     banner.setAttribute('href', cur_test.markup.content.link);
     for (const attr_name in cur_test.markup.content.clients_tracking_attrs) {
-        let attr_value = clients_tracking_attrs[attr_name];
+        let attr_value = cur_test.markup.content.clients_tracking_attrs[attr_name];
         banner.setAttribute('data-' + attr_name, attr_value);
     }
     banner.innerHTML = `
