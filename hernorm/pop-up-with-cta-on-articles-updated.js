@@ -30,8 +30,6 @@
         cur_test.log('Hotjar error: ', e);
     }
 
-
-
     let scope_parent = `.scope-parent[data-scope-name=${cur_test.init.css_scope_name}]`;
     document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
         #adhesion_desktop_wrapper {
@@ -114,14 +112,23 @@
     cur_test.markup.content = {
         // link: `https://www.truthfinder.com/p/home/?utm_source=BBX3&traffic[source]=BBX3&utm_medium=affiliate&traffic[medium]=affiliate&utm_campaign=&traffic[campaign]=bb219299a9q8ccc0a82fquns6cpssak8t5m9bpifv3rlt1bm85mzpm7ix1ei:&utm_term=&traffic[term]=&utm_content=&traffic[content]=&s1=&s2=bb219299a9q8ccc0a82fquns6cpssak8t5m9bpifv3rlt1bm85mzpm7ix1ei&s3=&s4=&s5=&traffic[funnel]=tf&traffic[sub_id]=&traffic[s2]=bb219299a9q8ccc0a82fquns6cpssak8t5m9bpifv3rlt1bm85mzpm7ix1ei&subtheme=cheaters&tone=caution`,
         link: `https://hernorm.com/recommends/bgc`,
+        clients_tracking_attrs: {
+            "tracking-group": 'digistore24',
+            "action": 'sale.hso',
+        },
         text: `3 Ways to Find Out If He’s Cheating?`,
         arrow_icon: `<svg width="10" height="16" viewBox="0 0 10 16" fill="none"><path d="M9.44469 7.37568L2.32449 0.255608C2.15981 0.090796 1.93997 0 1.70557 0C1.47116 0 1.25133 0.090796 1.08664 0.255608L0.562291 0.779831C0.22109 1.12142 0.22109 1.6766 0.562291 2.01767L6.5413 7.99668L0.555657 13.9823C0.390975 14.1471 0.300049 14.3668 0.300049 14.6011C0.300049 14.8357 0.390975 15.0554 0.555657 15.2203L1.08001 15.7444C1.24482 15.9092 1.46453 16 1.69893 16C1.93334 16 2.15317 15.9092 2.31785 15.7444L9.44469 8.61782C9.60976 8.45248 9.70043 8.23174 9.69991 7.99707C9.70043 7.7615 9.60976 7.54088 9.44469 7.37568Z" fill="white"/></svg>`,
+        
     };
     
     let banner = cur_test.markup.els.banner = document.createElement('a');
-    banner.classList.add(`scope-parent`, 'banner', 'hide');
+    banner.classList.add(`scope-parent`, 'banner', 'hide', 'krdn-affiliate-link');
     banner.setAttribute('data-scope-name', cur_test.init.css_scope_name);
     banner.setAttribute('href', cur_test.markup.content.link);
+    for (const attr_name in cur_test.markup.content.clients_tracking_attrs) {
+        let attr_value = clients_tracking_attrs[attr_name];
+        banner.setAttribute('data-' + attr_name, attr_value);
+    }
     banner.innerHTML = `
         <span class="text">${cur_test.markup.content.text}</span>
         <span class="button">${cur_test.markup.content.arrow_icon}</span>
@@ -134,5 +141,29 @@
         if(sticky_add) sticky_add.classList.add('hide-sticky-add');
         banner.classList.toggle('hide', false);
     },10000);
+
+    function parseFunction (str) {
+        var fn_body_idx = str.indexOf('{'),
+            fn_body = str.substring(fn_body_idx+1, str.lastIndexOf('}')),
+            fn_declare = str.substring(0, fn_body_idx),
+            fn_params = fn_declare.substring(fn_declare.indexOf('(')+1, fn_declare.lastIndexOf(')')),
+            args = fn_params.split(',');
+
+        args.push(fn_body);
+
+        function Fn () {
+            return Function.apply(this, args);
+        }
+        Fn.prototype = Function.prototype;
+
+        return new Fn();
+    }
+
+    let keradan_doInit = window.doInit.toString()
+        .replace("jQuery('a[data-tracking-group]').each", "jQuery('.krdn-affiliate-link').each")
+        .replace("jQuery('a[data-tracking-group]').click", "jQuery('.krdn-affiliate-link').click")
+        .replace("jQuery('a[data-tracking-group]').mousedown", "jQuery('.krdn-affiliate-link').mousedown");
+
+    setTimeout(parseFunction(keradan_doInit)(), 1000);
 
 })();
