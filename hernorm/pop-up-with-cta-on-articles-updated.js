@@ -47,7 +47,7 @@
             padding: 0;
             left: 0;
             width: 100vw;
-            height: 55px;
+            height: 90px;
             bottom: 0;
             background: #E768B5;
             box-shadow: 0px 0px 10px rgba(133, 35, 94, 0.25);
