@@ -23,7 +23,34 @@
 
     let scope_parent = `.scope-parent[data-scope-name=${cur_test.init.css_scope_name}]`;
     document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
+        #CartContainer form.cart .drawer__footer {
+            height: auto!important;
+            box-shadow: 0px -4px 20px rgba(0, 0, 0, 0.07);
+        }
+        #CartContainer form.cart .drawer__footer .cart-subtotal {
+            background: white!important;
+        }
         ${scope_parent}.benefits-box {
+            margin: 0 47px;
+            padding: 15px 0;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            font-family: Montserrat, "HelveticaNeue", "Helvetica Neue", sans-serif;
+            font-weight: 500;
+            font-size: 11px;
+            line-height: 13px;
+            color: #272C3B;
+        }
+        ${scope_parent}.benefits-box ul {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        ${scope_parent}.benefits-box ul li {
+            display: flex;
+            align-items: center;
+        }
+        ${scope_parent}.benefits-box ul li span {
+            font-size: 14px;
         }
     `;
 
@@ -39,7 +66,11 @@
     benefits_box.classList.add(`scope-parent`, 'benefits-box');
     benefits_box.setAttribute('data-scope-name', cur_test.init.css_scope_name);
     benefits_box.innerHTML = `
-        <div>${cur_test.markup.content.benefits_list[0]}</div>
+        <ul>
+            <li><span>•</span> ${cur_test.markup.content.benefits_list[0]}</li>
+            <li><span>•</span> ${cur_test.markup.content.benefits_list[1]}</li>
+            <li><span>•</span> ${cur_test.markup.content.benefits_list[2]}</li>
+        </ul>
     `;
 
     cur_test.insert_markup_into_dom = function(mutationRecords) {
