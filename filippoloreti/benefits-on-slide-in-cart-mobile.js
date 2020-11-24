@@ -39,8 +39,7 @@
     banner.classList.add(`scope-parent`, 'benefits-box');
     banner.setAttribute('data-scope-name', cur_test.init.css_scope_name);
     banner.innerHTML = `
-        <span class="text">${cur_test.markup.content.text}</span>
-        <span class="button">${cur_test.markup.content.arrow_icon}</span>
+        <div>${cur_test.markup.content.benefits_list[0]}</div>
     `;
 
     // document.querySelector('body').prepend(banner);
