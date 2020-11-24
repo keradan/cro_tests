@@ -8,7 +8,7 @@
     cur_test.init.enable_ga_events = true;
     // cur_test.init.debug_mode = false;
 
-    let v = 14;
+    let v = 15;
     cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
     cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -92,20 +92,14 @@
         </ul>
     `;
 
-    cur_test.insert_markup_into_dom = function(mutationRecords) {
-        cur_test.log(`insert_markup_into_dom trigered`);
-        if(document.querySelector(`${scope_parent}.benefits-box`)) return;
+    cur_test.insert_markup_into_dom = function() {
+        if(document.querySelector(`${scope_parent}.benefits-box`) || !document.querySelector('#CartContainer form.cart')) return;
         cur_test.log(`keradan need to insert benefits_box:`, cur_test.markup.els.benefits_box);
         document.querySelector('#CartContainer form.cart .cart-subtotal').after(cur_test.markup.els.benefits_box);
-        // cur_test.target_form = document.querySelector('#CartContainer form.cart');
     }
 
     // Сперва в промисе ожидаем появления тега form в корзине
     let target_form_waiting_promise = new Promise(function(resolve, reject) {
-        // setTimeout(function(){
-        //     clearInterval(target_form_waiting_timer);
-        //     reject(new Error('keradan target form not found by 15 sec'));
-        // }, 15000);
 
         let target_form_waiting_timer = setInterval(function(){
             
@@ -126,14 +120,6 @@
         
         cur_test.log('start target form update monitoring');
         let target_form_update_timer = setInterval(() => cur_test.insert_markup_into_dom(), 500);
-
-        // дальше вешаем мютейшн обсервер на форму, вернее на ее детей, он будет следить чтобы в форме постоянно был наш добавленный блок
-        // let observer = new MutationObserver(cur_test.insert_markup_into_dom);
-        // observer.observe(cur_test.target_form, {
-        //     childList: true, // наблюдать за непосредственными детьми
-        //     subtree: true, // и более глубокими потомками
-        //     characterDataOldValue: true,
-        // });
 
         cur_test.target_form.querySelector('button.cart__checkout').addEventListener('click', function() {
             cur_test.ga_event('Click on Checkout');
