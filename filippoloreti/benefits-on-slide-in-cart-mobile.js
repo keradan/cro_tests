@@ -8,7 +8,7 @@
     cur_test.init.enable_ga_events = true;
     // cur_test.init.debug_mode = false;
 
-    let v = 4;
+    let v = 5;
     cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
     cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -39,18 +39,23 @@
             font-size: 11px;
             line-height: 13px;
             color: #272C3B;
+            letter-spacing: 0;
         }
         ${scope_parent}.benefits-box ul {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin: 0;
+            padding: 0;
         }
         ${scope_parent}.benefits-box ul li {
             display: flex;
             align-items: center;
         }
         ${scope_parent}.benefits-box ul li span {
-            font-size: 14px;
+            font-size: 20px;
+            margin-right: 3px;
+            margin-bottom: 1px;
         }
     `;
 
