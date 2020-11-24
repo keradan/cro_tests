@@ -92,8 +92,9 @@
 
     cur_test.insert_markup_into_dom = function(mutationRecords) {
         cur_test.log(`insert_markup_into_dom trigered`);
-        if(cur_test.target_form.querySelector(`${scope_parent}.benefits-box`)) return;
-        cur_test.target_form.querySelector('.cart-subtotal').after(benefits_box);
+        if(document.querySelector(`${scope_parent}.benefits-box`)) return;
+        document.querySelector('#CartContainer form.cart .cart-subtotal').after(benefits_box);
+        cur_test.target_form = document.querySelector('#CartContainer form.cart');
     }
 
     // Сперва в промисе ожидаем появления тега form в корзине
