@@ -8,7 +8,7 @@
     cur_test.init.enable_ga_events = true;
     // cur_test.init.debug_mode = false;
 
-    let v = 3;
+    let v = 4;
     cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
     cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -43,9 +43,8 @@
     `;
 
     cur_test.insert_markup_into_dom = function(mutationRecords) {
-        cur_test.log('cur_test insert_markup_into_dom triggered');
-        cur_test.log(mutationRecords);
-        // document.querySelector('body').prepend(banner);
+        if(cur_test.target_form.querySelector(`${scope_parent}.benefits-box`)) return;
+        cur_test.target_form.querySelector('.cart-subtotal').after(benefits_box);
     }
 
     // Сперва в промисе ожидаем появления тега form в корзине
