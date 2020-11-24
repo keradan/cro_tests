@@ -8,7 +8,7 @@
     cur_test.init.enable_ga_events = true;
     // cur_test.init.debug_mode = false;
 
-    let v = 9;
+    let v = 10;
     cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
     cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -36,7 +36,7 @@
             bottom: 166px!important;
         }
         #CartContainer form.cart .drawer__footer {
-            height: 166px!important;
+            height: auto!important;
             box-shadow: 0px -4px 20px rgba(0, 0, 0, 0.07);
         }
         #CartContainer form.cart .drawer__footer .cart-subtotal {
