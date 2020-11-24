@@ -91,6 +91,7 @@
     `;
 
     cur_test.insert_markup_into_dom = function(mutationRecords) {
+        cur_test.log(`insert_markup_into_dom trigered`);
         if(cur_test.target_form.querySelector(`${scope_parent}.benefits-box`)) return;
         cur_test.target_form.querySelector('.cart-subtotal').after(benefits_box);
     }
