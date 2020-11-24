@@ -42,12 +42,47 @@
         <div>${cur_test.markup.content.benefits_list[0]}</div>
     `;
 
-    // document.querySelector('body').prepend(banner);
+    cur_test.insert_markup_into_dom = function(mutationRecords) {
+        cur_test.log('cur_test insert_markup_into_dom triggered');
+        cur_test.log(mutationRecords);
+        // document.querySelector('body').prepend(banner);
+    }
 
+    // Сперва в промисе ожидаем появления тега form в корзине
+    let target_form_waiting_promise = new Promise(function(resolve, reject) {
+        setTimeout(function(){
+            clearInterval(target_form_waiting_timer);
+            reject(new Error('keradan target form not found by 15 sec');
+        }, 15000);
 
+        let target_form_waiting_timer = setInterval(function(){
+            
+            let target_form = document.querySelector('#CartContainer form.cart');
+            if(!target_form) return;
 
+            cur_test.target_form = document.querySelector('#CartContainer form.cart');
 
+            clearInterval(target_form_waiting_timer);
 
+            setTimeout(() => resolve(`keradan target form successfully found`), 100);
+        }, 200);
+    });
+
+    target_form_waiting_promise
+    .then(function(msg) {
+        cur_test.log(msg);
+
+        // дальше вешаем мютейшн обсервер на форму, вернее на ее детей, он будет следить чтобы в форме постоянно был наш добавленный блок
+        let observer = new MutationObserver(cur_test.insert_markup_into_dom);
+        observer.observe(cur_test.target_form, {
+            childList: true, // наблюдать за непосредственными детьми
+            subtree: true, // и более глубокими потомками
+            characterDataOldValue: true,
+        });
+    })
+    .catch(function(error) {
+        console.error(error);
+    });
 
 
 
