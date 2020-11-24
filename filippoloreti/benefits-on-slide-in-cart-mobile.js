@@ -52,7 +52,7 @@
     let target_form_waiting_promise = new Promise(function(resolve, reject) {
         setTimeout(function(){
             clearInterval(target_form_waiting_timer);
-            reject(new Error('keradan target form not found by 15 sec');
+            reject(new Error('keradan target form not found by 15 sec'));
         }, 15000);
 
         let target_form_waiting_timer = setInterval(function(){
