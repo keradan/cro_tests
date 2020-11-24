@@ -35,10 +35,10 @@
         ],
     };
     
-    let benefits_box = cur_test.markup.els.banner = document.createElement('a');
-    banner.classList.add(`scope-parent`, 'benefits-box');
-    banner.setAttribute('data-scope-name', cur_test.init.css_scope_name);
-    banner.innerHTML = `
+    let benefits_box = cur_test.markup.els.benefits_box = document.createElement('div');
+    benefits_box.classList.add(`scope-parent`, 'benefits-box');
+    benefits_box.setAttribute('data-scope-name', cur_test.init.css_scope_name);
+    benefits_box.innerHTML = `
         <div>${cur_test.markup.content.benefits_list[0]}</div>
     `;
 
