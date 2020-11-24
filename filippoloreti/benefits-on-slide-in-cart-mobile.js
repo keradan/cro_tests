@@ -5,17 +5,26 @@
 
     // Set dev behavior:
     cur_test.init.enable_log = true;
-    cur_test.init.enable_ga_events = true;
+    cur_test.init.enable_ga_events = false;
     // cur_test.init.debug_mode = false;
 
-    let v = 6;
+    let v = 7;
     cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
     cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
     cur_test.ga_event('loaded');
 
     try {
-        // dskdklsdkdlskldskjcxjkjjkcjk
+        (function(h,o,t,j,a,r){
+            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+            h._hjSettings={hjid:1885763,hjsv:6};
+            a=o.getElementsByTagName('head')[0];
+            r=o.createElement('script');r.async=1;
+            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+        window.hj=window.hj||function(){(hj.q=hj.q||[]).push(arguments)};
+        hj('trigger', 'Benefits_SlideIn_cart');
     }
     catch (e) {
         cur_test.log('Hotjar error: ', e);
@@ -117,6 +126,11 @@
             subtree: true, // и более глубокими потомками
             characterDataOldValue: true,
         });
+
+        cur_test.target_form.querySelector('button.cart__checkout').addEventListener('click', function() {
+            cur_test.ga_event('Click on Checkout');
+        });
+        
     })
     .catch(function(error) {
         console.error(error);
