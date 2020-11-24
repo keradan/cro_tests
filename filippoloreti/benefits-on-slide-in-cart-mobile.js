@@ -8,7 +8,7 @@
     cur_test.init.enable_ga_events = true;
     // cur_test.init.debug_mode = false;
 
-    let v = 5;
+    let v = 6;
     cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
     cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -23,8 +23,11 @@
 
     let scope_parent = `.scope-parent[data-scope-name=${cur_test.init.css_scope_name}]`;
     document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
+        #CartContainer form.cart .drawer__inner {
+            bottom: calc(118px + 48px);
+        }
         #CartContainer form.cart .drawer__footer {
-            height: auto!important;
+            height: calc(118px + 48px);
             box-shadow: 0px -4px 20px rgba(0, 0, 0, 0.07);
         }
         #CartContainer form.cart .drawer__footer .cart-subtotal {
