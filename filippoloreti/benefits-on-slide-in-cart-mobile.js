@@ -8,7 +8,7 @@
     cur_test.init.enable_ga_events = true;
     // cur_test.init.debug_mode = false;
 
-    let v = 12;
+    let v = 13;
     cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
     cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -30,7 +30,9 @@
         cur_test.log('Hotjar error: ', e);
     }
 
-    let scope_parent = `.scope-parent[data-scope-name=${cur_test.init.css_scope_name}]`;
+    // let scope_parent = `.scope-parent[data-scope-name="krdn-filippoloreti-benefits-on-slide-in-cart-mobile"]`;
+    let scope_parent = `.scope-parent[data-scope-name="${cur_test.init.css_scope_name}"]`;
+    // let scope_parent = `.scope-parent[data-scope-name=${cur_test.init.css_scope_name}]`;
     document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
         #CartContainer form.cart .drawer__inner {
             bottom: 166px!important;
@@ -93,8 +95,9 @@
     cur_test.insert_markup_into_dom = function(mutationRecords) {
         cur_test.log(`insert_markup_into_dom trigered`);
         if(document.querySelector(`${scope_parent}.benefits-box`)) return;
-        document.querySelector('#CartContainer form.cart .cart-subtotal').after(benefits_box);
-        cur_test.target_form = document.querySelector('#CartContainer form.cart');
+        cur_test.log(`keradan need to insert benefits_box:`, cur_test.markup.els.benefits_box);
+        document.querySelector('#CartContainer form.cart .cart-subtotal').after(cur_test.markup.els.benefits_box);
+        // cur_test.target_form = document.querySelector('#CartContainer form.cart');
     }
 
     // Сперва в промисе ожидаем появления тега form в корзине
