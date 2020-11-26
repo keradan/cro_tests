@@ -8,7 +8,7 @@
     cur_test.init.enable_ga_events = true;
     // cur_test.init.debug_mode = false;
 
-    let v = 16;
+    let v = 17;
     cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
     cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -29,7 +29,7 @@
             background: white!important;
         }
         ${scope_parent}.benefits-box {
-            margin: 0 47px;
+            margin: 0 45px;
             padding: 15px 0;
             border-top: 1px solid rgba(0,0,0,0.1);
             font-family: Montserrat, "HelveticaNeue", "Helvetica Neue", sans-serif;
@@ -54,6 +54,11 @@
             font-size: 20px;
             margin-right: 3px;
             margin-bottom: 1px;
+        }
+        @media (max-width: 360px) {
+            ${scope_parent}.benefits-box {
+                font-size: 9px;
+            }
         }
     `;
 
