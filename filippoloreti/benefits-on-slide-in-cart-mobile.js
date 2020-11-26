@@ -8,27 +8,11 @@
     cur_test.init.enable_ga_events = true;
     // cur_test.init.debug_mode = false;
 
-    let v = 15;
+    let v = 16;
     cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
     cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
-    cur_test.ga_event('loaded');
-
-    try {
-        (function(h,o,t,j,a,r){
-            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-            h._hjSettings={hjid:1885763,hjsv:6};
-            a=o.getElementsByTagName('head')[0];
-            r=o.createElement('script');r.async=1;
-            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-            a.appendChild(r);
-        })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-        window.hj=window.hj||function(){(hj.q=hj.q||[]).push(arguments)};
-        hj('trigger', 'Benefits_SlideIn_cart');
-    }
-    catch (e) {
-        cur_test.log('Hotjar error: ', e);
-    }
+    cur_test.already_loaded = false;
 
     // let scope_parent = `.scope-parent[data-scope-name="krdn-filippoloreti-benefits-on-slide-in-cart-mobile"]`;
     let scope_parent = `.scope-parent[data-scope-name="${cur_test.init.css_scope_name}"]`;
@@ -94,6 +78,25 @@
 
     cur_test.insert_markup_into_dom = function() {
         if(document.querySelector(`${scope_parent}.benefits-box`) || !document.querySelector('#CartContainer form.cart')) return;
+        if(!cur_test.already_loaded) {
+            cur_test.already_loaded = true;
+            cur_test.ga_event('loaded');
+            try {
+                (function(h,o,t,j,a,r){
+                    h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+                    h._hjSettings={hjid:1885763,hjsv:6};
+                    a=o.getElementsByTagName('head')[0];
+                    r=o.createElement('script');r.async=1;
+                    r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+                    a.appendChild(r);
+                })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+                window.hj=window.hj||function(){(hj.q=hj.q||[]).push(arguments)};
+                hj('trigger', 'Benefits_SlideIn_cart');
+            }
+            catch (e) {
+                cur_test.log('Hotjar error: ', e);
+            }
+        }
         cur_test.log(`keradan need to insert benefits_box:`, cur_test.markup.els.benefits_box);
         document.querySelector('#CartContainer form.cart .cart-subtotal').after(cur_test.markup.els.benefits_box);
     }
