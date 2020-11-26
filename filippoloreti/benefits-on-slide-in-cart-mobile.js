@@ -8,7 +8,7 @@
     cur_test.init.enable_ga_events = true;
     // cur_test.init.debug_mode = false;
 
-    let v = 17;
+    let v = 18;
     cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
     cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -55,7 +55,7 @@
             margin-right: 3px;
             margin-bottom: 1px;
         }
-        @media (max-width: 360px) {
+        @media (max-width: 375px) {
             ${scope_parent}.benefits-box {
                 font-size: 9px;
             }
