@@ -11,8 +11,8 @@
 	let v = 1;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
-
-	keradan_ga_event('loaded');
+	
+	cur_test.ga_event('loaded');
 
 	try {
 	    (function(h,o,t,j,a,r){
