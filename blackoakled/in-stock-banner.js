@@ -30,11 +30,11 @@
 		cur_test.log('Hotjar error: ', e);
 	}
 
-	document.querySelector("#styles-" + test_data.name).innerHTML = `
-	 	${test_data.css_scope_name}-original-text {
+	document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
+	 	${cur_test.init.css_scope_name}-original-text {
 	 		font-size: 13px;
 	 	}
-	 	${test_data.css_scope_name}-big-text{
+	 	${cur_test.init.css_scope_name}-big-text{
 	 		text-transform: uppercase;
 		}
  	`;
@@ -42,8 +42,8 @@
  	let banner_original_text = document.querySelector(`#monthly-banner-long .month-sale-info`).innerText.split('- Order Online or Call 800-348-1287')[0].trim();
 	let new_text = 'In stock, ready to ship';
 	document.querySelector(`#monthly-banner-long .month-sale-info`).innerHTML = `
-		<span class="${test_data.css_scope_name}-original-text">${banner_original_text}</span>
-		<span class="${test_data.css_scope_name}-big-text">${new_text}<span>
+		<span class="${cur_test.init.css_scope_name}-original-text">${banner_original_text}</span>
+		<span class="${cur_test.init.css_scope_name}-big-text">${new_text}<span>
 	`;
 
 })();
