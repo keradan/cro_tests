@@ -31,22 +31,31 @@
 	}
 
 	document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
-	 	.${cur_test.init.css_scope_name}-original-text {
+	 	.${cur_test.init.css_scope_name} {
+	 		display: flex;
+		    flex-wrap: wrap;
+		    justify-content: flex-start;
+		    align-items: center;
+	 	}
+	 	.${cur_test.init.css_scope_name} .original-text {
 	 		font-size: 13px;
 	 		font-weight: bold;
 	 	}
-	 	.${cur_test.init.css_scope_name}-big-text{
+	 	.${cur_test.init.css_scope_name} .big-text{
 	 		text-transform: uppercase;
-	 		font-size: 22px;
+	 		font-size: 20px;
 	 		font-weight: bold;
+	 		margin-left: 10px;
 		}
  	`;
 
  	let banner_original_text = document.querySelector(`#monthly-banner-long .month-sale-info`).innerText.split('- Order Online or Call 800-348-1287')[0].trim();
 	let new_text = 'In stock, ready to ship';
+	document.querySelector(`#monthly-banner-long .month-sale-info`).classList.add(cur_test.init.css_scope_name);
+
 	document.querySelector(`#monthly-banner-long .month-sale-info`).innerHTML = `
-		<span class="${cur_test.init.css_scope_name}-original-text">${banner_original_text}</span>
-		<span class="${cur_test.init.css_scope_name}-big-text">${new_text}<span>
+		<span class="original-text">${banner_original_text}</span>
+		<span class="big-text">${new_text}</span>
 	`;
 
 })();
