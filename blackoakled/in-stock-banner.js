@@ -11,6 +11,8 @@
 	let v = 3;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
+
+	if (!document.querySelector(`#monthly-banner-long .month-sale-info`)) return;
 	
 	cur_test.ga_event('loaded');
 
