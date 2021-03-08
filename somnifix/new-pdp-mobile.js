@@ -8,7 +8,7 @@
 	cur_test.init.enable_ga_events = false;
 	// cur_test.init.debug_mode = false;
 
-	let v = 23;
+	let v = 24;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -230,8 +230,8 @@
 	document.querySelector('.product-template.product-main .product__information').before(cur_test.html);
 
 	let popups = {
-		quantity: cur_test.html.querySelector('quantity-popup'),
-		packs: cur_test.html.querySelector('packs-choose-popup'),
+		quantity: cur_test.html.querySelector('.quantity-popup'),
+		packs: cur_test.html.querySelector('.packs-choose-popup'),
 	};
 
 	popups.quantity.addEventListener('click', function(event){
