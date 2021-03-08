@@ -8,7 +8,7 @@
 	cur_test.init.enable_ga_events = false;
 	// cur_test.init.debug_mode = false;
 
-	let v = 28;
+	let v = 29;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -244,7 +244,7 @@
 	});
 
 	popups.quantity.querySelectorAll('ul li').forEach(function(list_item){
-		list_item.addEventListener('click', function(list_item){
+		list_item.addEventListener('click', function(){
 			cur_test.log('list_item: ', list_item);
 			cur_test.log('set_quantity: ', parseInt(list_item.innerHTML));
 			model.set_quantity(parseInt(list_item.innerHTML));
