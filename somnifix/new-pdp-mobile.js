@@ -8,7 +8,7 @@
 	cur_test.init.enable_ga_events = false;
 	// cur_test.init.debug_mode = false;
 
-	let v = 17;
+	let v = 19;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -170,6 +170,24 @@
 				</span>
 			</div>
 		`;
+
+		cur_test.html.querySelector('.pack-choose-box').addEventListener('click', function(){
+			console.log('pack-choose-box cicked: open popup for choose pack');
+		});
+
+		cur_test.html.querySelector('.shipping select').addEventListener('change', function(e){
+			console.log('shipping select', e.target);
+			console.log('shipping select value', e.target.value);
+		});
+
+		cur_test.html.querySelector('.quantity button').addEventListener('click', function(){
+			console.log('quantity button clicked: open popup for choose quantity');
+		});
+
+		cur_test.html.querySelector('.submit-buttons button.buy').addEventListener('click', function(){
+			console.log('buy button clicked');
+		});
+
 	}
 
 	// TMP for debugging:
@@ -200,9 +218,10 @@
 				border: 2px solid #4090D1;
 				border-radius: 5px;
 				background: #F1F7FC;
-				padding: 15px;
+				padding: 10px 15px;
 				color: rgb(30, 65, 95);
 				font-size: 16px;
+				line-height: 18px;
 			}
 			.${cur_test.init.css_scope_name} .pack-choose-box svg.arrow {
 				position: absolute;
@@ -253,6 +272,9 @@
 			}
 
 		/* current-pack-info advantages */
+			.${cur_test.init.css_scope_name} .current-pack-info ul.advantages {
+				margin: 20px 0;
+			}
 			.${cur_test.init.css_scope_name} .current-pack-info ul.advantages li {
 				font-family: Roboto;
 				font-weight: 500;
@@ -282,6 +304,7 @@
 			    font-size: 14px;
 			    color: #1E415F;
 			    margin-left: 5px;
+			    outline: none;
 			}
 
 		/* current-pack-info estimation */
@@ -332,6 +355,7 @@
 				text-align: left;
 				margin-right: 15px;
 				margin-bottom: 30px;
+				outline: none;
 			}
 			.${cur_test.init.css_scope_name} .current-pack-info .quantity button svg {
 				position: absolute;
@@ -386,6 +410,9 @@
 				font-size: 18px;
 				line-height: 50px;
 				color: #FFFFFF;
+				border: none;
+				margin-bottom: 20px;
+				outline: none;
 			}
 
 		/* current-pack-info money-back-guarantee */
@@ -395,7 +422,7 @@
 				align-items: center;
 			}
 			.${cur_test.init.css_scope_name} .current-pack-info .money-back-guarantee img {
-				width: 70px;
+				width: 100px;
 			}
 			.${cur_test.init.css_scope_name} .current-pack-info .money-back-guarantee span {
 				font-family: Roboto;
