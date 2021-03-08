@@ -187,9 +187,7 @@
 	document.querySelector('.product-template.product-main .product__information').before(cur_test.html);
 
 	document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
-	 	.${cur_test.init.css_scope_name} {
-	 		display: flex;
-	 	}
+	 	.${cur_test.init.css_scope_name} {}
  	`;
 
 	let shipping_countries_selector = 'form[action="/cart/add"] select.on-select[name="qauntry"] option';
@@ -208,7 +206,7 @@
 	});
 
 	cur_test.model_preparing_promise_attempts = 0;
-	cur_test.model_preparing_promise_time_interval = 100;
+	cur_test.model_preparing_promise_time_interval = 5;
 
 	let model_preparing_promise = new Promise(function(resolve, reject) {
 		cur_test.model_preparing_promise_attempts++;
