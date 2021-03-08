@@ -8,7 +8,7 @@
 	cur_test.init.enable_ga_events = false;
 	// cur_test.init.debug_mode = false;
 
-	let v = 9;
+	let v = 10;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -27,7 +27,7 @@
 			'Improve sleep quality',
 		],
 		shipping: [],
-		shipping_choosen_id: [],
+		shipping_choosen_id: 0,
 		quantity_choosen: 1,
 		pack_choosen_id: 'week_4',
 		packs: {
@@ -185,7 +185,6 @@
 		<div class="current-pack-info"></div>
 	`;
 	document.querySelector('.product-template.product-main .product__information').before(cur_test.html);
-	cur_test.render_pack();
 
 	document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
 	 	.${cur_test.init.css_scope_name} {
@@ -208,8 +207,34 @@
 		model.is_ready = true;
 	});
 
-	// Шпора:
-	// console.log('keradan product__information: ', document.querySelectorAll('.product-template.product-main .product__information'));
+	let model_preparing_promise = new Promise(function(resolve, reject) {
+		setTimeout(function(){
+			if(!model.is_ready) reject(`model is not get ready by 5 sec - new PDP failed.`);
+		}, 5000);
+
+		let model_preparing_promise_timer = setInterval(function(){
+			if(!model.is_ready) return;
+
+		    clearInterval(model_preparing_promise_timer);
+
+		    resolve(`model is ready for render new PDP.`);
+		}, 100);
+	});
+
+	model_preparing_promise
+	.then(function(msg) {
+		cur_test.log(msg);
+
+		cur_test.render_pack();
+	})
+	.catch(function(error) {
+		console.error(error);
+	});
+
+
+
+
+
 
 })();
 
