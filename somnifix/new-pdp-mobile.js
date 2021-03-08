@@ -8,7 +8,7 @@
 	cur_test.init.enable_ga_events = false;
 	// cur_test.init.debug_mode = false;
 
-	let v = 7;
+	let v = 8;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -96,22 +96,6 @@
 		},
 	};
 
-	// let model = cur_test.model;
-
-	cur_test.html = document.createElement('div');
-	cur_test.html.classList.add(cur_test.init.css_scope_name);
-	cur_test.html.innerHTML = `
-		<div class="pack-choose-box">
-			<div class="arrow">
-				<svg fill="none" viewBox="0 0 10 18"><path stroke="#4090D1" stroke-width="2" d="M1 1l7.2 7.5-7.3 8"/></svg>
-				<span class="head">Pack size:</span>
-				<br>
-				<span class="pack-choosen"></span>
-			</div>
-		</div>
-		<div class="current-pack-info"></div>
-	`;
-
 	cur_test.render_pack = function () {
 		cur_test.html.querySelector('.pack-choose-box .pack-choosen').innerHTML = `
 			<span>${model.pack_choosen.name} (${model.pack_choosen.days_count} strips)</span>
@@ -182,6 +166,25 @@
 		`;
 	}
 
+	// TMP for debugging:
+	window.kkk = cur_test;
+
+	cur_test.html = document.createElement('div');
+	cur_test.html.classList.add(cur_test.init.css_scope_name);
+	cur_test.html.innerHTML = `
+		<div class="pack-choose-box">
+			<div class="arrow">
+				<svg fill="none" viewBox="0 0 10 18"><path stroke="#4090D1" stroke-width="2" d="M1 1l7.2 7.5-7.3 8"/></svg>
+				<span class="head">Pack size:</span>
+				<br>
+				<span class="pack-choosen"></span>
+			</div>
+		</div>
+		<div class="current-pack-info"></div>
+	`;
+	document.querySelector('.product-template.product-main .product__information').before(cur_test.html);
+	cur_test.render_pack();
+
 	document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
 	 	.${cur_test.init.css_scope_name} {
 	 		display: flex;
@@ -205,8 +208,6 @@
 
 	// Шпора:
 	// console.log('keradan product__information: ', document.querySelectorAll('.product-template.product-main .product__information'));
-
- 	
 
 })();
 
