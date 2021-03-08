@@ -8,7 +8,7 @@
 	cur_test.init.enable_ga_events = false;
 	// cur_test.init.debug_mode = false;
 
-	let v = 29;
+	let v = 30;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -179,6 +179,7 @@
 
 		cur_test.html.querySelector('.pack-choose-box').addEventListener('click', function(){
 			console.log('pack-choose-box cicked: open popup for choose pack');
+
 		});
 
 		cur_test.html.querySelector('.shipping select').addEventListener('change', function(e) {
@@ -188,12 +189,27 @@
 
 		cur_test.html.querySelector('.quantity button').addEventListener('click', function(){
 			console.log('quantity button clicked: open popup for choose quantity');
+			cur_test.open_popup(cur_test.popups.quantity);
 		});
 
 		cur_test.html.querySelector('.submit-buttons button.buy').addEventListener('click', function(){
 			console.log('buy button clicked');
 		});
 
+	}
+
+	cur_test.open_popup = function (popup) {
+		popup.classList.toggle('displayed-popup', true);
+		setTimeout(function(){
+			popup.classList.toggle('opened-popup', true);
+		}, 1);
+	}
+
+	cur_test.close_popup = function (popup) {
+		popup.classList.toggle('opened-popup', false);
+		setTimeout(function(){
+			popup.classList.toggle('displayed-popup', false);
+		}, 300);
 	}
 
 	// TMP for debugging:
@@ -229,38 +245,37 @@
 	`;
 	document.querySelector('.product-template.product-main .product__information').before(cur_test.html);
 
-	let popups = {
+	let cur_test.popups = {
 		quantity: cur_test.html.querySelector('.quantity-popup'),
 		packs: cur_test.html.querySelector('.packs-choose-popup'),
 	};
 
-	popups.quantity.addEventListener('click', function(event){
-		if (event.target != popups.quantity) return false;
-		close_popup(popups.quantity);
+	cur_test.popups.quantity.addEventListener('click', function(event){
+		if (event.target != cur_test.popups.quantity) return false;
+		cur_test.close_popup(cur_test.popups.quantity);
 	});
 
 	popups.quantity.querySelector('.btn-close').addEventListener('click', function(){
-		close_popup(popups.quantity);
+		cur_test.close_popup(cur_test.popups.quantity);
 	});
 
-	popups.quantity.querySelectorAll('ul li').forEach(function(list_item){
-		list_item.addEventListener('click', function(){
-			cur_test.log('list_item: ', list_item);
-			cur_test.log('set_quantity: ', parseInt(list_item.innerHTML));
+	cur_test.popups.quantity.querySelectorAll('ul li').forEach(function(list_item){
+		list_item.addEventListener('click', function() {
 			model.set_quantity(parseInt(list_item.innerHTML));
-
-			cur_test.log('kkk: ', kkk);
-			// model.rerender_pdp();
+			setTimeout(function(){
+				cur_test.close_popup(cur_test.popups.quantity);
+				cur_test.rerender_pdp();
+			}, 100);
 		});
 	});
 
-	// popups.packs.addEventListener('click', function(event){
-	// 	if (event.target != popups.packs) return false;
-	// 	close_popup(popups.packs);
+	// cur_test.popups.packs.addEventListener('click', function(event){
+	// 	if (event.target != cur_test.popups.packs) return false;
+	// 	cur_test.close_popup(cur_test.popups.packs);
 	// });
 
-	// popups.packs.querySelector('.btn-close').addEventListener('click', function(){
-	// 	close_popup(popups.packs);
+	// cur_test.popups.packs.querySelector('.btn-close').addEventListener('click', function(){
+	// 	cur_test.close_popup(cur_test.popups.packs);
 	// });
 
 	document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
@@ -280,7 +295,15 @@
 				width: 100vw;
 				height: 100vh;
 				background: rgba(25, 25, 25, 0.8);
+				opacity: 1;
 				z-index: 999999999999999999999999999999999999;
+				transition: all 0.3s ease;
+			}
+			.${cur_test.init.css_scope_name} .quantity-popup:not(.displayed-popup) {
+				display: none;
+			}
+			.${cur_test.init.css_scope_name} .quantity-popup:not(.opened-popup) {
+				opacity: 0;
 			}
 			.${cur_test.init.css_scope_name} .quantity-popup .inner {
 				width: 50%;
@@ -290,6 +313,11 @@
 				border-radius: 10px;
 				overflow: hidden;
 				box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+				transform: scale(1);
+				transition: all 0.3s ease;
+			}
+			.${cur_test.init.css_scope_name} .quantity-popup:not(.opened-popup) .inner {
+				transform: scale(0.6);
 			}
 			.${cur_test.init.css_scope_name} .quantity-popup .inner .head {
 				height: 50px;
@@ -339,7 +367,7 @@
 				border: none;
 				border-left: 2px solid transparent;
 				border-bottom: 1px solid rgba(174, 174, 174, 0.5);
-				transition: all 0.2s ease;
+				transition: all 0.1s ease;
 				padding-top: 9px;
 				padding-left: 15px;
 			}
