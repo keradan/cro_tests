@@ -8,7 +8,7 @@
 	cur_test.init.enable_ga_events = false;
 	// cur_test.init.debug_mode = false;
 
-	let v = 25;
+	let v = 26;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -239,7 +239,7 @@
 		close_popup(popups.quantity);
 	});
 
-	popups.quantity.querySelector('btn.close').addEventListener('click', function(){
+	popups.quantity.querySelector('.btn-close').addEventListener('click', function(){
 		close_popup(popups.quantity);
 	});
 
@@ -248,14 +248,14 @@
 		// model.rerender_pdp();
 	});
 
-	popups.packs.addEventListener('click', function(event){
-		if (event.target != popups.packs) return false;
-		close_popup(popups.packs);
-	});
+	// popups.packs.addEventListener('click', function(event){
+	// 	if (event.target != popups.packs) return false;
+	// 	close_popup(popups.packs);
+	// });
 
-	popups.packs.querySelector('.btn-close').addEventListener('click', function(){
-		close_popup(popups.packs);
-	});
+	// popups.packs.querySelector('.btn-close').addEventListener('click', function(){
+	// 	close_popup(popups.packs);
+	// });
 
 	document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
 		.${cur_test.init.css_scope_name} {
