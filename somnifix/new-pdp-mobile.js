@@ -195,7 +195,6 @@
 		cur_test.html.querySelector('.submit-buttons button.buy').addEventListener('click', function(){
 			console.log('buy button clicked');
 		});
-
 	}
 
 	cur_test.open_popup = function (popup) {
@@ -245,7 +244,7 @@
 	`;
 	document.querySelector('.product-template.product-main .product__information').before(cur_test.html);
 
-	let cur_test.popups = {
+	cur_test.popups = {
 		quantity: cur_test.html.querySelector('.quantity-popup'),
 		packs: cur_test.html.querySelector('.packs-choose-popup'),
 	};
