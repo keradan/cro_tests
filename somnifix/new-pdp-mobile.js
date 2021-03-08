@@ -8,7 +8,7 @@
 	cur_test.init.enable_ga_events = false;
 	// cur_test.init.debug_mode = false;
 
-	let v = 2;
+	let v = 1;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -18,7 +18,7 @@
 
 	// hotjar
 
-	cur_test.model = {
+	let model = cur_test.model = {
 		is_ready: false,
 		advantages: [
 			'Promote nose breathing',
@@ -96,9 +96,7 @@
 		},
 	};
 
-	let model = cur_test.model;
-
-	let cur_test.html = document.createElement('div');
+	cur_test.html = document.createElement('div');
 	cur_test.html.classList.add(cur_test.init.css_scope_name);
 	cur_test.html.innerHTML = `
 		<div class="pack-choose-box">
