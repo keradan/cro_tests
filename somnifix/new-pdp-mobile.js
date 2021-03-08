@@ -8,7 +8,7 @@
 	cur_test.init.enable_ga_events = false;
 	// cur_test.init.debug_mode = false;
 
-	let v = 19;
+	let v = 20;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -90,7 +90,7 @@
 		},
 
 		set_shipping: function (new_shipping_choosen_id) {
-			cur_test.data.shipping_choosen_id = new_shipping_choosen_id;
+			this.shipping_choosen_id = new_shipping_choosen_id;
 		},
 
 		set_pack: function (new_pack_choosen_id) {
@@ -175,9 +175,9 @@
 			console.log('pack-choose-box cicked: open popup for choose pack');
 		});
 
-		cur_test.html.querySelector('.shipping select').addEventListener('change', function(e){
-			console.log('shipping select', e.target);
-			console.log('shipping select value', e.target.value);
+		cur_test.html.querySelector('.shipping select').addEventListener('change', function(e) {
+			model.set_shipping(e.target.value);
+			cur_test.render_pack();
 		});
 
 		cur_test.html.querySelector('.quantity button').addEventListener('click', function(){
@@ -341,6 +341,7 @@
 			.${cur_test.init.css_scope_name} .current-pack-info .quantity {
 				display: flex;
 				align-items: center;
+				margin-bottom: 30px;
 			}
 			.${cur_test.init.css_scope_name} .current-pack-info .quantity button {
 				position: relative;
@@ -354,7 +355,6 @@
 				width: 100px;
 				text-align: left;
 				margin-right: 15px;
-				margin-bottom: 30px;
 				outline: none;
 			}
 			.${cur_test.init.css_scope_name} .current-pack-info .quantity button svg {
