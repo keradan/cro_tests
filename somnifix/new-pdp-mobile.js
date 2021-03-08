@@ -8,7 +8,7 @@
 	cur_test.init.enable_ga_events = false;
 	// cur_test.init.debug_mode = false;
 
-	let v = 21;
+	let v = 22;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -96,9 +96,13 @@
 		set_pack: function (new_pack_choosen_id) {
 			this.pack_choosen_id = new_pack_choosen_id;
 		},
+
+		set_quantity: function (new_quantity_choosen) {
+			this.quantity_choosen = new_quantity_choosen;
+		},
 	};
 
-	cur_test.render_pack = function () {
+	cur_test.rerender_pdp = function () {
 		cur_test.html.querySelector('.pack-choose-box .pack-choosen').innerHTML = `
 			<span>${model.pack_choosen.name} (${model.pack_choosen.days_count} strips)</span>
 		`;
@@ -179,7 +183,7 @@
 
 		cur_test.html.querySelector('.shipping select').addEventListener('change', function(e) {
 			model.set_shipping(e.target.value);
-			cur_test.render_pack();
+			cur_test.rerender_pdp();
 		});
 
 		cur_test.html.querySelector('.quantity button').addEventListener('click', function(){
@@ -198,6 +202,23 @@
 	cur_test.html = document.createElement('div');
 	cur_test.html.classList.add(cur_test.init.css_scope_name);
 	cur_test.html.innerHTML = `
+		<div class="quantity-popup" data-popup="quantity">
+			<div class="inner">
+				<div class="head">
+					<span>Quantity</span>
+					<button class="btn-close" data-close-popup="quantity">
+						<svg fill="none" viewBox="0 0 10 12"><path fill="#000" fill-opacity=".4" d="M9 11a1 1 0 01-1 0L5 8l-3 3a1 1 0 11-1-2l2-3-2-3a1 1 0 111-2l3 3 3-3a1 1 0 111 2L7 6l2 3a1 1 0 010 2z"/></svg>
+					</button>
+				</div>
+				<div class="body">
+					<ul>
+						${for (var i = 1; i <= 100; i++) `
+							<li>${i}</li>
+						`}
+					</ul>
+				</div>
+			</div>
+		</div>
 		<div class="pack-choose-box">
 			<svg fill="none" class="arrow" viewBox="0 0 10 18"><path stroke="#4090D1" stroke-width="2" d="M1 1l7.2 7.5-7.3 8"/></svg>
 			<span class="head">Pack size:</span>
@@ -208,11 +229,111 @@
 	`;
 	document.querySelector('.product-template.product-main .product__information').before(cur_test.html);
 
+	let popups = {
+		quantity: cur_test.html.querySelector('quantity-popup'),
+		packs: cur_test.html.querySelector('packs-choose-popup'),
+	};
+
+	popups.quantity.addEventListener('click', function(event){
+		if (event.target != popups.quantity) return false;
+		close_popup(popups.quantity);
+	});
+
+	popups.quantity.querySelector('btn.close').addEventListener('click', function(){
+		close_popup(popups.quantity);
+	});
+
+	popups.quantity.querySelector('ul li').addEventListener('click', function(event){
+		model.set_quantity(event.target.innerHTML);
+		// model.rerender_pdp();
+	});
+
+	popups.packs.addEventListener('click', function(event){
+		if (event.target != popups.packs) return false;
+		close_popup(popups.packs);
+	});
+
+	popups.packs.querySelector('btn.close').addEventListener('click', function(){
+		close_popup(popups.packs);
+	});
+
 	document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
 		.${cur_test.init.css_scope_name} {
 			width: 100%;
 			padding: 0 10px;
 		}
+
+		/* quantity-popup */
+			.${cur_test.init.css_scope_name} .quantity-popup {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100vw;
+				height: 100vh;
+				background: rgba(25, 25, 25, 0.8);
+				z-index: 999999999999999999999999999999999999;
+			}
+			.${cur_test.init.css_scope_name} .quantity-popup .inner {
+				width: 50%;
+				height: 70%;
+				margin: 0;
+				padding: 0;
+				border-radius: 10px;
+				overflow: hidden;
+			}
+			.${cur_test.init.css_scope_name} .quantity-popup .inner .head {
+				height: 50px;
+				width: 100%;
+				background: red;
+				background: #EBEBEB;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding-left: 20px;
+				font-family: Roboto;
+				font-weight: bold;
+				font-size: 16px;
+				letter-spacing: 0.065em;
+				color: #282828;
+				border-bottom: 1px solid #AEAEAE;
+			}
+			.${cur_test.init.css_scope_name} .quantity-popup .inner .head .btn-close {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				width: 48px;
+				height: 48px;
+			}
+			.${cur_test.init.css_scope_name} .quantity-popup .inner .head .btn-close svg {
+				width: 15px;
+			}
+			.${cur_test.init.css_scope_name} .quantity-popup .inner .body {
+				overflow-y: scroll;
+			}
+			.${cur_test.init.css_scope_name} .quantity-popup .inner .body ul {
+				margin: 0;
+				padding: 0;
+			}
+			.${cur_test.init.css_scope_name} .quantity-popup .inner .body ul li {
+				width: 100%;
+				height: 40px;
+				font-family: Roboto;
+				font-size: 16px;
+				letter-spacing: 0.065em;
+				color: #000000;
+				background: transparent;
+				border: none;
+				border-left: 2px solid transparent;
+				border-bottom: 1px solid rgba(174, 174, 174, 0.5);
+				transition: all 0.2s ease;
+			}
+			.${cur_test.init.css_scope_name} .quantity-popup .inner .body ul li:last-child {
+				border-bottom: none;
+			}
+			.${cur_test.init.css_scope_name} .quantity-popup .inner .body ul li:active {
+				background: rgba(64, 144, 209, 0.14);
+				border-left: 2px solid #1E4670;
+			}
 
 		/* pack-choose-box */
 			.${cur_test.init.css_scope_name} .pack-choose-box {
@@ -474,7 +595,7 @@
 	.then(function(msg) {
 		cur_test.log(msg, ` Attempts count: ${cur_test.model_preparing_promise_attempts}; total time: ${(cur_test.model_preparing_promise_attempts * cur_test.model_preparing_promise_time_interval)}`);
 
-		cur_test.render_pack();
+		cur_test.rerender_pdp();
 	})
 	.catch(function(error) {
 		console.error(error);
