@@ -8,7 +8,7 @@
 	cur_test.init.enable_ga_events = false;
 	// cur_test.init.debug_mode = false;
 
-	let v = 16;
+	let v = 17;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -189,8 +189,12 @@
 	document.querySelector('.product-template.product-main .product__information').before(cur_test.html);
 
 	document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
+		.${cur_test.init.css_scope_name} {
+			width: 100%;
+			padding: 0 10px;
+		}
+
 		/* pack-choose-box */
-			.${cur_test.init.css_scope_name} {}
 			.${cur_test.init.css_scope_name} .pack-choose-box {
 				position: relative;
 				border: 2px solid #4090D1;
@@ -219,6 +223,7 @@
 				color: #1E415F;
 				font-family: Roboto;
 				font-weight: 500;
+				margin: 20px 0;
 			}
 			.${cur_test.init.css_scope_name} .current-pack-info .price {
 				font-family: Rubik;
@@ -284,6 +289,7 @@
 				font-family: Roboto;
 				font-size: 14px;
 				color: #1E4670;
+				margin-bottom: 10px;
 			}
 
 		/* current-pack-info free-shipping */
@@ -296,6 +302,7 @@
 				font-weight: 500;
 				font-size: 16px;
 				color: #FFFFFF;
+				margin-bottom: 10px;
 			}
 
 		/* current-pack-info stock-status */
@@ -304,6 +311,7 @@
 				font-weight: 500;
 				font-size: 18px;
 				color: #299546;
+				margin-bottom: 10px;
 			}
 
 		/* current-pack-info quantity */
@@ -311,7 +319,7 @@
 				display: flex;
 				align-items: center;
 			}
-			.${cur_test.init.css_scope_name} .current-pack-info button {
+			.${cur_test.init.css_scope_name} .current-pack-info .quantity button {
 				position: relative;
 				background: #F6F6F6;
 				border: 1px solid #1F405C;
@@ -319,17 +327,20 @@
 				font-family: Roboto;
 				font-size: 16px;
 				color: #1E415F;
-				padding: 8px 15px;
-				width: 110px;
+				padding: 10px 12px;
+				width: 100px;
+				text-align: left;
+				margin-right: 15px;
+				margin-bottom: 30px;
 			}
-			.${cur_test.init.css_scope_name} .current-pack-info button svg {
+			.${cur_test.init.css_scope_name} .current-pack-info .quantity button svg {
 				position: absolute;
 				width: 15px;
 				right: 15px;
 				top: 50%;
 				transform: translateY(-50%);
 			}
-			.${cur_test.init.css_scope_name} .current-pack-info span {
+			.${cur_test.init.css_scope_name} .current-pack-info .quantity span {
 				font-family: Roboto;
 				font-size: 14px;
 				color: #1E415F;
@@ -343,6 +354,7 @@
 				padding: 20px;
 				font-family: Roboto;
 				color: #1E4670;
+				margin-bottom: 30px;
 			}
 			.${cur_test.init.css_scope_name} .current-pack-info .subscription-box .checkmark-col {
 				padding-right: 15px;
@@ -350,12 +362,16 @@
 			.${cur_test.init.css_scope_name} .current-pack-info .subscription-box .info-col .title {
 				font-weight: 500;
 				font-size: 16px;
+				margin-bottom: 10px;
+				color: #1E4670;
 			}
 			.${cur_test.init.css_scope_name} .current-pack-info .subscription-box .info-col .title span {
 				color: #F27113;
+				font-size: 16px;
 			}
 			.${cur_test.init.css_scope_name} .current-pack-info .subscription-box .info-col .description {
 				font-size: 14px;
+				line-height: 16px;
 			}
 
 		/* current-pack-info submit-buttons */
