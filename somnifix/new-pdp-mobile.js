@@ -8,7 +8,7 @@
 	cur_test.init.enable_ga_events = false;
 	// cur_test.init.debug_mode = false;
 
-	let v = 5;
+	let v = 6;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 	
@@ -209,7 +209,9 @@
 	// console.log('keradan product__information: ', document.querySelectorAll('.product-template.product-main .product__information'));
 
 	setTimeout(function(){
-		cur_test.log(`%c Keradan's deleyed log: `, 'background: #222; color: #bada55',  cur_test);
+		// cur_test.log(`%c Keradan's deleyed log: `, 'background: #222; color: #bada55',  cur_test);
+		console.log('vse ok');
+		console.log('vse ok cur_test:', cur_test);
 	}, 5000);
 	
  	
