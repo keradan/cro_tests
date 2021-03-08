@@ -8,7 +8,7 @@
 	cur_test.init.enable_ga_events = false;
 	// cur_test.init.debug_mode = false;
 
-	let v = 15;
+	let v = 16;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -129,9 +129,8 @@
 				`).join("")}
 			</ul>
 			<div class="shipping">
-				Ship to:
+				<span>Ship to:</span>
 				<select>
-					dkjdsdjk
 					${model.shipping.map((shipping_item, i) => `
 						<option value="${i}">${shipping_item.country}</option>
 					`).join("")}
@@ -160,12 +159,12 @@
 					</p>
 				</div>
 			</label>
-			<div class="submit_buttons">
+			<div class="submit-buttons">
 				<button class="buy">Add to cart</button>
-				<button class="try-for-free">Try for free</button>
+				<button class="try-for-free" hidden>Try for free</button>
 			</div>
 			<div class="money-back-guarantee">
-				<img src="#dsjdsjk" alt="30 days money back guarantee">
+				<img src="https://i.ibb.co/mcQ6ngg/image-44.png" alt="">
 				<span>
 					30-day Money-Back<br>Guarantee
 				</span>
@@ -257,8 +256,135 @@
 				margin: 5px 0;
 			}
 			.${cur_test.init.css_scope_name} .current-pack-info ul.advantages svg {
-				width: 20px;
+				position: relative;
+			    top: 1px;
+			    width: 18px;
 				margin-right: 15px;
+			}
+
+		/* current-pack-info shipping */
+			.${cur_test.init.css_scope_name} .current-pack-info .shipping span {
+				font-family: Roboto;
+				font-size: 14px;
+				color: #1E4670;
+			}
+			.${cur_test.init.css_scope_name} .current-pack-info .shipping select {
+				border: none;
+			    border-bottom: 1px solid #1E415F;
+			    width: auto;
+			    font-family: Roboto;
+			    font-weight: 500;
+			    font-size: 14px;
+			    color: #1E415F;
+			    margin-left: 5px;
+			}
+
+		/* current-pack-info estimation */
+			.${cur_test.init.css_scope_name} .current-pack-info .estimation {
+				font-family: Roboto;
+				font-size: 14px;
+				color: #1E4670;
+			}
+
+		/* current-pack-info free-shipping */
+			.${cur_test.init.css_scope_name} .current-pack-info .free-shipping {
+				display: inline-block;
+				padding: 5px 20px;
+				background: #4090D1;
+				border-radius: 5px;
+				font-family: Roboto;
+				font-weight: 500;
+				font-size: 16px;
+				color: #FFFFFF;
+			}
+
+		/* current-pack-info stock-status */
+			.${cur_test.init.css_scope_name} .current-pack-info .stock-status {
+				font-family: Roboto;
+				font-weight: 500;
+				font-size: 18px;
+				color: #299546;
+			}
+
+		/* current-pack-info quantity */
+			.${cur_test.init.css_scope_name} .current-pack-info .quantity {
+				display: flex;
+				align-items: center;
+			}
+			.${cur_test.init.css_scope_name} .current-pack-info button {
+				position: relative;
+				background: #F6F6F6;
+				border: 1px solid #1F405C;
+				border-radius: 5px;
+				font-family: Roboto;
+				font-size: 16px;
+				color: #1E415F;
+				padding: 8px 15px;
+				width: 110px;
+			}
+			.${cur_test.init.css_scope_name} .current-pack-info button svg {
+				position: absolute;
+				width: 15px;
+				right: 15px;
+				top: 50%;
+				transform: translateY(-50%);
+			}
+			.${cur_test.init.css_scope_name} .current-pack-info span {
+				font-family: Roboto;
+				font-size: 14px;
+				color: #1E415F;
+			}
+
+		/* current-pack-info subscription-box */
+			.${cur_test.init.css_scope_name} .current-pack-info .subscription-box {
+				display: flex;
+				background: rgba(242, 180, 19, 0.1);
+				border-radius: 5px;
+				padding: 20px;
+				font-family: Roboto;
+				color: #1E4670;
+			}
+			.${cur_test.init.css_scope_name} .current-pack-info .subscription-box .checkmark-col {
+				padding-right: 15px;
+			}
+			.${cur_test.init.css_scope_name} .current-pack-info .subscription-box .info-col .title {
+				font-weight: 500;
+				font-size: 16px;
+			}
+			.${cur_test.init.css_scope_name} .current-pack-info .subscription-box .info-col .title span {
+				color: #F27113;
+			}
+			.${cur_test.init.css_scope_name} .current-pack-info .subscription-box .info-col .description {
+				font-size: 14px;
+			}
+
+		/* current-pack-info submit-buttons */
+			.${cur_test.init.css_scope_name} .current-pack-info .submit-buttons button.buy {
+				width: 100%;
+				height: 50px;
+				background: #1F405C;
+				border-radius: 100px;
+				text-transform: uppercase;
+				font-family: Roboto;
+				font-weight: 500;
+				font-size: 18px;
+				line-height: 50px;
+				color: #FFFFFF;
+			}
+
+		/* current-pack-info money-back-guarantee */
+			.${cur_test.init.css_scope_name} .current-pack-info .money-back-guarantee {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			.${cur_test.init.css_scope_name} .current-pack-info .money-back-guarantee img {
+				width: 70px;
+			}
+			.${cur_test.init.css_scope_name} .current-pack-info .money-back-guarantee span {
+				font-family: Roboto;
+				font-size: 14px;
+				color: #1E415F;
 			}
 
  	`;
