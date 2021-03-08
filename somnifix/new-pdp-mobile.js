@@ -8,7 +8,7 @@
 	cur_test.init.enable_ga_events = false;
 	// cur_test.init.debug_mode = false;
 
-	let v = 8;
+	let v = 9;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -75,13 +75,15 @@
 			Object.defineProperty(pack, "total_price", {
 				get: function() {
 					return this.price * model.quantity_choosen;
-				}
+				},
+				configurable: true,
 			});
 
 			Object.defineProperty(pack, "current_strips_count", {
 				get: function() {
 					return model.quantity_choosen * this.days_count;
-				}
+				},
+				configurable: true,
 			});
 
 			return pack;
