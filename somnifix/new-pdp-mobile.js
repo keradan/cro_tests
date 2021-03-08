@@ -8,7 +8,7 @@
 	cur_test.init.enable_ga_events = false;
 	// cur_test.init.debug_mode = false;
 
-	let v = 11;
+	let v = 12;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -144,7 +144,7 @@
 			</div>
 			<label class="subscription-box">
 				<div class="checkmark-col">
-					<input type="checbox">
+					<input type="checkbox">
 				</div>
 				<div class="info-col">
 					<p class="title">
@@ -175,12 +175,10 @@
 	cur_test.html.classList.add(cur_test.init.css_scope_name);
 	cur_test.html.innerHTML = `
 		<div class="pack-choose-box">
-			<div class="arrow">
-				<svg fill="none" viewBox="0 0 10 18"><path stroke="#4090D1" stroke-width="2" d="M1 1l7.2 7.5-7.3 8"/></svg>
-				<span class="head">Pack size:</span>
-				<br>
-				<span class="pack-choosen"></span>
-			</div>
+			<svg fill="none" class="arrow" viewBox="0 0 10 18"><path stroke="#4090D1" stroke-width="2" d="M1 1l7.2 7.5-7.3 8"/></svg>
+			<span class="head">Pack size:</span>
+			<br>
+			<span class="pack-choosen"></span>
 		</div>
 		<div class="current-pack-info"></div>
 	`;
@@ -188,6 +186,26 @@
 
 	document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
 	 	.${cur_test.init.css_scope_name} {}
+	 	.${cur_test.init.css_scope_name} .pack-choose-box {
+	 		position: relative;
+	 		border: 2px solid #4090D1;
+	 		border-radius: 5px;
+	 		background: #F1F7FC;
+	 		padding: 15px;
+	 		color: rgb(30, 65, 95);
+	 		font-size: 16px;
+	 	}
+	 	.${cur_test.init.css_scope_name} .pack-choose-box svg.arrow {
+	 		position: absolute;
+		    width: 15px;
+		    top: 50%;
+		    right: 25px;
+		    transform: translateY(-50%);
+	 	}
+	 	.${cur_test.init.css_scope_name} .pack-choose-box span.pack-choosen {
+	 		font-weight: bold;
+	 	}
+
  	`;
 
 	let shipping_countries_selector = 'form[action="/cart/add"] select.on-select[name="qauntry"] option';
@@ -206,7 +224,7 @@
 	});
 
 	cur_test.model_preparing_promise_attempts = 0;
-	cur_test.model_preparing_promise_time_interval = 5;
+	cur_test.model_preparing_promise_time_interval = 1;
 
 	let model_preparing_promise = new Promise(function(resolve, reject) {
 		cur_test.model_preparing_promise_attempts++;
