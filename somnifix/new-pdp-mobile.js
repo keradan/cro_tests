@@ -8,7 +8,7 @@
 	cur_test.init.enable_ga_events = false;
 	// cur_test.init.debug_mode = false;
 
-	let v = 13;
+	let v = 14;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -120,7 +120,12 @@
 			</div>
 			<ul class="advantages">
 				${model.advantages.map(item => `
-					<li>${item}</li>
+					<li>
+						<svg fill="none" viewBox="0 0 14 11">
+							<path id="0" stroke="#1E4670" stroke-width="2" d="M1 6l5 3 6-8"/>
+						</svg>
+						<span>${item}</span>
+					</li>
 				`).join("")}
 			</ul>
 			<div class="shipping">
@@ -219,6 +224,15 @@
 			.${cur_test.init.css_scope_name} .current-pack-info .price {
 				font-family: Rubik;
 				font-size: 24px;
+			}
+			.${cur_test.init.css_scope_name} .current-pack-info .price .number {
+				font-size: 24px;
+			    height: auto;
+			    display: inline;
+			    margin: 0;
+			    padding: 0;
+			    margin-left: 2px;
+			    margin-right: 7px;
 			}
 			.${cur_test.init.css_scope_name} .current-pack-info .made-in-usa {
 				display: flex;
