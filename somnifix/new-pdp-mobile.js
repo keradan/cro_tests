@@ -8,7 +8,7 @@
 	cur_test.init.enable_ga_events = false;
 	// cur_test.init.debug_mode = false;
 
-	let v = 10;
+	let v = 11;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -207,7 +207,11 @@
 		model.is_ready = true;
 	});
 
+	cur_test.model_preparing_promise_attempts = 0;
+	cur_test.model_preparing_promise_time_interval = 100;
+
 	let model_preparing_promise = new Promise(function(resolve, reject) {
+		cur_test.model_preparing_promise_attempts++;
 		setTimeout(function(){
 			if(!model.is_ready) reject(`model is not get ready by 5 sec - new PDP failed.`);
 		}, 5000);
@@ -218,12 +222,12 @@
 		    clearInterval(model_preparing_promise_timer);
 
 		    resolve(`model is ready for render new PDP.`);
-		}, 100);
+		}, cur_test.model_preparing_promise_time_interval);
 	});
 
 	model_preparing_promise
 	.then(function(msg) {
-		cur_test.log(msg);
+		cur_test.log(msg, ` Attempts count: ${cur_test.model_preparing_promise_attempts}; total time: ${(cur_test.model_preparing_promise_attempts * cur_test.model_preparing_promise_time_interval)}`);
 
 		cur_test.render_pack();
 	})
