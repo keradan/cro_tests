@@ -8,7 +8,7 @@
 	cur_test.init.enable_ga_events = false;
 	// cur_test.init.debug_mode = false;
 
-	let v = 20;
+	let v = 21;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -132,7 +132,9 @@
 				<span>Ship to:</span>
 				<select>
 					${model.shipping.map((shipping_item, i) => `
-						<option value="${i}">${shipping_item.country}</option>
+						<option value="${i}" ${i == model.shipping_choosen_id ? 'selected' : ''}>
+							${shipping_item.country}
+						</option>
 					`).join("")}
 				</select>
 			</div>
@@ -326,6 +328,9 @@
 				font-size: 16px;
 				color: #FFFFFF;
 				margin-bottom: 10px;
+			}
+			.${cur_test.init.css_scope_name} .current-pack-info .free-shipping[hidden] {
+				display: none;
 			}
 
 		/* current-pack-info stock-status */
