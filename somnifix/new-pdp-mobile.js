@@ -8,7 +8,7 @@
 	cur_test.init.enable_ga_events = false;
 	// cur_test.init.debug_mode = false;
 
-	let v = 12;
+	let v = 13;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -185,26 +185,54 @@
 	document.querySelector('.product-template.product-main .product__information').before(cur_test.html);
 
 	document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
-	 	.${cur_test.init.css_scope_name} {}
-	 	.${cur_test.init.css_scope_name} .pack-choose-box {
-	 		position: relative;
-	 		border: 2px solid #4090D1;
-	 		border-radius: 5px;
-	 		background: #F1F7FC;
-	 		padding: 15px;
-	 		color: rgb(30, 65, 95);
-	 		font-size: 16px;
-	 	}
-	 	.${cur_test.init.css_scope_name} .pack-choose-box svg.arrow {
-	 		position: absolute;
+		/* pack-choose-box */
+			.${cur_test.init.css_scope_name} {}
+			.${cur_test.init.css_scope_name} .pack-choose-box {
+				position: relative;
+				border: 2px solid #4090D1;
+				border-radius: 5px;
+				background: #F1F7FC;
+				padding: 15px;
+				color: rgb(30, 65, 95);
+				font-size: 16px;
+			}
+			.${cur_test.init.css_scope_name} .pack-choose-box svg.arrow {
+				position: absolute;
 		    width: 15px;
 		    top: 50%;
 		    right: 25px;
 		    transform: translateY(-50%);
-	 	}
-	 	.${cur_test.init.css_scope_name} .pack-choose-box span.pack-choosen {
-	 		font-weight: bold;
-	 	}
+			}
+			.${cur_test.init.css_scope_name} .pack-choose-box span.pack-choosen {
+				font-weight: bold;
+			}
+
+	 	/* current-pack-info head */
+			.${cur_test.init.css_scope_name} .current-pack-info .head {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				color: #1E415F;
+				font-family: Roboto;
+				font-weight: 500;
+			}
+			.${cur_test.init.css_scope_name} .current-pack-info .price {
+				font-family: Rubik;
+				font-size: 24px;
+			}
+			.${cur_test.init.css_scope_name} .current-pack-info .made-in-usa {
+				display: flex;
+				align-items: center;
+				padding: 10px;
+				border: 1px solid #CCCCCC;
+				border-radius: 6px;
+				font-size: 14px;
+				letter-spacing: 0.065em;
+			}
+			.${cur_test.init.css_scope_name} .current-pack-info .made-in-usa svg {
+				width: 20px;
+				margin-right: 10px;
+			}
 
  	`;
 
