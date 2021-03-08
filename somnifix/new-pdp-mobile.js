@@ -8,7 +8,7 @@
 	cur_test.init.enable_ga_events = false;
 	// cur_test.init.debug_mode = false;
 
-	let v = 26;
+	let v = 27;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -244,6 +244,7 @@
 	});
 
 	popups.quantity.querySelector('ul li').addEventListener('click', function(event){
+		cur_test.log('set_quantity: ', event.target.innerHTML);
 		model.set_quantity(event.target.innerHTML);
 		// model.rerender_pdp();
 	});
@@ -266,6 +267,9 @@
 		/* quantity-popup */
 			.${cur_test.init.css_scope_name} .quantity-popup {
 				position: fixed;
+				display: flex;
+			    justify-content: center;
+			    align-items: center;
 				top: 0;
 				left: 0;
 				width: 100vw;
@@ -280,6 +284,7 @@
 				padding: 0;
 				border-radius: 10px;
 				overflow: hidden;
+				box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
 			}
 			.${cur_test.init.css_scope_name} .quantity-popup .inner .head {
 				height: 50px;
@@ -303,12 +308,15 @@
 				align-items: center;
 				width: 48px;
 				height: 48px;
+				border: none;
 			}
 			.${cur_test.init.css_scope_name} .quantity-popup .inner .head .btn-close svg {
 				width: 15px;
 			}
 			.${cur_test.init.css_scope_name} .quantity-popup .inner .body {
 				overflow-y: scroll;
+				max-height: calc(100% - 51px);
+				background: white;
 			}
 			.${cur_test.init.css_scope_name} .quantity-popup .inner .body ul {
 				margin: 0;
@@ -319,6 +327,7 @@
 				height: 40px;
 				font-family: Roboto;
 				font-size: 16px;
+				font-weight: 500;
 				letter-spacing: 0.065em;
 				color: #000000;
 				background: transparent;
@@ -326,6 +335,8 @@
 				border-left: 2px solid transparent;
 				border-bottom: 1px solid rgba(174, 174, 174, 0.5);
 				transition: all 0.2s ease;
+				padding-top: 9px;
+				padding-left: 15px;
 			}
 			.${cur_test.init.css_scope_name} .quantity-popup .inner .body ul li:last-child {
 				border-bottom: none;
