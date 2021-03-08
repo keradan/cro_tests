@@ -254,7 +254,7 @@
 		cur_test.close_popup(cur_test.popups.quantity);
 	});
 
-	popups.quantity.querySelector('.btn-close').addEventListener('click', function(){
+	cur_test.popups.quantity.querySelector('.btn-close').addEventListener('click', function(){
 		cur_test.close_popup(cur_test.popups.quantity);
 	});
 
