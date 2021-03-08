@@ -8,7 +8,7 @@
 	cur_test.init.enable_ga_events = false;
 	// cur_test.init.debug_mode = false;
 
-	let v = 24;
+	let v = 25;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -253,7 +253,7 @@
 		close_popup(popups.packs);
 	});
 
-	popups.packs.querySelector('btn.close').addEventListener('click', function(){
+	popups.packs.querySelector('.btn-close').addEventListener('click', function(){
 		close_popup(popups.packs);
 	});
 
