@@ -207,6 +207,11 @@
 
 	// Шпора:
 	// console.log('keradan product__information: ', document.querySelectorAll('.product-template.product-main .product__information'));
+
+	setTimeout(function(){
+		cur_test.log(`%c Keradan's deleyed log: `, 'background: #222; color: #bada55',  cur_test);
+	}, 5000);
+	
  	
 
 })();
