@@ -8,7 +8,7 @@
 	cur_test.init.enable_ga_events = false;
 	// cur_test.init.debug_mode = false;
 
-	let v = 14;
+	let v = 15;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -246,6 +246,19 @@
 			.${cur_test.init.css_scope_name} .current-pack-info .made-in-usa svg {
 				width: 20px;
 				margin-right: 10px;
+			}
+
+		/* current-pack-info advantages */
+			.${cur_test.init.css_scope_name} .current-pack-info ul.advantages li {
+				font-family: Roboto;
+				font-weight: 500;
+				font-size: 14px;
+				color: #1E4670;
+				margin: 5px 0;
+			}
+			.${cur_test.init.css_scope_name} .current-pack-info ul.advantages svg {
+				width: 20px;
+				margin-right: 15px;
 			}
 
  	`;
