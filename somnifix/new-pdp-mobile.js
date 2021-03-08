@@ -245,6 +245,7 @@
 
 	popups.quantity.querySelectorAll('ul li').forEach(function(list_item){
 		list_item.addEventListener('click', function(list_item){
+			cur_test.log('list_item: ', list_item);
 			cur_test.log('set_quantity: ', parseInt(list_item.innerHTML));
 			model.set_quantity(parseInt(list_item.innerHTML));
 
