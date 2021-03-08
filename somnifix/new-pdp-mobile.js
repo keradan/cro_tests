@@ -8,7 +8,7 @@
 	cur_test.init.enable_ga_events = false;
 	// cur_test.init.debug_mode = false;
 
-	let v = 30;
+	let v = 31;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -34,7 +34,7 @@
 			week_4: {
 				days_count: 28,
 				name: '4-week pack',
-				auto_delivery_period: null,
+				auto_delivery_period: '',
 				price: 19.97,
 				old_price: null,
 				save_money_percent: 0,
@@ -74,7 +74,7 @@
 
 			Object.defineProperty(pack, "total_price", {
 				get: function() {
-					return this.price * model.quantity_choosen;
+					return Math.round((this.price * model.quantity_choosen) * 100) / 100;
 				},
 				configurable: true,
 			});
@@ -228,7 +228,7 @@
 				<div class="body">
 					<ul>
 						${Array.apply(null, Array(100)).map((v, i) => `
-							<li>${i}</li>
+							<li>${i + 1}</li>
 						`).join(" ")}
 					</ul>
 				</div>
