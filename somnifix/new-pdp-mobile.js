@@ -8,17 +8,17 @@
 	cur_test.init.enable_ga_events = false;
 	// cur_test.init.debug_mode = false;
 
-	let v = 2;
+	let v = 3;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
+	
+	cur_test.log(`%c Keradan's test lalala`, 'background: #222; color: #bada55');
 
 	if (!document.querySelector(`#monthly-banner-long .month-sale-info`)) return;
 	
 	cur_test.ga_event('loaded');
 
 	// hotjar
-
-	window.kkk = cur_test;
 
 	let model = cur_test.model = {
 		is_ready: false,
