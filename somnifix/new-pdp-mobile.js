@@ -8,7 +8,7 @@
 	cur_test.init.enable_ga_events = false;
 	// cur_test.init.debug_mode = false;
 
-	let v = 35;
+	let v = 36;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -39,7 +39,7 @@
 				old_price: null,
 				save_money_percent: 0,
 				have_subscription: false,
-				image: 'dsjdsjkdskj',
+				image: 'https://i.ibb.co/wyDWfg9/box-5.png',
 			},
 			week_12: {
 				days_count: 84,
@@ -49,7 +49,7 @@
 				old_price: 59.97,
 				save_money_percent: 7,
 				have_subscription: true,
-				image: 'dsjdsjkdskj',
+				image: 'https://i.ibb.co/NTgJ9M1/Group-870.png',
 			},
 			month_12: {
 				days_count: 365,
@@ -59,7 +59,7 @@
 				old_price: 230.97,
 				save_money_percent: 17,
 				have_subscription: true,
-				image: 'dsjdsjkdskj',
+				image: 'https://i.ibb.co/NTgJ9M1/Group-870.png',
 			},
 		},
 
@@ -478,6 +478,8 @@
 				font-family: Roboto;
 				font-size: 17px;
 				color: #1E4670;
+				margin-left: 15px;
+				margin-top: 5px;
 			}
 			.${cur_test.init.css_scope_name} .packs-choose-popup .inner .top-title span {
 				font-weight: bold;
@@ -488,6 +490,7 @@
 				display: flex;
 				align-items: center;
 				width: 100%;
+				padding-left: 10px;
 			}
 			.${cur_test.init.css_scope_name} .packs-choose-popup .inner .body .pack {
 				box-sizing: border-box;
@@ -496,6 +499,8 @@
 				border-radius: 10px;
 				opacity: 0.6;
 				padding: 10px;
+				min-width: 140px;
+				margin: 0 5px;
 			}
 			.${cur_test.init.css_scope_name} .packs-choose-popup .inner .body .pack.choosen {
 				background: rgba(64, 144, 209, 0.1);
@@ -503,12 +508,14 @@
 				border: 2px solid #4090D1;
 			}
 			.${cur_test.init.css_scope_name} .packs-choose-popup .inner .body .pack .save {
+				display: inline-block;
 				background: rgba(242, 113, 19, 0.29);
 				border-radius: 2px;
 				opacity: 1;
 				color: #F27113;
 				font-family: Roboto;
 				font-size: 11px;
+				padding: 0 4px;
 			}
 			.${cur_test.init.css_scope_name} .packs-choose-popup .inner .body .pack .save[hidden] {
 				opacity: 0;
