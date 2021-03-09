@@ -8,7 +8,7 @@
 	cur_test.init.enable_ga_events = false;
 	// cur_test.init.debug_mode = false;
 
-	let v = 33;
+	let v = 34;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -110,7 +110,7 @@
 		cur_test.html.querySelector('.packs-choose-popup').innerHTML = `
 			<div class="inner">
 				<button class="btn-close">Done</button>
-				<div class="title">
+				<div class="top-title">
 					Choose your pack: <span>${model.pack_choosen.name}</span>
 				</div>
 				<div class="body">
@@ -299,14 +299,14 @@
 		});
 	});
 
-	// cur_test.popups.packs.addEventListener('click', function(event){
-	// 	if (event.target != cur_test.popups.packs) return false;
-	// 	cur_test.close_popup(cur_test.popups.packs);
-	// });
+	cur_test.popups.packs.addEventListener('click', function(event){
+		if (event.target != cur_test.popups.packs) return false;
+		cur_test.close_popup(cur_test.popups.packs);
+	});
 
-	// cur_test.popups.packs.querySelector('.btn-close').addEventListener('click', function(){
-	// 	cur_test.close_popup(cur_test.popups.packs);
-	// });
+	cur_test.popups.packs.querySelector('.btn-close').addEventListener('click', function(){
+		cur_test.close_popup(cur_test.popups.packs);
+	});
 
 	document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
 		.${cur_test.init.css_scope_name} {
@@ -454,6 +454,8 @@
 				font-size: 16px;
 				color: #FFFFFF;
 				text-transform: uppercase;
+				background: transparent;
+				border: none;
 			}
 			.${cur_test.init.css_scope_name} .packs-choose-popup:not(.opened-popup) .inner .btn-close {
 				transform: translateY(50px);
@@ -472,6 +474,14 @@
 				transition-delay: 0.2s;
 			}
 
+			.${cur_test.init.css_scope_name} .packs-choose-popup .inner .top-title {
+				font-family: Roboto;
+				font-size: 17px;
+				color: #1E4670;
+			}
+			.${cur_test.init.css_scope_name} .packs-choose-popup .inner .top-title span {
+				font-weight: bold;
+			}
 			.${cur_test.init.css_scope_name} .packs-choose-popup .inner .body {
 				overflow-y: hidden;
 				overflow-x: scroll;
@@ -482,7 +492,7 @@
 			.${cur_test.init.css_scope_name} .packs-choose-popup .inner .body .pack {
 				box-sizing: border-box;
 				background: transparent;
-				border: 1px dashed #4090D1			
+				border: 1px dashed #4090D1;		
 				border-radius: 10px;
 				opacity: 0.6;
 				padding: 10px;
