@@ -8,7 +8,7 @@
 	cur_test.init.enable_ga_events = false;
 	// cur_test.init.debug_mode = false;
 
-	let v = 32;
+	let v = 33;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -132,7 +132,7 @@
 								</div>
 							</div>
 						`;
-					})}
+					}).join('')}
 				</div>
 			</div>
 		`;
@@ -436,7 +436,6 @@
 				height: 280px;
 				margin: 0;
 				padding: 0;
-				overflow: hidden;
 				transform: translateY(0);
 				transition: all 0.3s ease;
 				background: white;
@@ -473,14 +472,14 @@
 				transition-delay: 0.2s;
 			}
 
-			.${cur_test.init.css_scope_name} .packs-choose-popup:not(.opened-popup) .inner .body {
+			.${cur_test.init.css_scope_name} .packs-choose-popup .inner .body {
 				overflow-y: hidden;
 				overflow-x: scroll;
 				display: flex;
 				align-items: center;
 				width: 100%;
 			}
-			.${cur_test.init.css_scope_name} .packs-choose-popup:not(.opened-popup) .inner .body .pack {
+			.${cur_test.init.css_scope_name} .packs-choose-popup .inner .body .pack {
 				box-sizing: border-box;
 				background: transparent;
 				border: 1px dashed #4090D1			
@@ -488,12 +487,12 @@
 				opacity: 0.6;
 				padding: 10px;
 			}
-			.${cur_test.init.css_scope_name} .packs-choose-popup:not(.opened-popup) .inner .body .pack.choosen {
+			.${cur_test.init.css_scope_name} .packs-choose-popup .inner .body .pack.choosen {
 				background: rgba(64, 144, 209, 0.1);
 				opacity: 1;
 				border: 2px solid #4090D1;
 			}
-			.${cur_test.init.css_scope_name} .packs-choose-popup:not(.opened-popup) .inner .body .pack .save {
+			.${cur_test.init.css_scope_name} .packs-choose-popup .inner .body .pack .save {
 				background: rgba(242, 113, 19, 0.29);
 				border-radius: 2px;
 				opacity: 1;
@@ -501,10 +500,10 @@
 				font-family: Roboto;
 				font-size: 11px;
 			}
-			.${cur_test.init.css_scope_name} .packs-choose-popup:not(.opened-popup) .inner .body .pack .save[hidden] {
+			.${cur_test.init.css_scope_name} .packs-choose-popup .inner .body .pack .save[hidden] {
 				opacity: 0;
 			}
-			.${cur_test.init.css_scope_name} .packs-choose-popup:not(.opened-popup) .inner .body .pack .image {
+			.${cur_test.init.css_scope_name} .packs-choose-popup .inner .body .pack .image {
 				display: flex;
 				justify-content: center;
 				align-items: center;
@@ -512,33 +511,33 @@
 				height: 60px;
 				margin-bottom: 20px;
 			}
-			.${cur_test.init.css_scope_name} .packs-choose-popup:not(.opened-popup) .inner .body .pack .title {
+			.${cur_test.init.css_scope_name} .packs-choose-popup .inner .body .pack .title {
 				font-family: Roboto;
 				font-weight: bold;
 				font-size: 16px;
 				text-align: center;
 				color: #1E415F;
 			}
-			.${cur_test.init.css_scope_name} .packs-choose-popup:not(.opened-popup) .inner .body .pack .description {
+			.${cur_test.init.css_scope_name} .packs-choose-popup .inner .body .pack .description {
 				font-family: Roboto;
 				font-size: 12px;
 				text-align: center;
 				color: #747474;
 				margin: 20px 0;
 			}
-			.${cur_test.init.css_scope_name} .packs-choose-popup:not(.opened-popup) .inner .body .pack .price {
+			.${cur_test.init.css_scope_name} .packs-choose-popup .inner .body .pack .price {
 				display: flex;
 				justify-content: space-around;
 				align-items: center;
 			}
-			.${cur_test.init.css_scope_name} .packs-choose-popup:not(.opened-popup) .inner .body .pack .price .actual {
+			.${cur_test.init.css_scope_name} .packs-choose-popup .inner .body .pack .price .actual {
 				font-family: Rubik;
 				font-weight: 500;
 				font-size: 14px;
 				letter-spacing: 0.05em;
 				color: #1E415F;
 			}
-			.${cur_test.init.css_scope_name} .packs-choose-popup:not(.opened-popup) .inner .body .pack .price .old {
+			.${cur_test.init.css_scope_name} .packs-choose-popup .inner .body .pack .price .old {
 				font-family: Rubik;
 				font-weight: 500;
 				font-size: 10px;
