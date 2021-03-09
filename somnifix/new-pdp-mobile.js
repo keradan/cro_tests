@@ -180,7 +180,7 @@
 				</button>
 				<span>${model.quantity_choosen} pack = ${model.pack_choosen.current_strips_count} strips</span>
 			</div>
-			<label class="subscription-box">
+			<label class="subscription-box" ${model.pack_choosen.have_subscription ? '' : 'hidden'}>
 				<div class="checkmark-col">
 					<input type="checkbox">
 				</div>
@@ -239,7 +239,7 @@
 				cur_test.log('dataset.packId: ', pack.dataset.packId);
 
 				model.set_pack(pack.dataset.packId);
-				
+
 				setTimeout(function(){
 					cur_test.rerender_pdp();
 				}, 10);
@@ -754,6 +754,9 @@
 				font-family: Roboto;
 				color: #1E4670;
 				margin-bottom: 30px;
+			}
+			.${cur_test.init.css_scope_name} .current-pack-info .subscription-box[hidden] {
+				display: none;
 			}
 			.${cur_test.init.css_scope_name} .current-pack-info .subscription-box .checkmark-col {
 				padding-right: 15px;
