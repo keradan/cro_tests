@@ -8,11 +8,9 @@
 	cur_test.init.enable_ga_events = false;
 	// cur_test.init.debug_mode = false;
 
-	let v = 37;
+	let v = 38;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
-
-	// if (!document.querySelector(`#monthly-banner-long .month-sale-info`)) return;
 	
 	cur_test.ga_event('loaded');
 
@@ -117,7 +115,7 @@
 					${Object.keys(model.packs).map(function(key) {
 						let current_pack = model.packs[key];
 						return `
-							<div class="pack ${key == model.pack_choosen_id ? 'choosen' : ''}">
+							<div class="pack ${key == model.pack_choosen_id ? 'choosen' : ''}" data-pack-id="${key}">
 								<div class="save" ${current_pack.save_money_percent > 0 ? '' : 'hidden'}>
 									Save ${current_pack.save_money_percent}%
 								</div>
@@ -233,6 +231,16 @@
 
 		cur_test.popups.packs.querySelector('.btn-close').addEventListener('click', function(){
 			cur_test.close_popup(cur_test.popups.packs);
+		});
+
+		cur_test.popups.packs.querySelectorAll('.pack').forEach(function(pack){
+			pack.addEventListener('click', function() {
+				model.set_pack(parseInt(pack.dataset.packId));
+				setTimeout(function(){
+					cur_test.close_popup(cur_test.popups.packs);
+					cur_test.rerender_pdp();
+				}, 100);
+			});
 		});
 	}
 
@@ -456,6 +464,7 @@
 				text-transform: uppercase;
 				background: transparent;
 				border: none;
+				outline: none;
 			}
 			.${cur_test.init.css_scope_name} .packs-choose-popup:not(.opened-popup) .inner .btn-close {
 				transform: translateY(50px);
