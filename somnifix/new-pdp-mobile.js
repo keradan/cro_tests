@@ -8,7 +8,7 @@
 	cur_test.init.enable_ga_events = false;
 	// cur_test.init.debug_mode = false;
 
-	let v = 31;
+	let v = 32;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -107,6 +107,36 @@
 			<span>${model.pack_choosen.name} (${model.pack_choosen.days_count} strips)</span>
 		`;
 
+		cur_test.html.querySelector('.packs-choose-popup').innerHTML = `
+			<div class="inner">
+				<button class="btn-close">Done</button>
+				<div class="title">
+					Choose your pack: <span>${model.pack_choosen.name}</span>
+				</div>
+				<div class="body">
+					${Object.keys(model.packs).map(function(key) {
+						let current_pack = model.packs[key];
+						return `
+							<div class="pack ${key == model.pack_choosen_id ? 'choosen' : ''}">
+								<div class="save" ${current_pack.save_money_percent > 0 ? '' : 'hidden'}>
+									Save ${current_pack.save_money_percent}%
+								</div>
+								<div class="image">
+									<img src="current_pack.image" alt="">
+								</div>
+								<div class="title">${current_pack.name}</div>
+								<div class="description">${current_pack.days_count} strips - ${current_pack.days_count} days</div>
+								<div class="price">
+									<span class="actual">$${current_pack.price}</span>
+									<span class="old">$${current_pack.old_price}</span>
+								</div>
+							</div>
+						`;
+					})}
+				</div>
+			</div>
+		`;
+
 		cur_test.html.querySelector('.current-pack-info').innerHTML = `
 			<div class="head">
 				<div class="price">
@@ -179,7 +209,7 @@
 
 		cur_test.html.querySelector('.pack-choose-box').addEventListener('click', function(){
 			console.log('pack-choose-box cicked: open popup for choose pack');
-
+			cur_test.open_popup(cur_test.popups.packs);
 		});
 
 		cur_test.html.querySelector('.shipping select').addEventListener('change', function(e) {
@@ -217,11 +247,11 @@
 	cur_test.html = document.createElement('div');
 	cur_test.html.classList.add(cur_test.init.css_scope_name);
 	cur_test.html.innerHTML = `
-		<div class="quantity-popup" data-popup="quantity">
+		<div class="quantity-popup">
 			<div class="inner">
 				<div class="head">
 					<span>Quantity</span>
-					<button class="btn-close" data-close-popup="quantity">
+					<button class="btn-close">
 						<svg fill="none" viewBox="0 0 10 12"><path fill="#000" fill-opacity=".4" d="M9 11a1 1 0 01-1 0L5 8l-3 3a1 1 0 11-1-2l2-3-2-3a1 1 0 111-2l3 3 3-3a1 1 0 111 2L7 6l2 3a1 1 0 010 2z"/></svg>
 					</button>
 				</div>
@@ -234,6 +264,7 @@
 				</div>
 			</div>
 		</div>
+		<div class="packs-choose-popup"></div>
 		<div class="pack-choose-box">
 			<svg fill="none" class="arrow" viewBox="0 0 10 18"><path stroke="#4090D1" stroke-width="2" d="M1 1l7.2 7.5-7.3 8"/></svg>
 			<span class="head">Pack size:</span>
@@ -376,6 +407,144 @@
 			.${cur_test.init.css_scope_name} .quantity-popup .inner .body ul li:active {
 				background: rgba(64, 144, 209, 0.14);
 				border-left: 2px solid #1E4670;
+			}
+
+		/* packs-choose-popup */
+			.${cur_test.init.css_scope_name} .packs-choose-popup {
+				position: fixed;
+				display: flex;
+				justify-content: center;
+				align-items: flex-end;
+				top: 0;
+				left: 0;
+				width: 100vw;
+				height: 100vh;
+				background: rgba(25, 25, 25, 0.8);
+				opacity: 1;
+				z-index: 999999999999999999999999999999999999;
+				transition: all 0.3s ease;
+			}
+			.${cur_test.init.css_scope_name} .packs-choose-popup:not(.displayed-popup) {
+				display: none;
+			}
+			.${cur_test.init.css_scope_name} .packs-choose-popup:not(.opened-popup) {
+				opacity: 0;
+			}
+			.${cur_test.init.css_scope_name} .packs-choose-popup .inner {
+				position: relative;
+				width: 100%;
+				height: 280px;
+				margin: 0;
+				padding: 0;
+				overflow: hidden;
+				transform: translateY(0);
+				transition: all 0.3s ease;
+				background: white;
+			}
+			.${cur_test.init.css_scope_name} .packs-choose-popup:not(.opened-popup) .inner {
+				transform: translateY(30%);
+			}
+			.${cur_test.init.css_scope_name} .packs-choose-popup .inner .btn-close {
+				position: absolute;
+				top: -30px;
+				right: 20px;
+				transform: translateY(0);
+				transition: all 0.3s ease;
+				font-family: Roboto;
+				font-weight: bold;
+				font-size: 16px;
+				color: #FFFFFF;
+				text-transform: uppercase;
+			}
+			.${cur_test.init.css_scope_name} .packs-choose-popup:not(.opened-popup) .inner .btn-close {
+				transform: translateY(50px);
+			}
+			.${cur_test.init.css_scope_name} .packs-choose-popup .inner .pack {
+				transform: translateY(0);
+				transition: all 0.3s ease;
+			}
+			.${cur_test.init.css_scope_name} .packs-choose-popup:not(.opened-popup) .inner .pack {
+				transform: translateY(50%);
+			}
+			.${cur_test.init.css_scope_name} .packs-choose-popup:not(.opened-popup) .inner .pack:nth-child(2) {
+				transition-delay: 0.1s;
+			}
+			.${cur_test.init.css_scope_name} .packs-choose-popup:not(.opened-popup) .inner .pack:nth-child(3) {
+				transition-delay: 0.2s;
+			}
+
+			.${cur_test.init.css_scope_name} .packs-choose-popup:not(.opened-popup) .inner .body {
+				overflow-y: hidden;
+				overflow-x: scroll;
+				display: flex;
+				align-items: center;
+				width: 100%;
+			}
+			.${cur_test.init.css_scope_name} .packs-choose-popup:not(.opened-popup) .inner .body .pack {
+				box-sizing: border-box;
+				background: transparent;
+				border: 1px dashed #4090D1			
+				border-radius: 10px;
+				opacity: 0.6;
+				padding: 10px;
+			}
+			.${cur_test.init.css_scope_name} .packs-choose-popup:not(.opened-popup) .inner .body .pack.choosen {
+				background: rgba(64, 144, 209, 0.1);
+				opacity: 1;
+				border: 2px solid #4090D1;
+			}
+			.${cur_test.init.css_scope_name} .packs-choose-popup:not(.opened-popup) .inner .body .pack .save {
+				background: rgba(242, 113, 19, 0.29);
+				border-radius: 2px;
+				opacity: 1;
+				color: #F27113;
+				font-family: Roboto;
+				font-size: 11px;
+			}
+			.${cur_test.init.css_scope_name} .packs-choose-popup:not(.opened-popup) .inner .body .pack .save[hidden] {
+				opacity: 0;
+			}
+			.${cur_test.init.css_scope_name} .packs-choose-popup:not(.opened-popup) .inner .body .pack .image {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				width: 100%;
+				height: 60px;
+				margin-bottom: 20px;
+			}
+			.${cur_test.init.css_scope_name} .packs-choose-popup:not(.opened-popup) .inner .body .pack .title {
+				font-family: Roboto;
+				font-weight: bold;
+				font-size: 16px;
+				text-align: center;
+				color: #1E415F;
+			}
+			.${cur_test.init.css_scope_name} .packs-choose-popup:not(.opened-popup) .inner .body .pack .description {
+				font-family: Roboto;
+				font-size: 12px;
+				text-align: center;
+				color: #747474;
+				margin: 20px 0;
+			}
+			.${cur_test.init.css_scope_name} .packs-choose-popup:not(.opened-popup) .inner .body .pack .price {
+				display: flex;
+				justify-content: space-around;
+				align-items: center;
+			}
+			.${cur_test.init.css_scope_name} .packs-choose-popup:not(.opened-popup) .inner .body .pack .price .actual {
+				font-family: Rubik;
+				font-weight: 500;
+				font-size: 14px;
+				letter-spacing: 0.05em;
+				color: #1E415F;
+			}
+			.${cur_test.init.css_scope_name} .packs-choose-popup:not(.opened-popup) .inner .body .pack .price .old {
+				font-family: Rubik;
+				font-weight: 500;
+				font-size: 10px;
+				letter-spacing: 0.05em;
+				text-decoration-line: line-through;
+				color: #747474;
 			}
 
 		/* pack-choose-box */
