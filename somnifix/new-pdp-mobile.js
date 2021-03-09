@@ -8,7 +8,7 @@
 	cur_test.init.enable_ga_events = false;
 	// cur_test.init.debug_mode = false;
 
-	let v = 36;
+	let v = 37;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -467,10 +467,10 @@
 			.${cur_test.init.css_scope_name} .packs-choose-popup:not(.opened-popup) .inner .pack {
 				transform: translateY(50%);
 			}
-			.${cur_test.init.css_scope_name} .packs-choose-popup:not(.opened-popup) .inner .pack:nth-child(2) {
+			.${cur_test.init.css_scope_name} .packs-choose-popup .inner .pack:nth-child(2) {
 				transition-delay: 0.1s;
 			}
-			.${cur_test.init.css_scope_name} .packs-choose-popup:not(.opened-popup) .inner .pack:nth-child(3) {
+			.${cur_test.init.css_scope_name} .packs-choose-popup .inner .pack:nth-child(3) {
 				transition-delay: 0.2s;
 			}
 
@@ -478,8 +478,8 @@
 				font-family: Roboto;
 				font-size: 17px;
 				color: #1E4670;
+				margin: 8px 0;
 				margin-left: 15px;
-				margin-top: 5px;
 			}
 			.${cur_test.init.css_scope_name} .packs-choose-popup .inner .top-title span {
 				font-weight: bold;
@@ -499,6 +499,7 @@
 				border-radius: 10px;
 				opacity: 0.6;
 				padding: 10px;
+				padding-top: 5px;
 				min-width: 140px;
 				margin: 0 5px;
 			}
@@ -527,6 +528,10 @@
 				width: 100%;
 				height: 60px;
 				margin-bottom: 20px;
+			}
+			.${cur_test.init.css_scope_name} .packs-choose-popup .inner .body .pack .image img {
+				max-width: 100%;
+				max-height: 100%;
 			}
 			.${cur_test.init.css_scope_name} .packs-choose-popup .inner .body .pack .title {
 				font-family: Roboto;
