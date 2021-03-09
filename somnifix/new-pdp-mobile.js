@@ -8,7 +8,7 @@
 	cur_test.init.enable_ga_events = false;
 	// cur_test.init.debug_mode = false;
 
-	let v = 39;
+	let v = 40;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 	
@@ -236,7 +236,7 @@
 		cur_test.popups.packs.querySelectorAll('.pack').forEach(function(pack){
 			pack.addEventListener('click', function() {
 				cur_test.log('pack: ', pack);
-				cur_test.log('dataset.packId: ', dataset.packId);
+				cur_test.log('dataset.packId: ', pack.dataset.packId);
 
 				model.set_pack(pack.dataset.packId);
 				setTimeout(function(){
