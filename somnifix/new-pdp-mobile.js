@@ -122,7 +122,7 @@
 									Save ${current_pack.save_money_percent}%
 								</div>
 								<div class="image">
-									<img src="current_pack.image" alt="">
+									<img src="${current_pack.image}" alt="">
 								</div>
 								<div class="title">${current_pack.name}</div>
 								<div class="description">${current_pack.days_count} strips - ${current_pack.days_count} days</div>
