@@ -239,10 +239,14 @@
 				cur_test.log('dataset.packId: ', pack.dataset.packId);
 
 				model.set_pack(pack.dataset.packId);
+				
+				setTimeout(function(){
+					cur_test.rerender_pdp();
+				}, 10);
+
 				setTimeout(function(){
 					cur_test.close_popup(cur_test.popups.packs);
-					cur_test.rerender_pdp();
-				}, 100);
+				}, 300);
 			});
 		});
 	}
