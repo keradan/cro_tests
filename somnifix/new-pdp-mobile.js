@@ -8,7 +8,7 @@
 	cur_test.init.enable_ga_events = false;
 	// cur_test.init.debug_mode = false;
 
-	let v = 34;
+	let v = 35;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 
@@ -225,6 +225,15 @@
 		cur_test.html.querySelector('.submit-buttons button.buy').addEventListener('click', function(){
 			console.log('buy button clicked');
 		});
+
+		cur_test.popups.packs.addEventListener('click', function(event){
+			if (event.target != cur_test.popups.packs) return false;
+			cur_test.close_popup(cur_test.popups.packs);
+		});
+
+		cur_test.popups.packs.querySelector('.btn-close').addEventListener('click', function(){
+			cur_test.close_popup(cur_test.popups.packs);
+		});
 	}
 
 	cur_test.open_popup = function (popup) {
@@ -297,15 +306,6 @@
 				cur_test.rerender_pdp();
 			}, 100);
 		});
-	});
-
-	cur_test.popups.packs.addEventListener('click', function(event){
-		if (event.target != cur_test.popups.packs) return false;
-		cur_test.close_popup(cur_test.popups.packs);
-	});
-
-	cur_test.popups.packs.querySelector('.btn-close').addEventListener('click', function(){
-		cur_test.close_popup(cur_test.popups.packs);
 	});
 
 	document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
