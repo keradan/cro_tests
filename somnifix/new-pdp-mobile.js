@@ -8,7 +8,7 @@
 	cur_test.init.enable_ga_events = false;
 	// cur_test.init.debug_mode = false;
 
-	let v = 40;
+	let v = 41;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 	
@@ -27,7 +27,7 @@
 		shipping: [],
 		shipping_choosen_id: 0,
 		quantity_choosen: 1,
-		pack_choosen_id: 'week_4',
+		pack_choosen_id: 'week_12',
 		packs: {
 			week_4: {
 				days_count: 28,
