@@ -8,13 +8,25 @@
 	cur_test.init.enable_ga_events = false;
 	// cur_test.init.debug_mode = false;
 
-	let v = 41;
+	let v = 42;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 	
 	cur_test.ga_event('loaded');
 
 	// hotjar
+
+
+
+	// addItemToCart(product_id, quantity, int shipping_interval_frequency, str shipping_interval_unit_type, intstr subscription_id);
+
+	// addItemToCart(31272810676339, 1, "3", "Months", "95310");
+	// addItemToCart(32115046056051, 1);
+	// addItemToCart(31272810676339, 1, "3", "Months", "95310");
+	// addItemToCart(32115046056051, 1);
+	// addItemToCart(32190023958643, 1, "12", "Months", "95310");
+	// addItemToCart(32115046940787, 1);
+
 
 	let model = cur_test.model = {
 		is_ready: false,
@@ -26,10 +38,15 @@
 		],
 		shipping: [],
 		shipping_choosen_id: 0,
+		shipping_interval_unit_type: 'Months',
+		subscription_id: '95310',
 		quantity_choosen: 1,
 		pack_choosen_id: 'week_12',
+		subscribe_is_checked: false,
 		packs: {
 			week_4: {
+				product_id: 32115046023283,
+				shipping_interval_frequency: '0',
 				days_count: 28,
 				name: '4-week pack',
 				auto_delivery_period: '',
@@ -40,9 +57,11 @@
 				image: 'https://i.ibb.co/wyDWfg9/box-5.png',
 			},
 			week_12: {
+				product_id: 32115046056051,
+				shipping_interval_frequency: '3',
 				days_count: 84,
 				name: '12-week pack',
-				auto_delivery_period: 'every 12 months',
+				auto_delivery_period: 'every 12 weeks',
 				price: 55.97,
 				old_price: 59.97,
 				save_money_percent: 7,
@@ -50,6 +69,8 @@
 				image: 'https://i.ibb.co/NTgJ9M1/Group-870.png',
 			},
 			month_12: {
+				product_id: 32115046940787,
+				shipping_interval_frequency: '12',
 				days_count: 365,
 				name: '12-month pack',
 				auto_delivery_period: 'every 12 months',
@@ -204,6 +225,14 @@
 				</span>
 			</div>
 		`;
+
+		cur_test.html.querySelector('.submit-buttons button.buy').addEventListener('click', function(){
+			console.log('buy button cicked: run addItemToCart function');
+			setTimeout(function(){
+				if (!model.subscribe_is_checked) addItemToCart(model.pack_choosen.product_id, model.quantity_choosen);
+				else addItemToCart(model.pack_choosen.product_id, model.quantity_choosen, model.pack_choosen.shipping_interval_frequency, model.shipping_interval_unit_type, model.subscription_id);
+			}, 2000);
+		});
 
 		cur_test.html.querySelector('.pack-choose-box').addEventListener('click', function(){
 			console.log('pack-choose-box cicked: open popup for choose pack');
