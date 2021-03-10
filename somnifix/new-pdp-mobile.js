@@ -8,7 +8,7 @@
 	cur_test.init.enable_ga_events = true;
 	// cur_test.init.debug_mode = false;
 
-	let v = 49;
+	let v = 50;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 	
@@ -24,7 +24,7 @@
 	        a.appendChild(r);
 	    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
 	        window.hj=window.hj||function(){(hj.q=hj.q||[]).push(arguments)};
-	        hj('trigger', 'new_pdp_mobile');
+	        hj('trigger', 'optimize_pdp');
 	}
     catch (e) {
 		keradan_log('Hotjar error: ', e);
@@ -232,6 +232,10 @@
 		cur_test.html.querySelector('.submit-buttons button.buy').addEventListener('click', function(){
 			if (!model.subscribe_is_checked || model.pack_choosen_id == 'week_4') addItemToCart(model.pack_choosen.product_id, model.quantity_choosen);
 			else addItemToCart(model.pack_choosen.product_id, model.quantity_choosen, model.pack_choosen.shipping_interval_frequency, model.shipping_interval_unit_type, model.subscription_id);
+		});
+
+		cur_test.html.querySelector('.shipping select').addEventListener('click', function(e) {
+			cur_test.ga_event('click on select Country');
 		});
 
 		cur_test.html.querySelector('.shipping select').addEventListener('change', function(e) {
