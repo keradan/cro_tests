@@ -8,7 +8,7 @@
 	cur_test.init.enable_ga_events = false;
 	// cur_test.init.debug_mode = false;
 
-	let v = 46;
+	let v = 47;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 	
@@ -294,7 +294,6 @@
 	cur_test.html = document.createElement('div');
 	cur_test.html.classList.add(cur_test.init.css_scope_name);
 	cur_test.html.innerHTML = `
-		<div id="#pack_details" style="position: absolute; top: -60px;">sdsdsdsdd</div>
 		<div class="quantity-popup">
 			<div class="inner">
 				<div class="head">
@@ -348,6 +347,10 @@
 	});
 
 	document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
+		html {
+			scroll-behavior: smooth;
+		}
+
 		.${cur_test.init.css_scope_name} {
 			position: relative;
 			width: 100%;
@@ -832,7 +835,6 @@
 				font-size: 14px;
 				color: #1E415F;
 			}
-
  	`;
 
 	let shipping_countries_selector = 'form[action="/cart/add"] select.on-select[name="qauntry"] option';
@@ -876,10 +878,9 @@
 
 		// replacing default top right button for slide-in cart
 		let button = document.querySelector('#mobile-header .on-header-get-wrapper a.button.on-button-get-sominifix.on-button-get-sominifix-open').cloneNode(true);
-		button.setAttribute('href', '#pack_details');
+		button.setAttribute('onclick', `window.scroll({top: 600, left: 0, behavior: 'smooth'})`);
 		document.querySelector('#mobile-header .on-header-get-wrapper a.button.on-button-get-sominifix.on-button-get-sominifix-open').remove();
 		document.querySelector('#mobile-header .on-header-get-wrapper a.button.on-button-get-sominifix.on-button-get-sominifix-close').before(button);
-		tmp_span.before(button);
 	})
 	.catch(function(error) {
 		console.error(error);
