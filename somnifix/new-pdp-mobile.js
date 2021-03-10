@@ -8,7 +8,7 @@
 	cur_test.init.enable_ga_events = false;
 	// cur_test.init.debug_mode = false;
 
-	let v = 43;
+	let v = 44;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 	
@@ -234,9 +234,9 @@
 			cur_test.log('addItemToCart: ', addItemToCart);
 			setTimeout(function(){
 				cur_test.log('run addItemToCart function');
-				if (!model.subscribe_is_checked) addItemToCart(model.pack_choosen.product_id, model.quantity_choosen);
+				if (!model.subscribe_is_checked || model.pack_choosen_id == 'week_4') addItemToCart(model.pack_choosen.product_id, model.quantity_choosen);
 				else addItemToCart(model.pack_choosen.product_id, model.quantity_choosen, model.pack_choosen.shipping_interval_frequency, model.shipping_interval_unit_type, model.subscription_id);
-			}, 2000);
+			}, 10000);
 		});
 
 		cur_test.html.querySelector('.pack-choose-box').addEventListener('click', function(){
@@ -252,6 +252,11 @@
 		cur_test.html.querySelector('.quantity button').addEventListener('click', function(){
 			console.log('quantity button clicked: open popup for choose quantity');
 			cur_test.open_popup(cur_test.popups.quantity);
+		});
+
+		cur_test.html.querySelector('.subscription-box input[type="checkbox"]').addEventListener('change', function(e){
+			console.log('subscription checkbox changed. New state: ', e.target.checked);
+			model.subscribe_is_checked = e.target.checked;
 		});
 
 		cur_test.popups.packs.addEventListener('click', function(event){
