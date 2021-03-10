@@ -8,7 +8,7 @@
 	cur_test.init.enable_ga_events = false;
 	// cur_test.init.debug_mode = false;
 
-	let v = 48;
+	let v = 49;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 	
@@ -234,12 +234,6 @@
 			else addItemToCart(model.pack_choosen.product_id, model.quantity_choosen, model.pack_choosen.shipping_interval_frequency, model.shipping_interval_unit_type, model.subscription_id);
 		});
 
-		cur_test.html.querySelector('.pack-choose-box').addEventListener('click', function(){
-			console.log('pack-choose-box clicked: open popup for choose pack');
-			cur_test.open_popup(cur_test.popups.packs);
-			cur_test.ga_event('click on block — Pack size');
-		});
-
 		cur_test.html.querySelector('.shipping select').addEventListener('change', function(e) {
 			model.set_shipping(e.target.value);
 			cur_test.rerender_pdp();
@@ -338,6 +332,12 @@
 		<div class="current-pack-info"></div>
 	`;
 	document.querySelector('.product-template.product-main .product__information').before(cur_test.html);
+
+	cur_test.html.querySelector('.pack-choose-box').addEventListener('click', function(){
+		console.log('pack-choose-box clicked: open popup for choose pack');
+		cur_test.open_popup(cur_test.popups.packs);
+		cur_test.ga_event('click on block — Pack size');
+	});
 
 	cur_test.popups = {
 		quantity: cur_test.html.querySelector('.quantity-popup'),
