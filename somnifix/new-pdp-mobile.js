@@ -5,7 +5,7 @@
 
 	// Set dev behavior:
 	cur_test.init.enable_log = true;
-	cur_test.init.enable_ga_events = false;
+	cur_test.init.enable_ga_events = true;
 	// cur_test.init.debug_mode = false;
 
 	let v = 49;
@@ -240,13 +240,13 @@
 		});
 
 		cur_test.html.querySelector('.quantity button').addEventListener('click', function(){
-			console.log('quantity button clicked: open popup for choose quantity');
+			cur_test.log('quantity button clicked: open popup for choose quantity');
 			cur_test.open_popup(cur_test.popups.quantity);
 			cur_test.ga_event('click on select Quantity');
 		});
 
 		cur_test.html.querySelector('.subscription-box input[type="checkbox"]').addEventListener('change', function(e){
-			console.log('subscription checkbox changed. New state: ', e.target.checked);
+			cur_test.log('subscription checkbox changed. New state: ', e.target.checked);
 			model.subscribe_is_checked = e.target.checked;
 			cur_test.ga_event('click on checkbox Subscribe and save 10%');
 		});
@@ -300,7 +300,7 @@
 	}
 
 	// TMP for debugging:
-	window.kkk = cur_test;
+	// window.kkk = cur_test;
 
 	cur_test.html = document.createElement('div');
 	cur_test.html.classList.add(cur_test.init.css_scope_name);
@@ -334,7 +334,7 @@
 	document.querySelector('.product-template.product-main .product__information').before(cur_test.html);
 
 	cur_test.html.querySelector('.pack-choose-box').addEventListener('click', function(){
-		console.log('pack-choose-box clicked: open popup for choose pack');
+		cur_test.log('pack-choose-box clicked: open popup for choose pack');
 		cur_test.open_popup(cur_test.popups.packs);
 		cur_test.ga_event('click on block — Pack size');
 	});
