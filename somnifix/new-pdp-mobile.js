@@ -8,13 +8,27 @@
 	cur_test.init.enable_ga_events = false;
 	// cur_test.init.debug_mode = false;
 
-	let v = 47;
+	let v = 48;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 	
 	cur_test.ga_event('loaded');
 
-	// hotjar
+	try {
+		(function(h,o,t,j,a,r){
+	        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+	        h._hjSettings={hjid:1271698,hjsv:6};
+	        a=o.getElementsByTagName('head')[0];
+	        r=o.createElement('script');r.async=1;
+	        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+	        a.appendChild(r);
+	    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+	        window.hj=window.hj||function(){(hj.q=hj.q||[]).push(arguments)};
+	        hj('trigger', 'new_pdp_mobile');
+	}
+    catch (e) {
+		keradan_log('Hotjar error: ', e);
+	}
 
 	let model = cur_test.model = {
 		is_ready: false,
@@ -195,7 +209,8 @@
 				</div>
 				<div class="info-col">
 					<p class="title">
-						Subscribe and <span>save ${model.pack_choosen.save_money_percent}%</span>
+						<!-- ${model.pack_choosen.save_money_percent} -->
+						Subscribe and <span>save 10%</span>
 					</p>
 					<p class="description">
 						Auto delivery ${model.pack_choosen.auto_delivery_period} for $${model.pack_choosen.total_price}.<br>Cancel anytime.
@@ -215,21 +230,14 @@
 		`;
 
 		cur_test.html.querySelector('.submit-buttons button.buy').addEventListener('click', function(){
-			console.log('buy button cicked');
-			cur_test.log('model.subscribe_is_checked: ', model.subscribe_is_checked);
-			cur_test.log('model.pack_choosen.product_id: ', model.pack_choosen.product_id);
-			cur_test.log('model.quantity_choosen: ', model.quantity_choosen);
-			cur_test.log('addItemToCart: ', addItemToCart);
-			setTimeout(function(){
-				cur_test.log('run addItemToCart function');
-				if (!model.subscribe_is_checked || model.pack_choosen_id == 'week_4') addItemToCart(model.pack_choosen.product_id, model.quantity_choosen);
-				else addItemToCart(model.pack_choosen.product_id, model.quantity_choosen, model.pack_choosen.shipping_interval_frequency, model.shipping_interval_unit_type, model.subscription_id);
-			}, 10000);
+			if (!model.subscribe_is_checked || model.pack_choosen_id == 'week_4') addItemToCart(model.pack_choosen.product_id, model.quantity_choosen);
+			else addItemToCart(model.pack_choosen.product_id, model.quantity_choosen, model.pack_choosen.shipping_interval_frequency, model.shipping_interval_unit_type, model.subscription_id);
 		});
 
 		cur_test.html.querySelector('.pack-choose-box').addEventListener('click', function(){
-			console.log('pack-choose-box cicked: open popup for choose pack');
+			console.log('pack-choose-box clicked: open popup for choose pack');
 			cur_test.open_popup(cur_test.popups.packs);
+			cur_test.ga_event('click on block — Pack size');
 		});
 
 		cur_test.html.querySelector('.shipping select').addEventListener('change', function(e) {
@@ -240,11 +248,13 @@
 		cur_test.html.querySelector('.quantity button').addEventListener('click', function(){
 			console.log('quantity button clicked: open popup for choose quantity');
 			cur_test.open_popup(cur_test.popups.quantity);
+			cur_test.ga_event('click on select Quantity');
 		});
 
 		cur_test.html.querySelector('.subscription-box input[type="checkbox"]').addEventListener('change', function(e){
 			console.log('subscription checkbox changed. New state: ', e.target.checked);
 			model.subscribe_is_checked = e.target.checked;
+			cur_test.ga_event('click on checkbox Subscribe and save 10%');
 		});
 
 		cur_test.popups.packs.addEventListener('click', function(event){
@@ -254,12 +264,19 @@
 
 		cur_test.popups.packs.querySelector('.btn-close').addEventListener('click', function(){
 			cur_test.close_popup(cur_test.popups.packs);
+			cur_test.ga_event('click on button Done', 'Popup: Pack size');
 		});
 
 		cur_test.popups.packs.querySelectorAll('.pack').forEach(function(pack){
 			pack.addEventListener('click', function() {
 				cur_test.log('pack: ', pack);
 				cur_test.log('dataset.packId: ', pack.dataset.packId);
+
+				switch(pack.dataset.packId) {
+					case 'week_4': cur_test.ga_event('click on button 4-week pack', 'Popup: Pack size'); break;
+					case 'week_12': cur_test.ga_event('click on button 12-week pack', 'Popup: Pack size'); break;
+					case 'month_12': cur_test.ga_event('click on button 12-month pack', 'Popup: Pack size'); break;
+				}
 
 				model.set_pack(pack.dataset.packId);
 
@@ -878,7 +895,7 @@
 
 		// replacing default top right button for slide-in cart
 		let button = document.querySelector('#mobile-header .on-header-get-wrapper a.button.on-button-get-sominifix.on-button-get-sominifix-open').cloneNode(true);
-		button.setAttribute('onclick', `window.scroll({top: 600, left: 0, behavior: 'smooth'})`);
+		button.setAttribute('onclick', `window.scroll({top: 550, left: 0, behavior: 'smooth'})`);
 		document.querySelector('#mobile-header .on-header-get-wrapper a.button.on-button-get-sominifix.on-button-get-sominifix-open').remove();
 		document.querySelector('#mobile-header .on-header-get-wrapper a.button.on-button-get-sominifix.on-button-get-sominifix-close').before(button);
 	})
