@@ -228,10 +228,13 @@
 
 		cur_test.html.querySelector('.submit-buttons button.buy').addEventListener('click', function(){
 			console.log('buy button cicked: run addItemToCart function');
-			setTimeout(function(){
-				if (!model.subscribe_is_checked) addItemToCart(model.pack_choosen.product_id, model.quantity_choosen);
-				else addItemToCart(model.pack_choosen.product_id, model.quantity_choosen, model.pack_choosen.shipping_interval_frequency, model.shipping_interval_unit_type, model.subscription_id);
-			}, 2000);
+			cur_test.log('model.pack_choosen.product_id: ', model.pack_choosen.product_id);
+			cur_test.log('model.quantity_choosen: ', model.quantity_choosen);
+			cur_test.log('addItemToCart: ', addItemToCart);
+			// setTimeout(function(){
+			// 	if (!model.subscribe_is_checked) addItemToCart(model.pack_choosen.product_id, model.quantity_choosen);
+			// 	else addItemToCart(model.pack_choosen.product_id, model.quantity_choosen, model.pack_choosen.shipping_interval_frequency, model.shipping_interval_unit_type, model.subscription_id);
+			// }, 2000);
 		});
 
 		cur_test.html.querySelector('.pack-choose-box').addEventListener('click', function(){
