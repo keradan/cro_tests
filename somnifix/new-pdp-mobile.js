@@ -8,25 +8,13 @@
 	cur_test.init.enable_ga_events = false;
 	// cur_test.init.debug_mode = false;
 
-	let v = 44;
+	let v = 46;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 	
 	cur_test.ga_event('loaded');
 
 	// hotjar
-
-
-
-	// addItemToCart(product_id, quantity, int shipping_interval_frequency, str shipping_interval_unit_type, intstr subscription_id);
-
-	// addItemToCart(31272810676339, 1, "3", "Months", "95310");
-	// addItemToCart(32115046056051, 1);
-	// addItemToCart(31272810676339, 1, "3", "Months", "95310");
-	// addItemToCart(32115046056051, 1);
-	// addItemToCart(32190023958643, 1, "12", "Months", "95310");
-	// addItemToCart(32115046940787, 1);
-
 
 	let model = cur_test.model = {
 		is_ready: false,
@@ -203,7 +191,7 @@
 			</div>
 			<label class="subscription-box" ${model.pack_choosen.have_subscription ? '' : 'hidden'}>
 				<div class="checkmark-col">
-					<input type="checkbox">
+					<input type="checkbox" ${model.subscribe_is_checked ? 'checked' : ''}>
 				</div>
 				<div class="info-col">
 					<p class="title">
@@ -306,6 +294,7 @@
 	cur_test.html = document.createElement('div');
 	cur_test.html.classList.add(cur_test.init.css_scope_name);
 	cur_test.html.innerHTML = `
+		<div id="#pack_details" style="position: absolute; top: -60px;">sdsdsdsdd</div>
 		<div class="quantity-popup">
 			<div class="inner">
 				<div class="head">
@@ -360,6 +349,7 @@
 
 	document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
 		.${cur_test.init.css_scope_name} {
+			position: relative;
 			width: 100%;
 			padding: 0 10px;
 		}
@@ -883,6 +873,13 @@
 		cur_test.log(msg, ` Attempts count: ${cur_test.model_preparing_promise_attempts}; total time: ${(cur_test.model_preparing_promise_attempts * cur_test.model_preparing_promise_time_interval)}`);
 
 		cur_test.rerender_pdp();
+
+		// replacing default top right button for slide-in cart
+		let button = document.querySelector('#mobile-header .on-header-get-wrapper a.button.on-button-get-sominifix.on-button-get-sominifix-open').cloneNode(true);
+		button.setAttribute('href', '#pack_details');
+		document.querySelector('#mobile-header .on-header-get-wrapper a.button.on-button-get-sominifix.on-button-get-sominifix-open').remove();
+		document.querySelector('#mobile-header .on-header-get-wrapper a.button.on-button-get-sominifix.on-button-get-sominifix-close').before(button);
+		tmp_span.before(button);
 	})
 	.catch(function(error) {
 		console.error(error);
