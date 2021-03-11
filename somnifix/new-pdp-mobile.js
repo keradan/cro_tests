@@ -1,6 +1,6 @@
 (function () {
-	let v = 58;
-	
+	let v = 59;
+
 	// Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 	const cur_test = window.keradan.get_cur_test(document.currentScript);
 	cur_test.init.event_category = 'Exp — New PDP';
@@ -61,6 +61,7 @@
 			},
 			week_12: {
 				product_id: 32115046056051,
+				product_id_for_subscription: 31272810676339,
 				shipping_interval_frequency: '3',
 				days_count: 84,
 				name: '12-week pack',
@@ -73,6 +74,7 @@
 			},
 			month_12: {
 				product_id: 32115046940787,
+				product_id_for_subscription: 32190023958643,
 				shipping_interval_frequency: '12',
 				days_count: 365,
 				name: '12-month pack',
@@ -232,7 +234,7 @@
 
 		cur_test.html.querySelector('.submit-buttons button.buy').addEventListener('click', function(){
 			if (!model.subscribe_is_checked || model.pack_choosen_id == 'week_4') addItemToCart(model.pack_choosen.product_id, model.quantity_choosen);
-			else addItemToCart(model.pack_choosen.product_id, model.quantity_choosen, model.pack_choosen.shipping_interval_frequency, model.shipping_interval_unit_type, model.subscription_id);
+			else addItemToCart(model.pack_choosen.product_id_for_subscription, model.quantity_choosen, model.pack_choosen.shipping_interval_frequency, model.shipping_interval_unit_type, model.subscription_id);
 		});
 
 		cur_test.html.querySelector('.shipping select').addEventListener('click', function(e) {
