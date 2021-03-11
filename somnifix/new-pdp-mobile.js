@@ -8,7 +8,7 @@
 	cur_test.init.enable_ga_events = true;
 	// cur_test.init.debug_mode = false;
 
-	let v = 55;
+	let v = 56;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 	
@@ -926,7 +926,8 @@
 				cur_test.ga_event('click on sticky button');
 			});
 			sticky_button.innerHTML = 'Get somnifix';
-			sticky_button.classList.add('fs18')
+			sticky_button.classList.add('fs18');
+			sticky_button.classList.add('hide-by-scroll');
 			document.querySelector('.on-mobile-btn-wrapper a.on-mob-btn').remove();
 			document.querySelector('.on-mobile-btn-wrapper').append(sticky_button);
 			window.addEventListener('scroll', function() {
