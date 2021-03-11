@@ -1,5 +1,5 @@
 (function () {
-	let v = 61;
+	let v = 62;
 
 	// Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 	const cur_test = window.keradan.get_cur_test(document.currentScript);
@@ -220,7 +220,7 @@
 						Subscribe and <span>save 10%</span>
 					</p>
 					<p class="description">
-						Auto delivery ${model.pack_choosen.auto_delivery_period} for $${model.pack_choosen.total_price}.<br>Cancel anytime.
+						Auto delivery ${model.pack_choosen.auto_delivery_period} for $${model.pack_choosen.subscription_price * model.quantity_choosen}.<br>Cancel anytime.
 					</p>
 				</div>
 			</label>
@@ -743,6 +743,7 @@
 			    background: white;
 			    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 12 8'%3E%3Cpath stroke='%231E415F' stroke-width='2' d='M11 1L6 6 1 1'/%3E%3C/svg%3E") no-repeat 100% 50%;
 			    background-size: 9%;
+			    -webkit-appearance:none;
 			}
 
 		/* current-pack-info estimation */
