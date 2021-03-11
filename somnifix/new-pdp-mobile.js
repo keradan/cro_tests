@@ -8,7 +8,7 @@
 	cur_test.init.enable_ga_events = true;
 	// cur_test.init.debug_mode = false;
 
-	let v = 51;
+	let v = 52;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 	
@@ -857,6 +857,11 @@
 				font-size: 14px;
 				color: #1E415F;
 			}
+
+		.on-mobile-btn-wrapper a.on-mob-btn.fs18 {
+			font-size: 18px!important;
+			line-height: 18px!important;
+		}
  	`;
 
 	let shipping_countries_selector = 'form[action="/cart/add"] select.on-select[name="qauntry"] option';
@@ -900,7 +905,6 @@
 
 		// replacing default top right button for slide-in cart
 			let button = document.querySelector('#mobile-header .on-header-get-wrapper a.button.on-button-get-sominifix.on-button-get-sominifix-open').cloneNode(true);
-			// button.setAttribute('onclick', `window.scroll({top: 550, left: 0, behavior: 'smooth'})`);
 			button.addEventListener('click', function(){
 				window.scroll({top: 550, left: 0, behavior: 'smooth'});
 			});
@@ -909,14 +913,12 @@
 
 		// replacing default sticky button
 			let sticky_button = document.querySelector('.on-mobile-btn-wrapper a.on-mob-btn').cloneNode(true);
-			// sticky_button.setAttribute('onclick', `window.scroll({top: 550, left: 0, behavior: 'smooth'})`);
 			sticky_button.addEventListener('click', function(){
 				window.scroll({top: 550, left: 0, behavior: 'smooth'});
 				cur_test.ga_event('click on sticky button');
 			});
 			sticky_button.innerHTML = 'Get somnifix';
-			sticky_button.style.fontSize = '18px!important';
-			sticky_button.style.lineHeight = '18px!important';
+			sticky_button.classList.add('fs18')
 			document.querySelector('.on-mobile-btn-wrapper a.on-mob-btn').remove();
 			document.querySelector('.on-mobile-btn-wrapper').append(sticky_button);
 	})
