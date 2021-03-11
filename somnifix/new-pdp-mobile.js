@@ -8,7 +8,7 @@
 	cur_test.init.enable_ga_events = true;
 	// cur_test.init.debug_mode = false;
 
-	let v = 56;
+	let v = 57;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 	
@@ -869,6 +869,10 @@
 		}
 		a.button.on-mob-btn.hide-by-scroll {
 		    display: none;
+		}
+
+		.on-button-get-sominifix, a.button.on-mob-btn {
+		    -webkit-tap-highlight-color: transparent;
 		}
  	`;
 
