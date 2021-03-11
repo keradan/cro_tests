@@ -1,5 +1,5 @@
 (function () {
-	let v = 59;
+	let v = 60;
 
 	// Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 	const cur_test = window.keradan.get_cur_test(document.currentScript);
@@ -54,6 +54,7 @@
 				name: '4-week pack',
 				auto_delivery_period: '',
 				price: 19.97,
+				subscription_price: null,
 				old_price: null,
 				save_money_percent: 0,
 				have_subscription: false,
@@ -67,6 +68,7 @@
 				name: '12-week pack',
 				auto_delivery_period: 'every 12 weeks',
 				price: 55.97,
+				subscription_price: 49.97,
 				old_price: 59.97,
 				save_money_percent: 7,
 				have_subscription: true,
@@ -80,6 +82,7 @@
 				name: '12-month pack',
 				auto_delivery_period: 'every 12 months',
 				price: 219.97,
+				subscription_price: 199.97,
 				old_price: 230.97,
 				save_money_percent: 17,
 				have_subscription: true,
@@ -98,7 +101,8 @@
 
 			Object.defineProperty(pack, "total_price", {
 				get: function() {
-					return Math.round((this.price * model.quantity_choosen) * 100) / 100;
+					let price = model.subscribe_is_checked ? this.subscription_price : this.price;
+					return Math.round((price * model.quantity_choosen) * 100) / 100;
 				},
 				configurable: true,
 			});
