@@ -1,4 +1,6 @@
 (function () {
+	let v = 58;
+	
 	// Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 	const cur_test = window.keradan.get_cur_test(document.currentScript);
 	cur_test.init.event_category = 'Exp — New PDP';
@@ -8,7 +10,6 @@
 	cur_test.init.enable_ga_events = true;
 	// cur_test.init.debug_mode = false;
 
-	let v = 57;
 	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
 	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
 	
@@ -872,7 +873,9 @@
 		}
 
 		.on-button-get-sominifix, a.button.on-mob-btn {
-		    -webkit-tap-highlight-color: transparent;
+			/*
+		    	-webkit-tap-highlight-color: transparent;
+		    */
 		}
  	`;
 
