@@ -1,5 +1,5 @@
 (function () {
-	let v = 60;
+	let v = 61;
 
 	// Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 	const cur_test = window.keradan.get_cur_test(document.currentScript);
@@ -260,6 +260,7 @@
 			cur_test.log('subscription checkbox changed. New state: ', e.target.checked);
 			model.subscribe_is_checked = e.target.checked;
 			cur_test.ga_event('click on checkbox Subscribe and save 10%');
+			cur_test.rerender_pdp();
 		});
 
 		cur_test.popups.packs.addEventListener('click', function(event){
@@ -731,6 +732,7 @@
 			.${cur_test.init.css_scope_name} .current-pack-info .shipping select {
 				border: none;
 			    border-bottom: 1px solid #1E415F;
+			    border-radius: 0;
 			    width: auto;
 			    font-family: Roboto;
 			    font-weight: 500;
@@ -739,6 +741,8 @@
 			    margin-left: 5px;
 			    outline: none;
 			    background: white;
+			    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 12 8'%3E%3Cpath stroke='%231E415F' stroke-width='2' d='M11 1L6 6 1 1'/%3E%3C/svg%3E") no-repeat 100% 50%;
+			    background-size: 9%;
 			}
 
 		/* current-pack-info estimation */
