@@ -1,12 +1,12 @@
 (function () {
-	let v = 62;
+	let v = 63;
 
 	// Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 	const cur_test = window.keradan.get_cur_test(document.currentScript);
 	cur_test.init.event_category = 'Exp — New PDP';
 
 	// Set dev behavior:
-	cur_test.init.enable_log = true;
+	cur_test.init.enable_log = false;
 	cur_test.init.enable_ga_events = true;
 	// cur_test.init.debug_mode = false;
 
@@ -44,7 +44,7 @@
 		shipping_interval_unit_type: 'Months',
 		subscription_id: '95310',
 		quantity_choosen: 1,
-		pack_choosen_id: 'week_12',
+		pack_choosen_id: 'week_4',
 		subscribe_is_checked: false,
 		packs: {
 			week_4: {
