@@ -1,56 +1,170 @@
-(function () {
-	// Версия чтоб понять загрузился ли на гитхаб или еще нет
-	let v = 2;
+// Версия чтоб понять загрузился ли на гитхаб или еще нет
+let v = 15;
 
-	// Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
-	const cur_test = window.keradan.get_cur_test(document.currentScript);
+// Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
+const cur_test = window.keradan.get_cur_test(document.currentScript);
 
-	// Категория ивента для аналитики
-	cur_test.init.event_category = 'Exp — New PDP';
+// Категория ивента для аналитики
+cur_test.init.event_category = 'Exp — New PDP';
 
-	// Set dev behavior (for production need to comment out or remove):
-	cur_test.init.enable_log = true;
-	cur_test.init.enable_ga_events = false;
+// Set dev behavior (for production need to comment out or remove):
+cur_test.init.enable_log = true;
+cur_test.init.enable_ga_events = false;
 
-	// Чтоб зафиксировать присутствие и версию
-	cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55',  cur_test);
-	cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55',  document.currentScript.getAttribute('src'));
-	
-	// Пример отправки ивента в аналитику
-	cur_test.ga_event('loaded');
+// Чтоб зафиксировать присутствие и версию
+cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55', cur_test);
+cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55', document.currentScript.getAttribute('src'));
 
-	try {
-		// hotjar here
-	}
-    catch (e) {
-		// keradan_log('Hotjar error: ', e);
-	}
+// Пример отправки ивента в аналитику
+cur_test.ga_event('loaded');
 
-	// TMP: (для ручной вставки, потому что у них не работает до сих пор подключение ГО)
-		// let cur_test = {
-		// 	init: {
-		// 		name: 'keradan-tmp',
-		// 		css_scope_name: 'keradan-tmp'
-		// 	}
-		// };
-		// let html = document.createElement('div');
-		// html.classList.add(cur_test.init.css_scope_name);
-		// document.querySelector('.course-results').prepend(html);
-		
-		// let styles = document.createElement('style');
-		// styles.setAttribute('id', 'styles-' + cur_test.init.css_scope_name);
-		// document.querySelector('.course-results').prepend(styles);
-	// END TMP
+try {
+    // hotjar here
+} catch (e) {
+    // keradan_log('Hotjar error: ', e);
+}
+
+$('.courseCard:parent').remove()
+$('.gl-pagination:parent').remove()
 
 
-	// Создаем враппер для всей нашей верстки, и закидываем его в документ
-	cur_test.html = document.createElement('div');
-	cur_test.html.classList.add(cur_test.init.css_scope_name);
-	document.querySelector('.course-results').prepend(cur_test.html);
+function onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+}
 
-	
-	// Добавляем всю верстку тут
-	document.querySelector('.' + cur_test.init.css_scope_name).innerHTML = `
+var urlParams = new URLSearchParams(window.location.search);
+var courseID = urlParams.get('courseID');
+var data, locations
+var monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+];
+
+function changeLocation(location) {
+    item = data.filter(function(item){return item.location == location})[0]
+    $('#main_course').html(`${item.course_name} - ${location}`)
+    $('.location').html(item.location_address)
+    $('.course-picker').removeClass('opened')
+    dates = getDates(location)
+    $('.dates').html('')
+    changeDate(location, dates[0])
+
+    dates.forEach(function (date) {
+        $('.dates').append(`<li onclick="changeDate('${location}', '${date}')">${getFormattedDate(date)}</li>`)
+    })
+}
+
+function getFormattedDate(date) {
+    dObj = new Date(date)
+
+    return `${monthNames[dObj.getMonth()]} ${dObj.getDate()}`
+}
+
+function changeDate(location, date)
+{
+    $('.main_date').html(getFormattedDate(date))
+    $('.course-picker').removeClass('opened')
+    course = getCourse(location, date)[0]
+    $('.course_time').html(`${course.start_time} - ${course.end_time}`)
+    $('.course_tag').html(course.course_tag)
+    $('#main_date').html(`${getFormattedDate(date)} ${course.start_time} to ${course.end_time}`)
+    $('.course-name').html(`${course.course_name} - ${course.location}`)
+    $('#wage_tag').html(course.wage_tag)
+    $('#results').html(course.faster_result)
+    $('#price').html(course.price_without_discount)
+    $('#discont_price').html(course.price_with_discount)
+    $('#difference').html(course.price_without_discount - course.price_with_discount)
+    $("#book").data('course-id', course.eventId)
+}
+
+function showDateItem() {
+    $('.location-step').css('display', 'none')
+    $('.date-step').css('display', 'flex')
+}
+
+function book(){
+    var id = $("#book").data('course-id');
+    data = {
+        'locationID': id,
+        '_token': $('input[name=_token]').val(),
+        'currentPage': location.href,
+    };
+    $.ajax({
+        url: 'https://www.get-licensed.co.uk/trainee/add-to-cart',
+        type: "post",
+        data: data,
+        success: function(data){
+            if (data == "Added")
+                location.href = "https://www.get-licensed.co.uk/trainee/booking-step-1" + '/' + id;
+            else if (data == "AddedToCheckout")
+                location.href = "https://www.get-licensed.co.uk/trainee/checkout" + '/0/' + id;
+            else if (data == "AddedToDirectCheckout")
+                location.href = "https://www.get-licensed.co.uk/trainee/checkout" + '/2/' + id;
+            else
+                alert("Error adding course into cart");
+        }
+    }); // end of ajax request
+}
+
+function showResultItem() {
+    $('.date-step').css('display', 'none')
+    $('.course-step').css('display', 'flex')
+}
+
+
+function getDates(location) {
+    return data.filter(function (item) {
+        return item.location == location
+    })
+        .map(function (item) {
+            return item.start_date
+        })
+}
+
+function getCourse(location, date) {
+    return data.filter(function (item) {
+        return item.location == location && item.start_date == date
+    })
+}
+
+$.getJSON('https://www.get-licensed.co.uk/api/course/' + courseID)
+    .then(function (item) {
+        data = item
+        locations = data.map(function (item) {
+            return item.location
+        }).filter(onlyUnique)
+        $('.locations').html('')
+        changeLocation(locations[0])
+        $('#nextButton').removeAttr('disabled');
+        locations.forEach(function (location) {
+            $('.locations').append(`<li onclick="changeLocation('${location}')">${data[0].course_name} - ${location}</li>`)
+        })
+    })
+
+// TMP: (для ручной вставки, потому что у них не работает до сих пор подключение ГО)
+// let cur_test = {
+// 	init: {
+// 		name: 'keradan-tmp',
+// 		css_scope_name: 'keradan-tmp'
+// 	}
+// };
+// let html = document.createElement('div');
+// html.classList.add(cur_test.init.css_scope_name);
+// document.querySelector('.course-results').prepend(html);
+
+// let styles = document.createElement('style');
+// styles.setAttribute('id', 'styles-' + cur_test.init.css_scope_name);
+// document.querySelector('.course-results').prepend(styles);
+// END TMP
+
+
+// Создаем враппер для всей нашей верстки, и закидываем его в документ
+cur_test.html = document.createElement('div');
+cur_test.html.classList.add(cur_test.init.css_scope_name);
+document.querySelector('.course-results').prepend(cur_test.html);
+
+
+// Добавляем всю верстку тут
+document.querySelector('.' + cur_test.init.css_scope_name).innerHTML = `
 		<div class="step location-step" data-step="location">
 			<div class="step-title">
 				<div class="grey">Step 1</div>
@@ -59,17 +173,13 @@
 			<div class="text-label">Course</div>
 			<div class="course-picker">
 				<div class="choosen" onclick="this.parentElement.classList.toggle('opened')">
-					<div class="text">
-						Door Supervisor Training - Aylesbury
+					<div class="text" id="main_course">
+						Select course
 					</div>
 					<svg fill="none" viewBox="0 0 12 8"><path fill="#757575" d="M10.6.3L6 4.9 1.4.3 0 1.7l6 6 6-6L10.6.3z"/></svg>
 				</div>
-				<ul>
-					<li>Door Supervisor Training - Barnsley</li>
-					<li>Door Supervisor Training - Birmingham</li>
-					<li>Door Supervisor Training - Aylesbury</li>
-					<li>Door Supervisor Training - Chelmsford</li>
-					<li>Door Supervisor Training - London</li>
+				<ul class="locations">
+					
 				</ul>
 			</div>
 			<div class="text-label">Location</div>
@@ -77,10 +187,10 @@
 				<svg fill="none" viewBox="0 0 14 20">
 					<path fill="#757575" d="M7 0a7 7 0 00-7 7c0 5.3 7 13 7 13s7-7.8 7-13a7 7 0 00-7-7zM2 7a5 5 0 0110 0c0 2.9-2.9 7.2-5 9.9-2-2.7-5-7-5-9.9zm2.5 0a2.5 2.5 0 115 0 2.5 2.5 0 01-5 0z" />
 				</svg>
-				<div class="text">Future Inns Bristol Cabot Circus, Bond St South, Bristol BS1 3EN</div>
+				<div class="text location"></div>
 			</div>
 			<div class="button-wrapper">
-				<button>Next</button>
+				<button onclick="showDateItem()" disabled id="nextButton">Next</button>
 			</div>
 		</div>
 
@@ -92,17 +202,12 @@
 			<div class="text-label">Course date picker</div>
 			<div class="course-picker">
 				<div class="choosen" onclick="this.parentElement.classList.toggle('opened')">
-					<div class="text">
+					<div class="text main_date">
 						7th Jun
 					</div>
 					<svg fill="none" viewBox="0 0 12 8"><path fill="#757575" d="M10.6.3L6 4.9 1.4.3 0 1.7l6 6 6-6L10.6.3z"/></svg>
 				</div>
-				<ul>
-					<li>7th Jun</li>
-					<li>8th Jun</li>
-					<li>9th Jun</li>
-					<li>10th Jun</li>
-					<li>11th Jun</li>
+				<ul class="dates">
 				</ul>
 			</div>
 			<div class="text-label">Course time</div>
@@ -111,19 +216,19 @@
 					<path fill="#757575" d="M11.5 10L9.2 8.2V4.6a.7.7 0 10-1.4 0v4c0 .2.1.4.3.5l2.6 2a.7.7 0 001-.2c.2-.3.1-.7-.2-.9z"/>
 					<path fill="#757575" d="M8.5 0a8.5 8.5 0 100 17 8.5 8.5 0 000-17zm0 15.7a7.2 7.2 0 110-14.4 7.2 7.2 0 010 14.4z"/>
 				</svg>
-				<div class="text">8:00am - 6:00pm</div>
+				<div class="text course_time">8:00am - 6:00pm</div>
 			</div>
 			<div class="button-wrapper">
-				<button>Next</button>
+				<button onclick="showResultItem()">Next</button>
 			</div>
 		</div>
 
 		<div class="step course-step" data-step="course">
 			<div class="course-head">
-				<div class="tag orange-tag">
+				<div class="tag orange-tag course_tag">
 					Best selling SIA course
 				</div>
-				<div class="date">
+				<div class="date" id="main_date">
 					7th Jun 8am to 6pm
 				</div>
 			</div>
@@ -134,7 +239,7 @@
 				<svg fill="none" viewBox="0 0 14 20">
 					<path fill="#757575" d="M7 0a7 7 0 00-7 7c0 5.3 7 13 7 13s7-7.8 7-13a7 7 0 00-7-7zM2 7a5 5 0 0110 0c0 2.9-2.9 7.2-5 9.9-2-2.7-5-7-5-9.9zm2.5 0a2.5 2.5 0 115 0 2.5 2.5 0 01-5 0z" />
 				</svg>
-				<div class="text">Future Inns Bristol Cabot Circus, Bond St South, Bristol BS1 3EN</div>
+				<div class="text location">Future Inns Bristol Cabot Circus, Bond St South, Bristol BS1 3EN</div>
 			</div>
 			<div class="tag green-tag">
 				<span class="icon-man2 ico2"></span>
@@ -142,11 +247,11 @@
 			</div>
 			<div class="tag green-tag">
 				<span class="icon-cash-pound ico"></span>
-				<span>Avg. wage rate £16/hr</span>
+				<span id="wage_tag">Avg. wage rate £16/hr</span>
 			</div>
 			<div class="available">
 				<span class="icon-power ico"></span>
-				<span>Results available in 5 days</span>
+				<span id="results">Results available in 5 days</span>
 			</div>
 			<div class="expand-box">
 				<div class="head" onclick="this.parentElement.classList.toggle('opened')">
@@ -163,7 +268,7 @@
 							</div>
 							<svg fill="none" viewBox="0 0 12 8"><path fill="#757575" d="M10.6.3L6 4.9 1.4.3 0 1.7l6 6 6-6L10.6.3z"/></svg>
 						</div>
-						<ul>
+						<ul class="locations">
 							<li>Door Supervisor Training - Barnsley</li>
 							<li>Door Supervisor Training - Birmingham</li>
 							<li>Door Supervisor Training - Aylesbury</li>
@@ -178,7 +283,7 @@
 							</div>
 							<svg fill="none" viewBox="0 0 12 8"><path fill="#757575" d="M10.6.3L6 4.9 1.4.3 0 1.7l6 6 6-6L10.6.3z"/></svg>
 						</div>
-						<ul>
+						<ul class="dates">
 							<li>7th Jun</li>
 							<li>8th Jun</li>
 							<li>9th Jun</li>
@@ -191,24 +296,24 @@
 			<div class="green-title">Reserve your seat</div>
 			<div class="price-box">
 				<div class="price">
-					<span class="old">213.99</span>
+					<span class="old" id="price">213.99</span>
 					<span class="save">
 						You save 
-						<span>24</span>
+						<span id="difference">24</span>
 					</span>
 				</div>
-				<div class="total">
+				<div class="total" id="discont_price">
 					<span>189.99</span>
 				</div>
 			</div>
-			<div class="button-wrapper">
-				<button>Next</button>
+			<div class="button-wrapper" id="book">
+				<button onclick="book()">Book</button>
 			</div>
 		</div>
 	`;
 
-	// Добавляем все стили тут:
-	document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
+// Добавляем все стили тут:
+document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
 		.${cur_test.init.css_scope_name} .step {
 			display: flex;
 		    flex-direction: column;
@@ -219,6 +324,11 @@
 		    border-radius: 10px;
 		    padding: 15px;
 		}
+		
+		.${cur_test.init.css_scope_name} .date-step, .${cur_test.init.css_scope_name} .course-step {
+			display: none;
+		}
+		
 		.${cur_test.init.css_scope_name} .step-title {
 			width: 100%;
 		}
@@ -465,11 +575,6 @@
 		}
  	`;
 
-
-
-
-
-})();
 
 
 
