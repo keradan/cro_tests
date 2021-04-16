@@ -1,5 +1,5 @@
 // Версия чтоб понять загрузился ли на гитхаб или еще нет
-let v = 23;
+let v = 24;
 
 // Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 const cur_test = window.keradan.get_cur_test(document.currentScript);
@@ -589,7 +589,7 @@ document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
 		}
 		@media (min-width: 720px) {
 			.krdn-get-licensed-course-search-step-flow .course-step {
-				padding: 15px calc(50% - 280px);
+				padding: 30px calc(50% - 280px);
 
 				align-items: center;
 			}
