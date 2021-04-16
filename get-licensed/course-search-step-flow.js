@@ -1,5 +1,5 @@
 // Версия чтоб понять загрузился ли на гитхаб или еще нет
-let v = 15;
+let v = 16;
 
 // Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 const cur_test = window.keradan.get_cur_test(document.currentScript);
@@ -139,23 +139,6 @@ $.getJSON('https://www.get-licensed.co.uk/api/course/' + courseID)
             $('.locations').append(`<li onclick="changeLocation('${location}')">${data[0].course_name} - ${location}</li>`)
         })
     })
-
-// TMP: (для ручной вставки, потому что у них не работает до сих пор подключение ГО)
-// let cur_test = {
-// 	init: {
-// 		name: 'keradan-tmp',
-// 		css_scope_name: 'keradan-tmp'
-// 	}
-// };
-// let html = document.createElement('div');
-// html.classList.add(cur_test.init.css_scope_name);
-// document.querySelector('.course-results').prepend(html);
-
-// let styles = document.createElement('style');
-// styles.setAttribute('id', 'styles-' + cur_test.init.css_scope_name);
-// document.querySelector('.course-results').prepend(styles);
-// END TMP
-
 
 // Создаем враппер для всей нашей верстки, и закидываем его в документ
 cur_test.html = document.createElement('div');
@@ -314,6 +297,10 @@ document.querySelector('.' + cur_test.init.css_scope_name).innerHTML = `
 
 // Добавляем все стили тут:
 document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
+		
+		/* working with default elements */
+		.searchTopSection, .nearestCourseBox { display: none; }
+
 		.${cur_test.init.css_scope_name} .step {
 			display: flex;
 		    flex-direction: column;
