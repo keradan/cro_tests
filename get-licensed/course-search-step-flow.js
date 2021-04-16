@@ -1,5 +1,5 @@
 // Версия чтоб понять загрузился ли на гитхаб или еще нет
-let v = 31;
+let v = 32;
 
 // Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 const cur_test = window.keradan.get_cur_test(document.currentScript);
@@ -173,7 +173,8 @@ $.getJSON('https://www.get-licensed.co.uk/api/course/' + courseID)
 
                 return false;
             },
-            _renderItem:  function( ul, item ) {
+            _renderItem: function( ul, item ) {
+            	console.log('_renderItem');
                 return $( "<li>" )
 				    .attr( "data-value", item.value )
 				    .attr( "data-keradan", 'lalala' )
@@ -213,9 +214,9 @@ document.querySelector('.' + cur_test.init.css_scope_name).innerHTML = `
 			<div class="course-picker">
 				<div class="choosen" onclick="this.parentElement.classList.toggle('opened')">
 					<input type="text" placeholder="Select cource" class="course">
-<!--					<div class="text" id="main_course">-->
-<!--						Select course-->
-<!--					</div>-->
+		<!--					<div class="text" id="main_course">-->
+		<!--						Select course-->
+		<!--					</div>-->
 					<svg fill="none" viewBox="0 0 12 8"><path fill="#757575" d="M10.6.3L6 4.9 1.4.3 0 1.7l6 6 6-6L10.6.3z"/></svg>
 				</div>
 			</div>
@@ -309,9 +310,9 @@ document.querySelector('.' + cur_test.init.css_scope_name).innerHTML = `
 					<div class="course-picker">
 						<div class="choosen" onclick="this.parentElement.classList.toggle('opened')">
 						<input type="text" placeholder="Select cource" class="course">
-<!--							<div class="text">-->
-<!--								Change location-->
-<!--							</div>-->
+		<!--							<div class="text">-->
+		<!--								Change location-->
+		<!--							</div>-->
 							<svg fill="none" viewBox="0 0 12 8"><path fill="#757575" d="M10.6.3L6 4.9 1.4.3 0 1.7l6 6 6-6L10.6.3z"/></svg>
 						</div>
 					</div>
