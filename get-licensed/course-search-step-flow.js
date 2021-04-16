@@ -1,5 +1,5 @@
 // Версия чтоб понять загрузился ли на гитхаб или еще нет
-let v = 22;
+let v = 23;
 
 // Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 const cur_test = window.keradan.get_cur_test(document.currentScript);
@@ -238,6 +238,10 @@ document.querySelector('.' + cur_test.init.css_scope_name).innerHTML = `
 					<span class="icon-cash-pound ico"></span>
 					<span id="wage_tag">Avg. wage rate £16/hr</span>
 				</div>
+				<div class="tag green-tag show-on-wide-screen">
+					<span class="icon-medal-empty ico"></span>
+					<span id="wage_tag">Instant eLearning access</span>
+				</div>
 			</div>
 			<div class="available">
 				<span class="icon-power ico"></span>
@@ -307,7 +311,7 @@ document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
 		
 		/* working with default elements */
 			.searchTopSection, .nearestCourseBox .fynCourseBox { display: none; }
-			.nearestCourseBox h3 { text-align: center; }
+			.nearestCourseBox { text-align: center; }
 
 		.${cur_test.init.css_scope_name} .step {
 			display: flex;
@@ -570,19 +574,55 @@ document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
 			background: white;
 		}
 
+		@media (max-width: 499px) {
+			.krdn-get-licensed-course-search-step-flow .course-step .green-tag.show-on-wide-screen {
+				display: none;
+			}
+		}
 		@media (min-width: 500px) {
 			.${cur_test.init.css_scope_name} .button-wrapper button {
 				width: 320px;
 			}
 			.krdn-get-licensed-course-search-step-flow .step {
-				padding: 15px calc(50% - 200px);
+				padding: 30px calc(50% - 200px);
 			}
 		}
-		@media (min-width: 750px) {
+		@media (min-width: 720px) {
 			.krdn-get-licensed-course-search-step-flow .course-step {
-				padding: 15px calc(50% - 340px);
+				padding: 15px calc(50% - 280px);
+
+				align-items: center;
 			}
-			
+			.krdn-get-licensed-course-search-step-flow .course-head {
+				position: relative;
+				justify-content: center;
+			}
+			.krdn-get-licensed-course-search-step-flow .course-head .date {
+				position: absolute;
+				right: calc(50% - 280px);
+			}
+			.krdn-get-licensed-course-search-step-flow .course-step .green-tags {
+				display: flex;
+			}
+			.krdn-get-licensed-course-search-step-flow .course-step .green-tag {
+				margin: 5px;
+			}
+			.krdn-get-licensed-course-search-step-flow .course-step .data-with-icon {
+				width: auto;
+			}
+			.krdn-get-licensed-course-search-step-flow .price-box {
+				position: relative;
+				justify-content: center;
+				text-align: center;
+			}
+			.krdn-get-licensed-course-search-step-flow .price-box .price .old {
+				margin-bottom: 40px;
+				margin-top: 5px;
+			}
+			.krdn-get-licensed-course-search-step-flow .price-box .total {
+				position: absolute;
+				color: #F16622;
+			}
 		}
  	`;
 
