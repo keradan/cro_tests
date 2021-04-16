@@ -135,8 +135,8 @@ $.getJSON('https://www.get-licensed.co.uk/api/course/' + courseID)
         locations = data.map(function (item) {
             return  {
                 value: item.location,
-                label: `${data[0].course_name} - ${item.location}`,
-                desc: item.location_address
+                label: `${data[0].course_name} - ${item.location} <br> ${item.location_address}`,
+                // desc: item.location_address
             }
         }).reduce(function(memo, e1){
             var matches = memo.filter(function(e2){
@@ -161,9 +161,9 @@ $.getJSON('https://www.get-licensed.co.uk/api/course/' + courseID)
                     if(v.label.toLowerCase().indexOf(lastTerm) >= 0){
                         results.push(v);
                     }
-                    if(v.desc.toLowerCase().indexOf(lastTerm) >= 0){
-                        results.push(v);
-                    }
+                    // if(v.desc.toLowerCase().indexOf(lastTerm) >= 0){
+                    //     results.push(v);
+                    // }
                 });
                 response(results);
             },
