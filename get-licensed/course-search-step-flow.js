@@ -1,5 +1,5 @@
 // Версия чтоб понять загрузился ли на гитхаб или еще нет
-let v = 18;
+let v = 19;
 
 // Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 const cur_test = window.keradan.get_cur_test(document.currentScript);
@@ -146,6 +146,9 @@ cur_test.html.classList.add(cur_test.init.css_scope_name);
 document.querySelector('.course-results').prepend(cur_test.html);
 document.querySelector('.course-results').parentElement.classList.remove('col-md-9');
 document.querySelector('.searchTopSection').parentElement.remove();
+
+document.querySelector('.nearestCourseBox h3').parentElement.classList.remove('col-sm-9');
+document.querySelector('.nearestCourseBox h3').parentElement.classList.add('col-xs-12');
 
 
 // Добавляем всю верстку тут
@@ -426,6 +429,7 @@ document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
 			width: 100%;
 			margin-top: 20px;
 			margin-bottom: 5px;
+			text-align: center;
 		}
 		.${cur_test.init.css_scope_name} .button-wrapper button {
 			width: 100%;
@@ -561,6 +565,13 @@ document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
 		}
 		.${cur_test.init.css_scope_name} .course-step .course-picker ul {
 			background: white;
+		}
+
+		@media (min-width: 500px) {
+			.${cur_test.init.css_scope_name} .button-wrapper button {
+				width: 320px;
+				background: red;
+			}
 		}
  	`;
 
