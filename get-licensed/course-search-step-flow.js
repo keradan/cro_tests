@@ -1,5 +1,5 @@
 // Версия чтоб понять загрузился ли на гитхаб или еще нет
-let v = 16;
+let v = 17;
 
 // Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 const cur_test = window.keradan.get_cur_test(document.currentScript);
@@ -144,6 +144,8 @@ $.getJSON('https://www.get-licensed.co.uk/api/course/' + courseID)
 cur_test.html = document.createElement('div');
 cur_test.html.classList.add(cur_test.init.css_scope_name);
 document.querySelector('.course-results').prepend(cur_test.html);
+document.querySelector('.course-results').parentElement.classList.remove('col-md-9');
+document.querySelector('.searchTopSection').parentElement.remove();
 
 
 // Добавляем всю верстку тут
