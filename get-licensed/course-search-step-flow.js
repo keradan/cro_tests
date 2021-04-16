@@ -1,5 +1,5 @@
 // Версия чтоб понять загрузился ли на гитхаб или еще нет
-let v = 35;
+let v = 36;
 
 // Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 const cur_test = window.keradan.get_cur_test(document.currentScript);
@@ -135,7 +135,7 @@ $.getJSON('https://www.get-licensed.co.uk/api/course/' + courseID)
         locations = data.map(function (item) {
             return  {
                 value: item.location,
-                label: `${data[0].course_name} - ${item.location} ${item.location_address}`,
+                label: `${data[0].course_name} - ${item.location}. ${item.location_address}`,
                 // desc: item.location_address
             }
         }).reduce(function(memo, e1){
@@ -150,8 +150,7 @@ $.getJSON('https://www.get-licensed.co.uk/api/course/' + courseID)
 
         console.log('locations: ', locations);
 
-        $('.locations').html('');
-
+        $('.locations').html('')
         $( ".course" ).autocomplete({
             source: function( request, response ) {
                 // extract the last term
@@ -174,14 +173,6 @@ $.getJSON('https://www.get-licensed.co.uk/api/course/' + courseID)
 
                 return false;
             },
-        //     _renderItem: function( ul, item ) {
-        //     	console.log('_renderItem');
-        //         return $( "<li>" )
-				    // .attr( "data-value", item.value )
-				    // .attr( "data-keradan", 'lalala' )
-				    // .append( item.label )
-				    // .appendTo( ul );
-        //     },
             response: function(event, ui) {
                 if (!ui.content.length) {
                     $('.location-picker').css('display', 'none')
@@ -189,19 +180,8 @@ $.getJSON('https://www.get-licensed.co.uk/api/course/' + courseID)
                     var noResult = { value:"",label:"No results found", desc: "" };
                     ui.content.push(noResult);
                 }
-            },
-        }).data('ui-autocomplete')._renderItem = function(ul, item) {
-        	console.log('_renderItem');
-            return $( "<li>" )
-			    .attr( "data-value", item.value )
-			    .attr( "data-keradan", 'lalala' )
-			    .append( item.label )
-			    .appendTo( ul );
-
-			// console.log('test');
-			// var item = $('<div class="list_item_container"><div class="image"><img src="' + item.pfimage_thumb + '"></div><div class="label"><h3> Reputation:  ' + item.volume + '</h3></div><div class="description">' + item.product_name + '</div></div>')
-			// return $("<li>").append(item).appendTo(ul);
-		};
+            }
+        });
     })
 
 // Создаем враппер для всей нашей верстки, и закидываем его в документ
@@ -685,6 +665,12 @@ document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
 				color: #F16622;
 			}
 		}
+
+		/* search-drop-down */
+			#ui-id-2 {
+				background: red;
+			}
+		/* /search-drop-down */
  	`;
 
 
