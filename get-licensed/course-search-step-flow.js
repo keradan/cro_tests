@@ -1,5 +1,5 @@
 // Версия чтоб понять загрузился ли на гитхаб или еще нет
-let v = 38;
+let v = 39;
 
 // Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 const cur_test = window.keradan.get_cur_test(document.currentScript);
@@ -674,11 +674,13 @@ document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
 
 		/* search-drop-down */
 			.ui-autocomplete {
-				max-width: 50%;
-				margin-left: -5px;
+				max-width: 50%!important;
+				margin-left: -5px!important;
+				max-height: 200px!important;
+				overflow-y: scroll!important;
 			}
 			.ui-autocomplete .ui-menu-item {
-				padding: 5px;
+				padding: 5px!important;
 			}
 		/* /search-drop-down */
  	`;
