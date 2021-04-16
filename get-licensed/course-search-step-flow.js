@@ -1,5 +1,5 @@
 // Версия чтоб понять загрузился ли на гитхаб или еще нет
-let v = 17;
+let v = 18;
 
 // Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 const cur_test = window.keradan.get_cur_test(document.currentScript);
@@ -301,7 +301,7 @@ document.querySelector('.' + cur_test.init.css_scope_name).innerHTML = `
 document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
 		
 		/* working with default elements */
-		.searchTopSection, .nearestCourseBox { display: none; }
+		.searchTopSection, .nearestCourseBox .fynCourseBox { display: none; }
 
 		.${cur_test.init.css_scope_name} .step {
 			display: flex;
