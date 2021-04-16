@@ -1,5 +1,5 @@
 // Версия чтоб понять загрузился ли на гитхаб или еще нет
-let v = 24;
+let v = 28;
 
 // Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 const cur_test = window.keradan.get_cur_test(document.currentScript);
@@ -17,7 +17,8 @@ cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55'
 
 // Пример отправки ивента в аналитику
 cur_test.ga_event('loaded');
-
+$('head').append('<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">');
+$('head').append('<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>');
 try {
     // hotjar here
 } catch (e) {
@@ -40,6 +41,8 @@ var monthNames = ["January", "February", "March", "April", "May", "June",
 ];
 
 function changeLocation(location) {
+    $('.location-picker').css('display', 'block')
+    $('#nextButton').removeAttr('disabled');
     item = data.filter(function(item){return item.location == location})[0]
     $('#main_course').html(`${item.course_name} - ${location}`)
     $('.location').html(item.location_address)
@@ -130,14 +133,56 @@ $.getJSON('https://www.get-licensed.co.uk/api/course/' + courseID)
     .then(function (item) {
         data = item
         locations = data.map(function (item) {
-            return item.location
-        }).filter(onlyUnique)
+            return  {
+                value: item.location,
+                label: `${data[0].course_name} - ${item.location}`,
+                desc: item.location_address
+            }
+        }).reduce(function(memo, e1){
+            var matches = memo.filter(function(e2){
+                return e1.value == e2.value && e1.desc == e2.desc
+            })
+            if (matches.length == 0) {
+                memo.push(e1)
+            }
+            return memo;
+        }, [])
+
         $('.locations').html('')
-        changeLocation(locations[0])
-        $('#nextButton').removeAttr('disabled');
-        locations.forEach(function (location) {
-            $('.locations').append(`<li onclick="changeLocation('${location}')">${data[0].course_name} - ${location}</li>`)
-        })
+        $( ".course" ).autocomplete({
+            source: function( request, response ) {
+                // extract the last term
+                var lastTerm = request.term.toLowerCase();
+                var results = [];
+                // loop over data, seeking labels & desc
+                $.each(locations, function(k, v){
+                    if(v.label.toLowerCase().indexOf(lastTerm) >= 0){
+                        results.push(v);
+                    }
+                    if(v.desc.toLowerCase().indexOf(lastTerm) >= 0){
+                        results.push(v);
+                    }
+                });
+                response(results);
+            },
+            select: function( event, ui ) {
+                $( ".course" ).val(ui.item.label)
+                changeLocation(ui.item.value)
+
+                return false;
+            },
+            _renderItem:  function( ul, item ) {
+                return '';
+            },
+            response: function(event, ui) {
+                if (!ui.content.length) {
+                    $('.location-picker').css('display', 'none')
+                    $('#nextButton').attr('disabled', 'disabled');
+                    var noResult = { value:"",label:"No results found", desc: "" };
+                    ui.content.push(noResult);
+                }
+            }
+        });
     })
 
 // Создаем враппер для всей нашей верстки, и закидываем его в документ
@@ -161,22 +206,22 @@ document.querySelector('.' + cur_test.init.css_scope_name).innerHTML = `
 			<div class="text-label">Course</div>
 			<div class="course-picker">
 				<div class="choosen" onclick="this.parentElement.classList.toggle('opened')">
-					<div class="text" id="main_course">
-						Select course
-					</div>
+					<input type="text" placeholder="Select cource" class="course">
+<!--					<div class="text" id="main_course">-->
+<!--						Select course-->
+<!--					</div>-->
 					<svg fill="none" viewBox="0 0 12 8"><path fill="#757575" d="M10.6.3L6 4.9 1.4.3 0 1.7l6 6 6-6L10.6.3z"/></svg>
 				</div>
-				<ul class="locations">
-					
-				</ul>
 			</div>
-			<div class="text-label">Location</div>
+			<div class="location-picker">
+			    <div class="text-label">Location</div>
 			<div class="data-with-icon">
 				<svg fill="none" viewBox="0 0 14 20">
 					<path fill="#757575" d="M7 0a7 7 0 00-7 7c0 5.3 7 13 7 13s7-7.8 7-13a7 7 0 00-7-7zM2 7a5 5 0 0110 0c0 2.9-2.9 7.2-5 9.9-2-2.7-5-7-5-9.9zm2.5 0a2.5 2.5 0 115 0 2.5 2.5 0 01-5 0z" />
 				</svg>
 				<div class="text location"></div>
 			</div>
+            </div>
 			<div class="button-wrapper">
 				<button onclick="showDateItem()" disabled id="nextButton">Next</button>
 			</div>
@@ -257,18 +302,12 @@ document.querySelector('.' + cur_test.init.css_scope_name).innerHTML = `
 				<div class="body">
 					<div class="course-picker">
 						<div class="choosen" onclick="this.parentElement.classList.toggle('opened')">
-							<div class="text">
-								Change location
-							</div>
+						<input type="text" placeholder="Select cource" class="course">
+<!--							<div class="text">-->
+<!--								Change location-->
+<!--							</div>-->
 							<svg fill="none" viewBox="0 0 12 8"><path fill="#757575" d="M10.6.3L6 4.9 1.4.3 0 1.7l6 6 6-6L10.6.3z"/></svg>
 						</div>
-						<ul class="locations">
-							<li>Door Supervisor Training - Barnsley</li>
-							<li>Door Supervisor Training - Birmingham</li>
-							<li>Door Supervisor Training - Aylesbury</li>
-							<li>Door Supervisor Training - Chelmsford</li>
-							<li>Door Supervisor Training - London</li>
-						</ul>
 					</div>
 					<div class="course-picker">
 						<div class="choosen" onclick="this.parentElement.classList.toggle('opened')">
@@ -349,6 +388,9 @@ document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
 			font-weight: bold;
 		    font-size: 12px;
 		    color: #808080;
+		}
+		.${cur_test.init.css_scope_name} .location-picker {
+			display:none;
 		}
 		.${cur_test.init.css_scope_name} .course-picker {
 			position: relative;
