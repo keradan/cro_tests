@@ -1,5 +1,5 @@
 // Версия чтоб понять загрузился ли на гитхаб или еще нет
-let v = 30;
+let v = 31;
 
 // Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 const cur_test = window.keradan.get_cur_test(document.currentScript);
@@ -174,7 +174,11 @@ $.getJSON('https://www.get-licensed.co.uk/api/course/' + courseID)
                 return false;
             },
             _renderItem:  function( ul, item ) {
-                return '';
+                return $( "<li>" )
+				    .attr( "data-value", item.value )
+				    .attr( "data-keradan", 'lalala' )
+				    .append( item.label )
+				    .appendTo( ul );
             },
             response: function(event, ui) {
                 if (!ui.content.length) {
