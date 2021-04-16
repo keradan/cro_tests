@@ -1,5 +1,5 @@
 // Версия чтоб понять загрузился ли на гитхаб или еще нет
-let v = 21;
+let v = 22;
 
 // Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 const cur_test = window.keradan.get_cur_test(document.currentScript);
@@ -229,13 +229,15 @@ document.querySelector('.' + cur_test.init.css_scope_name).innerHTML = `
 				</svg>
 				<div class="text location">Future Inns Bristol Cabot Circus, Bond St South, Bristol BS1 3EN</div>
 			</div>
-			<div class="tag green-tag">
-				<span class="icon-man2 ico2"></span>
-				<span>Booked 1,640 times</span>
-			</div>
-			<div class="tag green-tag">
-				<span class="icon-cash-pound ico"></span>
-				<span id="wage_tag">Avg. wage rate £16/hr</span>
+			<div class="green-tags">
+				<div class="tag green-tag">
+					<span class="icon-man2 ico2"></span>
+					<span>Booked 1,640 times</span>
+				</div>
+				<div class="tag green-tag">
+					<span class="icon-cash-pound ico"></span>
+					<span id="wage_tag">Avg. wage rate £16/hr</span>
+				</div>
 			</div>
 			<div class="available">
 				<span class="icon-power ico"></span>
@@ -305,7 +307,7 @@ document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
 		
 		/* working with default elements */
 			.searchTopSection, .nearestCourseBox .fynCourseBox { display: none; }
-			.nearestCourseBox .fynCourseBox h3 { text-align: center; }
+			.nearestCourseBox h3 { text-align: center; }
 
 		.${cur_test.init.css_scope_name} .step {
 			display: flex;
