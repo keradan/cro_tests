@@ -1,11 +1,11 @@
 // Версия чтоб понять загрузился ли на гитхаб или еще нет
-let v = 40;
+let v = 41;
 
 // Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 const cur_test = window.keradan.get_cur_test(document.currentScript);
 
 // Категория ивента для аналитики
-cur_test.init.event_category = 'Exp — New PDP';
+cur_test.init.event_category = 'Exp — Course search page';
 
 // Set dev behavior (for production need to comment out or remove):
 cur_test.init.enable_log = true;
@@ -15,14 +15,24 @@ cur_test.init.enable_ga_events = false;
 cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55', cur_test);
 cur_test.log(`%c Keradan's test script url:`, 'background: #222; color: #bada55', document.currentScript.getAttribute('src'));
 
-// Пример отправки ивента в аналитику
 cur_test.ga_event('loaded');
+
 $('head').append('<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">');
 $('head').append('<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>');
+
 try {
-    // hotjar here
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:2258991,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+    window.hj=window.hj||function(){(hj.q=hj.q||[]).push(arguments)};
+    hj('trigger', 'course_search_page');
 } catch (e) {
-    // keradan_log('Hotjar error: ', e);
+    console.log('Hotjar error: ', e);
 }
 
 $('.courseCard:parent').remove()
@@ -194,7 +204,6 @@ document.querySelector('.searchTopSection').parentElement.remove();
 document.querySelector('.nearestCourseBox h3').parentElement.classList.remove('col-sm-9');
 document.querySelector('.nearestCourseBox h3').parentElement.classList.add('col-xs-12');
 
-
 // Добавляем всю верстку тут
 document.querySelector('.' + cur_test.init.css_scope_name).innerHTML = `
 		<div class="step location-step" data-step="location">
@@ -206,9 +215,6 @@ document.querySelector('.' + cur_test.init.css_scope_name).innerHTML = `
 			<div class="course-picker">
 				<div class="choosen" onclick="this.parentElement.classList.toggle('opened')">
 					<input type="text" placeholder="Select cource" class="course">
-		<!--					<div class="text" id="main_course">-->
-		<!--						Select course-->
-		<!--					</div>-->
 					<svg fill="none" viewBox="0 0 12 8"><path fill="#757575" d="M10.6.3L6 4.9 1.4.3 0 1.7l6 6 6-6L10.6.3z"/></svg>
 				</div>
 			</div>
@@ -300,16 +306,13 @@ document.querySelector('.' + cur_test.init.css_scope_name).innerHTML = `
 				</div>
 				<div class="body">
 					<div class="course-picker">
-						<div class="choosen" onclick="this.parentElement.classList.toggle('opened')">
-						<input type="text" placeholder="Select cource" class="course">
-		<!--							<div class="text">-->
-		<!--								Change location-->
-		<!--							</div>-->
+						<div class="choosen loc" onclick="this.parentElement.classList.toggle('opened')">
+							<input type="text" placeholder="Select cource" class="course">
 							<svg fill="none" viewBox="0 0 12 8"><path fill="#757575" d="M10.6.3L6 4.9 1.4.3 0 1.7l6 6 6-6L10.6.3z"/></svg>
 						</div>
 					</div>
 					<div class="course-picker">
-						<div class="choosen" onclick="this.parentElement.classList.toggle('opened')">
+						<div class="choosen dat" onclick="this.parentElement.classList.toggle('opened')">
 							<div class="text">
 								Change date
 							</div>
@@ -683,12 +686,41 @@ document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
 			#ui-id-2 {
 				max-width: 370px!important;
 			}
-			#ui-id-2 {
-			.ui-autocomplete .ui-menu-item {
+			#ui-id-2 .ui-menu-item {
 				padding: 7px 5px!important;
 			}
 		/* /search-drop-down */
  	`;
+
+// ga events
+	document.querySelector('.location-step .course-picker .choosen').addEventListener('click', function(){
+		cur_test.ga_event('click on dropdown', 'Step #01: Pick a location');
+	});
+
+	document.querySelector('.location-step button').addEventListener('click', function(){
+		cur_test.ga_event('click on button Next', 'Step #01: Pick a location');
+	});
+
+	document.querySelector('.date-step .course-picker .choosen').addEventListener('click', function(){
+		cur_test.ga_event('click on dropdown', 'Step #02: Pick time and date');
+	});
+
+	document.querySelector('.date-step button').addEventListener('click', function(){
+		cur_test.ga_event('click on button Next', 'Step #02: Pick time and date');
+	});
+
+	document.querySelector('.course-step .expand-box .head').addEventListener('click', function(){
+		cur_test.ga_event('click on dropdown Change selection', 'Step #03: Verify information');
+	});
+
+	document.querySelector('.course-picker .choosen.loc').addEventListener('click', function(){
+		cur_test.ga_event('collapse Course', 'Step #03: Verify information');
+	});
+	
+	document.querySelector('.course-picker .choosen.dat').addEventListener('click', function(){
+		cur_test.ga_event('collapse Course date picker', 'Step #03: Verify information');
+	});
+// ga events end
 
 
 
