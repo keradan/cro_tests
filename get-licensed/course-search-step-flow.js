@@ -9,7 +9,7 @@ cur_test.init.event_category = 'Exp — Course search page';
 
 // Set dev behavior (for production need to comment out or remove):
 cur_test.init.enable_log = true;
-cur_test.init.enable_ga_events = false;
+cur_test.init.enable_ga_events = true;
 
 // Чтоб зафиксировать присутствие и версию
 cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55', cur_test);
