@@ -1,5 +1,5 @@
 // Версия чтоб понять загрузился ли на гитхаб или еще нет
-let v = 54;
+let v = 55;
 
 // Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 const cur_test = window.keradan.get_cur_test(document.currentScript);
@@ -161,6 +161,11 @@ $.getJSON('https://www.get-licensed.co.uk/api/course/' + courseID)
 
         console.log('locations: ', locations);
 
+        setTimeout(function(){
+        	let location_step = document.querySelector(cur_test.init.css_scope_name + ' .step.location-step');
+        	location_step.classList.remove('loading');
+        }, 100);
+
         $('.locations').html('')
         $( ".course" ).autocomplete({
             source: locations,
@@ -206,7 +211,17 @@ document.querySelector('.nearestCourseBox h3').parentElement.classList.add('col-
 
 // Добавляем всю верстку тут
 document.querySelector('.' + cur_test.init.css_scope_name).innerHTML = `
-		<div class="step location-step" data-step="location">
+		<div class="step location-step loading" data-step="location">
+			<div class="loader">
+				<svg xmlns="http://www.w3.org/2000/svg" style="margin: auto; background: none; display: block; shape-rendering: auto; animation-play-state: running; animation-delay: 0s;" width="50px" height="50px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+					<circle cx="50" cy="50" r="30" stroke-width="5" stroke="#1a1a1a" stroke-dasharray="47.12388980384689 47.12388980384689" fill="none" stroke-linecap="round" style="animation-play-state: running; animation-delay: 0s;" transform="rotate(270.944 50 50)">
+					  <animateTransform attributeName="transform" type="rotate" dur="4s" repeatCount="indefinite" keyTimes="0;1" values="0 50 50;360 50 50" style="animation-play-state: running; animation-delay: 0s;"></animateTransform>
+					</circle>
+					<circle cx="50" cy="50" r="24" stroke-width="5" stroke="#42af58" stroke-dasharray="37.69911184307752 37.69911184307752" stroke-dashoffset="37.69911184307752" fill="none" stroke-linecap="round" style="animation-play-state: running;animation-delay: 0s;" transform="rotate(-270.944 50 50)">
+					  <animateTransform attributeName="transform" type="rotate" dur="4s" repeatCount="indefinite" keyTimes="0;1" values="0 50 50;-360 50 50" style="animation-play-state: running; animation-delay: 0s;"></animateTransform>
+					</circle>
+				</svg>
+			</div>
 			<div class="step-title">
 				<div class="grey">Step 1</div>
 				<div class="green">Pick a location</div>
@@ -355,6 +370,7 @@ document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
 			.nearestCourseBox { text-align: center; }
 
 		.${cur_test.init.css_scope_name} .step {
+			position: relative;
 			display: flex;
 		    flex-direction: column;
 		    justify-content: center;
@@ -364,11 +380,24 @@ document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
 		    border-radius: 10px;
 		    padding: 15px;
 		}
-		
+		.${cur_test.init.css_scope_name} .step .loader {
+			position: absolute;
+		    top: 50%;
+		    left: 50%;
+		    transform: translate(-50%, -50%);
+		}
+		.${cur_test.init.css_scope_name} .step:not(.loading) .loader {
+			display: none;
+		}
+		.${cur_test.init.css_scope_name} .location-step.loading .text-label,
+		.${cur_test.init.css_scope_name} .location-step.loading .course-picker,
+		.${cur_test.init.css_scope_name} .location-step.loading .location-picker,
+		.${cur_test.init.css_scope_name} .location-step.loading .button-wrapper, {
+			display: none;
+		}
 		.${cur_test.init.css_scope_name} .date-step, .${cur_test.init.css_scope_name} .course-step {
 			display: none;
 		}
-		
 		.${cur_test.init.css_scope_name} .step-title {
 			width: 100%;
 		}
