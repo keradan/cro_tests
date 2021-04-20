@@ -1,5 +1,5 @@
 // Версия чтоб понять загрузился ли на гитхаб или еще нет
-let v = 45;
+let v = 54;
 
 // Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 const cur_test = window.keradan.get_cur_test(document.currentScript);
@@ -82,6 +82,7 @@ function changeDate(location, date)
     $('#main_date').html(`${getFormattedDate(date)} ${course.start_time} to ${course.end_time}`)
     $('.course-name').html(`${course.course_name} - ${course.location}`)
     $('#wage_tag').html(course.wage_tag)
+    $('#booked_times').html(course.booked)
     $('#results').html(course.faster_result)
     $('#price').html(course.price_without_discount)
     $('#discont_price').html(course.price_with_discount)
@@ -162,23 +163,11 @@ $.getJSON('https://www.get-licensed.co.uk/api/course/' + courseID)
 
         $('.locations').html('')
         $( ".course" ).autocomplete({
-            source: function( request, response ) {
-                // extract the last term
-                var lastTerm = request.term.toLowerCase();
-                var results = [];
-                // loop over data, seeking labels & desc
-                $.each(locations, function(k, v){
-                    if(v.label.toLowerCase().indexOf(lastTerm) >= 0){
-                        results.push(v);
-                    }
-                    // if(v.desc.toLowerCase().indexOf(lastTerm) >= 0){
-                    //     results.push(v);
-                    // }
-                });
-                response(results);
-            },
+            source: locations,
+            minLength: 0,
             select: function( event, ui ) {
                 $( ".course" ).val(ui.item.label)
+                $(this).parent().removeClass('opened')
                 changeLocation(ui.item.value)
 
                 return false;
@@ -192,6 +181,17 @@ $.getJSON('https://www.get-licensed.co.uk/api/course/' + courseID)
                 }
             }
         });
+
+        $('.choosen.locs').click(function () {
+            hasClass = $(this).parent().hasClass('opened')
+            if (hasClass) {
+                $(".ui-menu-item").hide();
+                $(this).parent().removeClass('opened')
+            } else {
+                $(this).find(".course").autocomplete('search', '')
+                $(this).parent().addClass('opened')
+            }
+        })
     })
 
 // Создаем враппер для всей нашей верстки, и закидываем его в документ
@@ -213,8 +213,8 @@ document.querySelector('.' + cur_test.init.css_scope_name).innerHTML = `
 			</div>
 			<div class="text-label">Course</div>
 			<div class="course-picker">
-				<div class="choosen" onclick="this.parentElement.classList.toggle('opened')">
-					<input type="text" placeholder="Select cource" class="course">
+				<div class="choosen locs">
+					<input type="text" placeholder="Please enter your location" class="course">
 					<svg fill="none" viewBox="0 0 12 8"><path fill="#757575" d="M10.6.3L6 4.9 1.4.3 0 1.7l6 6 6-6L10.6.3z"/></svg>
 				</div>
 			</div>
@@ -282,7 +282,7 @@ document.querySelector('.' + cur_test.init.css_scope_name).innerHTML = `
 			<div class="green-tags">
 				<div class="tag green-tag">
 					<span class="icon-man2 ico2"></span>
-					<span>Booked 1,640 times</span>
+					<span id="booked_times">Booked 1,640 times</span>
 				</div>
 				<div class="tag green-tag">
 					<span class="icon-cash-pound ico"></span>
@@ -290,7 +290,7 @@ document.querySelector('.' + cur_test.init.css_scope_name).innerHTML = `
 				</div>
 				<div class="tag green-tag show-on-wide-screen">
 					<span class="icon-medal-empty ico"></span>
-					<span id="wage_tag">Instant eLearning access</span>
+					<span>Instant eLearning access</span>
 				</div>
 			</div>
 			<div class="available">
@@ -306,14 +306,14 @@ document.querySelector('.' + cur_test.init.css_scope_name).innerHTML = `
 				</div>
 				<div class="body">
 					<div class="course-picker">
-						<div class="choosen loc" onclick="this.parentElement.classList.toggle('opened')">
-							<input type="text" placeholder="Select cource" class="course">
+						<div class="choosen locs loc">
+							<input type="text" placeholder="Search by dropdown" class="course">
 							<svg fill="none" viewBox="0 0 12 8"><path fill="#757575" d="M10.6.3L6 4.9 1.4.3 0 1.7l6 6 6-6L10.6.3z"/></svg>
 						</div>
 					</div>
 					<div class="course-picker">
 						<div class="choosen dat" onclick="this.parentElement.classList.toggle('opened')">
-							<div class="text">
+							<div class="text main_date">
 								Change date
 							</div>
 							<svg fill="none" viewBox="0 0 12 8"><path fill="#757575" d="M10.6.3L6 4.9 1.4.3 0 1.7l6 6 6-6L10.6.3z"/></svg>
