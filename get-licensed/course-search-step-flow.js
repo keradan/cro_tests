@@ -1,5 +1,5 @@
 // Версия чтоб понять загрузился ли на гитхаб или еще нет
-let v = 55;
+let v = 56;
 
 // Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 const cur_test = window.keradan.get_cur_test(document.currentScript);
@@ -162,7 +162,10 @@ $.getJSON('https://www.get-licensed.co.uk/api/course/' + courseID)
         console.log('locations: ', locations);
 
         setTimeout(function(){
-        	let location_step = document.querySelector(cur_test.init.css_scope_name + ' .step.location-step');
+        	location_step_selector = `.${cur_test.init.css_scope_name} .step.location-step`;
+        	let location_step = document.querySelector(location_step_selector);
+        	console.log('location_step_selector: ', location_step_selector);
+        	console.log('location_step: ', location_step);
         	location_step.classList.remove('loading');
         }, 100);
 
@@ -392,8 +395,8 @@ document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
 		.${cur_test.init.css_scope_name} .location-step.loading .text-label,
 		.${cur_test.init.css_scope_name} .location-step.loading .course-picker,
 		.${cur_test.init.css_scope_name} .location-step.loading .location-picker,
-		.${cur_test.init.css_scope_name} .location-step.loading .button-wrapper, {
-			display: none;
+		.${cur_test.init.css_scope_name} .location-step.loading .button-wrapper {
+			opacity: 0;
 		}
 		.${cur_test.init.css_scope_name} .date-step, .${cur_test.init.css_scope_name} .course-step {
 			display: none;
