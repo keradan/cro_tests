@@ -1,5 +1,5 @@
 // Версия чтоб понять загрузился ли на гитхаб или еще нет
-let v = 66;
+let v = 67;
 
 // Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 const cur_test = window.keradan.get_cur_test(document.currentScript);
@@ -174,9 +174,11 @@ $.getJSON('https://www.get-licensed.co.uk/api/course/' + courseID)
 
         	let choosen = location_step.querySelector('.choosen');
 
-        	console.log('choosen: ', choosen);
-
-        	if (choosen.classList.contains('show-loader')) setTimeout(() => choosen.click(), 500);
+        	if (choosen.classList.contains('show-loader')) setTimeout(function(){
+        		console.log('choosen: ', choosen);
+        		console.log('choosen clicked!');
+        		choosen.click();
+        	}, 1000);
         }, 1);
 
         $('.locations').html('')
@@ -404,7 +406,7 @@ document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
 		    align-items: center;
 		}
 		.${cur_test.init.css_scope_name} .step .loader svg {
-			width: 40px;
+			width: 40px!important;
 		}
 		.${cur_test.init.css_scope_name} .step:not(.loading) .loader {
 			display: none!important;
