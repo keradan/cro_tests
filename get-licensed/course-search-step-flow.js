@@ -1,5 +1,5 @@
 // Версия чтоб понять загрузился ли на гитхаб или еще нет
-let v = 68;
+let v = 69;
 
 // Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 const cur_test = window.keradan.get_cur_test(document.currentScript);
@@ -80,7 +80,7 @@ function changeDate(location, date, date_end)
     course = getCourse(location, date)[0]
     $('.course_time').html(`${course.start_time} - ${course.end_time}`)
     $('.course_tag').html(course.course_tag)
-    $('#main_date').html(`${getFormattedDate(date)} ${course.start_time} to ${course.end_time}`)
+    $('#main_date').html(`${getFormattedDate(date)}<br>${course.start_time} to ${course.end_time}`)
     $('.course-name').html(`${course.course_name} - ${course.location}`)
     $('#wage_tag').html(course.wage_tag)
     $('#booked_times').html(course.booked)
@@ -449,7 +449,17 @@ document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
 		    box-sizing: border-box;
 		    border-radius: 5px;
 		    padding: 0;
-		    margin-bottom: 15px;
+		    margin-bottom: 25px;
+		}
+		.${cur_test.init.css_scope_name} .course-picker .help-tip {
+			position: absolute;
+		    top: 100%;
+		    right: 0;
+		    font-weight: 600;
+		    font-size: 10px;
+		    line-height: 12px;
+		    color: #808080;
+		    margin-top: 5px;
 		}
 		.${cur_test.init.css_scope_name} .course-picker input {
 			width: 100%;
@@ -557,11 +567,12 @@ document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
 			display: flex;
 		    justify-content: space-between;
 		    align-items: center;
-		    margin-bottom: 5px;
+		    margin-bottom: 15px;
 		    width: 100%;
 		}
 		.${cur_test.init.css_scope_name} .course-head .date {
 			font-size: 14px;
+			line-height: 14px;
 			color: #808080;
 		}
 		.${cur_test.init.css_scope_name} .tag {
