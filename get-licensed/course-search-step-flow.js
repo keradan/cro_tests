@@ -1,5 +1,5 @@
 // Версия чтоб понять загрузился ли на гитхаб или еще нет
-let v = 69;
+let v = 70;
 
 // Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 const cur_test = window.keradan.get_cur_test(document.currentScript);
@@ -233,6 +233,7 @@ document.querySelector('.' + cur_test.init.css_scope_name).innerHTML = `
 			</div>
 			<div class="text-label">Find your nearest course</div>
 			<div class="course-picker">
+				<div class="help-tip">Please search using boroughs/cities</div>
 				<div class="choosen locs" onclick="this.parentElement.classList.toggle('show-loader')">
 					<div class="loader">
 						<svg xmlns="http://www.w3.org/2000/svg" style="margin: auto; background: none; display: block; shape-rendering: auto; animation-play-state: running; animation-delay: 0s;" width="50px" height="50px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
