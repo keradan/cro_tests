@@ -1,5 +1,5 @@
 // Версия чтоб понять загрузился ли на гитхаб или еще нет
-let v = 63;
+let v = 64;
 
 // Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 const cur_test = window.keradan.get_cur_test(document.currentScript);
@@ -225,7 +225,7 @@ document.querySelector('.' + cur_test.init.css_scope_name).innerHTML = `
 			</div>
 			<div class="text-label">Find your nearest course</div>
 			<div class="course-picker">
-				<div class="choosen locs">
+				<div class="choosen locs" onclick="this.parentElement.classList.toggle('show-loader')">
 					<div class="loader">
 						<svg xmlns="http://www.w3.org/2000/svg" style="margin: auto; background: none; display: block; shape-rendering: auto; animation-play-state: running; animation-delay: 0s;" width="50px" height="50px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
 							<circle cx="50" cy="50" r="30" stroke-width="5" stroke="#1a1a1a" stroke-dasharray="47.12388980384689 47.12388980384689" fill="none" stroke-linecap="round" style="animation-play-state: running; animation-delay: 0s;" transform="rotate(270.944 50 50)">
@@ -400,7 +400,7 @@ document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
 		.${cur_test.init.css_scope_name} .step:not(.loading) .loader {
 			display: none!important;
 		}
-		.${cur_test.init.css_scope_name} .course-picker:not(.opened) .choosen .loader {
+		.${cur_test.init.css_scope_name} .course-picker:not(.show-loader) .choosen .loader {
 			display:none;
 		}
 		.${cur_test.init.css_scope_name} .date-step, .${cur_test.init.css_scope_name} .course-step {
