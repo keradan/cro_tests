@@ -403,12 +403,6 @@ document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
 		.${cur_test.init.css_scope_name} .course-picker:not(.opened) .choosen .loader {
 			display:none;
 		}
-		.${cur_test.init.css_scope_name} .location-step.loading .text-label,
-		.${cur_test.init.css_scope_name} .location-step.loading .course-picker,
-		.${cur_test.init.css_scope_name} .location-step.loading .location-picker,
-		.${cur_test.init.css_scope_name} .location-step.loading .button-wrapper {
-			opacity: 0;
-		}
 		.${cur_test.init.css_scope_name} .date-step, .${cur_test.init.css_scope_name} .course-step {
 			display: none;
 		}
