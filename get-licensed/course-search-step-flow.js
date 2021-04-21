@@ -1,5 +1,5 @@
 // Версия чтоб понять загрузился ли на гитхаб или еще нет
-let v = 58;
+let v = 61;
 
 // Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 const cur_test = window.keradan.get_cur_test(document.currentScript);
@@ -49,6 +49,7 @@ var data, locations
 var monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
 ];
+var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 function changeLocation(location) {
     $('.location-picker').css('display', 'block')
@@ -59,22 +60,22 @@ function changeLocation(location) {
     $('.course-picker').removeClass('opened')
     dates = getDates(location)
     $('.dates').html('')
-    changeDate(location, dates[0])
+    changeDate(location, dates[0].start, dates[0].end)
 
     dates.forEach(function (date) {
-        $('.dates').append(`<li onclick="changeDate('${location}', '${date}')">${getFormattedDate(date)}</li>`)
+        $('.dates').append(`<li onclick="changeDate('${location}', '${date.start}', '${date.end}')">${getFormattedDate(date.start)} - ${getFormattedDate(date.end)}</li>`)
     })
 }
 
 function getFormattedDate(date) {
     dObj = new Date(date)
 
-    return `${monthNames[dObj.getMonth()]} ${dObj.getDate()}`
+    return `${days[dObj.getDay()]}, ${monthNames[dObj.getMonth()]} ${dObj.getDate()}`
 }
 
-function changeDate(location, date)
+function changeDate(location, date, date_end)
 {
-    $('.main_date').html(getFormattedDate(date))
+    $('.main_date').html(`${getFormattedDate(date)} - ${getFormattedDate(date_end)}`)
     $('.course-picker').removeClass('opened')
     course = getCourse(location, date)[0]
     $('.course_time').html(`${course.start_time} - ${course.end_time}`)
@@ -130,7 +131,10 @@ function getDates(location) {
         return item.location == location
     })
         .map(function (item) {
-            return item.start_date
+            return {
+                'start': item.start_date,
+                'end': item.end_date
+            }
         })
 }
 
@@ -146,7 +150,7 @@ $.getJSON('https://www.get-licensed.co.uk/api/course/' + courseID)
         locations = data.map(function (item) {
             return  {
                 value: item.location,
-                label: `${data[0].course_name} - ${item.location}. ${item.location_address}`,
+                label: item.location,
                 // desc: item.location_address
             }
         }).reduce(function(memo, e1){
@@ -184,7 +188,7 @@ $.getJSON('https://www.get-licensed.co.uk/api/course/' + courseID)
                 if (!ui.content.length) {
                     $('.location-picker').css('display', 'none')
                     $('#nextButton').attr('disabled', 'disabled');
-                    var noResult = { value:"",label:"No results found", desc: "" };
+                    var noResult = { value:"",label:"No results found. Please try to search by boroughs or cities", desc: "" };
                     ui.content.push(noResult);
                 }
             }
@@ -229,7 +233,7 @@ document.querySelector('.' + cur_test.init.css_scope_name).innerHTML = `
 				<div class="grey">Step 1</div>
 				<div class="green">Pick a location</div>
 			</div>
-			<div class="text-label">Course</div>
+			<div class="text-label">Find your nearest course</div>
 			<div class="course-picker">
 				<div class="choosen locs">
 					<input type="text" placeholder="Please enter your location" class="course">
