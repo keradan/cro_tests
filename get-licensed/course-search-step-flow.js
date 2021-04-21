@@ -1,5 +1,5 @@
 // Версия чтоб понять загрузился ли на гитхаб или еще нет
-let v = 65;
+let v = 66;
 
 // Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 const cur_test = window.keradan.get_cur_test(document.currentScript);
@@ -402,6 +402,9 @@ document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
 		    display: flex;
 		    justify-content: center;
 		    align-items: center;
+		}
+		.${cur_test.init.css_scope_name} .step .loader svg {
+			width: 40px;
 		}
 		.${cur_test.init.css_scope_name} .step:not(.loading) .loader {
 			display: none!important;
