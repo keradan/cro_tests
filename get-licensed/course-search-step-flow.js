@@ -1,5 +1,5 @@
 // Версия чтоб понять загрузился ли на гитхаб или еще нет
-let v = 70;
+let v = 71;
 
 // Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 const cur_test = window.keradan.get_cur_test(document.currentScript);
@@ -575,6 +575,7 @@ document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
 			font-size: 14px;
 			line-height: 14px;
 			color: #808080;
+			text-align: right;
 		}
 		.${cur_test.init.css_scope_name} .tag {
 		    border-radius: 60px;
