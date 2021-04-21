@@ -174,8 +174,9 @@ $.getJSON('https://www.get-licensed.co.uk/api/course/' + courseID)
 
         	let choosen = location_step.querySelector('.choosen');
 
-        	if (choosen.classList.contains('show-loader'))
-        		setTimeout(() => choosen.click(), 50);
+        	console.log('choosen: ', choosen);
+
+        	if (choosen.classList.contains('show-loader')) setTimeout(() => choosen.click(), 500);
         }, 1);
 
         $('.locations').html('')
