@@ -1,5 +1,5 @@
 // Версия чтоб понять загрузился ли на гитхаб или еще нет
-let v = 85;
+let v = 86;
 
 // Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 const cur_test = window.keradan.get_cur_test(document.currentScript);
@@ -500,6 +500,7 @@ document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
 		    display: flex;
 		    align-items: center;
 		    justify-content: space-between;
+		    cursor: pointer;
 		}
 		.${cur_test.init.css_scope_name} .course-picker .choosen .text {
 			font-size: 14px;
@@ -543,6 +544,7 @@ document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
 		    color: #3C3C3C;
 		    padding: 0 5px;
 		    border-bottom: 1px solid #F2F2F2;
+		    cursor: pointer;
 		}
 		.${cur_test.init.css_scope_name} .course-picker ul li span {
 			height: 30px;
@@ -694,6 +696,7 @@ document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
 		    align-items: center;
 		    height: 45px;
 		    padding: 0 8px;
+		    cursor: pointer;
 		}
 		.${cur_test.init.css_scope_name} .expand-box .head .text {
 			max-width: calc(100% - 25px);
@@ -793,6 +796,7 @@ document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
 			#ui-id-2 .ui-menu-item, #ui-id-3 .ui-menu-item {
 				padding: 7px 5px!important;
 				border-bottom: 1px solid #F2F2F2!important;
+				cursor: pointer;
 			}
 
 			@media (max-width: 499px) {
