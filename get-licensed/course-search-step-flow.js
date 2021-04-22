@@ -1,5 +1,5 @@
 // Версия чтоб понять загрузился ли на гитхаб или еще нет
-let v = 84;
+let v = 85;
 
 // Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 const cur_test = window.keradan.get_cur_test(document.currentScript);
@@ -802,19 +802,21 @@ document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
 				}
 			}
 			@media (min-width: 500px) {
-				#ui-id-2 {
+				#ui-id-2, #ui-id-3 {
 					max-width: 400px!important;
 					min-width: 400px!important;
-				}
-				#ui-id-3 {
-					max-width: 530px!important;
-					min-width: 530px!important;
 				}
 				#ui-id-2 .ui-menu-item:hover .ui-menu-item-wrapper,
 				#ui-id-3 .ui-menu-item:hover .ui-menu-item-wrapper {
 					border-color: #d2d2d2!important;
 			    	background: #00000014!important;
 			    	color: #333333!important;
+				}
+			}
+			@media (min-width: 720px) {
+				#ui-id-3 {
+					max-width: 560px!important;
+					min-width: 560px!important;
 				}
 			}
 
