@@ -1,5 +1,5 @@
 // Версия чтоб понять загрузился ли на гитхаб или еще нет
-let v = 79;
+let v = 80;
 
 // Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 const cur_test = window.keradan.get_cur_test(document.currentScript);
@@ -63,7 +63,7 @@ function changeLocation(location) {
     changeDate(location, dates[0].start, dates[0].end)
 
     dates.forEach(function (date) {
-        $('.dates').append(`<li onclick="changeDate('${location}', '${date.start}', '${date.end}')">${getFormattedDate(date.start)} - ${getFormattedDate(date.end)}</li>`)
+        $('.dates').append(`<li onclick="changeDate('${location}', '${date.start}', '${date.end}')"><span>${getFormattedDate(date.start)} - ${getFormattedDate(date.end)}</span></li>`)
     })
 
     setTimeout(function(){
