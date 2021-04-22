@@ -1,5 +1,5 @@
 // Версия чтоб понять загрузился ли на гитхаб или еще нет
-let v = 71;
+let v = 72;
 
 // Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 const cur_test = window.keradan.get_cur_test(document.currentScript);
@@ -9,7 +9,7 @@ cur_test.init.event_category = 'Exp — Course search page';
 
 // Set dev behavior (for production need to comment out or remove):
 cur_test.init.enable_log = true;
-cur_test.init.enable_ga_events = true;
+cur_test.init.enable_ga_events = false;
 
 // Чтоб зафиксировать присутствие и версию
 cur_test.log(`%c Keradan's test "${cur_test.init.go_title}" (v - ${v}) is here:`, 'background: #222; color: #bada55', cur_test);
@@ -802,6 +802,22 @@ document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
 	
 	document.querySelector('.course-picker .choosen.dat').addEventListener('click', function(){
 		cur_test.ga_event('collapse Course date picker', 'Step #03: Verify information');
+	});
+
+	document.querySelector('#ui-id-2 .ui-menu-item').addEventListener('click', function(){
+		cur_test.ga_event('choose city', 'Step #01: Pick a location');
+	});
+
+	document.querySelector('#ui-id-3 .ui-menu-item').addEventListener('click', function(){
+		cur_test.ga_event('choose city', 'Step #03: Verify information');
+	});
+
+	document.querySelector('.date-step .course-picker ul.dates li').addEventListener('click', function(){
+		cur_test.ga_event('choose date', 'Step #02: Pick time and date');
+	});
+
+	document.querySelector('.course-step .course-picker ul.dates li').addEventListener('click', function(){
+		cur_test.ga_event('choose date', 'Step #03: Verify information');
 	});
 // ga events end
 
