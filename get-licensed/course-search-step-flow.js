@@ -1,5 +1,5 @@
 // Версия чтоб понять загрузился ли на гитхаб или еще нет
-let v = 72;
+let v = 73;
 
 // Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 const cur_test = window.keradan.get_cur_test(document.currentScript);
@@ -190,6 +190,16 @@ $.getJSON('https://www.get-licensed.co.uk/api/course/' + courseID)
                 $(this).parent().removeClass('opened')
                 changeLocation(ui.item.value)
 
+                console.log('#####################');
+                console.log('this: ', this);
+                console.log('this.dataset: ', this.dataset);
+                console.log('parent: ', $(this).parent());
+                console.log('ui.item: ', ui.item);
+                console.log('#####################');
+
+                // 	cur_test.ga_event('choose city', 'Step #01: Pick a location');
+                // 	cur_test.ga_event('choose city', 'Step #03: Verify information');
+
                 return false;
             },
             response: function(event, ui) {
@@ -245,7 +255,7 @@ document.querySelector('.' + cur_test.init.css_scope_name).innerHTML = `
 							</circle>
 						</svg>
 					</div>
-					<input type="text" placeholder="Please enter your location" class="course">
+					<input type="text" placeholder="Please enter your location" class="course" data-ga-event="choose city" data-ga-event-label="Step #01: Pick a location">
 					<svg fill="none" viewBox="0 0 12 8"><path fill="#757575" d="M10.6.3L6 4.9 1.4.3 0 1.7l6 6 6-6L10.6.3z"/></svg>
 				</div>
 			</div>
@@ -338,7 +348,7 @@ document.querySelector('.' + cur_test.init.css_scope_name).innerHTML = `
 				<div class="body">
 					<div class="course-picker">
 						<div class="choosen locs loc">
-							<input type="text" placeholder="Search by dropdown" class="course">
+							<input type="text" placeholder="Search by dropdown" class="course" data-ga-event="choose city" data-ga-event-label="Step #03: Verify information">
 							<svg fill="none" viewBox="0 0 12 8"><path fill="#757575" d="M10.6.3L6 4.9 1.4.3 0 1.7l6 6 6-6L10.6.3z"/></svg>
 						</div>
 					</div>
@@ -804,20 +814,24 @@ document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
 		cur_test.ga_event('collapse Course date picker', 'Step #03: Verify information');
 	});
 
-	document.querySelector('#ui-id-2 .ui-menu-item').addEventListener('click', function(){
-		cur_test.ga_event('choose city', 'Step #01: Pick a location');
+	// document.querySelector('#ui-id-2 .ui-menu-item').addEventListener('click', function(){
+	// 	cur_test.ga_event('choose city', 'Step #01: Pick a location');
+	// });
+
+	// document.querySelector('#ui-id-3 .ui-menu-item').addEventListener('click', function(){
+	// 	cur_test.ga_event('choose city', 'Step #03: Verify information');
+	// });
+
+	document.querySelectorAll('.date-step .course-picker ul.dates li').forEach(function(elem){
+		elem.addEventListener('click', function(){
+			cur_test.ga_event('choose date', 'Step #02: Pick time and date');
+		});
 	});
 
-	document.querySelector('#ui-id-3 .ui-menu-item').addEventListener('click', function(){
-		cur_test.ga_event('choose city', 'Step #03: Verify information');
-	});
-
-	document.querySelector('.date-step .course-picker ul.dates li').addEventListener('click', function(){
-		cur_test.ga_event('choose date', 'Step #02: Pick time and date');
-	});
-
-	document.querySelector('.course-step .course-picker ul.dates li').addEventListener('click', function(){
-		cur_test.ga_event('choose date', 'Step #03: Verify information');
+	document.querySelectorAll('.course-step .course-picker ul.dates li').forEach(function(elem){
+		elem.addEventListener('click', function(){
+			cur_test.ga_event('choose date', 'Step #03: Verify information');
+		});
 	});
 // ga events end
 
