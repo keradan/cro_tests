@@ -1,5 +1,5 @@
 // Версия чтоб понять загрузился ли на гитхаб или еще нет
-let v = 74;
+let v = 76;
 
 // Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 const cur_test = window.keradan.get_cur_test(document.currentScript);
@@ -65,6 +65,22 @@ function changeLocation(location) {
     dates.forEach(function (date) {
         $('.dates').append(`<li onclick="changeDate('${location}', '${date.start}', '${date.end}')">${getFormattedDate(date.start)} - ${getFormattedDate(date.end)}</li>`)
     })
+
+    setTimeout(function(){
+    	document.querySelectorAll('.date-step .course-picker ul.dates li').forEach(function(elem){
+			console.log("elem: ", elem);
+			elem.addEventListener('click', function(){
+				console.log("elem clicked: ");
+				cur_test.ga_event('choose date', 'Step #02: Pick time and date');
+			});
+		});
+
+		document.querySelectorAll('.course-step .course-picker ul.dates li').forEach(function(elem){
+			elem.addEventListener('click', function(){
+				cur_test.ga_event('choose date', 'Step #03: Verify information');
+			});
+		});
+    }, 1);
 }
 
 function getFormattedDate(date) {
@@ -804,26 +820,6 @@ document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
 	
 	document.querySelector('.course-picker .choosen.dat').addEventListener('click', function(){
 		cur_test.ga_event('collapse Course date picker', 'Step #03: Verify information');
-	});
-
-	// document.querySelector('#ui-id-2 .ui-menu-item').addEventListener('click', function(){
-	// 	cur_test.ga_event('choose city', 'Step #01: Pick a location');
-	// });
-
-	// document.querySelector('#ui-id-3 .ui-menu-item').addEventListener('click', function(){
-	// 	cur_test.ga_event('choose city', 'Step #03: Verify information');
-	// });
-
-	document.querySelectorAll('.date-step .course-picker ul.dates li').forEach(function(elem){
-		elem.addEventListener('click', function(){
-			cur_test.ga_event('choose date', 'Step #02: Pick time and date');
-		});
-	});
-
-	document.querySelectorAll('.course-step .course-picker ul.dates li').forEach(function(elem){
-		elem.addEventListener('click', function(){
-			cur_test.ga_event('choose date', 'Step #03: Verify information');
-		});
 	});
 // ga events end
 
