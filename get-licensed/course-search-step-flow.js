@@ -1,5 +1,5 @@
 // Версия чтоб понять загрузился ли на гитхаб или еще нет
-let v = 88;
+let v = 89;
 
 // Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 const cur_test = window.keradan.get_cur_test(document.currentScript);
@@ -857,7 +857,13 @@ document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
 	});
 
 	document.querySelector('.course-step .button-wrapper button').addEventListener('click', function(){
-		cur_test.ga_event('click on button Book', 'Section: Course card');
+		let dl = window.dataLayer || [];
+		dl.push({
+		    'event': 'event-to-ga',
+		    'eventCategory': 'Listing (Courses) — Search',
+		    'eventAction': 'click on button Book',
+		    'eventLabel': 'Section: Course card'
+		});
 	});
 // ga events end
 
