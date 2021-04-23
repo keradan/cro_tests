@@ -1,5 +1,5 @@
 // Версия чтоб понять загрузился ли на гитхаб или еще нет
-let v = 87;
+let v = 88;
 
 // Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 const cur_test = window.keradan.get_cur_test(document.currentScript);
@@ -854,6 +854,10 @@ document.querySelector("#styles-" + cur_test.init.name).innerHTML = `
 	
 	document.querySelector('.course-picker .choosen.dat').addEventListener('click', function(){
 		cur_test.ga_event('collapse Course date picker', 'Step #03: Verify information');
+	});
+
+	document.querySelector('.course-step .button-wrapper button').addEventListener('click', function(){
+		cur_test.ga_event('click on button Book', 'Section: Course card');
 	});
 // ga events end
 
