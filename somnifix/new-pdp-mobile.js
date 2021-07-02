@@ -1,5 +1,5 @@
 (function () {
-	let v = 63;
+	let v = 64;
 
 	// Если IE тогда вместо currentScript будет так: document.querySelector('тут айдишник скрипта вставленный вручную')
 	const cur_test = window.keradan.get_cur_test(document.currentScript);
@@ -53,7 +53,7 @@
 				days_count: 28,
 				name: '4-week pack',
 				auto_delivery_period: '',
-				price: 19.97,
+				price: 21.99,
 				subscription_price: null,
 				old_price: null,
 				save_money_percent: 0,
